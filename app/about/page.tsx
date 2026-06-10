@@ -175,7 +175,7 @@ export default function AboutPage() {
           <div className="mx-auto max-w-3xl flex flex-wrap gap-4 text-sm">
             <Link href="/disclosure" className="text-blue-600 hover:text-blue-800">Affiliate Disclosure →</Link>
             <Link href="/privacy" className="text-blue-600 hover:text-blue-800">Privacy Policy →</Link>
-            <Link href="/stats" className="text-blue-600 hover:text-blue-800">Site Stats →</Link>
+            <Link href="/quiz" className="text-blue-600 hover:text-blue-800">Security Quiz →</Link>
           </div>
         </div>
       </main>

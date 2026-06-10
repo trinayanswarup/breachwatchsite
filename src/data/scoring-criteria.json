@@ -4,42 +4,35 @@
       "id": "logging_policy",
       "name": "Logging Policy",
       "weight": 30,
-      "description": "Does the privacy policy actually guarantee no logs? Has it been independently audited?",
+      "description": "What does the actual privacy policy say — not the marketing page. Has the no-logs claim been independently audited?",
       "higherIsBetter": true
     },
     {
       "id": "jurisdiction",
       "name": "Jurisdiction",
       "weight": 20,
-      "description": "Is the company headquartered outside 14 Eyes? Does a warrant canary exist?",
+      "description": "Which country's laws govern data requests to the VPN provider. Outside 14 Eyes with no mandatory data retention laws scores highest.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "independent_audit",
+      "name": "Independent Audit",
+      "weight": 20,
+      "description": "Has a reputable security firm audited and verified their no-logs claims? Audit quality, scope, and recency all matter.",
       "higherIsBetter": true
     },
     {
       "id": "price",
       "name": "Price",
-      "weight": 20,
-      "description": "Cost per month on the longest available plan. Lower is better.",
-      "higherIsBetter": true
-    },
-    {
-      "id": "speed",
-      "name": "Speed",
       "weight": 15,
-      "description": "Based on independent speed tests from AV-Comparatives and SpeedTest.net benchmarks.",
+      "description": "Real monthly cost on the best available plan. Lower is better. Existence of a free tier is factored in.",
       "higherIsBetter": true
     },
     {
-      "id": "device_limit",
-      "name": "Device Limit",
-      "weight": 10,
-      "description": "Number of simultaneous connections allowed on one account.",
-      "higherIsBetter": true
-    },
-    {
-      "id": "streaming",
-      "name": "Streaming Support",
-      "weight": 5,
-      "description": "Works reliably with Netflix, BBC iPlayer, Disney+, and other major streaming services.",
+      "id": "reliability",
+      "name": "Reliability",
+      "weight": 15,
+      "description": "Based on Play Store rating and review patterns — real users reporting real connection stability over time.",
       "higherIsBetter": true
     }
   ],
