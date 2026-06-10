@@ -1,0 +1,137 @@
+[
+  {
+    "id": "bitdefender",
+    "name": "Bitdefender",
+    "slug": "bitdefender",
+    "tagline": "Consistently top AV-TEST scores with low system impact — best detection rate in the test",
+    "website": "https://www.bitdefender.com",
+    "affiliateUrl": "PLACEHOLDER",
+    "scores": {
+      "detection_rate": 10,
+      "performance_impact": 8,
+      "price": 7,
+      "privacy": 7,
+      "false_positive_rate": 8
+    },
+    "pricing": {
+      "monthly": 3.33,
+      "annual": 39.99,
+      "currency": "USD"
+    },
+    "highlights": [
+      "AV-TEST scores: 6/6 protection, 6/6 performance, 6/6 usability (2024 consumer tests)",
+      "Photon technology adapts scanning to your hardware to minimise slowdown",
+      "Romanian company; collects limited telemetry for cloud-based threat intelligence"
+    ],
+    "verdict": "The best overall antivirus — maximum detection, reasonable price, and low performance impact.",
+    "bestFor": "Users who want the highest detection rates without noticeably slowing down their computer"
+  },
+  {
+    "id": "malwarebytes",
+    "name": "Malwarebytes",
+    "slug": "malwarebytes",
+    "tagline": "Lightweight scanner that excels at removing existing infections",
+    "website": "https://www.malwarebytes.com",
+    "affiliateUrl": "PLACEHOLDER",
+    "scores": {
+      "detection_rate": 7,
+      "performance_impact": 9,
+      "price": 7,
+      "privacy": 7,
+      "false_positive_rate": 8
+    },
+    "pricing": {
+      "monthly": 3.75,
+      "annual": 39.99,
+      "currency": "USD"
+    },
+    "highlights": [
+      "Among the lightest antivirus tools available — minimal CPU and RAM footprint",
+      "Specialises in removing adware, PUPs, and malware that traditional AV misses",
+      "Free version available for manual on-demand scanning"
+    ],
+    "verdict": "Best lightweight option — if you already have Windows Defender active, Malwarebytes adds useful cleanup capability.",
+    "bestFor": "Users who want a lightweight second opinion scanner alongside Windows Defender"
+  },
+  {
+    "id": "eset",
+    "name": "ESET NOD32",
+    "slug": "eset",
+    "tagline": "Best performance scores in the industry — extremely low system impact",
+    "website": "https://www.eset.com",
+    "affiliateUrl": "PLACEHOLDER",
+    "scores": {
+      "detection_rate": 9,
+      "performance_impact": 10,
+      "price": 7,
+      "privacy": 8,
+      "false_positive_rate": 6
+    },
+    "pricing": {
+      "monthly": 3.33,
+      "annual": 39.99,
+      "currency": "USD"
+    },
+    "highlights": [
+      "AV-TEST top performance scores — lowest system impact of any commercial antivirus",
+      "Slovak company with a clear privacy policy and minimal telemetry collection",
+      "30+ years of threat intelligence built into the detection engine"
+    ],
+    "verdict": "Best for older or lower-spec hardware — excellent detection with virtually no performance overhead.",
+    "bestFor": "Users with older computers or who run performance-intensive applications and need minimal overhead"
+  },
+  {
+    "id": "norton",
+    "name": "Norton 360",
+    "slug": "norton",
+    "tagline": "Excellent detection rates with a comprehensive feature bundle — notable performance impact",
+    "website": "https://norton.com",
+    "affiliateUrl": "PLACEHOLDER",
+    "scores": {
+      "detection_rate": 9,
+      "performance_impact": 5,
+      "price": 5,
+      "privacy": 4,
+      "false_positive_rate": 7
+    },
+    "pricing": {
+      "monthly": 6.67,
+      "annual": 79.99,
+      "currency": "USD"
+    },
+    "highlights": [
+      "Includes VPN, password manager, and dark web monitoring in the bundle",
+      "Strong AV-TEST detection scores: consistently above 99% in real-world tests",
+      "NortonLifeLock (now Gen Digital) has received regulatory scrutiny for data collection practices"
+    ],
+    "verdict": "Strong detection but overpriced, resource-heavy, and has a poor privacy track record compared to competitors.",
+    "bestFor": "Users who want an all-in-one security bundle and are less concerned about resource usage"
+  },
+  {
+    "id": "windows_defender",
+    "name": "Windows Defender",
+    "slug": "windows-defender",
+    "tagline": "Free, built-in, and surprisingly capable — the baseline all others are measured against",
+    "website": "https://microsoft.com/en-us/windows/windows-defender",
+    "affiliateUrl": "https://microsoft.com/en-us/windows/windows-defender",
+    "scores": {
+      "detection_rate": 7,
+      "performance_impact": 7,
+      "price": 10,
+      "privacy": 5,
+      "false_positive_rate": 7
+    },
+    "pricing": {
+      "monthly": 0,
+      "annual": 0,
+      "currency": "USD"
+    },
+    "highlights": [
+      "Free and already installed on every Windows PC — zero setup required",
+      "AV-TEST real-world protection score: 98.6% (2024) — better than many paid options",
+      "Deep Microsoft integration means it can patch exploits at the OS level"
+    ],
+    "verdict": "Surprisingly good for a free tool — adequate for cautious users, but add Malwarebytes for broader coverage.",
+    "bestFor": "Budget-conscious users on Windows who practice safe browsing habits"
+  }
+]

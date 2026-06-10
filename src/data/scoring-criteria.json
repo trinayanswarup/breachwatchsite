@@ -1,0 +1,164 @@
+{
+  "vpn": [
+    {
+      "id": "logging_policy",
+      "name": "Logging Policy",
+      "weight": 30,
+      "description": "Does the privacy policy actually guarantee no logs? Has it been independently audited?",
+      "higherIsBetter": true
+    },
+    {
+      "id": "jurisdiction",
+      "name": "Jurisdiction",
+      "weight": 20,
+      "description": "Is the company headquartered outside 14 Eyes? Does a warrant canary exist?",
+      "higherIsBetter": true
+    },
+    {
+      "id": "price",
+      "name": "Price",
+      "weight": 20,
+      "description": "Cost per month on the longest available plan. Lower is better.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "speed",
+      "name": "Speed",
+      "weight": 15,
+      "description": "Based on independent speed tests from AV-Comparatives and SpeedTest.net benchmarks.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "device_limit",
+      "name": "Device Limit",
+      "weight": 10,
+      "description": "Number of simultaneous connections allowed on one account.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "streaming",
+      "name": "Streaming Support",
+      "weight": 5,
+      "description": "Works reliably with Netflix, BBC iPlayer, Disney+, and other major streaming services.",
+      "higherIsBetter": true
+    }
+  ],
+  "password-manager": [
+    {
+      "id": "security_architecture",
+      "name": "Security Architecture",
+      "weight": 30,
+      "description": "Zero-knowledge design, end-to-end encryption, and key derivation method (PBKDF2, Argon2).",
+      "higherIsBetter": true
+    },
+    {
+      "id": "open_source",
+      "name": "Open Source",
+      "weight": 20,
+      "description": "Is the client code publicly auditable? Has an independent security firm audited it?",
+      "higherIsBetter": true
+    },
+    {
+      "id": "price",
+      "name": "Price",
+      "weight": 20,
+      "description": "Free tier availability and cost of premium plan.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "platform_coverage",
+      "name": "Platform Coverage",
+      "weight": 15,
+      "description": "Available on Windows, macOS, iOS, Android, Linux, and major browser extensions.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "breach_history",
+      "name": "Breach History",
+      "weight": 10,
+      "description": "Has the company been breached? How did they respond? Transparency matters.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "twofa_support",
+      "name": "2FA Support",
+      "weight": 5,
+      "description": "Supports hardware security keys (FIDO2/WebAuthn), TOTP authenticator apps, and Duo.",
+      "higherIsBetter": true
+    }
+  ],
+  "antivirus": [
+    {
+      "id": "detection_rate",
+      "name": "Detection Rate",
+      "weight": 35,
+      "description": "AV-TEST Institute scores for protection against malware and zero-day threats. Source: av-test.org.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "performance_impact",
+      "name": "Performance Impact",
+      "weight": 25,
+      "description": "System slowdown during scans, measured by AV-TEST performance scores. Higher = less impact.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "price",
+      "name": "Price",
+      "weight": 20,
+      "description": "Annual subscription cost for a single device. Free options score highest.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "privacy",
+      "name": "Privacy",
+      "weight": 15,
+      "description": "Does the antivirus send telemetry, file samples, or browsing data back to the vendor?",
+      "higherIsBetter": true
+    },
+    {
+      "id": "false_positive_rate",
+      "name": "False Positive Rate",
+      "weight": 5,
+      "description": "Frequency of legitimate software flagged incorrectly. Lower false positives score higher.",
+      "higherIsBetter": true
+    }
+  ],
+  "2fa-apps": [
+    {
+      "id": "backup_recovery",
+      "name": "Backup & Recovery",
+      "weight": 35,
+      "description": "What happens if you lose your phone? Can you recover your 2FA codes without losing account access?",
+      "higherIsBetter": true
+    },
+    {
+      "id": "open_source",
+      "name": "Open Source",
+      "weight": 25,
+      "description": "Is the source code publicly auditable? Can anyone verify there are no backdoors?",
+      "higherIsBetter": true
+    },
+    {
+      "id": "cloud_sync",
+      "name": "Cloud Sync",
+      "weight": 20,
+      "description": "Encrypted sync across devices. Local-only storage is more private but riskier if you lose your device.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "platform",
+      "name": "Platform",
+      "weight": 15,
+      "description": "Available on iOS, Android, and ideally desktop. Cross-platform scores highest.",
+      "higherIsBetter": true
+    },
+    {
+      "id": "ease_of_use",
+      "name": "Ease of Use",
+      "weight": 5,
+      "description": "How straightforward is setup, adding accounts, and day-to-day use?",
+      "higherIsBetter": true
+    }
+  ]
+}

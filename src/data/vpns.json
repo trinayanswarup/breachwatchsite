@@ -1,0 +1,142 @@
+[
+  {
+    "id": "nordvpn",
+    "name": "NordVPN",
+    "slug": "nordvpn",
+    "tagline": "The most popular VPN — audited no-logs policy, Panama jurisdiction",
+    "website": "https://nordvpn.com",
+    "affiliateUrl": "PLACEHOLDER",
+    "scores": {
+      "logging_policy": 8,
+      "jurisdiction": 8,
+      "price": 7,
+      "speed": 9,
+      "device_limit": 8,
+      "streaming": 10
+    },
+    "pricing": {
+      "monthly": 12.99,
+      "annual": 59.88,
+      "currency": "USD"
+    },
+    "highlights": [
+      "Independent no-logs audit completed by PricewaterhouseCoopers (2022)",
+      "Panama jurisdiction: outside 14 Eyes, no mandatory data retention",
+      "10 simultaneous device connections included on all plans"
+    ],
+    "verdict": "The best all-rounder: audited no-logs policy, fast speeds, and strong streaming support.",
+    "bestFor": "Most users who want a reliable, audited VPN with good streaming support"
+  },
+  {
+    "id": "expressvpn",
+    "name": "ExpressVPN",
+    "slug": "expressvpn",
+    "tagline": "Fastest speeds with Lightway protocol — owned by Kape Technologies",
+    "website": "https://www.expressvpn.com",
+    "affiliateUrl": "PLACEHOLDER",
+    "scores": {
+      "logging_policy": 7,
+      "jurisdiction": 8,
+      "price": 3,
+      "speed": 10,
+      "device_limit": 7,
+      "streaming": 10
+    },
+    "pricing": {
+      "monthly": 12.95,
+      "annual": 99.95,
+      "currency": "USD"
+    },
+    "highlights": [
+      "Lightway protocol delivers consistently the fastest speeds in independent tests",
+      "British Virgin Islands jurisdiction: outside 14 Eyes",
+      "8 simultaneous device connections"
+    ],
+    "verdict": "Fastest VPN available, but significantly more expensive and owned by Kape Technologies (formerly Crossrider).",
+    "bestFor": "Users who prioritise raw speed and are willing to pay a premium"
+  },
+  {
+    "id": "surfshark",
+    "name": "Surfshark",
+    "slug": "surfshark",
+    "tagline": "Unlimited devices, best value — Netherlands jurisdiction",
+    "website": "https://surfshark.com",
+    "affiliateUrl": "PLACEHOLDER",
+    "scores": {
+      "logging_policy": 7,
+      "jurisdiction": 5,
+      "price": 9,
+      "speed": 7,
+      "device_limit": 10,
+      "streaming": 8
+    },
+    "pricing": {
+      "monthly": 13.99,
+      "annual": 47.88,
+      "currency": "USD"
+    },
+    "highlights": [
+      "Unlimited simultaneous connections — share one subscription with your household",
+      "Independent no-logs audit completed by Deloitte (2023)",
+      "CleanWeb feature blocks ads and trackers at the VPN level"
+    ],
+    "verdict": "Best value for families or households — unlimited devices at a low price, though Netherlands is in 9 Eyes.",
+    "bestFor": "Families or users who need to cover many devices on a budget"
+  },
+  {
+    "id": "mullvad",
+    "name": "Mullvad",
+    "slug": "mullvad",
+    "tagline": "Maximum anonymity — accepts cash and Monero, no email required",
+    "website": "https://mullvad.net",
+    "affiliateUrl": "https://mullvad.net",
+    "scores": {
+      "logging_policy": 10,
+      "jurisdiction": 7,
+      "price": 6,
+      "speed": 7,
+      "device_limit": 5,
+      "streaming": 3
+    },
+    "pricing": {
+      "monthly": 5,
+      "annual": 60,
+      "currency": "EUR"
+    },
+    "highlights": [
+      "No email, no account name — sign up with just a generated account number",
+      "Accepts cash and Monero payments for complete anonymity",
+      "Open source client; independently audited by Cure53 (2022)"
+    ],
+    "verdict": "The gold standard for privacy — no affiliate programme, and we recommend it anyway.",
+    "bestFor": "Privacy-focused users who want maximum anonymity and don't need streaming"
+  },
+  {
+    "id": "protonvpn",
+    "name": "ProtonVPN",
+    "slug": "protonvpn",
+    "tagline": "Swiss-based, open source, free tier available — from the makers of ProtonMail",
+    "website": "https://protonvpn.com",
+    "affiliateUrl": "PLACEHOLDER",
+    "scores": {
+      "logging_policy": 9,
+      "jurisdiction": 9,
+      "price": 7,
+      "speed": 8,
+      "device_limit": 8,
+      "streaming": 7
+    },
+    "pricing": {
+      "monthly": 9.99,
+      "annual": 71.88,
+      "currency": "USD"
+    },
+    "highlights": [
+      "Switzerland jurisdiction: strong privacy laws, outside 5/9/14 Eyes intelligence alliances",
+      "Fully open source clients audited by SEC Consult (2022)",
+      "Free tier available with no data limit — the only trustworthy free VPN"
+    ],
+    "verdict": "Best for privacy without sacrificing usability — Swiss jurisdiction and open source code are hard to beat.",
+    "bestFor": "Privacy-focused users who also want open source, audited software"
+  }
+]
