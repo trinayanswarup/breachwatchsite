@@ -66,17 +66,10 @@
       "higherIsBetter": true
     },
     {
-      "id": "breach_history",
-      "name": "Breach History",
-      "weight": 10,
-      "description": "Has the company been breached? How did they respond? Transparency matters.",
-      "higherIsBetter": true
-    },
-    {
-      "id": "twofa_support",
-      "name": "2FA Support",
-      "weight": 5,
-      "description": "Supports hardware security keys (FIDO2/WebAuthn), TOTP authenticator apps, and Duo.",
+      "id": "reliability",
+      "name": "Reliability",
+      "weight": 15,
+      "description": "Based on App Store and Play Store rating patterns — real users reporting sync failures, autofill bugs, and vault access issues over time.",
       "higherIsBetter": true
     }
   ],

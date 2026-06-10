@@ -9,6 +9,7 @@ export const affiliateLinks: Record<string, string> = {
   dashlane: 'PLACEHOLDER',
   nordpass: 'PLACEHOLDER',
   keeper: 'PLACEHOLDER',
+  protonpass: 'PLACEHOLDER',
   malwarebytes: 'PLACEHOLDER',
   bitdefender: 'PLACEHOLDER',
   norton: 'PLACEHOLDER',
