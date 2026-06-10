@@ -16,13 +16,13 @@ export const affiliateLinks: Record<string, string> = {
 };
 
 export function buildAffiliateUrl(
+  href: string,
   product: string,
   category: string,
   pageType: string
 ): string {
-  const base = affiliateLinks[product];
-  if (!base || base === 'PLACEHOLDER') {
-    return `https://breachwatchsite.com/reviews/${product}`;
+  if (!href || href === 'PLACEHOLDER') {
+    return `/reviews/${product}`;
   }
 
   const utm = new URLSearchParams({
@@ -31,6 +31,6 @@ export function buildAffiliateUrl(
     utm_campaign: `${category}-${pageType}`,
   });
 
-  const separator = base.includes('?') ? '&' : '?';
-  return `${base}${separator}${utm.toString()}`;
+  const separator = href.includes('?') ? '&' : '?';
+  return `${href}${separator}${utm.toString()}`;
 }
