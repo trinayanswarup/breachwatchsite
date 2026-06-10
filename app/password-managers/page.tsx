@@ -10,6 +10,7 @@ import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import productsRaw from '@/data/password-managers.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
+import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Best Password Manager 2025 — Compared on Security Architecture',
@@ -27,6 +28,33 @@ function weightedScore(p: Product): number {
 const ranked = [...products].sort((a, b) => weightedScore(b) - weightedScore(a));
 const topPick = ranked[0];
 
+const SITE = 'https://breachwatchsite.com';
+const pageSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Best Password Managers 2025 — Ranked by Security Architecture',
+  url: `${SITE}/password-managers`,
+  numberOfItems: ranked.length,
+  itemListElement: ranked.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.name,
+    item: {
+      '@type': 'SoftwareApplication',
+      name: p.name,
+      applicationCategory: 'SecurityApplication',
+      url: p.website,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: weightedScore(p).toFixed(2),
+        bestRating: '10',
+        worstRating: '0',
+        ratingCount: '1',
+      },
+    },
+  })),
+};
+
 export default function PasswordManagersPage() {
   const topPickHref = buildAffiliateUrl(
     affiliateLinks[topPick.id] ?? topPick.affiliateUrl,
@@ -37,6 +65,7 @@ export default function PasswordManagersPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <JsonLd data={pageSchema} />
       <Nav />
 
       <main className="flex-1">

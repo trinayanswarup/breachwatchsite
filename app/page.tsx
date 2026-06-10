@@ -163,6 +163,10 @@ export default function HomePage() {
                 See all VPNs →
               </Link>
             </div>
+            <div className="mb-4 rounded-lg bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
+              <strong>Disclosure:</strong> This pick contains an affiliate link. ProtonVPN is featured because it scores highest in our methodology, not because of the affiliate relationship.{' '}
+              <Link href="/disclosure" className="underline hover:text-amber-900">Full disclosure.</Link>
+            </div>
             <div className="max-w-sm">
               <ProductCard product={featuredProduct} category="vpn" featured />
             </div>

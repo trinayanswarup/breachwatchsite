@@ -8,6 +8,7 @@ import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import pmRaw from '@/data/password-managers.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
+import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Bitwarden vs 1Password 2025 — Free vs Premium, Which Wins?',
@@ -32,9 +33,27 @@ function cta(product: Product): string {
   );
 }
 
+const SITE = 'https://breachwatchsite.com';
+const pageSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Bitwarden vs 1Password 2025 — Free vs Premium, Which Wins?',
+  url: `${SITE}/reviews/bitwarden-vs-1password`,
+  datePublished: '2025-01-01',
+  dateModified: '2025-06-10',
+  author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+  publisher: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/reviews/bitwarden-vs-1password` },
+  about: [
+    { '@type': 'SoftwareApplication', name: 'Bitwarden', url: bitwarden.website },
+    { '@type': 'SoftwareApplication', name: '1Password', url: onepassword.website },
+  ],
+};
+
 export default function BitwardenVs1PasswordPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <JsonLd data={pageSchema} />
       <Nav />
 
       <main className="flex-1">

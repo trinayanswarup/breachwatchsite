@@ -8,6 +8,7 @@ import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import pmRaw from '@/data/password-managers.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
+import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Bitwarden Review 2025 — The Best Free Password Manager?',
@@ -27,9 +28,46 @@ const ctaUrl = buildAffiliateUrl(
   'review'
 );
 
+const SITE = 'https://breachwatchsite.com';
+const productScore = criteria.reduce(
+  (sum, c) => sum + ((product.scores[c.id] ?? 0) * c.weight) / 100, 0
+);
+const pageSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: 'Bitwarden Review 2025 — The Best Free Password Manager?',
+      url: `${SITE}/reviews/bitwarden`,
+      datePublished: '2025-01-01',
+      dateModified: '2025-06-10',
+      author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+      publisher: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/reviews/bitwarden` },
+    },
+    {
+      '@type': 'Review',
+      itemReviewed: {
+        '@type': 'SoftwareApplication',
+        name: product.name,
+        applicationCategory: 'SecurityApplication',
+        url: product.website,
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: productScore.toFixed(2),
+        bestRating: '10',
+        worstRating: '0',
+      },
+      author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+    },
+  ],
+};
+
 export default function BitwardenReviewPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <JsonLd data={pageSchema} />
       <Nav />
 
       <main className="flex-1">

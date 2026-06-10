@@ -8,6 +8,7 @@ import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import vpnsRaw from '@/data/vpns.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
+import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Best VPN for Lithuania 2025 — Jurisdiction, Law & Speed',
@@ -33,9 +34,24 @@ const topPickUrl = buildAffiliateUrl(
   'review-lithuania'
 );
 
+const SITE = 'https://breachwatchsite.com';
+const pageSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Best VPN for Lithuania 2025 — Jurisdiction, Data Law & Speed',
+  url: `${SITE}/reviews/best-vpn-lithuania`,
+  datePublished: '2025-01-01',
+  dateModified: '2025-06-10',
+  author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+  publisher: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/reviews/best-vpn-lithuania` },
+  about: { '@type': 'Place', name: 'Lithuania', containedInPlace: { '@type': 'Country', name: 'Lithuania' } },
+};
+
 export default function BestVpnLithuaniaPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <JsonLd data={pageSchema} />
       <Nav />
 
       <main className="flex-1">

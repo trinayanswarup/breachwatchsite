@@ -8,6 +8,7 @@ import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import vpnsRaw from '@/data/vpns.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
+import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'NordVPN vs ExpressVPN 2025 — Which Is Actually Better?',
@@ -32,9 +33,27 @@ function cta(product: Product): string {
   );
 }
 
+const SITE = 'https://breachwatchsite.com';
+const pageSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'NordVPN vs ExpressVPN 2025 — Which Is Actually Better?',
+  url: `${SITE}/reviews/nordvpn-vs-expressvpn`,
+  datePublished: '2025-01-01',
+  dateModified: '2025-06-10',
+  author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+  publisher: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/reviews/nordvpn-vs-expressvpn` },
+  about: [
+    { '@type': 'SoftwareApplication', name: 'NordVPN', url: nord.website },
+    { '@type': 'SoftwareApplication', name: 'ExpressVPN', url: express.website },
+  ],
+};
+
 export default function NordVpnVsExpressVpnPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <JsonLd data={pageSchema} />
       <Nav />
 
       <main className="flex-1">
