@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BreachWatch
 
-## Getting Started
+Honest cybersecurity tool comparisons. No jargon. No hidden bias.
 
-First, run the development server:
+**Live site:** [breachwatchsite.com](https://breachwatchsite.com)
+
+BreachWatch helps everyday people find the right cybersecurity tool — VPN, password manager, antivirus, or 2FA app — through transparent scoring, genuine editorial content, and an AI-powered security quiz that identifies your single biggest risk in 30 seconds.
+
+---
+
+## How the scoring works
+
+Every product is scored across a set of criteria specific to its category. Criteria have documented weights that sum to 100. Scores are calculated from the JSON data files in `src/data/` — they are never hardcoded in components. The full methodology is published at `/disclosure`.
+
+Example — VPN scoring:
+| Criterion | Weight | Why |
+|-----------|--------|-----|
+| Logging policy | 30% | The most important privacy factor |
+| Jurisdiction | 20% | Legal environment for data requests |
+| Price | 20% | Real cost to the user |
+| Speed | 15% | Based on independent test results |
+| Device limit | 10% | Practical usability |
+| Streaming support | 5% | Common use case |
+
+---
+
+## Setup
 
 ```bash
+git clone https://github.com/yourusername/breachwatchsite
+cd breachwatchsite
+npm install
+cp .env.example .env.local
+# Add your GROQ_API_KEY to .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Get a free Groq API key at [console.groq.com](https://console.groq.com) — no credit card required.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Stack
 
-## Learn More
+- Next.js 14 (App Router)
+- TypeScript (strict mode)
+- Tailwind CSS
+- Groq API (llama-3.3-70b-versatile) for the security quiz
+- Vercel Analytics for traffic tracking
+- next-sitemap for automatic sitemap generation
+- No database — all product data in JSON files
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Affiliate programmes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Programme | Status | Notes |
+|-----------|--------|-------|
+| NordVPN Partners | Applied | Instant approval |
+| Surfshark Affiliates | Applied | Instant approval |
+| ExpressVPN | Applied | Via Commission Junction |
+| 1Password | Applied | Via partners portal |
+| Malwarebytes | Applied | Via Impact.com |
+| Bitdefender | Applied | Via affiliates portal |
+| Mullvad | N/A | No affiliate programme — linked directly |
+| Bitwarden | N/A | No standard programme — referral only |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/              # Next.js App Router pages
+├── components/       # Reusable UI components
+├── data/             # Product data and scoring criteria (JSON)
+└── lib/              # Utilities: affiliate links, analytics, quiz
+```
+
+---
+
+## Content principles
+
+1. Read the actual privacy policy before scoring it — not the marketing page
+2. Cite independent test sources (AV-TEST, AV-Comparatives, Cure53 audits)
+3. Mention what each product gets wrong — this is what builds reader trust
+4. Mullvad has no affiliate programme and is recommended anyway when it's the right answer
+5. The affiliate model is disclosed transparently on every page with affiliate links
+
+---
+
+## CI
+
+GitHub Actions runs on every push to main:
+- TypeScript type check (`tsc --noEmit`)
+- ESLint (`npm run lint`)
+- Next.js build (`npm run build`)
