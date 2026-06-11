@@ -2,28 +2,19 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import {
+  formatBreachCount,
+  formatBreachDate,
+  getBreachAdvice,
+  getBreachSeverity,
+  type HIBPBreach,
+} from '@/lib/breaches';
 
 export const metadata: Metadata = {
   title: 'Recent Data Breaches and What To Do Next | BreachWatch',
   description:
     'Track recent public data breaches from Have I Been Pwned metadata and get practical next steps based on exposed data types.',
 };
-
-interface HIBPBreach {
-  Name: string;
-  Title: string;
-  Domain: string;
-  BreachDate: string;
-  AddedDate: string;
-  PwnCount: number;
-  DataClasses: string[];
-  IsVerified: boolean;
-}
-
-interface SeverityInfo {
-  label: string;
-  className: string;
-}
 
 async function fetchBreaches(): Promise<HIBPBreach[]> {
   try {
@@ -46,65 +37,9 @@ async function fetchBreaches(): Promise<HIBPBreach[]> {
   }
 }
 
-function formatCount(n: number): string {
-  if (n >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1)}B`;
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000) return `${Math.round(n / 1_000)}K`;
-  return n.toLocaleString();
-}
-
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
-}
-
-function getSeverity(count: number): SeverityInfo {
-  if (count >= 100_000_000)
-    return { label: 'Critical', className: 'bg-red-100 text-red-700' };
-  if (count >= 10_000_000)
-    return { label: 'Large', className: 'bg-orange-100 text-orange-700' };
-  if (count >= 1_000_000)
-    return { label: 'Medium', className: 'bg-amber-100 text-amber-700' };
-  return { label: 'Small', className: 'bg-gray-100 text-bw-text' };
-}
-
-function getAdvice(dataClasses: string[]): string[] {
-  const exposed = new Set(dataClasses.map((item) => item.toLowerCase()));
-  const advice: string[] = [];
-
-  if (exposed.has('passwords')) {
-    advice.push('Change reused passwords immediately and check old passwords for known leaks.');
-  }
-
-  if (exposed.has('email addresses')) {
-    advice.push('Watch for phishing emails and enable 2FA on important accounts.');
-  }
-
-  if (exposed.has('phone numbers')) {
-    advice.push('Be alert for SMS phishing and SIM-swap attempts.');
-  }
-
-  if (exposed.has('credit cards') || exposed.has('payment histories')) {
-    advice.push('Monitor bank statements and card activity for unfamiliar charges.');
-  }
-
-  if (exposed.has('ip addresses') || exposed.has('physical addresses')) {
-    advice.push('Treat follow-up messages as higher risk because attackers may personalize them.');
-  }
-
-  if (advice.length === 0) {
-    advice.push('Review exposed data types and change credentials on any affected account.');
-  }
-
-  return advice.slice(0, 3);
-}
-
 function BreachCard({ breach }: { breach: HIBPBreach }) {
-  const severity = getSeverity(breach.PwnCount);
-  const advice = getAdvice(breach.DataClasses);
+  const severity = getBreachSeverity(breach.PwnCount);
+  const advice = getBreachAdvice(breach.DataClasses);
   const visibleClasses = breach.DataClasses.slice(0, 5);
   const remaining = breach.DataClasses.length - visibleClasses.length;
 
@@ -131,19 +66,19 @@ function BreachCard({ breach }: { breach: HIBPBreach }) {
           <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-bw-gray">
             Accounts
           </p>
-          <p className="mt-1 font-semibold text-bw-black">{formatCount(breach.PwnCount)}</p>
+          <p className="mt-1 font-semibold text-bw-black">{formatBreachCount(breach.PwnCount)}</p>
         </div>
         <div>
           <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-bw-gray">
             Breach date
           </p>
-          <p className="mt-1 font-semibold text-bw-black">{formatDate(breach.BreachDate)}</p>
+          <p className="mt-1 font-semibold text-bw-black">{formatBreachDate(breach.BreachDate)}</p>
         </div>
         <div>
           <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-bw-gray">
             Added
           </p>
-          <p className="mt-1 font-semibold text-bw-black">{formatDate(breach.AddedDate)}</p>
+          <p className="mt-1 font-semibold text-bw-black">{formatBreachDate(breach.AddedDate)}</p>
         </div>
       </div>
 

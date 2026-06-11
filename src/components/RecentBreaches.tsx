@@ -1,15 +1,10 @@
 import Link from 'next/link';
-
-interface HIBPBreach {
-  Name: string;
-  Title: string;
-  Domain: string;
-  BreachDate: string;
-  AddedDate: string;
-  PwnCount: number;
-  DataClasses: string[];
-  IsVerified: boolean;
-}
+import {
+  formatBreachCount,
+  formatBreachDate,
+  getBreachSeverity,
+  type HIBPBreach,
+} from '@/lib/breaches';
 
 async function fetchRecentBreaches(): Promise<HIBPBreach[]> {
   try {
@@ -30,42 +25,12 @@ async function fetchRecentBreaches(): Promise<HIBPBreach[]> {
   }
 }
 
-function formatCount(n: number): string {
-  if (n >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1)}B`;
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000) return `${Math.round(n / 1_000)}K`;
-  return n.toLocaleString();
-}
-
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
-}
-
-interface SeverityInfo {
-  label: string;
-  className: string;
-}
-
-function getSeverity(count: number): SeverityInfo {
-  if (count >= 100_000_000)
-    return { label: 'Critical', className: 'bg-red-100 text-red-700' };
-  if (count >= 10_000_000)
-    return { label: 'Large', className: 'bg-orange-100 text-orange-700' };
-  if (count >= 1_000_000)
-    return { label: 'Medium', className: 'bg-amber-100 text-amber-700' };
-  return { label: 'Small', className: 'bg-gray-100 text-bw-text' };
-}
-
 interface BreachCardProps {
   breach: HIBPBreach;
 }
 
 function BreachCard({ breach }: BreachCardProps) {
-  const severity = getSeverity(breach.PwnCount);
+  const severity = getBreachSeverity(breach.PwnCount);
   const visibleClasses = breach.DataClasses.slice(0, 4);
   const remaining = breach.DataClasses.length - visibleClasses.length;
 
@@ -87,10 +52,10 @@ function BreachCard({ breach }: BreachCardProps) {
 
       <div className="flex items-center gap-4 text-sm">
         <span className="text-bw-text font-medium">
-          {formatCount(breach.PwnCount)} accounts
+          {formatBreachCount(breach.PwnCount)} accounts
         </span>
         <span className="text-bw-gray text-xs">
-          Added {formatDate(breach.AddedDate)}
+          Added {formatBreachDate(breach.AddedDate)}
         </span>
       </div>
 
