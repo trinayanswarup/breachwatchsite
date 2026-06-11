@@ -114,7 +114,7 @@ export default function QuizWidget({ onComplete }: QuizWidgetProps) {
             <div
               key={i}
               className={`h-1.5 flex-1 rounded-[3px] transition-colors duration-300 ${
-                i <= currentStep ? 'bg-blue-500' : 'bg-gray-200'
+                i <= currentStep ? 'bg-bw-blue' : 'bg-black/10'
               }`}
             />
           ))}
