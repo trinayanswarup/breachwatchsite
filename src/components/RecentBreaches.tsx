@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 interface HIBPBreach {
   Name: string;
   Title: string;
@@ -118,10 +120,20 @@ export default async function RecentBreaches() {
   return (
     <section className="border-t border-black/10 bg-bw-light px-4 py-16">
       <div className="mx-auto max-w-6xl">
-        <h2 className="text-2xl font-bold text-bw-black">Recent Data Breaches</h2>
-        <p className="mt-1 text-bw-gray">
-          Updated daily from the Have I Been Pwned database
-        </p>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-bw-black">Recent Data Breaches</h2>
+            <p className="mt-1 text-bw-gray">
+              Updated daily from the Have I Been Pwned database
+            </p>
+          </div>
+          <Link
+            href="/breaches"
+            className="text-sm font-semibold text-bw-blue underline hover:text-bw-blue-dark"
+          >
+            View all breaches -&gt;
+          </Link>
+        </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {breaches.map((breach) => (
             <BreachCard key={breach.Name} breach={breach} />

@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 const NAV_LINKS = [
   { href: '/tools', label: 'Tools' },
+  { href: '/breaches', label: 'Breaches' },
   { href: '/vpn', label: 'VPNs' },
   { href: '/password-managers', label: 'Password Managers' },
   { href: '/antivirus', label: 'Antivirus' },
