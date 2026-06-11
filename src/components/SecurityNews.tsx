@@ -41,14 +41,9 @@ interface NewsCardProps {
 }
 
 function NewsCard({ item }: NewsCardProps) {
-  const href =
-    item.source === 'HN'
-      ? `https://news.ycombinator.com/item?id=${item.id.slice(3)}`
-      : item.url;
-
   return (
     <a
-      href={href}
+      href={item.url}
       target="_blank"
       rel="noopener noreferrer"
       className="group flex flex-col gap-2 rounded-[3px] border border-black/10 bg-white p-4 shadow-sm transition-all hover:border-bw-blue hover:shadow-md"
