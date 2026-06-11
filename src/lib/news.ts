@@ -1,4 +1,4 @@
-export type NewsSource = 'HN' | 'r/netsec' | 'r/privacy';
+export type NewsSource = 'HN' | 'r/netsec' | 'r/privacy' | 'r/cybersecurity';
 
 export interface NewsItem {
   id: string;
@@ -12,7 +12,9 @@ const SECURITY_KEYWORDS = [
   'vpn',
   'password',
   'breach',
-  'hack',
+  'hacked',
+  'hacker',
+  'hackers',
   'security',
   'privacy',
   'malware',
@@ -25,9 +27,18 @@ const SECURITY_KEYWORDS = [
 ];
 
 const EXCLUDED_LINK_HOSTS = ['github.com', 'gitlab.com', 'bitbucket.org'];
+const EXCLUDED_TITLE_TERMS = ['hackathon'];
+const HN_SEARCH_QUERIES = [
+  'cybersecurity',
+  'ransomware',
+  'data breach',
+  'vulnerability',
+  'privacy',
+];
 
-function isSecurityRelated(title: string): boolean {
+export function isSecurityRelated(title: string): boolean {
   const lower = title.toLowerCase();
+  if (EXCLUDED_TITLE_TERMS.some((term) => lower.includes(term))) return false;
   return SECURITY_KEYWORDS.some((kw) => lower.includes(kw));
 }
 
@@ -53,54 +64,55 @@ export function isCuratedNewsLink(title: string, url?: string): boolean {
   }
 }
 
-interface HNStory {
-  id: number;
-  type: string;
-  title: string;
+interface HNSearchHit {
+  objectID: string;
+  title?: string;
+  story_title?: string;
   url?: string;
-  time: number;
+  story_url?: string;
+  created_at: string;
 }
 
-async function fetchHackerNews(): Promise<NewsItem[]> {
-  const idsRes = await fetch(
-    'https://hacker-news.firebaseio.com/v0/topstories.json',
-    { next: { revalidate: 7200 } }
-  );
-  if (!idsRes.ok) throw new Error('HN top stories unavailable');
+interface HNSearchResponse {
+  hits: HNSearchHit[];
+}
 
-  const ids = (await idsRes.json()) as number[];
-  const first30 = ids.slice(0, 30);
+async function fetchHackerNewsSearch(): Promise<NewsItem[]> {
+  const results = await Promise.allSettled(
+    HN_SEARCH_QUERIES.map(async (query) => {
+      const res = await fetch(
+        `https://hn.algolia.com/api/v1/search_by_date?query=${encodeURIComponent(
+          query
+        )}&tags=story&hitsPerPage=10`,
+        { next: { revalidate: 7200 } }
+      );
 
-  const stories = await Promise.all(
-    first30.map(async (id) => {
-      try {
-        const r = await fetch(
-          `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
-          { next: { revalidate: 7200 } }
-        );
-        if (!r.ok) return null;
-        return (await r.json()) as HNStory;
-      } catch {
-        return null;
-      }
+      if (!res.ok) throw new Error(`HN search unavailable for ${query}`);
+      return (await res.json()) as HNSearchResponse;
     })
   );
 
-  const matching: NewsItem[] = [];
-  for (const story of stories) {
-    if (!story || story.type !== 'story' || !story.title) continue;
-    if (!isSecurityRelated(story.title)) continue;
-    if (!isCuratedNewsLink(story.title, story.url)) continue;
-    matching.push({
-      id: `hn-${story.id}`,
-      title: story.title,
-      url: story.url ?? `https://news.ycombinator.com/item?id=${story.id}`,
-      source: 'HN',
-      publishedAt: new Date(story.time * 1000),
+  return results.flatMap((result) => {
+    if (result.status !== 'fulfilled') return [];
+
+    return result.value.hits.flatMap((hit): NewsItem[] => {
+      const title = hit.title ?? hit.story_title;
+      const url = hit.url ?? hit.story_url;
+      if (!title || !url) return [];
+      if (!isSecurityRelated(title)) return [];
+      if (!isCuratedNewsLink(title, url)) return [];
+
+      return [
+        {
+          id: `hn-search-${hit.objectID}`,
+          title,
+          url,
+          source: 'HN',
+          publishedAt: new Date(hit.created_at),
+        },
+      ];
     });
-    if (matching.length === 4) break;
-  }
-  return matching;
+  });
 }
 
 interface RedditPostData {
@@ -121,13 +133,17 @@ interface RedditListing {
   };
 }
 
-function toNewsSource(sub: 'netsec' | 'privacy'): NewsSource {
-  return sub === 'netsec' ? 'r/netsec' : 'r/privacy';
+type RedditSource = 'netsec' | 'privacy' | 'cybersecurity';
+
+function toNewsSource(sub: RedditSource): NewsSource {
+  if (sub === 'netsec') return 'r/netsec';
+  if (sub === 'privacy') return 'r/privacy';
+  return 'r/cybersecurity';
 }
 
-async function fetchSubreddit(sub: 'netsec' | 'privacy'): Promise<NewsItem[]> {
+async function fetchSubreddit(sub: RedditSource): Promise<NewsItem[]> {
   const res = await fetch(
-    `https://www.reddit.com/r/${sub}/top.json?limit=10&t=week`,
+    `https://www.reddit.com/r/${sub}/top.json?limit=35&t=week`,
     {
       next: { revalidate: 7200 },
       headers: { 'User-Agent': 'BreachWatch/1.0' },
@@ -152,9 +168,10 @@ async function fetchSubreddit(sub: 'netsec' | 'privacy'): Promise<NewsItem[]> {
 
 export async function fetchAllNews(): Promise<NewsItem[]> {
   const results = await Promise.allSettled([
-    fetchHackerNews(),
+    fetchHackerNewsSearch(),
     fetchSubreddit('netsec'),
     fetchSubreddit('privacy'),
+    fetchSubreddit('cybersecurity'),
   ]);
 
   const all: NewsItem[] = [];

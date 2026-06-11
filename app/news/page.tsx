@@ -95,6 +95,7 @@ function sourceBadgeClass(source: NewsSource): string {
     HN: 'bg-orange-100 text-orange-700',
     'r/netsec': 'bg-bw-blue/10 text-bw-blue',
     'r/privacy': 'bg-green-100 text-green-700',
+    'r/cybersecurity': 'bg-purple-100 text-purple-700',
   };
 
   return styles[source];
@@ -188,7 +189,7 @@ export default async function NewsPage() {
             <div>
               <h2 className="text-[22px] font-bold text-bw-black">Latest curated links</h2>
               <p className="mt-1 text-[13px] text-bw-gray">
-                Updated from Hacker News, r/netsec, and r/privacy.
+                Updated from Hacker News, r/netsec, r/privacy, and r/cybersecurity.
               </p>
             </div>
             <Link

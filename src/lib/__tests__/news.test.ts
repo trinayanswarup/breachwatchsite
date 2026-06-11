@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isCuratedNewsLink } from '../news';
+import { isCuratedNewsLink, isSecurityRelated } from '../news';
 
 describe('isCuratedNewsLink', () => {
   it('rejects HN product/showcase posts and repository links', () => {
@@ -25,5 +25,11 @@ describe('isCuratedNewsLink', () => {
         'https://example.com/security/password-leak-report'
       )
     ).toBe(true);
+  });
+
+  it('rejects non-security posts with hackathon wording', () => {
+    expect(isSecurityRelated('RIP software hackathons. Long live the hardware hackathon')).toBe(
+      false
+    );
   });
 });

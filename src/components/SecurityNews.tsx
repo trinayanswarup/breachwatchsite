@@ -27,6 +27,7 @@ function SourceBadge({ source }: SourceBadgeProps) {
     HN: 'bg-orange-100 text-orange-700',
     'r/netsec': 'bg-bw-blue/10 text-bw-blue',
     'r/privacy': 'bg-green-100 text-green-700',
+    'r/cybersecurity': 'bg-purple-100 text-purple-700',
   };
   return (
     <span
