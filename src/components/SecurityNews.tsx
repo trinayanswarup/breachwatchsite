@@ -1,5 +1,6 @@
 import { fetchAllNews } from '@/lib/news';
 import type { NewsItem, NewsSource } from '@/lib/news';
+import Link from 'next/link';
 
 function timeAgo(date: Date): string {
   const diff = Date.now() - date.getTime();
@@ -72,8 +73,18 @@ export default async function SecurityNews() {
   return (
     <section className="border-t border-black/10 bg-white px-4 py-16">
       <div className="mx-auto max-w-6xl">
-        <h2 className="text-2xl font-bold text-bw-black">Security News</h2>
-        <p className="mt-1 text-bw-gray">Latest from the security community</p>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-bw-black">Security News</h2>
+            <p className="mt-1 text-bw-gray">Latest from the security community</p>
+          </div>
+          <Link
+            href="/news"
+            className="text-sm font-semibold text-bw-blue underline hover:text-bw-blue-dark"
+          >
+            View all news -&gt;
+          </Link>
+        </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
             <NewsCard key={item.id} item={item} />

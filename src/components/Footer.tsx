@@ -27,6 +27,7 @@ export default function Footer() {
             </p>
             <ul className="mt-3 space-y-2">
               {[
+                { href: '/news', label: 'Security News' },
                 { href: '/tools', label: 'Free Security Tools' },
                 { href: '/breaches', label: 'Recent Data Breaches' },
                 { href: '/vpn', label: 'Best VPNs' },

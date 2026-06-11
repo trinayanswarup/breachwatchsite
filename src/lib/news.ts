@@ -82,6 +82,7 @@ interface RedditPostData {
   id: string;
   title: string;
   permalink: string;
+  url?: string;
   created_utc: number;
 }
 
@@ -115,7 +116,7 @@ async function fetchSubreddit(sub: 'netsec' | 'privacy'): Promise<NewsItem[]> {
   return data.data.children.slice(0, 3).map((child) => ({
     id: `${sub}-${child.data.id}`,
     title: child.data.title,
-    url: `https://www.reddit.com${child.data.permalink}`,
+    url: child.data.url ?? `https://www.reddit.com${child.data.permalink}`,
     source,
     publishedAt: new Date(child.data.created_utc * 1000),
   }));
