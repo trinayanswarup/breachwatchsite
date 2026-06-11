@@ -90,7 +90,7 @@ export default function HomePage() {
             </h1>
             <p className="mt-3 text-[15px] text-bw-gray">
               We score every tool on the criteria that actually matter.{' '}
-              <Link href="/about" className="text-bw-blue underline hover:text-bw-blue-dark">
+              <Link href="/how-we-test" className="text-bw-blue underline hover:text-bw-blue-dark">
                 See our methodology.
               </Link>
             </p>
@@ -228,7 +228,7 @@ export default function HomePage() {
               higher commissions.
             </p>
             <Link
-              href="/about"
+              href="/how-we-test"
               className="mt-4 inline-block text-[13px] font-semibold text-bw-blue underline hover:text-bw-blue-dark"
             >
               Read the full methodology →

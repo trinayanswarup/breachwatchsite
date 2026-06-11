@@ -53,6 +53,7 @@ export default function Footer() {
             <ul className="mt-3 space-y-2">
               {[
                 { href: '/about', label: 'About' },
+                { href: '/how-we-test', label: 'How We Test' },
                 { href: '/privacy', label: 'Privacy Policy' },
                 { href: '/disclosure', label: 'Affiliate Disclosure' },
               ].map((link) => (
