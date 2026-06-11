@@ -89,17 +89,17 @@
       "higherIsBetter": true
     },
     {
-      "id": "price",
-      "name": "Price",
+      "id": "privacy",
+      "name": "Privacy Practices",
       "weight": 20,
-      "description": "Annual subscription cost for a single device. Free options score highest.",
+      "description": "Does the antivirus send telemetry, file samples, or browsing data back to the vendor? Known data-selling incidents reduce this score.",
       "higherIsBetter": true
     },
     {
-      "id": "privacy",
-      "name": "Privacy",
+      "id": "price",
+      "name": "Price",
       "weight": 15,
-      "description": "Does the antivirus send telemetry, file samples, or browsing data back to the vendor?",
+      "description": "Annual subscription cost for a single device. Free options score highest.",
       "higherIsBetter": true
     },
     {
@@ -126,24 +126,24 @@
       "higherIsBetter": true
     },
     {
-      "id": "cloud_sync",
-      "name": "Cloud Sync",
+      "id": "export_capability",
+      "name": "Export Capability",
       "weight": 20,
-      "description": "Encrypted sync across devices. Local-only storage is more private but riskier if you lose your device.",
+      "description": "Can you export your tokens and switch to another app without starting over? Proprietary lock-in is a security risk, not a feature.",
       "higherIsBetter": true
     },
     {
-      "id": "platform",
-      "name": "Platform",
+      "id": "reliability",
+      "name": "Reliability",
       "weight": 15,
-      "description": "Available on iOS, Android, and ideally desktop. Cross-platform scores highest.",
+      "description": "Play Store rating and review patterns — real users reporting sync failures, autofill bugs, and token loss incidents over time.",
       "higherIsBetter": true
     },
     {
       "id": "ease_of_use",
-      "name": "Ease of Use",
+      "name": "Ease of Setup",
       "weight": 5,
-      "description": "How straightforward is setup, adding accounts, and day-to-day use?",
+      "description": "How straightforward is first-time setup, adding accounts, and day-to-day use for non-technical users?",
       "higherIsBetter": true
     }
   ]

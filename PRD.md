@@ -445,6 +445,105 @@ Every event fired via `track()` from `@vercel/analytics/react`:
 
 ---
 
+## Live Features
+
+These features extend the core comparison site with live data and interactive tools.
+
+---
+
+### Breach Checker `/breach-checker`
+**Purpose:** Let users check if a password has appeared in a known data breach, without ever sending the password to a server.
+
+**Content:**
+- H1: "Check If Your Password Has Been Exposed in a Data Breach"
+- Password input form — no account required, password never stored or sent in plain text
+- Results show: whether the password appears in any known breach, and how many times it has been seen
+- If not found: green confirmation with a note that a strong unique password per site is still essential
+- If found: red alert with specific next-step recommendations (switch to a password manager)
+- Affiliate CTAs to Bitwarden appropriate to the result
+
+**Implementation:**
+- `BreachChecker.tsx` — client-side component; browser hashes the password with SHA-1 using Web Crypto API; only the first 5 characters of the hash are sent to the server; password never leaves the browser in plain text
+- `BreachResult.tsx` — displays breach results or clean result; accepts count of matches
+- `/api/breach-checker/route.ts` — server-side proxy to HIBP Passwords API (`api.pwnedpasswords.com/range/{first5chars}`); checks if full hash suffix appears in the response; password never logged or stored; no API key required
+
+**Rules:**
+- Passwords must never be logged or stored
+- Password hash checking must use k-anonymity — only the first 5 characters of the SHA-1 hash are ever sent to the HIBP API
+- Results cached per hash prefix, not per password
+
+**SEO:**
+- Title: `Has My Password Been Hacked? Check for Data Breaches | BreachWatch`
+- Description: `Check if your password has appeared in a data breach. Uses Have I Been Pwned. Your password never leaves your browser — only an anonymous hash fragment is sent.`
+- Internal links: password managers page, 2FA apps page
+
+---
+
+### Shareable Score Page `/score/[score]`
+**Purpose:** Allow users to share their quiz score on social media, driving referral traffic back to the quiz. A score of 1 shared on Reddit is a better acquisition channel than a score of 5.
+
+**Content:**
+- Dynamic route `/score/1` through `/score/5`
+- Large score badge matching quiz result colour coding (1–2 red, 3 amber, 4–5 green)
+- Score headline: e.g. "My security score: 2/5 — I need to fix this" (copy varies by score)
+- Social sharing: copy-to-clipboard link, Twitter/X share button with pre-filled text
+- Primary CTA: "Take the quiz yourself →" links to `/quiz`
+- Secondary CTA: links to the most relevant category for that score band
+
+**Implementation:**
+- `app/score/[score]/page.tsx` — statically generated for scores 1–5; `generateStaticParams` returns the five valid values; invalid score values return 404
+- `ShareScore.tsx` — share button component with clipboard copy, native share API fallback, and Twitter/X intent URL
+- Open Graph metadata generated per score for social preview cards
+
+**SEO:**
+- Each score page has a unique title and description generated from the score value
+- `noindex` — these pages are for sharing, not for ranking; internal links via the quiz result screen
+
+---
+
+### Recent Breaches Feed `/api/recent-breaches`
+**Purpose:** Show the most recent data breaches on the homepage and breach checker page, demonstrating that the threat is ongoing and building urgency.
+
+**Content:**
+- Returns a list of the most recent breaches from HIBP: breach name, domain, breach date, number of accounts, data classes exposed
+- Displayed via `RecentBreaches.tsx` on the homepage and breach checker landing area
+- Shows up to 5 most recent breaches
+
+**Implementation:**
+- `/api/recent-breaches/route.ts` — fetches from HIBP `/breaches` endpoint; filters to recent entries; uses Next.js `fetch` with `revalidate: 3600` (1-hour cache)
+- `RecentBreaches.tsx` — renders breach cards with: name, date, affected account count, data types exposed; severity indicator based on account count
+
+**Caching:**
+- `revalidate: 3600` — breach data changes infrequently; 1-hour cache is appropriate
+- On HIBP API failure: return cached data if available; return empty array with error flag if not
+
+---
+
+### Security News Feed `/api/security-news`
+**Purpose:** Provide a live security news section on the homepage to increase return visits, demonstrate editorial awareness, and give users a reason to bookmark the site.
+
+**Content:**
+- Aggregates security news headlines from multiple RSS/API sources (minimum 3 sources)
+- Displayed via `SecurityNews.tsx`: headline, source name, published date, link to original article
+- Shows up to 9 items (3 per source)
+
+**Implementation:**
+- `/api/security-news/route.ts` — fetches from multiple sources in parallel using `Promise.allSettled`; merges and sorts by date; uses Next.js `fetch` with `revalidate: 900` (15-minute cache)
+- `src/lib/news.ts` — news fetching and normalisation logic per source; each source has its own fetch function that returns a consistent `NewsItem` type
+- `SecurityNews.tsx` — renders news cards; skeleton loading state; source badge per item
+
+**Failure handling:**
+- Each news source is fetched independently — `Promise.allSettled` not `Promise.all`
+- If one source fails, its items are omitted and the others display normally
+- If all sources fail, an empty array is returned — the component renders nothing rather than an error
+- Minimum viable result: at least one source returning items; no hard failures propagated to the page
+
+**Caching:**
+- `revalidate: 900` — news freshness matters more than breach data; 15-minute cache
+- Stale-while-revalidate behaviour provided by Next.js fetch caching
+
+---
+
 ## Launch checklist
 Before going live:
 - [ ] All affiliate links replaced with real IDs from affiliate dashboards

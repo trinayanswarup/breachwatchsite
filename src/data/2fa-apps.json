@@ -3,14 +3,41 @@
     "id": "aegis",
     "name": "Aegis Authenticator",
     "slug": "aegis",
-    "tagline": "Best Android 2FA app — fully open source, encrypted backups, no cloud required",
+    "tagline": "Fully offline, open source, encrypted backups — Android only",
     "website": "https://getaegis.app",
     "affiliateUrl": "https://getaegis.app",
     "scores": {
       "backup_recovery": 9,
       "open_source": 10,
-      "cloud_sync": 5,
-      "platform": 3,
+      "export_capability": 10,
+      "reliability": 9,
+      "ease_of_use": 7
+    },
+    "pricing": {
+      "monthly": 0,
+      "annual": 0,
+      "currency": "USD"
+    },
+    "highlights": [
+      "Export tokens to an encrypted file at any time — complete, portable, no lock-in",
+      "Fully open source, available on F-Droid — no Google Play account required",
+      "Encrypted vault with a separate backup password — local storage, no cloud required"
+    ],
+    "verdict": "The definitive Android 2FA app. Full control, no third-party dependency, open source. Requires backup discipline.",
+    "bestFor": "Android users who want maximum control over their 2FA tokens with no cloud dependency and full portability"
+  },
+  {
+    "id": "ente_auth",
+    "name": "Ente Auth",
+    "slug": "ente-auth",
+    "tagline": "Open source, end-to-end encrypted cloud sync, cross-platform — iOS, Android, and desktop",
+    "website": "https://ente.io/auth",
+    "affiliateUrl": "https://ente.io/auth",
+    "scores": {
+      "backup_recovery": 9,
+      "open_source": 10,
+      "export_capability": 9,
+      "reliability": 8,
       "ease_of_use": 8
     },
     "pricing": {
@@ -19,106 +46,25 @@
       "currency": "USD"
     },
     "highlights": [
-      "Fully open source with public audit — available on F-Droid and Google Play",
-      "Encrypted local backups you can store anywhere (Dropbox, Google Drive, local)",
-      "TOTP, HOTP, and Steam tokens supported; import from Google Authenticator"
+      "End-to-end encrypted sync — Ente cannot read your tokens even on their own servers",
+      "Cross-platform: Android, iOS, Windows, macOS, Linux, and web app",
+      "Shows the next TOTP code before it generates — never wait for a refresh mid-login"
     ],
-    "verdict": "The definitive Android 2FA app — open source, encrypted backups, and completely free.",
-    "bestFor": "Android users who want the most transparent and secure 2FA app available"
-  },
-  {
-    "id": "raivo",
-    "name": "Raivo OTP",
-    "slug": "raivo",
-    "tagline": "Best iOS 2FA app — open source, iCloud encrypted sync, Apple Watch support",
-    "website": "https://raivo-otp.com",
-    "affiliateUrl": "https://raivo-otp.com",
-    "scores": {
-      "backup_recovery": 8,
-      "open_source": 10,
-      "cloud_sync": 8,
-      "platform": 3,
-      "ease_of_use": 9
-    },
-    "pricing": {
-      "monthly": 0,
-      "annual": 0,
-      "currency": "USD"
-    },
-    "highlights": [
-      "Open source iOS native app with excellent design",
-      "iCloud Keychain encrypted sync across all your Apple devices",
-      "Apple Watch app for quick token access without unlocking your phone"
-    ],
-    "verdict": "The best iOS 2FA app — native design, iCloud sync, and fully open source.",
-    "bestFor": "iOS users who want an open source app with seamless Apple ecosystem integration"
-  },
-  {
-    "id": "authy",
-    "name": "Authy",
-    "slug": "authy",
-    "tagline": "Best multi-device sync — encrypted cloud backup and desktop app included",
-    "website": "https://authy.com",
-    "affiliateUrl": "https://authy.com",
-    "scores": {
-      "backup_recovery": 10,
-      "open_source": 0,
-      "cloud_sync": 10,
-      "platform": 10,
-      "ease_of_use": 9
-    },
-    "pricing": {
-      "monthly": 0,
-      "annual": 0,
-      "currency": "USD"
-    },
-    "highlights": [
-      "Encrypted cloud backup — never lose your 2FA codes if you lose your phone",
-      "Desktop app for Windows, macOS, and Linux in addition to iOS and Android",
-      "Multi-device sync lets you access codes on phone and computer simultaneously"
-    ],
-    "verdict": "Best for users who switch phones frequently or want desktop access — closed source is the tradeoff.",
-    "bestFor": "Users who prioritise easy recovery and multi-device access over open source transparency"
+    "verdict": "The best cross-platform option with genuine privacy. Open source, E2EE cloud sync, and full export capability. The right choice for iOS users.",
+    "bestFor": "iOS users, users who want desktop access to their 2FA codes, and anyone who wants cross-platform sync with genuine end-to-end encryption"
   },
   {
     "id": "google_authenticator",
     "name": "Google Authenticator",
     "slug": "google-authenticator",
-    "tagline": "Simple and widely supported — Google account backup added in 2023",
+    "tagline": "Simple and widely supported — cloud sync added in 2023, but export is a trap",
     "website": "https://support.google.com/accounts/answer/1066447",
     "affiliateUrl": "https://support.google.com/accounts/answer/1066447",
     "scores": {
-      "backup_recovery": 7,
+      "backup_recovery": 5,
       "open_source": 0,
-      "cloud_sync": 6,
-      "platform": 8,
-      "ease_of_use": 8
-    },
-    "pricing": {
-      "monthly": 0,
-      "annual": 0,
-      "currency": "USD"
-    },
-    "highlights": [
-      "Google account backup added in May 2023 — previously had no backup at all",
-      "Supported by virtually every site that offers TOTP-based 2FA",
-      "No account required — works offline on iOS and Android"
-    ],
-    "verdict": "Adequate for most users, but Aegis (Android) or Raivo (iOS) are strictly better with no downside.",
-    "bestFor": "Casual users who want the simplest possible 2FA setup with a familiar brand"
-  },
-  {
-    "id": "microsoft_authenticator",
-    "name": "Microsoft Authenticator",
-    "slug": "microsoft-authenticator",
-    "tagline": "Best recovery for Microsoft account users — passwordless login and encrypted backup",
-    "website": "https://www.microsoft.com/en-us/security/mobile-authenticator-app",
-    "affiliateUrl": "https://www.microsoft.com/en-us/security/mobile-authenticator-app",
-    "scores": {
-      "backup_recovery": 8,
-      "open_source": 0,
-      "cloud_sync": 8,
-      "platform": 8,
+      "export_capability": 4,
+      "reliability": 7,
       "ease_of_use": 9
     },
     "pricing": {
@@ -127,11 +73,65 @@
       "currency": "USD"
     },
     "highlights": [
-      "Encrypted cloud backup to Microsoft account; restore to any new phone in minutes",
-      "Passwordless login for Microsoft accounts — use your phone instead of a password",
-      "Number matching feature prevents MFA fatigue attacks"
+      "Google account cloud sync added in May 2023 — but sync reliability has been reported as inconsistent",
+      "Export screen places a pre-checked 'Delete all' button next to 'Next' — multiple users report losing all codes",
+      "Supported by virtually every site that offers TOTP-based 2FA"
     ],
-    "verdict": "Excellent if you use Microsoft 365 or Azure — solid recovery options and modern security features.",
-    "bestFor": "Microsoft 365 users who want seamless integration with their work accounts"
+    "verdict": "Adequate for casual use, but the export UX is dangerous and cloud sync has reliability issues. Switch to Aegis or Ente Auth.",
+    "bestFor": "Users who want the simplest possible 2FA app and are primarily on one device — not recommended if you ever plan to switch apps"
+  },
+  {
+    "id": "microsoft_authenticator",
+    "name": "Microsoft Authenticator",
+    "slug": "microsoft-authenticator",
+    "tagline": "Essential for Microsoft accounts — problematic for everything else",
+    "website": "https://www.microsoft.com/en-us/security/mobile-authenticator-app",
+    "affiliateUrl": "https://www.microsoft.com/en-us/security/mobile-authenticator-app",
+    "scores": {
+      "backup_recovery": 4,
+      "open_source": 0,
+      "export_capability": 3,
+      "reliability": 7,
+      "ease_of_use": 7
+    },
+    "pricing": {
+      "monthly": 0,
+      "annual": 0,
+      "currency": "USD"
+    },
+    "highlights": [
+      "Passwordless sign-in for Microsoft accounts — the genuine differentiating feature",
+      "Circular dependency on new device setup: asks you to authenticate with the app you're trying to set up",
+      "Backup reliability issues reported — extended outages with no recovery path for affected users"
+    ],
+    "verdict": "Use it for Microsoft accounts if your organization requires it. Keep a separate, more reliable app for non-Microsoft accounts.",
+    "bestFor": "Work environments mandating Microsoft Authenticator for Microsoft 365 accounts — pair with Aegis or Ente Auth for personal accounts"
+  },
+  {
+    "id": "authy",
+    "name": "Authy",
+    "slug": "authy",
+    "tagline": "Multi-device sync was the selling point — but intentional lock-in and Twilio breach make it a liability",
+    "website": "https://authy.com",
+    "affiliateUrl": "https://authy.com",
+    "scores": {
+      "backup_recovery": 5,
+      "open_source": 0,
+      "export_capability": 1,
+      "reliability": 7,
+      "ease_of_use": 8
+    },
+    "pricing": {
+      "monthly": 0,
+      "annual": 0,
+      "currency": "USD"
+    },
+    "highlights": [
+      "No token export — by design. Switching to another app requires resetting 2FA on every account manually",
+      "Twilio (parent company) suffered a data breach in 2022 that exposed Authy user phone numbers",
+      "Blocks GrapheneOS — a more privacy-focused Android variant — from running the app"
+    ],
+    "verdict": "Do not recommend for new users. The intentional export lock-in and Twilio breach history are disqualifying. Migrate to Aegis or Ente Auth.",
+    "bestFor": "Existing users who are already locked in and haven't encountered problems yet — new users should start with Aegis or Ente Auth"
   }
 ]

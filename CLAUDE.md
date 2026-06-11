@@ -47,12 +47,20 @@ breachwatchsite/
 │   │   ├── password-managers/page.tsx
 │   │   ├── antivirus/page.tsx
 │   │   ├── 2fa-apps/page.tsx
-│   │   └── reviews/
-│   │       ├── nordvpn/page.tsx
-│   │       ├── bitwarden/page.tsx
-│   │       ├── nordvpn-vs-expressvpn/page.tsx
-│   │       ├── bitwarden-vs-1password/page.tsx
-│   │       └── best-vpn-lithuania/page.tsx
+│   │   ├── reviews/
+│   │   │   ├── nordvpn/page.tsx
+│   │   │   ├── bitwarden/page.tsx
+│   │   │   ├── nordvpn-vs-expressvpn/page.tsx
+│   │   │   ├── bitwarden-vs-1password/page.tsx
+│   │   │   └── best-vpn-lithuania/page.tsx
+│   │   ├── breach-checker/
+│   │   │   └── page.tsx
+│   │   ├── score/
+│   │   │   └── [score]/page.tsx
+│   │   └── api/
+│   │       ├── breach-checker/route.ts
+│   │       ├── recent-breaches/route.ts
+│   │       └── security-news/route.ts
 │   ├── components/
 │   │   ├── ComparisonTable.tsx
 │   │   ├── QuizWidget.tsx
@@ -62,7 +70,12 @@ breachwatchsite/
 │   │   ├── StatsDisplay.tsx
 │   │   ├── ScoreBreakdown.tsx
 │   │   ├── Nav.tsx
-│   │   └── Footer.tsx
+│   │   ├── Footer.tsx
+│   │   ├── BreachChecker.tsx
+│   │   ├── BreachResult.tsx
+│   │   ├── RecentBreaches.tsx
+│   │   ├── SecurityNews.tsx
+│   │   └── ShareScore.tsx
 │   ├── data/
 │   │   ├── vpns.json
 │   │   ├── password-managers.json
@@ -72,14 +85,15 @@ breachwatchsite/
 │   └── lib/
 │       ├── quiz.ts
 │       ├── analytics.ts
-│       └── affiliate.ts
+│       ├── affiliate.ts
+│       └── news.ts
 ```
 
 ## Environment variables
 ```
 GROQ_API_KEY=your_key_here
 ```
-Get a free key at console.groq.com — no credit card required.
+Get `GROQ_API_KEY` free at console.groq.com — no credit card required.
 
 ## Rules you must follow
 
@@ -114,6 +128,12 @@ Get a free key at console.groq.com — no credit card required.
 - The quiz API route must never throw an unhandled error. Always return a valid response even if Groq fails — use a sensible default recommendation.
 - Quiz answers are never stored anywhere — no database, no logging.
 - The quiz makes exactly one Groq API call per submission.
+
+### Breach checker and live data rules
+- Breach checker API route must never log or store passwords
+- All external API calls must use Next.js fetch caching with appropriate revalidation times
+- News feed must handle partial failures gracefully — if one source fails, show the other two
+- Password hash checking must use k-anonymity — only the first 5 characters of the SHA-1 hash are ever sent to the HIBP API
 
 ## What done looks like
 A session is done when:
