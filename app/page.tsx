@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
+import RecentBreaches from '@/components/RecentBreaches';
+import SecurityNews from '@/components/SecurityNews';
 import type { Product } from '@/lib/types';
 import vpnsJson from '@/data/vpns.json';
 
@@ -92,14 +94,22 @@ export default function HomePage() {
                 See our methodology.
               </Link>
             </p>
-            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <div className="mt-8 flex flex-col items-center gap-4">
+              <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                <Link
+                  href="/quiz"
+                  className="rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white shadow-sm transition-colors hover:bg-blue-700"
+                >
+                  Find out your biggest security risk →
+                </Link>
+                <p className="text-sm text-gray-500">Takes 30 seconds. No email required.</p>
+              </div>
               <Link
-                href="/quiz"
-                className="rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white shadow-sm transition-colors hover:bg-blue-700"
+                href="/breach-checker"
+                className="text-sm font-medium text-blue-600 underline underline-offset-2 hover:text-blue-800 transition-colors"
               >
-                Find out your biggest security risk →
+                Check if your password was leaked →
               </Link>
-              <p className="text-sm text-gray-500">Takes 30 seconds. No email required.</p>
             </div>
           </div>
         </section>
@@ -143,6 +153,10 @@ export default function HomePage() {
             />
           </div>
         </section>
+
+        {/* Recent breaches + security news — async server components, ISR 24h / 2h */}
+        <RecentBreaches />
+        <SecurityNews />
 
         {/* Featured pick */}
         <section className="border-t border-gray-100 bg-gray-50 px-4 py-16">

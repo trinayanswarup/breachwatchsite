@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { QuizResult } from '@/lib/quiz';
+import ShareScore from '@/components/ShareScore';
 
 export interface QuizResultProps {
   result: QuizResult;
@@ -123,6 +124,8 @@ export default function QuizResultComponent({ result }: QuizResultProps) {
           See all categories
         </Link>
       </div>
+
+      <ShareScore score={result.score} />
 
       <p className="mt-6 text-center text-xs text-gray-400">
         Your answers were not stored. This analysis runs entirely in memory.

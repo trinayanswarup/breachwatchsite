@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { href: '/password-managers', label: 'Password Managers' },
   { href: '/antivirus', label: 'Antivirus' },
   { href: '/2fa-apps', label: '2FA Apps' },
+  { href: '/breach-checker', label: 'Breach Checker' },
 ];
 
 export default function Nav() {
