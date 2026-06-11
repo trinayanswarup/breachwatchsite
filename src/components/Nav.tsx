@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const NAV_LINKS = [
+  { href: '/tools', label: 'Tools' },
   { href: '/vpn', label: 'VPNs' },
   { href: '/password-managers', label: 'Password Managers' },
   { href: '/antivirus', label: 'Antivirus' },
