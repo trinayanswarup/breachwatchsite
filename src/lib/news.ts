@@ -24,9 +24,33 @@ const SECURITY_KEYWORDS = [
   'encryption',
 ];
 
+const EXCLUDED_LINK_HOSTS = ['github.com', 'gitlab.com', 'bitbucket.org'];
+
 function isSecurityRelated(title: string): boolean {
   const lower = title.toLowerCase();
   return SECURITY_KEYWORDS.some((kw) => lower.includes(kw));
+}
+
+export function isCuratedNewsLink(title: string, url?: string): boolean {
+  const lowerTitle = title.trim().toLowerCase();
+  if (
+    lowerTitle.startsWith('show hn:') ||
+    lowerTitle.startsWith('ask hn:') ||
+    lowerTitle.startsWith('launch hn:')
+  ) {
+    return false;
+  }
+
+  if (!url) return true;
+
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, '');
+    return !EXCLUDED_LINK_HOSTS.some(
+      (excludedHost) => host === excludedHost || host.endsWith(`.${excludedHost}`)
+    );
+  } catch {
+    return false;
+  }
 }
 
 interface HNStory {
@@ -66,6 +90,7 @@ async function fetchHackerNews(): Promise<NewsItem[]> {
   for (const story of stories) {
     if (!story || story.type !== 'story' || !story.title) continue;
     if (!isSecurityRelated(story.title)) continue;
+    if (!isCuratedNewsLink(story.title, story.url)) continue;
     matching.push({
       id: `hn-${story.id}`,
       title: story.title,
@@ -113,13 +138,16 @@ async function fetchSubreddit(sub: 'netsec' | 'privacy'): Promise<NewsItem[]> {
   const data = (await res.json()) as RedditListing;
   const source = toNewsSource(sub);
 
-  return data.data.children.slice(0, 3).map((child) => ({
-    id: `${sub}-${child.data.id}`,
-    title: child.data.title,
-    url: child.data.url ?? `https://www.reddit.com${child.data.permalink}`,
-    source,
-    publishedAt: new Date(child.data.created_utc * 1000),
-  }));
+  return data.data.children
+    .filter((child) => isCuratedNewsLink(child.data.title, child.data.url))
+    .slice(0, 3)
+    .map((child) => ({
+      id: `${sub}-${child.data.id}`,
+      title: child.data.title,
+      url: child.data.url ?? `https://www.reddit.com${child.data.permalink}`,
+      source,
+      publishedAt: new Date(child.data.created_utc * 1000),
+    }));
 }
 
 export async function fetchAllNews(): Promise<NewsItem[]> {
