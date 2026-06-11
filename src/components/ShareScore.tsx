@@ -30,13 +30,13 @@ export default function ShareScore({ score }: ShareScoreProps) {
   }
 
   return (
-    <div className="mt-8 rounded-xl border border-gray-200 bg-gray-50 p-5">
-      <p className="mb-3 text-sm font-semibold text-gray-700">Share your score</p>
+    <div className="mt-8 rounded-[3px] border border-black/10 bg-bw-light p-5">
+      <p className="mb-3 text-sm font-semibold text-bw-text">Share your score</p>
       <div className="flex flex-col gap-2 sm:flex-row">
         <button
           type="button"
           onClick={handleCopy}
-          className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          className="flex flex-1 items-center justify-center gap-2 rounded-[3px] border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-bw-text transition-colors hover:bg-bw-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
         >
           <span aria-hidden="true">{copied ? '✓' : '🔗'}</span>
           {copied ? 'Link copied!' : 'Copy link'}
@@ -45,7 +45,7 @@ export default function ShareScore({ score }: ShareScoreProps) {
           href={redditSubmitUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-orange-500 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+          className="flex flex-1 items-center justify-center gap-2 rounded-[3px] bg-orange-500 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
         >
           <span aria-hidden="true">↑</span>
           Share on Reddit

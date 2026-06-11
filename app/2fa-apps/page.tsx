@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
-import ProductCard from '@/components/ProductCard';
+import RankedCard from '@/components/RankedCard';
 import ScoreBreakdown from '@/components/ScoreBreakdown';
 import AffiliateCTA from '@/components/AffiliateCTA';
 import JsonLd from '@/components/JsonLd';
@@ -70,6 +70,46 @@ const pageSchema: Record<string, unknown> = {
   })),
 };
 
+const FA_BULLETS: Record<string, { pros: string[]; cons: string[] }> = {
+  aegis: {
+    pros: [
+      'Export tokens to an encrypted file at any time — complete, portable, no lock-in',
+      'Fully open source, available on F-Droid — no Google Play account required',
+      'Encrypted vault with a separate backup password — local storage only',
+    ],
+    cons: ['Android only — no iOS or desktop app'],
+  },
+  ente_auth: {
+    pros: [
+      'End-to-end encrypted sync — Ente cannot read your tokens even on their servers',
+      'Cross-platform: Android, iOS, Windows, macOS, Linux, and web',
+      'Shows the next TOTP code before it generates — never wait mid-login',
+    ],
+    cons: ['Newer project — requires trust in Ente for encrypted cloud sync'],
+  },
+  google_authenticator: {
+    pros: ['Supported by virtually every site that offers TOTP-based 2FA'],
+    cons: [
+      'Export screen has a pre-checked "Delete all" button — multiple users report losing all codes',
+      'Cloud sync reliability reported as inconsistent since 2023 launch',
+    ],
+  },
+  microsoft_authenticator: {
+    pros: ['Passwordless sign-in for Microsoft accounts — the genuine differentiating feature'],
+    cons: [
+      'Circular dependency on new device: asks you to authenticate with the app you\'re setting up',
+      'Backup reliability issues — extended outages with no recovery path',
+    ],
+  },
+  authy: {
+    pros: ['Multi-device sync established before competitors offered it'],
+    cons: [
+      'No token export — by design. Switching apps requires resetting 2FA on every account',
+      'Twilio breach (2022) exposed Authy user phone numbers · Blocks GrapheneOS',
+    ],
+  },
+};
+
 export default function TwoFAPage() {
   const topPickHref = productCta(topPick);
 
@@ -81,70 +121,32 @@ export default function TwoFAPage() {
       <main className="flex-1">
 
         {/* Hero */}
-        <section className="bg-gradient-to-b from-blue-50 to-white px-4 pt-10 pb-8">
-          <div className="mx-auto max-w-3xl">
-            <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm text-gray-500">
-              <Link href="/" className="hover:text-blue-600">BreachWatch</Link>
-              <span aria-hidden="true">›</span>
-              <span className="text-gray-900">2FA Apps</span>
-            </nav>
-
-            <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl">
+        <section className="px-5 pt-14 pb-10 text-center">
+          <div className="mx-auto max-w-[680px]">
+            <h1 className="text-[32px] font-bold leading-tight text-bw-black">
               Best 2FA Apps of 2026 — The One Question That Changes Everything
             </h1>
-            <p className="mt-4 text-lg text-gray-600">
-              Two-factor authentication is only as good as your recovery plan. Every 2FA
-              app works fine — until you lose your phone, factory reset it, or switch to
-              a new device. That&apos;s the moment most people discover their app&apos;s
-              fatal flaw. We ranked these five apps primarily on backup and recovery
-              options, because that&apos;s what separates a security tool from a
-              security trap.{' '}
-              <strong className="text-gray-900">Aegis</strong> scores{' '}
-              <strong>{weightedScore(topPick).toFixed(1)}/10</strong> (Android).{' '}
-              <strong className="text-gray-900">Ente Auth</strong> scores{' '}
-              <strong>{weightedScore(enteAuthPick).toFixed(1)}/10</strong> on all
-              platforms including iOS.
+            <p className="mt-3.5 text-[15px] text-bw-gray leading-relaxed max-w-[500px] mx-auto">
+              We compared 5 two-factor authentication apps on what actually matters: what
+              happens when you lose your phone. The results will surprise you.
             </p>
-
-            <div className="mt-4 rounded-lg border border-green-200 bg-green-50 px-4 py-2.5 text-sm text-green-800">
-              <strong>Note:</strong> These apps are free — there are no affiliate links
-              on this page. Our recommendations are purely editorial.{' '}
-              <Link href="/disclosure" className="underline hover:text-green-900">
-                Full disclosure policy.
-              </Link>
-            </div>
+            <Link
+              href="/quiz"
+              className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
+            >
+              Take the 30-second quiz →
+            </Link>
           </div>
         </section>
 
-        {/* Privacy Guides callout */}
-        <section className="border-b border-blue-100 bg-blue-50 px-4 py-5">
-          <div className="mx-auto max-w-3xl flex items-start gap-3">
-            <span className="mt-0.5 shrink-0 text-blue-500 text-lg" aria-hidden="true">ℹ</span>
-            <p className="text-sm text-blue-900">
-              <strong>Independent validation:</strong>{' '}
-              <a
-                href="https://www.privacyguides.org/en/multi-factor-authentication/"
-                className="underline hover:text-blue-700"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Privacy Guides
-              </a>{' '}
-              recommends only two 2FA apps:{' '}
-              <strong>Aegis Authenticator</strong> and{' '}
-              <strong>Ente Auth</strong>. Google Authenticator, Microsoft Authenticator,
-              and Authy do not appear on their list. Our rankings align with this
-              consensus.
-            </p>
-          </div>
-        </section>
+
 
         {/* Comparison table */}
         <section className="mx-auto max-w-6xl px-4 py-12">
-          <h2 className="mb-2 text-2xl font-bold text-gray-900">
+          <h2 className="mb-2 text-2xl font-bold text-bw-black">
             2FA app comparison: all 5 apps scored
           </h2>
-          <p className="mb-6 text-gray-500">
+          <p className="mb-6 text-bw-gray">
             Closed-source apps score 0 on open source (25% weight), and apps with
             no export capability score low on the export criterion (20% weight).
             These two criteria eliminate half the field.
@@ -153,26 +155,26 @@ export default function TwoFAPage() {
         </section>
 
         {/* Criteria explanation */}
-        <section className="border-t border-gray-100 bg-gray-50 px-4 py-12">
+        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-2 text-2xl font-bold text-gray-900">
+            <h2 className="mb-2 text-2xl font-bold text-bw-black">
               How we score 2FA apps
             </h2>
-            <p className="mb-8 text-gray-500">
+            <p className="mb-8 text-bw-gray">
               Backup and recovery has the highest weight because the consequences of
               getting it wrong are severe — you can lose access to accounts permanently
               if you lose your phone with no recovery path.
             </p>
             <div className="space-y-4">
               {criteria.map((c) => (
-                <div key={c.id} className="rounded-lg border border-gray-200 bg-white px-5 py-4">
+                <div key={c.id} className="rounded-[3px] border border-black/10 bg-white px-5 py-4">
                   <div className="flex items-center justify-between gap-3">
-                    <h3 className="font-semibold text-gray-900">{c.name}</h3>
-                    <span className="shrink-0 rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-bold text-blue-700">
+                    <h3 className="font-semibold text-bw-black">{c.name}</h3>
+                    <span className="shrink-0 rounded-[3px] bg-bw-blue/10 px-2.5 py-0.5 text-xs font-bold text-bw-blue">
                       {c.weight}% weight
                     </span>
                   </div>
-                  <p className="mt-1 text-sm text-gray-600">{c.description}</p>
+                  <p className="mt-1 text-sm text-bw-text">{c.description}</p>
                 </div>
               ))}
             </div>
@@ -181,21 +183,21 @@ export default function TwoFAPage() {
 
         {/* Individual product write-ups */}
         <section className="mx-auto max-w-3xl px-4 py-12 space-y-14">
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 className="text-2xl font-bold text-bw-black">
             Detailed breakdown — every 2FA app reviewed
           </h2>
 
           {/* Aegis */}
           <article>
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
-              <h3 className="text-xl font-bold text-gray-900">
+              <h3 className="text-xl font-bold text-bw-black">
                 1. Aegis Authenticator — {weightedScore(topPick).toFixed(1)}/10
               </h3>
-              <span className="rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
+              <span className="rounded-[3px] bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 Winner (Android)
               </span>
             </div>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Aegis is the gold standard for Android 2FA. Everything is stored locally
               — no cloud account required, no third party has access to your tokens.
               You back up your encrypted vault to a file and store it wherever you
@@ -203,21 +205,21 @@ export default function TwoFAPage() {
               uses a separate password from your vault password, so even if someone gets
               the backup file, they cannot read it without the backup password.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               The defining feature is the export capability. You can export all your
               tokens at any time, in a standard format, and import them into any other
               app. There is no lock-in. This is the opposite of Authy&apos;s approach
               and it&apos;s how 2FA apps should work.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Critical caveat: if you forget your vault master password and have no
               backup, your tokens are gone. The developer states this explicitly by
               design. This is correct security practice, but it means you must take
               backups seriously before you need them.
             </p>
-            <p className="mt-3 text-sm font-medium text-gray-500">
+            <p className="mt-3 text-sm font-medium text-bw-gray">
               4.6 stars / 6,040+ Play Store reviews ·{' '}
-              <a href="https://getaegis.app" className="text-blue-600 underline hover:text-blue-800" target="_blank" rel="noopener noreferrer">Android only</a>
+              <a href="https://getaegis.app" className="text-bw-blue underline hover:text-bw-blue-dark" target="_blank" rel="noopener noreferrer">Android only</a>
             </p>
             <div className="mt-4">
               <AffiliateCTA
@@ -232,35 +234,35 @@ export default function TwoFAPage() {
           {/* Ente Auth */}
           <article>
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
-              <h3 className="text-xl font-bold text-gray-900">
+              <h3 className="text-xl font-bold text-bw-black">
                 2. Ente Auth — {weightedScore(enteAuthPick).toFixed(1)}/10
               </h3>
-              <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800">
+              <span className="rounded-[3px] bg-bw-blue/10 px-3 py-1 text-sm font-semibold text-bw-blue-dark">
                 Runner-up (all platforms)
               </span>
             </div>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Ente Auth is the best option if you want cloud sync with genuine privacy.
               Your tokens are end-to-end encrypted before they leave your device — Ente
               cannot read them. The sync works across Android, iOS, Windows, macOS,
               Linux, and a web app. This makes it the right choice for iOS users (where
               Aegis has no app) and anyone who wants desktop access to their codes.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Two notable features from user reviews: the app shows you the next TOTP
               code before it generates, meaning you never have to wait for a refresh
               mid-login. And like Aegis, you can export your tokens at any time in a
               standard format — no lock-in.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               The main friction: cloud sync requires creating an Ente account. Some
               users find this unnecessary for a 2FA app. You can use it without cloud
               backup (just like Aegis), but this isn&apos;t obvious on first launch.
               Occasional reports of the QR scanner crashing and minor UX rough edges.
             </p>
-            <p className="mt-3 text-sm font-medium text-gray-500">
+            <p className="mt-3 text-sm font-medium text-bw-gray">
               4.7 stars / 2,290+ Play Store reviews ·{' '}
-              <a href="https://ente.io/auth" className="text-blue-600 underline hover:text-blue-800" target="_blank" rel="noopener noreferrer">Android, iOS, desktop, web</a>
+              <a href="https://ente.io/auth" className="text-bw-blue underline hover:text-bw-blue-dark" target="_blank" rel="noopener noreferrer">Android, iOS, desktop, web</a>
             </p>
             <div className="mt-4">
               <AffiliateCTA
@@ -274,16 +276,16 @@ export default function TwoFAPage() {
 
           {/* Google Authenticator */}
           <article>
-            <h3 className="text-xl font-bold text-gray-900">
+            <h3 className="text-xl font-bold text-bw-black">
               3. Google Authenticator — {weightedScore(googleAuthPick).toFixed(1)}/10
             </h3>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Google Authenticator is the most widely supported 2FA app — virtually
               every website that supports TOTP will show a Google Authenticator setup
               QR code. Google added cloud sync in 2023, which addressed the most common
               complaint about losing all tokens when changing phones.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               The problem is that cloud sync doesn&apos;t always work correctly.
               Multiple recent reviews describe tokens disappearing after sync, tokens
               not transferring to new devices despite backup supposedly being enabled,
@@ -292,56 +294,56 @@ export default function TwoFAPage() {
               which has resulted in users losing all their codes with a single
               misplaced tap.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               The export capability is also limited to QR-code scanning one at a time —
               there is no file export that would let you migrate to another app easily.
               Not recommended if you ever plan to switch apps.
             </p>
-            <p className="mt-3 text-sm font-medium text-gray-500">
+            <p className="mt-3 text-sm font-medium text-bw-gray">
               4.4 stars / 663K+ Play Store reviews · Not recommended by Privacy Guides
             </p>
           </article>
 
           {/* Microsoft Authenticator */}
           <article>
-            <h3 className="text-xl font-bold text-gray-900">
+            <h3 className="text-xl font-bold text-bw-black">
               4. Microsoft Authenticator — {weightedScore(msAuthPick).toFixed(1)}/10
             </h3>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Microsoft Authenticator is required if you want passwordless sign-in to
               Microsoft accounts — that&apos;s its genuine differentiator. Push
               notification approval for Microsoft logins is convenient and consistently
               praised by reviewers using it for work accounts.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Outside the Microsoft ecosystem, the picture is poor. The most common
               complaint — with reviews getting hundreds of helpful votes — is a circular
               dependency problem when setting up on a new device: the app asks you to
               authenticate with the app you&apos;re trying to set up. This problem has
               been reported consistently and not fully resolved.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Backup reliability issues have been documented — extended periods where
               the backup function simply doesn&apos;t work, with no recovery path for
               the affected accounts. Not suitable as a primary 2FA app for non-Microsoft
               accounts.
             </p>
-            <p className="mt-3 text-sm font-medium text-gray-500">
+            <p className="mt-3 text-sm font-medium text-bw-gray">
               4.7 stars / 2.68M+ Play Store reviews (primarily Microsoft account users) · Not recommended by Privacy Guides
             </p>
           </article>
 
           {/* Authy */}
           <article>
-            <h3 className="text-xl font-bold text-gray-900">
+            <h3 className="text-xl font-bold text-bw-black">
               5. Authy — {weightedScore(authyPick).toFixed(1)}/10
             </h3>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Authy pioneered multi-device sync for 2FA and was the best option for
               years. For users who set it up and haven&apos;t needed to change devices,
               it still works.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               The problem is intentional lock-in. Authy deliberately prevents token
               export — there is no way to move your tokens to another app without
               manually going to every website and resetting 2FA from scratch. The
@@ -350,13 +352,13 @@ export default function TwoFAPage() {
               data breach in 2022 that exposed Authy user phone numbers. Authy also
               blocks GrapheneOS, a more privacy-focused Android variant.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               If you are already using Authy and haven&apos;t hit problems, the
               migration cost is real. But new users should start with Aegis (Android)
               or Ente Auth (cross-platform) — you will not regret having full control
               of your tokens.
             </p>
-            <p className="mt-3 text-sm font-medium text-gray-500">
+            <p className="mt-3 text-sm font-medium text-bw-gray">
               4.0 stars / 95.5K+ Play Store reviews · Not recommended by Privacy Guides
             </p>
           </article>
@@ -394,49 +396,49 @@ export default function TwoFAPage() {
         </section>
 
         {/* Verdict */}
-        <section className="border-t border-gray-100 bg-blue-50 px-4 py-12">
+        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-6 text-2xl font-bold text-gray-900">Our verdict</h2>
+            <h2 className="mb-6 text-2xl font-bold text-bw-black">Our verdict</h2>
 
             <div className="space-y-4 mb-8">
-              <div className="rounded-lg border border-green-200 bg-white px-5 py-4">
+              <div className="rounded-[3px] border border-green-200 bg-white px-5 py-4">
                 <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-gray-900">Winner: Aegis (Android)</span>
+                  <span className="font-bold text-bw-black">Winner: Aegis (Android)</span>
                   <span className="text-sm font-semibold text-green-700">
                     {weightedScore(topPick).toFixed(1)}/10
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="mt-1 text-sm text-bw-text">
                   Full control of your tokens, encrypted file backups, open source, no
                   cloud dependency. The right answer for Android users who take security
                   seriously. Requires backup discipline.
                 </p>
               </div>
 
-              <div className="rounded-lg border border-blue-200 bg-white px-5 py-4">
+              <div className="rounded-[3px] border border-blue-200 bg-white px-5 py-4">
                 <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-gray-900">Runner-up: Ente Auth (all platforms)</span>
-                  <span className="text-sm font-semibold text-blue-700">
+                  <span className="font-bold text-bw-black">Runner-up: Ente Auth (all platforms)</span>
+                  <span className="text-sm font-semibold text-bw-blue">
                     {weightedScore(enteAuthPick).toFixed(1)}/10
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="mt-1 text-sm text-bw-text">
                   The only Privacy Guides-recommended app with genuine cross-platform
                   support including iOS and desktop. End-to-end encrypted cloud sync.
                   Export your tokens any time. Best choice for iOS users.
                 </p>
               </div>
 
-              <div className="rounded-lg border border-red-200 bg-white px-5 py-4">
+              <div className="rounded-[3px] border border-red-200 bg-white px-5 py-4">
                 <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-gray-900">
+                  <span className="font-bold text-bw-black">
                     Skip: Google Auth, Microsoft Auth, Authy
                   </span>
-                  <span className="text-sm font-semibold text-gray-500">
+                  <span className="text-sm font-semibold text-bw-gray">
                     {weightedScore(googleAuthPick).toFixed(1)} and below
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="mt-1 text-sm text-bw-text">
                   All three are closed source. All three have significant token loss
                   stories in recent reviews. Authy actively prevents you from leaving.
                   None appear on Privacy Guides.
@@ -464,30 +466,43 @@ export default function TwoFAPage() {
           </div>
         </section>
 
-        {/* ProductCard grid */}
-        <section className="mx-auto max-w-6xl px-4 py-12">
-          <h2 className="mb-2 text-2xl font-bold text-gray-900">
-            Quick reference — all 5 apps
-          </h2>
-          <p className="mb-6 text-gray-500">
-            Sorted by overall score. Aegis and Ente Auth lead by a wide margin.
-          </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {ranked.map((p) => (
-              <ProductCard
-                key={p.id}
-                product={p}
-                category="2fa-apps"
-                featured={p.id === topPick.id}
-              />
-            ))}
+        {/* Ranked comparison */}
+        <section className="mx-auto max-w-[760px] px-5 pb-10">
+          <div className="flex items-end gap-3 border-b-2 border-bw-blue pb-2 mb-4">
+            <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-gray">
+              5 2FA apps compared · Updated Jun 2026 · Methodology published
+            </span>
           </div>
+          {ranked.map((p, i) => {
+            const bullets = FA_BULLETS[p.id] ?? { pros: p.highlights, cons: [] };
+            return (
+              <RankedCard
+                key={p.id}
+                rank={i + 1}
+                productId={p.id}
+                name={p.name}
+                tagline={p.tagline}
+                pros={bullets.pros}
+                cons={bullets.cons}
+                score={weightedScore(p)}
+                ctaHref={productCta(p)}
+                ctaLabel={`Visit ${p.name}`}
+              />
+            );
+          })}
+          <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
+            Scores calculated from{' '}
+            <Link href="/about" className="text-bw-blue underline">published criteria</Link>.
+            {' '}Affiliate commissions do not affect rankings. Some links earn us a commission
+            at no extra cost to you.{' '}
+            <Link href="/disclosure" className="text-bw-blue underline">Full disclosure →</Link>
+          </p>
         </section>
 
         {/* FAQ */}
-        <section className="border-t border-gray-100 bg-gray-50 px-4 py-12">
+        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-8 text-2xl font-bold text-gray-900">2FA app FAQ</h2>
+            <h2 className="mb-8 text-2xl font-bold text-bw-black">2FA app FAQ</h2>
             <div className="space-y-6">
               {[
                 {
@@ -507,9 +522,9 @@ export default function TwoFAPage() {
                   a: "Yes. Any TOTP account can be added to any app. Some people keep Aegis for personal accounts and Microsoft Authenticator for work accounts that require it. The 6-digit codes generated by all TOTP apps are identical for the same account — they use a shared algorithm (RFC 6238), not a proprietary format.",
                 },
               ].map(({ q, a }) => (
-                <div key={q} className="rounded-lg border border-gray-200 bg-white px-5 py-4">
-                  <h3 className="font-semibold text-gray-900">{q}</h3>
-                  <p className="mt-2 text-sm text-gray-600">{a}</p>
+                <div key={q} className="rounded-[3px] border border-black/10 bg-white px-5 py-4">
+                  <h3 className="font-semibold text-bw-black">{q}</h3>
+                  <p className="mt-2 text-sm text-bw-text">{a}</p>
                 </div>
               ))}
             </div>
@@ -518,12 +533,12 @@ export default function TwoFAPage() {
 
         {/* Related links */}
         <section className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-6 text-xl font-bold text-gray-900">
+          <h2 className="mb-6 text-xl font-bold text-bw-black">
             Build a complete security setup
           </h2>
-          <p className="mb-4 text-sm text-gray-600">
+          <p className="mb-4 text-sm text-bw-text">
             2FA is one layer. Pair it with a{' '}
-            <Link href="/password-managers" className="text-blue-600 underline hover:text-blue-800">
+            <Link href="/password-managers" className="text-bw-blue underline hover:text-bw-blue-dark">
               password manager
             </Link>{' '}
             for the biggest security improvement most people can make.
@@ -531,32 +546,32 @@ export default function TwoFAPage() {
           <div className="grid gap-3 sm:grid-cols-2">
             <Link
               href="/password-managers"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Best password managers →
             </Link>
             <Link
               href="/reviews/bitwarden"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Bitwarden review — includes TOTP integration →
             </Link>
             <Link
               href="/vpn"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Best VPNs →
             </Link>
             <Link
               href="/antivirus"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Best antivirus software →
             </Link>
           </div>
-          <p className="mt-8 text-sm text-gray-500">
+          <p className="mt-8 text-sm text-bw-gray">
             Not sure where to start?{' '}
-            <Link href="/quiz" className="text-blue-600 underline hover:text-blue-800">
+            <Link href="/quiz" className="text-bw-blue underline hover:text-bw-blue-dark">
               Take the 30-second security quiz →
             </Link>
           </p>
@@ -567,3 +582,4 @@ export default function TwoFAPage() {
     </div>
   );
 }
+

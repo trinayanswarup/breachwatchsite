@@ -74,26 +74,26 @@ export default function NordVpnReviewPage() {
         {/* Hero */}
         <section className="bg-gradient-to-b from-blue-50 to-white px-4 pt-10 pb-8">
           <div className="mx-auto max-w-3xl">
-            <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm text-gray-500">
-              <Link href="/" className="hover:text-blue-600">BreachWatch</Link>
+            <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm text-bw-gray">
+              <Link href="/" className="hover:text-bw-blue">BreachWatch</Link>
               <span aria-hidden="true">›</span>
-              <Link href="/vpn" className="hover:text-blue-600">VPNs</Link>
+              <Link href="/vpn" className="hover:text-bw-blue">VPNs</Link>
               <span aria-hidden="true">›</span>
-              <span className="text-gray-900">NordVPN Review</span>
+              <span className="text-bw-black">NordVPN Review</span>
             </nav>
 
-            <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl">
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-bw-black sm:text-4xl">
               NordVPN Review 2025 — Is It Still Worth It?
             </h1>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 text-lg text-bw-text">
               NordVPN is the most heavily marketed VPN in the world. That alone is reason
               to be sceptical. After reviewing the independent audit results, the 2018
               server breach, Panama&apos;s jurisdiction, and the current pricing, our score
-              is <strong className="text-gray-900">8.05/10</strong> — strong, but not our
+              is <strong className="text-bw-black">8.05/10</strong> — strong, but not our
               top pick. ProtonVPN scores 8.25 and has a better transparency record.
             </p>
 
-            <div className="mt-4 rounded-lg bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
+            <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
               <strong>Disclosure:</strong> This page contains an affiliate link to NordVPN.
               We earn a commission if you purchase. Our score is calculated from the same
               weighted criteria used across every VPN we compare.{' '}
@@ -104,7 +104,7 @@ export default function NordVpnReviewPage() {
 
         {/* Score breakdown */}
         <section className="mx-auto max-w-3xl px-4 py-10">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+          <h2 className="mb-4 text-2xl font-bold text-bw-black">
             How NordVPN scores
           </h2>
           <ScoreBreakdown product={product} criteria={criteria} />
@@ -113,10 +113,10 @@ export default function NordVpnReviewPage() {
         {/* Main editorial */}
         <article className="mx-auto max-w-3xl px-4 pb-4">
           <section className="mb-10">
-            <h2 className="mb-3 text-xl font-bold text-gray-900">
+            <h2 className="mb-3 text-xl font-bold text-bw-black">
               The 2018 server breach — and the 16-month disclosure delay
             </h2>
-            <p className="mb-3 text-gray-700">
+            <p className="mb-3 text-bw-text">
               In 2018, a Finnish data centre that NordVPN used suffered a server
               compromise. An attacker gained root access via a remote management system
               that the data centre had installed without NordVPN&apos;s knowledge. The
@@ -124,7 +124,7 @@ export default function NordVpnReviewPage() {
               architecture meant there was no session data to steal. One expired TLS key
               was exposed.
             </p>
-            <p className="mb-3 text-gray-700">
+            <p className="mb-3 text-bw-text">
               The problem was not the breach itself but the response. NordVPN discovered
               the incident in early 2018 and did not disclose it publicly until October
               2019 — 16 months later. The company says it delayed disclosure while
@@ -133,7 +133,7 @@ export default function NordVpnReviewPage() {
               justifies the delay is a judgement call, but the lack of proactive
               disclosure is a legitimate mark against the company&apos;s transparency.
             </p>
-            <p className="text-gray-700">
+            <p className="text-bw-text">
               Since then, NordVPN has launched a bug bounty programme through HackerOne,
               completed two independent infrastructure audits, and moved away from
               third-party data centres toward colocated servers it controls directly.
@@ -143,10 +143,10 @@ export default function NordVpnReviewPage() {
           </section>
 
           <section className="mb-10">
-            <h2 className="mb-3 text-xl font-bold text-gray-900">
+            <h2 className="mb-3 text-xl font-bold text-bw-black">
               The PricewaterhouseCoopers audit
             </h2>
-            <p className="mb-3 text-gray-700">
+            <p className="mb-3 text-bw-text">
               NordVPN commissioned PricewaterhouseCoopers Switzerland to conduct a
               no-logs audit in 2022. PwC reviewed NordVPN&apos;s logging infrastructure,
               configuration files, and operational procedures to verify that the
@@ -154,7 +154,7 @@ export default function NordVpnReviewPage() {
               implementation. The audit covered NordVPN&apos;s servers and confirmed no
               user activity logs, connection timestamps, or IP addresses are retained.
             </p>
-            <p className="mb-3 text-gray-700">
+            <p className="mb-3 text-bw-text">
               Using a Big Four accounting firm for a technical audit is notable — most
               VPN providers use smaller specialist firms. PwC has a higher reputation to
               protect and deeper resources, which adds credibility. The limitations are
@@ -162,7 +162,7 @@ export default function NordVpnReviewPage() {
               happening during the audit period, not that it has never happened or cannot
               be enabled in future.
             </p>
-            <p className="text-gray-700">
+            <p className="text-bw-text">
               For comparison, Mullvad has been audited by Cure53 and has never had a
               server breach. ProtonVPN is open source and audited. NordVPN&apos;s audit
               is credible but its track record of transparency is weaker than those two.
@@ -170,10 +170,10 @@ export default function NordVpnReviewPage() {
           </section>
 
           <section className="mb-10">
-            <h2 className="mb-3 text-xl font-bold text-gray-900">
+            <h2 className="mb-3 text-xl font-bold text-bw-black">
               Panama jurisdiction — what it actually means
             </h2>
-            <p className="mb-3 text-gray-700">
+            <p className="mb-3 text-bw-text">
               NordVPN is incorporated in Panama, which has no mandatory data retention
               laws and is outside the Five Eyes, Nine Eyes, and Fourteen Eyes
               intelligence-sharing alliances. This is a genuine structural advantage.
@@ -182,7 +182,7 @@ export default function NordVpnReviewPage() {
               legal assistance treaty requests through Panama, which adds significant
               friction even if logs were retained.
             </p>
-            <p className="text-gray-700">
+            <p className="text-bw-text">
               The practical implication: for the vast majority of users — people who
               want privacy from their ISP, advertiser tracking, or basic geographic
               restrictions — jurisdiction is largely academic. It matters most to
@@ -194,17 +194,17 @@ export default function NordVpnReviewPage() {
           </section>
 
           <section className="mb-10">
-            <h2 className="mb-3 text-xl font-bold text-gray-900">
+            <h2 className="mb-3 text-xl font-bold text-bw-black">
               Pricing and value
             </h2>
-            <p className="mb-3 text-gray-700">
+            <p className="mb-3 text-bw-text">
               NordVPN&apos;s standard pricing is $4.99/month on the two-year plan
               ($59.88/year billed upfront). The monthly rate without a long-term
               commitment is $12.99. Ten simultaneous device connections are included
               on all plans, and the service covers Windows, macOS, iOS, Android,
               Linux, and browser extensions.
             </p>
-            <p className="text-gray-700">
+            <p className="text-bw-text">
               ExpressVPN charges roughly $8.32/month on an annual plan — 67% more than
               NordVPN — for a marginally faster connection and slightly weaker
               transparency credentials. Surfshark undercuts NordVPN on price with
@@ -215,17 +215,17 @@ export default function NordVpnReviewPage() {
           </section>
 
           <section className="mb-10">
-            <h2 className="mb-3 text-xl font-bold text-gray-900">
+            <h2 className="mb-3 text-xl font-bold text-bw-black">
               Who NordVPN is right for
             </h2>
-            <p className="mb-3 text-gray-700">
+            <p className="mb-3 text-bw-text">
               NordVPN is a good choice for mainstream users who want a well-supported,
               fast VPN with a credible audit record and a legitimate jurisdiction. It
               scores 10/10 for streaming — it reliably unblocks Netflix, BBC iPlayer,
               Disney+, and other major services — and 9/10 for speed, which makes it
               one of the most capable options for daily use.
             </p>
-            <p className="text-gray-700">
+            <p className="text-bw-text">
               It is <em>not</em> the right choice if your primary concern is maximum
               transparency and audit trail. For that, ProtonVPN (open source, audited,
               Swiss jurisdiction) or Mullvad (no account, cash payments accepted, 10/10
@@ -236,10 +236,10 @@ export default function NordVpnReviewPage() {
         </article>
 
         {/* Verdict */}
-        <section className="border-t border-gray-100 bg-blue-50 px-4 py-12">
+        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-3 text-2xl font-bold text-gray-900">Verdict</h2>
-            <p className="mb-6 text-gray-600">
+            <h2 className="mb-3 text-2xl font-bold text-bw-black">Verdict</h2>
+            <p className="mb-6 text-bw-text">
               NordVPN scores <strong>8.05/10</strong> — good but not our top-ranked VPN.
               If you want the most popular option with a solid audit record and excellent
               streaming support, it delivers. If you want maximum privacy credibility,
@@ -266,22 +266,22 @@ export default function NordVpnReviewPage() {
 
         {/* Related links */}
         <section className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-5 text-xl font-bold text-gray-900">Related</h2>
+          <h2 className="mb-5 text-xl font-bold text-bw-black">Related</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             <Link href="/reviews/nordvpn-vs-expressvpn"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors">
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors">
               NordVPN vs ExpressVPN →
             </Link>
             <Link href="/vpn"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors">
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors">
               Full VPN comparison →
             </Link>
             <Link href="/reviews/best-vpn-lithuania"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors">
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors">
               Best VPN for Lithuania →
             </Link>
             <Link href="/password-managers"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors">
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors">
               Best password managers →
             </Link>
           </div>
@@ -292,3 +292,4 @@ export default function NordVpnReviewPage() {
     </div>
   );
 }
+

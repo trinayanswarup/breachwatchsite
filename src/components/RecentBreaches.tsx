@@ -55,7 +55,7 @@ function getSeverity(count: number): SeverityInfo {
     return { label: 'Large', className: 'bg-orange-100 text-orange-700' };
   if (count >= 1_000_000)
     return { label: 'Medium', className: 'bg-amber-100 text-amber-700' };
-  return { label: 'Small', className: 'bg-gray-100 text-gray-600' };
+  return { label: 'Small', className: 'bg-gray-100 text-bw-text' };
 }
 
 interface BreachCardProps {
@@ -68,26 +68,26 @@ function BreachCard({ breach }: BreachCardProps) {
   const remaining = breach.DataClasses.length - visibleClasses.length;
 
   return (
-    <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+    <div className="flex flex-col gap-3 rounded-[3px] border border-black/10 bg-white p-4 shadow-sm">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="font-bold text-gray-900 leading-tight">{breach.Title}</p>
+          <p className="font-bold text-bw-black leading-tight">{breach.Title}</p>
           {breach.Domain && (
-            <p className="mt-0.5 text-xs text-gray-400">{breach.Domain}</p>
+            <p className="mt-0.5 text-xs text-bw-gray">{breach.Domain}</p>
           )}
         </div>
         <span
-          className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${severity.className}`}
+          className={`shrink-0 rounded-[3px] px-2 py-0.5 text-xs font-semibold ${severity.className}`}
         >
           {severity.label}
         </span>
       </div>
 
       <div className="flex items-center gap-4 text-sm">
-        <span className="text-gray-700 font-medium">
+        <span className="text-bw-text font-medium">
           {formatCount(breach.PwnCount)} accounts
         </span>
-        <span className="text-gray-400 text-xs">
+        <span className="text-bw-gray text-xs">
           Added {formatDate(breach.AddedDate)}
         </span>
       </div>
@@ -96,13 +96,13 @@ function BreachCard({ breach }: BreachCardProps) {
         {visibleClasses.map((dc) => (
           <span
             key={dc}
-            className="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-700"
+            className="rounded-[3px] bg-bw-light px-2 py-0.5 text-xs text-bw-blue"
           >
             {dc}
           </span>
         ))}
         {remaining > 0 && (
-          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
+          <span className="rounded-[3px] bg-gray-100 px-2 py-0.5 text-xs text-bw-gray">
             +{remaining} more
           </span>
         )}
@@ -116,10 +116,10 @@ export default async function RecentBreaches() {
   if (breaches.length === 0) return null;
 
   return (
-    <section className="border-t border-gray-100 bg-gray-50 px-4 py-16">
+    <section className="border-t border-black/10 bg-bw-light px-4 py-16">
       <div className="mx-auto max-w-6xl">
-        <h2 className="text-2xl font-bold text-gray-900">Recent Data Breaches</h2>
-        <p className="mt-1 text-gray-500">
+        <h2 className="text-2xl font-bold text-bw-black">Recent Data Breaches</h2>
+        <p className="mt-1 text-bw-gray">
           Updated daily from the Have I Been Pwned database
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

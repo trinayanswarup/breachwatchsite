@@ -47,25 +47,25 @@ export default function ProductCard({
 
   return (
     <article
-      className={`rounded-xl bg-white p-5 shadow-sm transition-shadow hover:shadow-md ${
+      className={`rounded-[3px] bg-white p-5 shadow-sm transition-shadow hover:shadow-md ${
         featured
           ? 'border-2 border-blue-400 ring-4 ring-blue-50'
-          : 'border border-gray-200'
+          : 'border border-black/10'
       }`}
     >
       {featured && (
-        <span className="mb-3 inline-block rounded-full bg-blue-600 px-3 py-0.5 text-xs font-bold uppercase tracking-wide text-white">
+        <span className="mb-3 inline-block rounded-[3px] bg-blue-600 px-3 py-0.5 text-xs font-bold uppercase tracking-wide text-white">
           Featured pick
         </span>
       )}
 
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="text-lg font-bold text-gray-900">{product.name}</h3>
-          <p className="mt-0.5 text-sm text-gray-500">{product.tagline}</p>
+          <h3 className="text-lg font-bold text-bw-black">{product.name}</h3>
+          <p className="mt-0.5 text-sm text-bw-gray">{product.tagline}</p>
         </div>
         <div
-          className={`shrink-0 rounded-lg px-3 py-2 text-center ring-1 ${scoreBadgeClass(score)}`}
+          className={`shrink-0 rounded-[3px] px-3 py-2 text-center ring-1 ${scoreBadgeClass(score)}`}
         >
           <span className="block text-2xl font-bold leading-none">
             {score.toFixed(1)}
@@ -78,7 +78,7 @@ export default function ProductCard({
 
       <ul className="mt-4 space-y-2" aria-label="Key highlights">
         {product.highlights.map((highlight, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+          <li key={i} className="flex items-start gap-2 text-sm text-bw-text">
             <span className="mt-0.5 shrink-0 text-green-500" aria-hidden="true">
               ✓
             </span>
@@ -87,13 +87,13 @@ export default function ProductCard({
         ))}
       </ul>
 
-      <blockquote className="mt-4 rounded-md bg-gray-50 px-3 py-2 text-sm italic text-gray-600 border-l-2 border-gray-300">
+      <blockquote className="mt-4 rounded-md bg-bw-light px-3 py-2 text-sm italic text-bw-text border-l-2 border-gray-300">
         {product.verdict}
       </blockquote>
 
-      <p className="mt-3 text-xs text-gray-500">
+      <p className="mt-3 text-xs text-bw-gray">
         Best for:{' '}
-        <span className="font-medium text-gray-700">{product.bestFor}</span>
+        <span className="font-medium text-bw-text">{product.bestFor}</span>
       </p>
 
       <div className="mt-4">

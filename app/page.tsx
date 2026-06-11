@@ -30,16 +30,16 @@ function CategoryCard({ href, icon, title, description, count }: CategoryCardPro
   return (
     <Link
       href={href}
-      className="group flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:border-blue-300 hover:shadow-md"
+      className="group flex flex-col gap-3 border border-black/10 bg-white p-5 transition-all hover:border-bw-blue hover:shadow-sm"
     >
-      <span className="text-3xl" aria-hidden="true">{icon}</span>
+      <span className="text-2xl" aria-hidden="true">{icon}</span>
       <div>
-        <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+        <h3 className="font-bold text-bw-black group-hover:text-bw-blue transition-colors text-[15px]">
           {title}
         </h3>
-        <p className="mt-1 text-sm text-gray-500">{description}</p>
+        <p className="mt-1 text-[13px] text-bw-gray">{description}</p>
       </div>
-      <p className="mt-auto text-xs font-medium text-blue-600">
+      <p className="mt-auto text-[12px] font-medium text-bw-blue">
         {count} products scored →
       </p>
     </Link>
@@ -56,17 +56,17 @@ function ComparisonLink({ href, title, label }: ComparisonLinkProps) {
   return (
     <Link
       href={href}
-      className="group flex items-center justify-between rounded-lg border border-gray-200 bg-white px-4 py-3.5 transition-all hover:border-blue-200 hover:bg-blue-50"
+      className="group flex items-center justify-between border border-black/10 bg-white px-4 py-3.5 transition-all hover:border-bw-blue"
     >
       <div>
-        <span className="block text-xs font-semibold uppercase tracking-wider text-blue-600">
+        <span className="block text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
           {label}
         </span>
-        <span className="mt-0.5 block text-sm font-medium text-gray-800 group-hover:text-blue-700">
+        <span className="mt-0.5 block text-[13px] font-medium text-bw-black group-hover:text-bw-blue">
           {title}
         </span>
       </div>
-      <span className="shrink-0 text-gray-400 group-hover:text-blue-500 transition-colors" aria-hidden="true">
+      <span className="shrink-0 text-bw-gray group-hover:text-bw-blue transition-colors" aria-hidden="true">
         →
       </span>
     </Link>
@@ -79,34 +79,34 @@ export default function HomePage() {
       <Nav />
 
       <main className="flex-1">
-        {/* Hero — quiz CTA above the fold */}
-        <section className="bg-gradient-to-b from-blue-50 to-white px-4 py-20 text-center">
-          <div className="mx-auto max-w-2xl">
-            <p className="mb-4 inline-block rounded-full bg-blue-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-700">
+        {/* Hero */}
+        <section className="px-5 pt-16 pb-12 text-center border-b border-black/10">
+          <div className="mx-auto max-w-[680px]">
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.1em] text-bw-gray">
               Transparent scoring · No hidden bias
             </p>
-            <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-5xl">
+            <h1 className="text-[32px] font-bold leading-tight text-bw-black">
               Find the right cybersecurity tool — without the jargon or the bias.
             </h1>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-3 text-[15px] text-bw-gray">
               We score every tool on the criteria that actually matter.{' '}
-              <Link href="/about" className="text-blue-600 underline underline-offset-2 hover:text-blue-800">
+              <Link href="/about" className="text-bw-blue underline hover:text-bw-blue-dark">
                 See our methodology.
               </Link>
             </p>
-            <div className="mt-8 flex flex-col items-center gap-4">
-              <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-                <Link
-                  href="/quiz"
-                  className="rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white shadow-sm transition-colors hover:bg-blue-700"
-                >
-                  Find out your biggest security risk →
-                </Link>
-                <p className="text-sm text-gray-500">Takes 30 seconds. No email required.</p>
-              </div>
+            <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <Link
+                href="/quiz"
+                className="rounded-[3px] bg-bw-blue px-6 py-3 text-[14px] font-bold text-white hover:bg-bw-blue-dark transition-colors"
+              >
+                Find your biggest security risk →
+              </Link>
+              <p className="text-[12px] text-bw-gray">Takes 30 seconds. No email required.</p>
+            </div>
+            <div className="mt-3">
               <Link
                 href="/breach-checker"
-                className="text-sm font-medium text-blue-600 underline underline-offset-2 hover:text-blue-800 transition-colors"
+                className="text-[13px] font-medium text-bw-blue underline hover:text-bw-blue-dark transition-colors"
               >
                 Check if your password was leaked →
               </Link>
@@ -115,14 +115,14 @@ export default function HomePage() {
         </section>
 
         {/* Category cards */}
-        <section className="mx-auto max-w-6xl px-4 py-16">
-          <h2 className="mb-2 text-2xl font-bold text-gray-900">
+        <section className="mx-auto max-w-6xl px-5 py-12">
+          <h2 className="mb-1 text-[20px] font-bold text-bw-black">
             Browse by category
           </h2>
-          <p className="mb-8 text-gray-500">
+          <p className="mb-6 text-[13px] text-bw-gray">
             Every product is scored using documented criteria. No black boxes.
           </p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <CategoryCard
               href="/vpn"
               icon="🛡"
@@ -154,33 +154,34 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Recent breaches + security news — async server components, ISR 24h / 2h */}
+        {/* Recent breaches + security news */}
         <RecentBreaches />
         <SecurityNews />
 
         {/* Featured pick */}
-        <section className="border-t border-gray-100 bg-gray-50 px-4 py-16">
+        <section className="border-t border-black/10 px-5 py-12">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-8 flex items-baseline justify-between gap-4">
+            <div className="mb-5 flex items-baseline justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-blue-600">
+                <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
                   Featured pick this month
                 </p>
-                <h2 className="mt-1 text-2xl font-bold text-gray-900">
+                <h2 className="mt-1 text-[20px] font-bold text-bw-black">
                   Our top-rated VPN
                 </h2>
               </div>
               <Link
                 href="/vpn"
-                className="shrink-0 text-sm font-medium text-blue-600 hover:text-blue-800"
+                className="shrink-0 text-[13px] font-medium text-bw-blue hover:text-bw-blue-dark"
               >
                 See all VPNs →
               </Link>
             </div>
-            <div className="mb-4 rounded-lg bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
-              <strong>Disclosure:</strong> This pick contains an affiliate link. ProtonVPN is featured because it scores highest in our methodology, not because of the affiliate relationship.{' '}
-              <Link href="/disclosure" className="underline hover:text-amber-900">Full disclosure.</Link>
-            </div>
+            <p className="mb-4 text-[11px] text-bw-gray">
+              Affiliate link —{' '}
+              <Link href="/disclosure" className="text-bw-blue underline">full disclosure</Link>.
+              Featured because it scores highest in our methodology.
+            </p>
             <div className="max-w-sm">
               <ProductCard product={featuredProduct} category="vpn" featured />
             </div>
@@ -188,11 +189,11 @@ export default function HomePage() {
         </section>
 
         {/* Recent comparisons */}
-        <section className="mx-auto max-w-6xl px-4 py-16">
-          <h2 className="mb-2 text-2xl font-bold text-gray-900">
+        <section className="border-t border-black/10 mx-auto max-w-6xl px-5 py-12">
+          <h2 className="mb-1 text-[20px] font-bold text-bw-black">
             Latest comparisons
           </h2>
-          <p className="mb-8 text-gray-500">
+          <p className="mb-6 text-[13px] text-bw-gray">
             In-depth reviews based on real product testing and publicly verifiable data.
           </p>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -215,20 +216,20 @@ export default function HomePage() {
         </section>
 
         {/* Methodology teaser */}
-        <section className="border-t border-gray-100 bg-blue-50 px-4 py-12">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-xl font-bold text-gray-900">
+        <section className="border-t border-black/10 px-5 py-10">
+          <div className="mx-auto max-w-[680px] text-center">
+            <h2 className="text-[18px] font-bold text-bw-black">
               How we score products
             </h2>
-            <p className="mt-3 text-gray-600">
+            <p className="mt-3 text-[14px] text-bw-gray leading-relaxed">
               Every product is scored using a weighted set of criteria specific to its
               category. The weights are published alongside every comparison. Scores are
-              calculated from the data — they are never adjusted to favour products that
-              earn higher commissions.
+              calculated from the data — never adjusted to favour products that earn
+              higher commissions.
             </p>
             <Link
               href="/about"
-              className="mt-4 inline-block text-sm font-semibold text-blue-600 underline underline-offset-2 hover:text-blue-800"
+              className="mt-4 inline-block text-[13px] font-semibold text-bw-blue underline hover:text-bw-blue-dark"
             >
               Read the full methodology →
             </Link>
@@ -240,3 +241,4 @@ export default function HomePage() {
     </div>
   );
 }
+

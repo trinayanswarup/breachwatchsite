@@ -37,11 +37,11 @@ export default function DisclosurePage() {
 
         <section className="bg-gradient-to-b from-blue-50 to-white px-4 pt-10 pb-8">
           <div className="mx-auto max-w-3xl">
-            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <h1 className="text-3xl font-extrabold tracking-tight text-bw-black sm:text-4xl">
               Affiliate Disclosure
             </h1>
-            <p className="mt-3 text-sm text-gray-500">Last updated: {LAST_UPDATED}</p>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-3 text-sm text-bw-gray">Last updated: {LAST_UPDATED}</p>
+            <p className="mt-4 text-lg text-bw-text">
               BreachWatch earns money when readers click affiliate links and purchase
               products. This page explains exactly how that works, which products we
               have affiliate relationships with, and the mechanism we use to ensure
@@ -53,14 +53,14 @@ export default function DisclosurePage() {
         <article className="mx-auto max-w-3xl px-4 py-10 space-y-10">
 
           <section>
-            <h2 className="mb-4 text-xl font-bold text-gray-900">What affiliate marketing is</h2>
-            <p className="mb-3 text-gray-700">
+            <h2 className="mb-4 text-xl font-bold text-bw-black">What affiliate marketing is</h2>
+            <p className="mb-3 text-bw-text">
               When you click a link on BreachWatch to a product page and make a purchase,
               the vendor may pay us a referral commission. This commission is typically a
               percentage of the sale price and is paid by the vendor — it does not
               increase the price you pay.
             </p>
-            <p className="text-gray-700">
+            <p className="text-bw-text">
               Affiliate marketing is a standard business model for comparison and review
               sites. The FTC and UK ASA both require disclosure of these relationships,
               which is why we include disclosure notices on every page that contains
@@ -69,21 +69,21 @@ export default function DisclosurePage() {
           </section>
 
           <section>
-            <h2 className="mb-4 text-xl font-bold text-gray-900">
+            <h2 className="mb-4 text-xl font-bold text-bw-black">
               How we prevent commissions from affecting rankings
             </h2>
-            <p className="mb-3 text-gray-700">
+            <p className="mb-3 text-bw-text">
               Our product scores are calculated algorithmically. Every criterion, its
               weight, and the score for each product are published on the comparison page.
               The overall score is the weighted sum — there is no editorial override.
             </p>
-            <p className="mb-3 text-gray-700">
+            <p className="mb-3 text-bw-text">
               The clearest evidence of this: <strong>Mullvad VPN scores 7.30/10</strong>{' '}
               and we recommend it for privacy-focused users. We have no affiliate
               relationship with Mullvad — they do not run an affiliate programme. If
               commission rates drove our rankings, Mullvad would not appear on the site.
             </p>
-            <p className="text-gray-700">
+            <p className="text-bw-text">
               Similarly, NordVPN (score 8.05/10) is not our top-rated VPN — ProtonVPN
               (8.25/10) is. NordVPN almost certainly offers a higher affiliate commission
               than ProtonVPN. This does not change their respective scores or rankings.
@@ -91,11 +91,11 @@ export default function DisclosurePage() {
           </section>
 
           <section>
-            <h2 className="mb-4 text-xl font-bold text-gray-900">How affiliate links are labelled</h2>
-            <p className="mb-3 text-gray-700">
+            <h2 className="mb-4 text-xl font-bold text-bw-black">How affiliate links are labelled</h2>
+            <p className="mb-3 text-bw-text">
               Every affiliate link on this site:
             </p>
-            <ul className="space-y-2 text-gray-700">
+            <ul className="space-y-2 text-bw-text">
               {[
                 'Uses rel="noopener noreferrer sponsored" — the sponsored attribute signals to browsers and crawlers that the link is commercial.',
                 'Shows an "Affiliate link — we may earn a commission" tooltip on hover.',
@@ -111,28 +111,28 @@ export default function DisclosurePage() {
           </section>
 
           <section>
-            <h2 className="mb-4 text-xl font-bold text-gray-900">
+            <h2 className="mb-4 text-xl font-bold text-bw-black">
               Affiliate relationships — full list
             </h2>
-            <p className="mb-4 text-gray-500 text-sm">
+            <p className="mb-4 text-bw-gray text-sm">
               Products with &quot;Pending&quot; status link to their review page while
               affiliate arrangements are established. No commission is earned on Pending links.
             </p>
-            <div className="overflow-x-auto rounded-lg border border-gray-200">
+            <div className="overflow-x-auto rounded-[3px] border border-black/10">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="bg-gray-50 border-b border-gray-200">
-                    <th scope="col" className="px-4 py-3 text-left font-semibold text-gray-700">Product</th>
-                    <th scope="col" className="px-4 py-3 text-left font-semibold text-gray-700">Category</th>
-                    <th scope="col" className="px-4 py-3 text-left font-semibold text-gray-700">Status</th>
+                  <tr className="bg-bw-light border-b border-black/10">
+                    <th scope="col" className="px-4 py-3 text-left font-semibold text-bw-text">Product</th>
+                    <th scope="col" className="px-4 py-3 text-left font-semibold text-bw-text">Category</th>
+                    <th scope="col" className="px-4 py-3 text-left font-semibold text-bw-text">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {AFFILIATE_PRODUCTS.map((p) => (
                     <tr key={p.name} className="bg-white">
-                      <td className="px-4 py-2.5 font-medium text-gray-900">{p.name}</td>
-                      <td className="px-4 py-2.5 text-gray-500">{p.category}</td>
-                      <td className="px-4 py-2.5 text-gray-600">{p.status}</td>
+                      <td className="px-4 py-2.5 font-medium text-bw-black">{p.name}</td>
+                      <td className="px-4 py-2.5 text-bw-gray">{p.category}</td>
+                      <td className="px-4 py-2.5 text-bw-text">{p.status}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -141,12 +141,12 @@ export default function DisclosurePage() {
           </section>
 
           <section>
-            <h2 className="mb-4 text-xl font-bold text-gray-900">Questions or concerns</h2>
-            <p className="text-gray-700">
+            <h2 className="mb-4 text-xl font-bold text-bw-black">Questions or concerns</h2>
+            <p className="text-bw-text">
               If you believe a recommendation on this site was influenced by commercial
               factors rather than our scoring methodology, or if you have any other
               concern about our disclosure practices, contact us at{' '}
-              <a href="mailto:hello@breachwatchsite.com" className="text-blue-600 underline hover:text-blue-800">
+              <a href="mailto:hello@breachwatchsite.com" className="text-bw-blue underline hover:text-bw-blue-dark">
                 hello@breachwatchsite.com
               </a>
               .
@@ -155,10 +155,10 @@ export default function DisclosurePage() {
 
         </article>
 
-        <div className="border-t border-gray-100 bg-gray-50 px-4 py-8">
+        <div className="border-t border-black/10 bg-bw-light px-4 py-8">
           <div className="mx-auto max-w-3xl flex flex-wrap gap-4 text-sm">
-            <Link href="/about" className="text-blue-600 hover:text-blue-800">About BreachWatch →</Link>
-            <Link href="/privacy" className="text-blue-600 hover:text-blue-800">Privacy Policy →</Link>
+            <Link href="/about" className="text-bw-blue hover:text-bw-blue-dark">About BreachWatch →</Link>
+            <Link href="/privacy" className="text-bw-blue hover:text-bw-blue-dark">Privacy Policy →</Link>
           </div>
         </div>
       </main>
@@ -166,3 +166,4 @@ export default function DisclosurePage() {
     </div>
   );
 }
+

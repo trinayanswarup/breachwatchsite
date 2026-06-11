@@ -24,12 +24,12 @@ export default function AffiliateCTA({
   }
 
   const baseClass =
-    'group relative inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2';
+    'group relative inline-flex w-full items-center justify-center gap-2 rounded-[3px] px-4 py-2 text-[12px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bw-blue focus-visible:ring-offset-2';
 
   const variantClass =
     variant === 'primary'
-      ? 'bg-blue-600 text-white hover:bg-blue-700'
-      : 'border border-blue-600 bg-white text-blue-600 hover:bg-blue-50';
+      ? 'bg-bw-blue text-white hover:bg-bw-blue-dark'
+      : 'border border-bw-blue bg-white text-bw-blue hover:bg-bw-light';
 
   return (
     <div className="relative inline-block">

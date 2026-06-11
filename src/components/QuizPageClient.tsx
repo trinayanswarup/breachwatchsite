@@ -56,14 +56,14 @@ export default function QuizPageClient() {
         {step === 'loading' && (
           <div className="flex flex-col items-center gap-4 text-center">
             <div
-              className="h-12 w-12 animate-spin rounded-full border-4 border-blue-200 border-t-blue-600"
+              className="h-12 w-12 animate-spin rounded-[3px] border-4 border-blue-200 border-t-blue-600"
               role="status"
               aria-label="Analysing your security profile"
             />
-            <p className="text-lg font-semibold text-gray-700">
+            <p className="text-lg font-semibold text-bw-text">
               Analysing your security profile…
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-bw-gray">
               This takes about two seconds.
             </p>
           </div>

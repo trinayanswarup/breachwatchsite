@@ -4,25 +4,25 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-gray-200 bg-gray-50 mt-auto">
+    <footer className="border-t border-black/10 bg-bw-light mt-auto">
       <div className="mx-auto max-w-6xl px-4 py-10">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <div>
             <Link
               href="/"
-              className="flex items-center gap-2 text-base font-bold text-gray-900 hover:text-blue-600 transition-colors"
+              className="flex items-center gap-2 text-base font-bold text-bw-black hover:text-bw-blue transition-colors"
             >
-              <span className="text-blue-600" aria-hidden="true">🛡</span>
+              <span className="text-bw-blue" aria-hidden="true">🛡</span>
               BreachWatch
             </Link>
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-bw-gray">
               Honest cybersecurity tool comparisons. Transparent scoring, no
               hidden bias.
             </p>
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <p className="text-xs font-semibold uppercase tracking-wider text-bw-gray">
               Categories
             </p>
             <ul className="mt-3 space-y-2">
@@ -36,7 +36,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                    className="text-sm text-bw-text hover:text-bw-black transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -46,7 +46,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <p className="text-xs font-semibold uppercase tracking-wider text-bw-gray">
               Legal
             </p>
             <ul className="mt-3 space-y-2">
@@ -58,7 +58,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                    className="text-sm text-bw-text hover:text-bw-black transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -68,17 +68,17 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-gray-200 pt-6">
-          <p className="text-xs text-gray-500">
+        <div className="mt-8 border-t border-black/10 pt-6">
+          <p className="text-xs text-bw-gray">
             <strong>Affiliate disclosure:</strong> BreachWatch earns commissions
             on some links at no extra cost to you. Our scores are calculated
             algorithmically from documented criteria — commissions never affect
             rankings.{' '}
-            <Link href="/disclosure" className="underline hover:text-gray-700">
+            <Link href="/disclosure" className="underline hover:text-bw-text">
               Full disclosure →
             </Link>
           </p>
-          <p className="mt-3 text-xs text-gray-400">
+          <p className="mt-3 text-xs text-bw-gray">
             © {year} BreachWatch. All rights reserved.
           </p>
         </div>

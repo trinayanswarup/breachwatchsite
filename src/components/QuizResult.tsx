@@ -60,7 +60,7 @@ function ScoreBadge({ score }: { score: number }) {
     score <= 2 ? 'High risk' : score === 3 ? 'Moderate risk' : 'Low risk';
 
   return (
-    <div className={`inline-flex flex-col items-center rounded-xl border-2 px-6 py-4 ${colorClass}`}>
+    <div className={`inline-flex flex-col items-center rounded-[3px] border-2 px-6 py-4 ${colorClass}`}>
       <span className="text-5xl font-bold leading-none">{score}</span>
       <span className="mt-1 text-xs font-semibold uppercase tracking-wider opacity-80">
         out of 5
@@ -77,7 +77,7 @@ export default function QuizResultComponent({ result }: QuizResultProps) {
     <div className="mx-auto max-w-xl px-4 py-10">
       <div className="mb-6 flex items-center gap-2">
         <span
-          className={`rounded-full border px-3 py-1 text-xs font-semibold ${URGENCY_CLASS[result.urgency]}`}
+          className={`rounded-[3px] border px-3 py-1 text-xs font-semibold ${URGENCY_CLASS[result.urgency]}`}
         >
           {URGENCY_LABEL[result.urgency]}
         </span>
@@ -88,24 +88,24 @@ export default function QuizResultComponent({ result }: QuizResultProps) {
           <ScoreBadge score={result.score} />
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+          <p className="text-xs font-semibold uppercase tracking-wider text-bw-gray">
             Your biggest risk
           </p>
-          <p className="mt-1 text-xl font-bold leading-snug text-gray-900">
+          <p className="mt-1 text-xl font-bold leading-snug text-bw-black">
             {result.biggestRisk}
           </p>
         </div>
       </div>
 
-      <div className="mb-8 rounded-xl border border-blue-100 bg-blue-50 p-5">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-blue-600">
+      <div className="mb-8 rounded-[3px] border border-blue-100 bg-bw-light p-5">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-bw-blue">
           Our recommendation
         </p>
         <div className="flex items-center gap-3">
           <span className="text-4xl" aria-hidden="true">{meta.icon}</span>
           <div>
-            <p className="text-lg font-bold text-gray-900">{meta.label}</p>
-            <p className="mt-0.5 text-sm text-gray-600">{result.reasoning}</p>
+            <p className="text-lg font-bold text-bw-black">{meta.label}</p>
+            <p className="mt-0.5 text-sm text-bw-text">{result.reasoning}</p>
           </div>
         </div>
       </div>
@@ -113,13 +113,13 @@ export default function QuizResultComponent({ result }: QuizResultProps) {
       <div className="space-y-3">
         <Link
           href={meta.href}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-4 text-base font-bold text-white transition-colors hover:bg-blue-700"
+          className="flex w-full items-center justify-center gap-2 rounded-[3px] bg-blue-600 px-6 py-4 text-base font-bold text-white transition-colors hover:bg-blue-700"
         >
           {meta.ctaLabel} <span aria-hidden="true">→</span>
         </Link>
         <Link
           href="/"
-          className="flex w-full items-center justify-center rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50"
+          className="flex w-full items-center justify-center rounded-[3px] border border-black/10 bg-white px-6 py-3 text-sm font-medium text-bw-text transition-colors hover:bg-bw-light"
         >
           See all categories
         </Link>
@@ -127,7 +127,7 @@ export default function QuizResultComponent({ result }: QuizResultProps) {
 
       <ShareScore score={result.score} />
 
-      <p className="mt-6 text-center text-xs text-gray-400">
+      <p className="mt-6 text-center text-xs text-bw-gray">
         Your answers were not stored. This analysis runs entirely in memory.
       </p>
     </div>

@@ -72,7 +72,7 @@ export default function BreachChecker() {
           <div>
             <label
               htmlFor="password-input"
-              className="block text-sm font-medium text-gray-700 mb-1.5"
+              className="block text-sm font-medium text-bw-text mb-1.5"
             >
               Enter a password to check
             </label>
@@ -86,7 +86,7 @@ export default function BreachChecker() {
               autoCorrect="off"
               autoCapitalize="off"
               spellCheck={false}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-colors"
+              className="w-full rounded-[3px] border border-gray-300 px-4 py-3 text-bw-black placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-colors"
               disabled={state === 'loading'}
             />
           </div>
@@ -94,7 +94,7 @@ export default function BreachChecker() {
           <button
             type="submit"
             disabled={state === 'loading' || !password.trim()}
-            className="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full rounded-[3px] bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {state === 'loading' ? 'Checking…' : 'Check this password'}
           </button>
@@ -102,12 +102,12 @@ export default function BreachChecker() {
       )}
 
       {state === 'loading' && (
-        <div className="mt-6 flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 p-5">
+        <div className="mt-6 flex items-center gap-3 rounded-[3px] border border-black/10 bg-bw-light p-5">
           <span
-            className="inline-block h-5 w-5 rounded-full border-2 border-blue-600 border-t-transparent animate-spin"
+            className="inline-block h-5 w-5 rounded-[3px] border-2 border-blue-600 border-t-transparent animate-spin"
             aria-hidden="true"
           />
-          <p className="text-gray-600 text-sm">
+          <p className="text-bw-text text-sm">
             Checking against 900 million leaked passwords…
           </p>
         </div>
@@ -119,7 +119,7 @@ export default function BreachChecker() {
           <button
             type="button"
             onClick={handleReset}
-            className="mt-4 text-sm text-gray-500 hover:text-gray-700 underline transition-colors"
+            className="mt-4 text-sm text-bw-gray hover:text-bw-text underline transition-colors"
           >
             Check another password
           </button>
@@ -127,7 +127,7 @@ export default function BreachChecker() {
       )}
 
       {state === 'error' && (
-        <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-5">
+        <div className="mt-6 rounded-[3px] border border-amber-200 bg-amber-50 p-5">
           <p className="font-medium text-amber-800">
             Could not reach the breach database right now.
           </p>

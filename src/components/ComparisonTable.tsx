@@ -27,13 +27,13 @@ export default function ComparisonTable({ products, criteria }: ComparisonTableP
   const maxScore = Math.max(...scores.map((s) => s.score));
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+    <div className="overflow-x-auto rounded-[3px] border border-black/10 shadow-sm">
       <table className="min-w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-200 bg-gray-50">
+          <tr className="border-b border-black/10 bg-bw-light">
             <th
               scope="col"
-              className="sticky left-0 z-10 bg-gray-50 px-4 py-3 text-left font-semibold text-gray-700 min-w-[200px]"
+              className="sticky left-0 z-10 bg-bw-light px-4 py-3 text-left font-semibold text-bw-text min-w-[200px]"
             >
               Criterion
             </th>
@@ -46,13 +46,13 @@ export default function ComparisonTable({ products, criteria }: ComparisonTableP
                   scope="col"
                   className={`min-w-[130px] px-4 py-3 text-center font-semibold ${
                     isWinner
-                      ? 'border-x-2 border-t-2 border-blue-500 bg-blue-50 text-blue-900'
-                      : 'text-gray-700'
+                      ? 'border-x-2 border-t-2 border-blue-500 bg-bw-light text-blue-900'
+                      : 'text-bw-text'
                   }`}
                 >
                   <span className="block">{p.name}</span>
                   {isWinner && (
-                    <span className="mt-0.5 block text-[11px] font-medium text-blue-600">
+                    <span className="mt-0.5 block text-[11px] font-medium text-bw-blue">
                       ★ Top rated
                     </span>
                   )}
@@ -63,14 +63,14 @@ export default function ComparisonTable({ products, criteria }: ComparisonTableP
         </thead>
         <tbody>
           {criteria.map((criterion, rowIdx) => (
-            <tr key={criterion.id} className={rowIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}>
+            <tr key={criterion.id} className={rowIdx % 2 === 0 ? 'bg-white' : 'bg-bw-light/40'}>
               <td
                 className={`sticky left-0 z-10 px-4 py-3 ${
-                  rowIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'
+                  rowIdx % 2 === 0 ? 'bg-white' : 'bg-bw-light/40'
                 }`}
               >
-                <p className="font-medium text-gray-900">{criterion.name}</p>
-                <p className="text-xs text-gray-500">{criterion.weight}% weight</p>
+                <p className="font-medium text-bw-black">{criterion.name}</p>
+                <p className="text-xs text-bw-gray">{criterion.weight}% weight</p>
               </td>
               {products.map((p) => {
                 const ps = scores.find((s) => s.id === p.id);
@@ -80,7 +80,7 @@ export default function ComparisonTable({ products, criteria }: ComparisonTableP
                   <td
                     key={p.id}
                     className={`px-4 py-3 text-center ${
-                      isWinner ? 'border-x-2 border-blue-500 bg-blue-50/20' : ''
+                      isWinner ? 'border-x-2 border-blue-500 bg-bw-light/20' : ''
                     }`}
                   >
                     <span className={rawScoreClass(score)}>{score}/10</span>
@@ -91,8 +91,8 @@ export default function ComparisonTable({ products, criteria }: ComparisonTableP
           ))}
         </tbody>
         <tfoot>
-          <tr className="border-t-2 border-gray-200 bg-gray-50">
-            <td className="sticky left-0 z-10 bg-gray-50 px-4 py-3 font-bold text-gray-900">
+          <tr className="border-t-2 border-black/10 bg-bw-light">
+            <td className="sticky left-0 z-10 bg-bw-light px-4 py-3 font-bold text-bw-black">
               Overall Score
             </td>
             {scores.map((s) => {
@@ -102,12 +102,12 @@ export default function ComparisonTable({ products, criteria }: ComparisonTableP
                   key={s.id}
                   className={`px-4 py-3 text-center ${
                     isWinner
-                      ? 'border-x-2 border-b-2 border-blue-500 bg-blue-50 font-bold text-blue-700'
-                      : 'font-semibold text-gray-900'
+                      ? 'border-x-2 border-b-2 border-blue-500 bg-bw-light font-bold text-bw-blue'
+                      : 'font-semibold text-bw-black'
                   }`}
                 >
                   <span className="text-lg">{s.score.toFixed(1)}</span>
-                  <span className="text-sm text-gray-500">/10</span>
+                  <span className="text-sm text-bw-gray">/10</span>
                 </td>
               );
             })}

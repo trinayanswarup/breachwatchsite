@@ -10,7 +10,7 @@ export default function BreachResult({ count }: BreachResultProps) {
   return (
     <div className="mt-6 space-y-4">
       {found ? (
-        <div className="rounded-xl border border-red-200 bg-red-50 p-5">
+        <div className="rounded-[3px] border border-red-200 bg-red-50 p-5">
           <div className="flex items-start gap-3">
             <span className="mt-0.5 text-2xl" aria-hidden="true">⚠️</span>
             <div>
@@ -27,7 +27,7 @@ export default function BreachResult({ count }: BreachResultProps) {
           </div>
         </div>
       ) : (
-        <div className="rounded-xl border border-green-200 bg-green-50 p-5">
+        <div className="rounded-[3px] border border-green-200 bg-green-50 p-5">
           <div className="flex items-start gap-3">
             <span className="mt-0.5 text-2xl" aria-hidden="true">✅</span>
             <div>
@@ -42,8 +42,8 @@ export default function BreachResult({ count }: BreachResultProps) {
         </div>
       )}
 
-      <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
-        <p className="text-sm text-blue-800">
+      <div className="rounded-[3px] border border-blue-100 bg-bw-light p-4">
+        <p className="text-sm text-bw-blue-dark">
           {found ? (
             <>
               <strong>A password manager generates unique unguessable passwords for every site</strong>

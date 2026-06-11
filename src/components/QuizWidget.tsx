@@ -105,7 +105,7 @@ export default function QuizWidget({ onComplete }: QuizWidgetProps) {
   return (
     <div className="mx-auto max-w-xl px-4 py-8">
       <div className="mb-8">
-        <div className="mb-2 flex items-center justify-between text-sm text-gray-500">
+        <div className="mb-2 flex items-center justify-between text-sm text-bw-gray">
           <span>Question {currentStep + 1} of {QUESTIONS.length}</span>
           <span>{Math.round(progress)}% complete</span>
         </div>
@@ -113,7 +113,7 @@ export default function QuizWidget({ onComplete }: QuizWidgetProps) {
           {Array.from({ length: QUESTIONS.length }, (_, i) => (
             <div
               key={i}
-              className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${
+              className={`h-1.5 flex-1 rounded-[3px] transition-colors duration-300 ${
                 i <= currentStep ? 'bg-blue-500' : 'bg-gray-200'
               }`}
             />
@@ -124,12 +124,12 @@ export default function QuizWidget({ onComplete }: QuizWidgetProps) {
       <div
         className={`transition-opacity duration-200 ${visible ? 'opacity-100' : 'opacity-0'}`}
       >
-        <h2 className="mb-2 text-2xl font-bold leading-snug text-gray-900 sm:text-3xl">
+        <h2 className="mb-2 text-2xl font-bold leading-snug text-bw-black sm:text-3xl">
           {question.text}
         </h2>
 
         {question.hint && (
-          <p className="mb-6 text-sm text-gray-500">{question.hint}</p>
+          <p className="mb-6 text-sm text-bw-gray">{question.hint}</p>
         )}
 
         {!question.hint && <div className="mb-6" />}
@@ -140,7 +140,7 @@ export default function QuizWidget({ onComplete }: QuizWidgetProps) {
               key={option.value}
               type="button"
               onClick={() => handleSelect(option.value)}
-              className="w-full rounded-xl border-2 border-gray-200 bg-white px-5 py-4 text-left text-base font-medium text-gray-700 transition-all hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 active:scale-[0.99]"
+              className="w-full rounded-[3px] border-2 border-black/10 bg-white px-5 py-4 text-left text-base font-medium text-bw-text transition-all hover:border-blue-400 hover:bg-bw-light hover:text-bw-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 active:scale-[0.99]"
             >
               {option.label}
             </button>

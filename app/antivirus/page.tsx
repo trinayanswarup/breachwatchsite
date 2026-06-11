@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
-import ProductCard from '@/components/ProductCard';
+import RankedCard from '@/components/RankedCard';
 import ScoreBreakdown from '@/components/ScoreBreakdown';
 import AffiliateCTA from '@/components/AffiliateCTA';
 import JsonLd from '@/components/JsonLd';
@@ -70,8 +70,47 @@ const pageSchema: Record<string, unknown> = {
   })),
 };
 
+const AV_BULLETS: Record<string, { pros: string[]; cons: string[] }> = {
+  windows_defender: {
+    pros: [
+      'Free and already installed — zero setup, auto-updates with Windows Update',
+      'AV-TEST consistently awards 6/6 on protection, performance, and usability',
+      'No additional third party with deep system access',
+    ],
+    cons: ['Limited advanced features · No cross-platform support'],
+  },
+  eset: {
+    pros: [
+      'Lowest system impact of any full antivirus suite — tops AV-TEST performance benchmarks',
+      'Slovak company: EU member, outside 5 Eyes and 9 Eyes intelligence alliances',
+      'Clean, upsell-free interface focused on core functionality',
+    ],
+    cons: ['Paid only — no meaningful free tier · Some UI elements feel dated'],
+  },
+  bitdefender: {
+    pros: [
+      'AV-TEST consistently 18/18 — maximum possible score across all categories',
+      'Romanian company: outside US/UK intelligence sharing arrangements',
+    ],
+    cons: ['Not open source · Recent upsell prompts in UI'],
+  },
+  malwarebytes: {
+    pros: [
+      'Exceptional at removing existing infections — finds adware and PUPs traditional AV misses',
+      'Best used alongside Windows Defender for layered defence',
+    ],
+    cons: ['Not a standalone AV replacement · Free version lacks real-time protection'],
+  },
+  norton: {
+    pros: ['Good detection rates · Includes VPN, password manager, and dark web monitoring'],
+    cons: [
+      'Norton Crypto (2022): enrolled users in Ethereum mining without clear consent',
+      'Higher system impact than Bitdefender or ESET',
+    ],
+  },
+};
+
 export default function AntivirusPage() {
-  const topPickHref = productCta(topPick);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -81,58 +120,28 @@ export default function AntivirusPage() {
       <main className="flex-1">
 
         {/* Hero */}
-        <section className="bg-gradient-to-b from-blue-50 to-white px-4 pt-10 pb-8">
-          <div className="mx-auto max-w-3xl">
-            <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm text-gray-500">
-              <Link href="/" className="hover:text-blue-600">BreachWatch</Link>
-              <span aria-hidden="true">›</span>
-              <span className="text-gray-900">Antivirus</span>
-            </nav>
-
-            <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl">
+        <section className="px-5 pt-14 pb-10 text-center">
+          <div className="mx-auto max-w-[680px]">
+            <h1 className="text-[32px] font-bold leading-tight text-bw-black">
               Best Antivirus Software 2026 — What the Independent Tests Actually Show
             </h1>
-            <p className="mt-4 text-lg text-gray-600">
-              Before the rankings: most antivirus comparison sites won&apos;t tell you that{' '}
-              <a
-                href="https://www.privacyguides.org"
-                className="text-blue-600 underline hover:text-blue-800"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Privacy Guides
-              </a>
-              , the most trusted independent security resource online, does{' '}
-              <strong className="text-gray-900">not recommend</strong> third-party
-              antivirus for most users. A fully updated Windows 11 with Microsoft Defender
-              enabled is sufficient protection for the majority of threat models. We think
-              you should make an informed decision rather than defaulting to whatever
-              affiliate sites rank highest.
+            <p className="mt-3.5 text-[15px] text-bw-gray leading-relaxed max-w-[500px] mx-auto">
+              We ranked antivirus software using AV-TEST independent lab scores. Includes the
+              honest answer about whether you actually need third-party antivirus.
             </p>
-
-            <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-800">
-              <strong>Disclosure:</strong> Some links on this page are affiliate links. We
-              earn a commission if you purchase. Detection scores come from{' '}
-              <a
-                href="https://www.av-test.org"
-                className="underline hover:text-amber-900"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                av-test.org
-              </a>{' '}
-              and are not influenced by vendor relationships.{' '}
-              <Link href="/disclosure" className="underline hover:text-amber-900">
-                Full disclosure policy.
-              </Link>
-            </div>
+            <Link
+              href="/quiz"
+              className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
+            >
+              Take the 30-second quiz →
+            </Link>
           </div>
         </section>
 
         {/* Who needs it / who doesn't */}
-        <section className="border-b border-gray-100 px-4 py-8">
+        <section className="border-b border-black/10 px-4 py-8">
           <div className="mx-auto max-w-3xl grid gap-6 sm:grid-cols-2">
-            <div className="rounded-lg border border-green-200 bg-green-50 px-5 py-4">
+            <div className="rounded-[3px] border border-green-200 bg-green-50 px-5 py-4">
               <h2 className="mb-3 font-bold text-green-900">
                 Who actually benefits from third-party antivirus
               </h2>
@@ -152,11 +161,11 @@ export default function AntivirusPage() {
               </ul>
             </div>
 
-            <div className="rounded-lg border border-gray-200 bg-gray-50 px-5 py-4">
-              <h2 className="mb-3 font-bold text-gray-900">
+            <div className="rounded-[3px] border border-black/10 bg-bw-light px-5 py-4">
+              <h2 className="mb-3 font-bold text-bw-black">
                 Who probably doesn&apos;t need it
               </h2>
-              <ul className="space-y-1.5 text-sm text-gray-700">
+              <ul className="space-y-1.5 text-sm text-bw-text">
                 {[
                   'Users running a fully updated Windows 11 or macOS',
                   'Users who are careful about what they download and click',
@@ -164,7 +173,7 @@ export default function AntivirusPage() {
                   'Users already running Windows Defender with current definitions',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="mt-0.5 shrink-0 text-gray-400" aria-hidden="true">–</span>
+                    <span className="mt-0.5 shrink-0 text-bw-gray" aria-hidden="true">–</span>
                     {item}
                   </li>
                 ))}
@@ -175,14 +184,14 @@ export default function AntivirusPage() {
 
         {/* Comparison table */}
         <section className="mx-auto max-w-6xl px-4 py-12">
-          <h2 className="mb-2 text-2xl font-bold text-gray-900">
+          <h2 className="mb-2 text-2xl font-bold text-bw-black">
             Antivirus comparison: all 5 products scored
           </h2>
-          <p className="mb-6 text-gray-500">
+          <p className="mb-6 text-bw-gray">
             Detection scores are from{' '}
             <a
               href="https://www.av-test.org"
-              className="text-blue-600 hover:text-blue-800 underline"
+              className="text-bw-blue hover:text-bw-blue-dark underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -196,26 +205,26 @@ export default function AntivirusPage() {
         </section>
 
         {/* Criteria explanation */}
-        <section className="border-t border-gray-100 bg-gray-50 px-4 py-12">
+        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-2 text-2xl font-bold text-gray-900">
+            <h2 className="mb-2 text-2xl font-bold text-bw-black">
               How we score antivirus software
             </h2>
-            <p className="mb-8 text-gray-500">
+            <p className="mb-8 text-bw-gray">
               All detection and performance data comes from published AV-TEST reports.
               Vendor claims are not used as scoring inputs. Privacy weight reflects the
               inherent risk of granting a third party deep system access.
             </p>
             <div className="space-y-4">
               {criteria.map((c) => (
-                <div key={c.id} className="rounded-lg border border-gray-200 bg-white px-5 py-4">
+                <div key={c.id} className="rounded-[3px] border border-black/10 bg-white px-5 py-4">
                   <div className="flex items-center justify-between gap-3">
-                    <h3 className="font-semibold text-gray-900">{c.name}</h3>
-                    <span className="shrink-0 rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-bold text-blue-700">
+                    <h3 className="font-semibold text-bw-black">{c.name}</h3>
+                    <span className="shrink-0 rounded-[3px] bg-bw-blue/10 px-2.5 py-0.5 text-xs font-bold text-bw-blue">
                       {c.weight}% weight
                     </span>
                   </div>
-                  <p className="mt-1 text-sm text-gray-600">{c.description}</p>
+                  <p className="mt-1 text-sm text-bw-text">{c.description}</p>
                 </div>
               ))}
             </div>
@@ -224,21 +233,21 @@ export default function AntivirusPage() {
 
         {/* Individual product write-ups */}
         <section className="mx-auto max-w-3xl px-4 py-12 space-y-14">
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 className="text-2xl font-bold text-bw-black">
             Detailed breakdown — every antivirus reviewed
           </h2>
 
           {/* Windows Defender */}
           <article>
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
-              <h3 className="text-xl font-bold text-gray-900">
+              <h3 className="text-xl font-bold text-bw-black">
                 1. Windows Defender — {weightedScore(topPick).toFixed(1)}/10
               </h3>
-              <span className="rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
+              <span className="rounded-[3px] bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 Winner (free)
               </span>
             </div>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Windows Defender has transformed over the past decade from a mediocre
               bundled tool into a genuinely competitive security product. AV-TEST
               consistently awards it 6/6 on protection, 6/6 on performance, and 6/6 on
@@ -247,20 +256,20 @@ export default function AntivirusPage() {
               party with system access beyond Microsoft, whose telemetry is already
               present as part of Windows.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               The case for Defender as your primary antivirus is straightforward: it is
               already installed, updates automatically with Windows Update, costs nothing,
               and scores as well as or better than paid alternatives in independent testing.
               For a technically competent user who keeps their system updated, this is the
               correct answer.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               What it lacks: bundled extras like VPN, password manager, or dark web
               monitoring. If you want those features in a single product, a paid suite
               makes sense. But on pure malware detection, Defender is no longer the
               compromise it once was.
             </p>
-            <p className="mt-3 text-sm text-gray-500">
+            <p className="mt-3 text-sm text-bw-gray">
               Already installed on Windows — no action required. Check Windows Security
               in Settings to verify it&apos;s active.
             </p>
@@ -269,14 +278,14 @@ export default function AntivirusPage() {
           {/* Bitdefender */}
           <article>
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
-              <h3 className="text-xl font-bold text-gray-900">
+              <h3 className="text-xl font-bold text-bw-black">
                 2. Bitdefender — {weightedScore(bitdefenderPick).toFixed(1)}/10
               </h3>
-              <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800">
+              <span className="rounded-[3px] bg-bw-blue/10 px-3 py-1 text-sm font-semibold text-bw-blue-dark">
                 Best detection
               </span>
             </div>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Bitdefender consistently achieves 18/18 on AV-TEST — the maximum possible
               — across protection, performance, and usability. It is a Romanian company,
               placing it outside the US/UK intelligence-sharing arrangements that concern
@@ -284,12 +293,12 @@ export default function AntivirusPage() {
               independent tests show it has one of the lowest system-impact footprints
               of any full antivirus suite.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               There are no known incidents of data selling or inappropriate data
               collection. The privacy policy is more transparent than many competitors.
               The interface is clean and does not aggressively upsell additional products.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               The main trade-off: any third-party antivirus introduces an additional
               party with deep system access. That&apos;s an inherent cost of using any
               product in this category. Bitdefender&apos;s privacy score (8/10) reflects
@@ -308,21 +317,21 @@ export default function AntivirusPage() {
           {/* ESET */}
           <article>
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
-              <h3 className="text-xl font-bold text-gray-900">
+              <h3 className="text-xl font-bold text-bw-black">
                 3. ESET — {weightedScore(esetPick).toFixed(1)}/10
               </h3>
-              <span className="rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
+              <span className="rounded-[3px] bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 Winner (paid)
               </span>
             </div>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               ESET has been making security software since 1992. It consistently tops
               AV-TEST performance benchmarks — using the fewest system resources of any
               product in this comparison. On older or lower-powered computers, this
               matters significantly. AV-TEST protection scores for ESET are consistently
               in the 17–18/18 range.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Slovakia is an EU country but outside the 5 Eyes and 9 Eyes intelligence
               alliances. ESET has no known history of inappropriate data sharing and their
               privacy policy is more conservative than US-based competitors. Among
@@ -330,7 +339,7 @@ export default function AntivirusPage() {
               unnecessary bundled extras, no aggressive upselling, just antivirus that
               does its job.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               What it gets wrong: the interface is functional rather than polished.
               Less brand recognition than Norton or McAfee means less community support.
               Fewer bundled features if you specifically want a security suite.
@@ -347,24 +356,24 @@ export default function AntivirusPage() {
 
           {/* Malwarebytes */}
           <article>
-            <h3 className="text-xl font-bold text-gray-900">
+            <h3 className="text-xl font-bold text-bw-black">
               4. Malwarebytes — {weightedScore(malwarebytesPick).toFixed(1)}/10
             </h3>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Malwarebytes built its reputation as the tool you run when you already have
               malware — it is exceptionally good at removing infections that other products
               miss, particularly adware and potentially unwanted programmes. For that use
               case, it remains one of the best options available, and the free version
               covers it completely with no time limit.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               As a full-time real-time protection replacement, the scores are lower than
               Bitdefender or ESET on detection rates. Malwarebytes prioritises low false
               positives over maximum detection — a reasonable design choice but one that
               means it misses some threats that other products catch. AV-TEST scores
               typically land around 16–17/18.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               The recommended approach: run Malwarebytes free periodically as a
               second-opinion scanner alongside Windows Defender. You get Defender&apos;s
               real-time protection plus Malwarebytes&apos; superior removal capability
@@ -382,16 +391,16 @@ export default function AntivirusPage() {
 
           {/* Norton */}
           <article>
-            <h3 className="text-xl font-bold text-gray-900">
+            <h3 className="text-xl font-bold text-bw-black">
               5. Norton 360 — {weightedScore(nortonPick).toFixed(1)}/10
             </h3>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               Norton 360 achieves good AV-TEST scores and bundles a lot of features:
               VPN, password manager, dark web monitoring, cloud backup, and parental
               controls. The detection rates are genuinely strong. The problem is the
               privacy history.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               In 2022, Norton was found to have been automatically enrolling users into a
               cryptocurrency mining programme called &ldquo;Norton Crypto&rdquo; that used
               customer computers to mine Ethereum and took a 15% cut of earnings —
@@ -399,7 +408,7 @@ export default function AntivirusPage() {
               regulatory scrutiny and class action lawsuits. For a product that asks for
               deep, privileged access to your computer, this is a disqualifying incident.
             </p>
-            <p className="mt-3 text-gray-700">
+            <p className="mt-3 text-bw-text">
               The performance impact of Norton&apos;s suite is also higher than
               competitors. ESET and Bitdefender are better options at comparable or lower
               prices. There is no scenario where Norton 360 is the best choice given the
@@ -409,64 +418,64 @@ export default function AntivirusPage() {
         </section>
 
         {/* Verdict */}
-        <section className="border-t border-gray-100 bg-blue-50 px-4 py-12">
+        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-6 text-2xl font-bold text-gray-900">Our verdict</h2>
+            <h2 className="mb-6 text-2xl font-bold text-bw-black">Our verdict</h2>
 
             <div className="space-y-4 mb-8">
-              <div className="rounded-lg border border-green-200 bg-white px-5 py-4">
+              <div className="rounded-[3px] border border-green-200 bg-white px-5 py-4">
                 <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-gray-900">
+                  <span className="font-bold text-bw-black">
                     Tied winners: Windows Defender + ESET
                   </span>
                   <span className="text-sm font-semibold text-green-700">
                     {weightedScore(topPick).toFixed(1)}/10
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="mt-1 text-sm text-bw-text">
                   Windows Defender if you want zero cost and no additional trust
                   relationships. ESET if you want independent third-party verification, a
                   lighter system footprint, and a non-US company with a clean privacy record.
                 </p>
               </div>
 
-              <div className="rounded-lg border border-blue-200 bg-white px-5 py-4">
+              <div className="rounded-[3px] border border-blue-200 bg-white px-5 py-4">
                 <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-gray-900">Best detection: Bitdefender</span>
-                  <span className="text-sm font-semibold text-blue-700">
+                  <span className="font-bold text-bw-black">Best detection: Bitdefender</span>
+                  <span className="text-sm font-semibold text-bw-blue">
                     {weightedScore(bitdefenderPick).toFixed(1)}/10
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="mt-1 text-sm text-bw-text">
                   Consistently maximum AV-TEST scores with minimal system impact. Romanian
                   company, reasonable privacy practices. Best paid option for pure detection.
                 </p>
               </div>
 
-              <div className="rounded-lg border border-gray-200 bg-white px-5 py-4">
+              <div className="rounded-[3px] border border-black/10 bg-white px-5 py-4">
                 <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-gray-900">
+                  <span className="font-bold text-bw-black">
                     Best free scanner: Malwarebytes (alongside Defender)
                   </span>
-                  <span className="text-sm font-semibold text-gray-600">
+                  <span className="text-sm font-semibold text-bw-text">
                     {weightedScore(malwarebytesPick).toFixed(1)}/10
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="mt-1 text-sm text-bw-text">
                   Run it periodically as a second-opinion scanner. Excellent at finding and
                   removing infections that Defender might miss. Free version is fully
                   functional with no time limit.
                 </p>
               </div>
 
-              <div className="rounded-lg border border-red-200 bg-white px-5 py-4">
+              <div className="rounded-[3px] border border-red-200 bg-white px-5 py-4">
                 <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-gray-900">Skip: Norton 360</span>
+                  <span className="font-bold text-bw-black">Skip: Norton 360</span>
                   <span className="text-sm font-semibold text-red-600">
                     {weightedScore(nortonPick).toFixed(1)}/10
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="mt-1 text-sm text-bw-text">
                   The Norton Crypto incident is disqualifying for a product asking for
                   deep system access. ESET and Bitdefender are better at every price point.
                 </p>
@@ -494,22 +503,22 @@ export default function AntivirusPage() {
         </section>
 
         {/* The question nobody asks */}
-        <section className="border-t border-gray-100 px-4 py-10">
-          <div className="mx-auto max-w-3xl rounded-lg border border-gray-200 bg-gray-50 px-6 py-5">
-            <h2 className="mb-3 text-lg font-bold text-gray-900">
+        <section className="border-t border-black/10 px-4 py-10">
+          <div className="mx-auto max-w-3xl rounded-[3px] border border-black/10 bg-bw-light px-6 py-5">
+            <h2 className="mb-3 text-lg font-bold text-bw-black">
               The question nobody asks
             </h2>
-            <p className="text-gray-700 text-sm">
+            <p className="text-bw-text text-sm">
               The best antivirus is the one that never needs to activate because you
               didn&apos;t click the phishing link, didn&apos;t download the cracked
               software, and kept your system updated. No antivirus product can fully
               compensate for unsafe computing habits. The most effective security
               investment for most people is not an antivirus subscription — it&apos;s a{' '}
-              <Link href="/password-managers" className="text-blue-600 underline hover:text-blue-800">
+              <Link href="/password-managers" className="text-bw-blue underline hover:text-bw-blue-dark">
                 password manager
               </Link>{' '}
               and{' '}
-              <Link href="/2fa-apps" className="text-blue-600 underline hover:text-blue-800">
+              <Link href="/2fa-apps" className="text-bw-blue underline hover:text-bw-blue-dark">
                 2FA
               </Link>{' '}
               on their important accounts.
@@ -517,30 +526,44 @@ export default function AntivirusPage() {
           </div>
         </section>
 
-        {/* ProductCard grid */}
-        <section className="mx-auto max-w-6xl px-4 py-12">
-          <h2 className="mb-2 text-2xl font-bold text-gray-900">
-            Quick reference — all 5 antivirus products
-          </h2>
-          <p className="mb-6 text-gray-500">
-            Sorted by overall score. Windows Defender and ESET are tied at the top.
-          </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {ranked.map((p) => (
-              <ProductCard
-                key={p.id}
-                product={p}
-                category="antivirus"
-                featured={p.id === topPick.id}
-              />
-            ))}
+        {/* Ranked comparison */}
+        <section className="mx-auto max-w-[760px] px-5 pb-10">
+          <div className="flex items-end gap-3 border-b-2 border-bw-blue pb-2 mb-4">
+            <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-gray">
+              5 antivirus products compared · Updated Jun 2026 · AV-TEST data
+            </span>
           </div>
+          {ranked.map((p, i) => {
+            const bullets = AV_BULLETS[p.id] ?? { pros: p.highlights, cons: [] };
+            return (
+              <RankedCard
+                key={p.id}
+                rank={i + 1}
+                productId={p.id}
+                name={p.name}
+                tagline={p.tagline}
+                pros={bullets.pros}
+                cons={bullets.cons}
+                score={weightedScore(p)}
+                ctaHref={productCta(p)}
+                ctaLabel={`Visit ${p.name}`}
+                noAffiliateNote={p.id === 'windows_defender' ? 'Free and built-in — no affiliate link' : undefined}
+              />
+            );
+          })}
+          <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
+            Scores calculated from{' '}
+            <Link href="/about" className="text-bw-blue underline">published criteria</Link>.
+            {' '}Affiliate commissions do not affect rankings. Some links earn us a commission
+            at no extra cost to you.{' '}
+            <Link href="/disclosure" className="text-bw-blue underline">Full disclosure →</Link>
+          </p>
         </section>
 
         {/* FAQ */}
-        <section className="border-t border-gray-100 bg-gray-50 px-4 py-12">
+        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-8 text-2xl font-bold text-gray-900">Antivirus FAQ</h2>
+            <h2 className="mb-8 text-2xl font-bold text-bw-black">Antivirus FAQ</h2>
             <div className="space-y-6">
               {[
                 {
@@ -560,9 +583,9 @@ export default function AntivirusPage() {
                   a: "ESET and Bitdefender have the lowest performance impact in independent testing. Norton has a higher impact. Windows Defender's impact is minimal on modern hardware. On hardware from 2018 or earlier, the difference between ESET and Norton can be noticeable during background scans.",
                 },
               ].map(({ q, a }) => (
-                <div key={q} className="rounded-lg border border-gray-200 bg-white px-5 py-4">
-                  <h3 className="font-semibold text-gray-900">{q}</h3>
-                  <p className="mt-2 text-sm text-gray-600">{a}</p>
+                <div key={q} className="rounded-[3px] border border-black/10 bg-white px-5 py-4">
+                  <h3 className="font-semibold text-bw-black">{q}</h3>
+                  <p className="mt-2 text-sm text-bw-text">{a}</p>
                 </div>
               ))}
             </div>
@@ -571,29 +594,29 @@ export default function AntivirusPage() {
 
         {/* Related links */}
         <section className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-6 text-xl font-bold text-gray-900">Related comparisons</h2>
+          <h2 className="mb-6 text-xl font-bold text-bw-black">Related comparisons</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             <Link
               href="/password-managers"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Best password managers — higher ROI than antivirus →
             </Link>
             <Link
               href="/2fa-apps"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Best 2FA apps →
             </Link>
             <Link
               href="/vpn"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Best VPNs →
             </Link>
             <Link
               href="/quiz"
-              className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Take the security quiz →
             </Link>
@@ -605,3 +628,4 @@ export default function AntivirusPage() {
     </div>
   );
 }
+
