@@ -483,25 +483,25 @@ export default function AntivirusPage() {
           <h2 className="mb-6 text-xl font-bold text-bw-black">Related antivirus comparisons</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             <Link
-              href="#windows-defender"
+              href="/comparisons/windows-defender-vs-paid-antivirus"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Windows Defender vs paid antivirus -&gt;
             </Link>
             <Link
-              href="#eset"
+              href="/comparisons/eset-vs-bitdefender"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               ESET vs Bitdefender - speed vs detection -&gt;
             </Link>
             <Link
-              href="#malwarebytes"
+              href="/comparisons/malwarebytes-vs-antivirus"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Malwarebytes vs full antivirus suites -&gt;
             </Link>
             <Link
-              href="#norton"
+              href="/comparisons/norton-vs-antivirus-alternatives"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Norton 360 vs safer alternatives -&gt;

@@ -473,19 +473,19 @@ export default function PasswordManagersPage() {
               Bitwarden vs 1Password full comparison -&gt;
             </Link>
             <Link
-              href="#protonpass"
+              href="/comparisons/proton-pass-vs-bitwarden"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Proton Pass vs Bitwarden - privacy vs free tier -&gt;
             </Link>
             <Link
-              href="#1password"
+              href="/comparisons/1password-vs-keeper"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               1Password vs Keeper - premium vs compliance -&gt;
             </Link>
             <Link
-              href="#dashlane"
+              href="/comparisons/nordpass-vs-dashlane"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               NordPass vs Dashlane - ecosystem vs bundle -&gt;

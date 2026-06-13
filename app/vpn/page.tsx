@@ -557,19 +557,19 @@ export default function VPNPage() {
               NordVPN vs ExpressVPN -&gt;
             </Link>
             <Link
-              href="#mullvad"
+              href="/comparisons/mullvad-vs-protonvpn"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Mullvad vs Proton VPN - privacy picks -&gt;
             </Link>
             <Link
-              href="#surfshark"
+              href="/comparisons/surfshark-vs-nordvpn"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Surfshark vs NordVPN - budget vs mainstream -&gt;
             </Link>
             <Link
-              href="#expressvpn"
+              href="/comparisons/expressvpn-vs-vpn-alternatives"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               ExpressVPN vs the field - when to skip it -&gt;

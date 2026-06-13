@@ -439,25 +439,25 @@ export default function TwoFAPage() {
           <p className="mb-4 text-sm text-bw-text">2FA is one layer. Pair it with a <a href="/password-managers" className="text-bw-blue underline hover:text-bw-blue-dark">password manager</a> for the biggest security improvement most people can make.</p>
           <div className="grid gap-3 sm:grid-cols-2">
             <Link
-              href="#aegis"
+              href="/comparisons/aegis-vs-ente-auth"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Aegis vs Ente Auth - local backup vs sync -&gt;
             </Link>
             <Link
-              href="#google-authenticator"
+              href="/comparisons/google-authenticator-vs-aegis"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Google Authenticator vs safer backups -&gt;
             </Link>
             <Link
-              href="#microsoft-authenticator"
+              href="/comparisons/microsoft-authenticator-vs-2fa-apps"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Microsoft Authenticator vs general 2FA apps -&gt;
             </Link>
             <Link
-              href="#authy"
+              href="/comparisons/authy-vs-ente-auth"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
               Authy vs export-friendly 2FA apps -&gt;
