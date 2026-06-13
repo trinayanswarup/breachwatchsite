@@ -6,176 +6,170 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    'BreachWatch privacy policy. We use Vercel Analytics (cookieless, anonymous). We collect no email addresses, store no personal data, and do not use advertising trackers.',
+    'BreachWatch privacy policy: no accounts, no ad trackers, no saved passwords, and clear limits on analytics and affiliate links.',
 };
 
-const LAST_UPDATED = '10 June 2025';
+const LAST_UPDATED = '13 June 2026';
+
+const privacyPoints = [
+  {
+    title: 'No accounts',
+    text: 'You can use BreachWatch without signing up, logging in, or giving us an email address.',
+  },
+  {
+    title: 'No saved passwords',
+    text: 'Password checks are designed so BreachWatch never receives the full password you type.',
+  },
+  {
+    title: 'No ad tracking',
+    text: 'We do not run advertising pixels, retargeting scripts, or cross-site tracking profiles.',
+  },
+];
 
 export default function PrivacyPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <Nav />
       <main className="flex-1">
-
-        <section className="bg-gradient-to-b from-blue-50 to-white px-4 pt-10 pb-8">
-          <div className="mx-auto max-w-3xl">
-            <h1 className="text-3xl font-extrabold tracking-tight text-bw-black sm:text-4xl">
-              Privacy Policy
-            </h1>
-            <p className="mt-3 text-sm text-bw-gray">Last updated: {LAST_UPDATED}</p>
-            <p className="mt-4 text-lg text-bw-text">
-              BreachWatch does not collect personal data. We use Vercel Analytics, which
-              is cookieless and does not track individual users. We store no email
-              addresses, passwords, account information, or quiz answers.
+        <section className="border-b border-black/10 bg-bw-light px-5 py-12">
+          <div className="mx-auto max-w-6xl">
+            <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
+              Privacy
             </p>
+            <div className="mt-3 max-w-3xl">
+              <h1 className="text-[34px] font-bold leading-tight text-bw-black">
+                BreachWatch is built to collect as little data as possible.
+              </h1>
+              <p className="mt-4 text-[15px] leading-7 text-bw-gray">
+                Use the site without an account. Check passwords without sending the full
+                password to us. Read comparisons without advertising trackers following
+                you around the web.
+              </p>
+              <p className="mt-3 text-[13px] text-bw-gray">Last updated: {LAST_UPDATED}</p>
+            </div>
           </div>
         </section>
 
-        <article className="mx-auto max-w-3xl px-4 py-10 space-y-10">
-
-          <section>
-            <h2 className="mb-4 text-xl font-bold text-bw-black">What data we collect</h2>
-            <p className="mb-3 text-bw-text">
-              We collect no personally identifiable information. We do not have an
-              account system, email newsletter, or contact form that stores submissions.
-            </p>
-            <p className="text-bw-text">
-              We use <strong>Vercel Analytics</strong> to measure aggregate site traffic.
-              Vercel Analytics does not use cookies, does not fingerprint browsers, and
-              does not collect IP addresses or device identifiers. It reports anonymised
-              aggregate metrics: page views, visitor counts by country and device type,
-              and referrer sources. No data that can identify an individual user is
-              collected or stored.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-4 text-xl font-bold text-bw-black">Custom analytics events</h2>
-            <p className="mb-3 text-bw-text">
-              We track the following custom events via Vercel Analytics to understand
-              how readers use the site:
-            </p>
-            <ul className="space-y-2 rounded-[3px] border border-black/10 bg-bw-light px-5 py-4 text-sm text-bw-text">
-              {[
-                { event: 'quiz_start', desc: 'Fired when a user begins the security quiz.' },
-                { event: 'quiz_complete', desc: 'Fired when a user completes the quiz. Includes anonymised score and recommended category — no answers are transmitted.' },
-                { event: 'affiliate_click', desc: 'Fired when a user clicks an affiliate CTA. Includes product name and page path — no personal data.' },
-                { event: 'category_view', desc: 'Fired when a user views a category page.' },
-                { event: 'comparison_view', desc: 'Fired when a user views a comparison article.' },
-              ].map(({ event, desc }) => (
-                <li key={event} className="flex items-start gap-3">
-                  <code className="mt-0.5 shrink-0 rounded bg-gray-200 px-1.5 py-0.5 text-xs font-mono text-bw-black">
-                    {event}
-                  </code>
-                  <span>{desc}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-3 text-sm text-bw-gray">
-              None of these events include user names, email addresses, IP addresses,
-              or any other personally identifiable information.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-4 text-xl font-bold text-bw-black">The security quiz</h2>
-            <p className="mb-3 text-bw-text">
-              The security quiz sends your answers to the Groq API (Groq Inc.,
-              San Jose, CA) to generate a personalised security recommendation. Groq
-              processes the answers to produce a recommendation and does not store them
-              beyond the duration of the API request, per their privacy policy.
-            </p>
-            <p className="text-bw-text">
-              BreachWatch does not store, log, or transmit quiz answers to any other
-              party. Answers exist only in your browser and in the transient API
-              request to Groq. When you navigate away from the quiz result, they are
-              gone.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-4 text-xl font-bold text-bw-black">Affiliate links</h2>
-            <p className="mb-3 text-bw-text">
-              Affiliate links on this site include UTM parameters
-              (<code className="rounded bg-gray-100 px-1 py-0.5 text-xs">utm_source=breachwatchsite</code>)
-              so we can measure which links readers click. This information is processed
-              by the destination vendor (e.g. NordVPN, Bitwarden) according to their
-              own privacy policies. We do not receive personally identifiable information
-              as part of affiliate reporting — only aggregate click and conversion counts.
-            </p>
-            <p className="text-bw-text">
-              All affiliate links are disclosed with{' '}
-              <code className="rounded bg-gray-100 px-1 py-0.5 text-xs">rel=&quot;sponsored&quot;</code>{' '}
-              and a visible tooltip.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-4 text-xl font-bold text-bw-black">Cookies</h2>
-            <p className="text-bw-text">
-              BreachWatch does not set any first-party cookies. Vercel Analytics does
-              not use cookies. If you click an affiliate link, the destination website
-              may set its own cookies according to its privacy policy — this is outside
-              our control and covered by the destination site&apos;s disclosures.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-4 text-xl font-bold text-bw-black">Third-party services</h2>
-            <div className="space-y-3 text-bw-text">
-              <p>
-                <strong>Vercel</strong> — BreachWatch is hosted on Vercel. Vercel may
-                process server logs as part of normal infrastructure operation. See
-                Vercel&apos;s privacy policy at vercel.com/legal/privacy-policy.
-              </p>
-              <p>
-                <strong>Groq</strong> — The quiz API route sends quiz answers to Groq
-                for AI processing. See Groq&apos;s privacy policy at groq.com/privacy.
-              </p>
-              <p>
-                <strong>Google Fonts / Geist Fonts</strong> — This site uses the Geist
-                typeface served via Next.js local font optimisation. No requests are
-                made to Google Fonts at runtime.
-              </p>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="mb-4 text-xl font-bold text-bw-black">Your rights</h2>
-            <p className="mb-3 text-bw-text">
-              Because we hold no personal data about you, there is nothing to access,
-              correct, or delete. If you have a concern about data processing related
-              to this site, contact us at the address below.
-            </p>
-            <p className="text-bw-text">
-              If you are in the EU or UK, you have the right to lodge a complaint with
-              your national data protection authority if you believe your rights under
-              GDPR or UK GDPR have been infringed.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-4 text-xl font-bold text-bw-black">Contact</h2>
-            <p className="text-bw-text">
-              For privacy enquiries, contact{' '}
-              <a href="mailto:privacy@breachwatchsite.com" className="text-bw-blue underline hover:text-bw-blue-dark">
-                privacy@breachwatchsite.com
-              </a>
-              .
-            </p>
-          </section>
-
-        </article>
-
-        <div className="border-t border-black/10 bg-bw-light px-4 py-8">
-          <div className="mx-auto max-w-3xl flex flex-wrap gap-4 text-sm">
-            <Link href="/about" className="text-bw-blue hover:text-bw-blue-dark">About BreachWatch →</Link>
-            <Link href="/disclosure" className="text-bw-blue hover:text-bw-blue-dark">Affiliate Disclosure →</Link>
+        <section className="mx-auto max-w-6xl px-5 py-10">
+          <div className="grid gap-4 md:grid-cols-3">
+            {privacyPoints.map((point) => (
+              <div key={point.title} className="rounded-[3px] border border-black/10 bg-white p-5 shadow-sm">
+                <h2 className="text-[18px] font-bold text-bw-black">{point.title}</h2>
+                <p className="mt-2 text-[13px] leading-6 text-bw-text">{point.text}</p>
+              </div>
+            ))}
           </div>
-        </div>
+        </section>
+
+        <article className="mx-auto max-w-4xl px-5 pb-14">
+          <div className="space-y-5">
+            <section className="rounded-[3px] border border-black/10 bg-white p-6">
+              <h2 className="text-[22px] font-bold text-bw-black">What we collect</h2>
+              <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
+                <p>
+                  BreachWatch does not have user accounts, comments, saved profiles, or a
+                  newsletter signup. That means we do not ask for your name, email address,
+                  phone number, or login details to use the site.
+                </p>
+                <p>
+                  We use privacy-friendly analytics to understand basic site performance:
+                  which pages are visited, what country traffic comes from, and which device
+                  type is being used. We use this to improve the site, not to identify you.
+                </p>
+              </div>
+            </section>
+
+            <section className="rounded-[3px] border border-black/10 bg-white p-6">
+              <h2 className="text-[22px] font-bold text-bw-black">How the tools handle data</h2>
+              <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
+                <p>
+                  The password checker hashes your password in the browser first and only
+                  sends a short hash prefix for comparison. BreachWatch does not receive or
+                  store the full password.
+                </p>
+                <p>
+                  The security quiz is used only to show a recommendation on screen. We do
+                  not save your answers to a BreachWatch account or build a personal profile
+                  from them.
+                </p>
+                <p>
+                  The password generator, checklists, and VPN need checker run in your
+                  browser and do not require an account.
+                </p>
+              </div>
+            </section>
+
+            <section className="rounded-[3px] border border-black/10 bg-white p-6">
+              <h2 className="text-[22px] font-bold text-bw-black">Affiliate links</h2>
+              <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
+                <p>
+                  Some product links are affiliate links. If you click one and buy from the
+                  product provider, BreachWatch may earn a commission at no extra cost to
+                  you.
+                </p>
+                <p>
+                  The provider may use its own cookies or tracking after you leave
+                  BreachWatch. That is controlled by the provider, not by us. We do not sell
+                  personal information to affiliate partners.
+                </p>
+              </div>
+            </section>
+
+            <section className="rounded-[3px] border border-black/10 bg-white p-6">
+              <h2 className="text-[22px] font-bold text-bw-black">Cookies and third parties</h2>
+              <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
+                <p>
+                  BreachWatch does not use advertising cookies. Hosting, analytics, security
+                  tooling, and product links may involve third-party services that process
+                  limited technical data needed to provide the site.
+                </p>
+                <p>
+                  We keep those services limited to what the site actually needs: hosting,
+                  basic analytics, quiz recommendations, breach/password checks, and
+                  outbound product links.
+                </p>
+              </div>
+            </section>
+
+            <section className="rounded-[3px] border border-black/10 bg-white p-6">
+              <h2 className="text-[22px] font-bold text-bw-black">Your choices</h2>
+              <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
+                <p>
+                  You can use BreachWatch without creating an account. You can avoid
+                  affiliate tracking by not clicking product links. You can also use browser
+                  privacy controls to block third-party cookies on destination sites.
+                </p>
+                <p>
+                  If you have a privacy question, contact{' '}
+                  <a
+                    href="mailto:privacy@breachwatchsite.com"
+                    className="text-bw-blue underline hover:text-bw-blue-dark"
+                  >
+                    privacy@breachwatchsite.com
+                  </a>
+                  .
+                </p>
+              </div>
+            </section>
+          </div>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <Link
+              href="/disclosure"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-[13px] font-semibold text-bw-text transition-colors hover:border-bw-blue hover:text-bw-blue"
+            >
+              Affiliate disclosure -&gt;
+            </Link>
+            <Link
+              href="/how-we-test"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-[13px] font-semibold text-bw-text transition-colors hover:border-bw-blue hover:text-bw-blue"
+            >
+              How BreachWatch tests products -&gt;
+            </Link>
+          </div>
+        </article>
       </main>
       <Footer />
     </div>
   );
 }
-
