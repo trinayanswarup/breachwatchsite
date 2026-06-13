@@ -7,7 +7,7 @@ import { fetchAllNews, type NewsItem, type NewsSource } from '@/lib/news';
 export const metadata: Metadata = {
   title: 'Cybersecurity News Links and Privacy Updates | BreachWatch',
   description:
-    'Curated cybersecurity, privacy, breach, and security-tool links from public communities and external sources. No copied articles or fake newsroom content.',
+    'Curated cybersecurity, privacy, breach, vulnerability, and security-tool links with clear context and related BreachWatch tools.',
 };
 
 function timeAgo(date: Date): string {
@@ -173,12 +173,12 @@ export default async function NewsPage() {
             </p>
             <div className="mt-3 max-w-3xl">
               <h1 className="text-[34px] font-bold leading-tight text-bw-black">
-                Curated cybersecurity links without copied articles or fake reporting.
+                Latest cybersecurity links with clear context.
               </h1>
               <p className="mt-4 text-[15px] leading-7 text-bw-gray">
-                BreachWatch links to public security and privacy discussions, then adds a
-                short rule-based context line and a related BreachWatch tool. These are
-                external stories, not original reporting.
+                Follow security, privacy, breach, and vulnerability items from public
+                sources, organized with topic labels, action context, and related
+                BreachWatch tools.
               </p>
             </div>
           </div>
@@ -189,7 +189,7 @@ export default async function NewsPage() {
             <div>
               <h2 className="text-[22px] font-bold text-bw-black">Latest curated links</h2>
               <p className="mt-1 text-[13px] text-bw-gray">
-                Updated from Hacker News, r/netsec, r/privacy, and r/cybersecurity.
+                Updated from public security and privacy sources.
               </p>
             </div>
             <Link

@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: 'Recent Data Breaches and What To Do Next | BreachWatch',
   description:
-    'Track recent public data breaches from Have I Been Pwned metadata and get practical next steps based on exposed data types.',
+    'Track recent public data breach records, exposed data types, affected account counts, and practical next steps.',
 };
 
 async function fetchBreaches(): Promise<HIBPBreach[]> {
@@ -129,12 +129,11 @@ export default async function BreachesPage() {
             </p>
             <div className="mt-3 max-w-3xl">
               <h1 className="text-[34px] font-bold leading-tight text-bw-black">
-                Recent data breaches, exposed data types, and practical next steps.
+                Recent breach records, exposed data types, and practical next steps.
               </h1>
               <p className="mt-4 text-[15px] leading-7 text-bw-gray">
-                BreachWatch uses public breach metadata to show what was exposed and
-                what action makes sense next. This is not an email breach search; paid
-                HIBP account lookup is intentionally not used here.
+                Track newly added public breach records, see what data was exposed,
+                and get clear response steps based on the type of information leaked.
               </p>
             </div>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -159,7 +158,7 @@ export default async function BreachesPage() {
             <div>
               <h2 className="text-[22px] font-bold text-bw-black">Latest public breaches</h2>
               <p className="mt-1 text-[13px] text-bw-gray">
-                Updated daily from the Have I Been Pwned breach catalog.
+                Updated daily from public breach catalog records.
               </p>
             </div>
             <a
