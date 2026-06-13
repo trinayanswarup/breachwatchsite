@@ -4,8 +4,8 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
 import RankedCard from '@/components/RankedCard';
-import ScoreBreakdown from '@/components/ScoreBreakdown';
 import AffiliateCTA from '@/components/AffiliateCTA';
+import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
@@ -27,6 +27,14 @@ function weightedScore(p: Product): number {
 
 const ranked = [...products].sort((a, b) => weightedScore(b) - weightedScore(a));
 const topPick = ranked[0];
+
+const shortlist = [
+  { name: 'Windows Defender', label: 'best free antivirus for most Windows users', href: '#windows-defender' },
+  { name: 'ESET', label: 'best lightweight paid antivirus', href: '#eset' },
+  { name: 'Bitdefender', label: 'best detection-focused antivirus', href: '#bitdefender' },
+  { name: 'Malwarebytes', label: 'best second-opinion scanner', href: '#malwarebytes' },
+  { name: 'Norton 360', label: 'skip unless you specifically need the bundle', href: '#norton' },
+];
 
 function productCta(p: Product): string {
   const raw = affiliateLinks[p.id] ?? p.affiliateUrl;
@@ -138,9 +146,23 @@ export default function AntivirusPage() {
           </div>
         </section>
 
-        {/* Who needs it / who doesn't */}
-        <section className="border-b border-black/10 px-4 py-8">
-          <div className="mx-auto max-w-3xl grid gap-6 sm:grid-cols-2">
+        <CategoryShortlist
+          title="Recommended antivirus tools - shortlist"
+          description="Start here if you want the fast answer before reading the full breakdown."
+          items={shortlist}
+        />
+
+        {/* Why this category matters */}
+        <section className="border-t border-b border-black/10 bg-bw-light px-4 py-10">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-2xl font-bold text-bw-black">Why antivirus still matters</h2>
+            <p className="mt-3 text-sm leading-6 text-bw-gray">
+              Modern operating systems are much safer than they used to be, but antivirus
+              still matters for shared devices, risky downloads, business compliance, and
+              second-opinion scanning after something feels wrong.
+            </p>
+          </div>
+          <div className="mx-auto mt-6 grid max-w-3xl gap-6 sm:grid-cols-2">
             <div className="rounded-[3px] border border-green-200 bg-green-50 px-5 py-4">
               <h2 className="mb-3 font-bold text-green-900">
                 Who actually benefits from third-party antivirus
@@ -204,33 +226,6 @@ export default function AntivirusPage() {
           <ComparisonTable products={ranked} criteria={criteria} category="antivirus" />
         </section>
 
-        {/* Criteria explanation */}
-        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-2 text-2xl font-bold text-bw-black">
-              How we score antivirus software
-            </h2>
-            <p className="mb-8 text-bw-gray">
-              All detection and performance data comes from published AV-TEST reports.
-              Vendor claims are not used as scoring inputs. Privacy weight reflects the
-              inherent risk of granting a third party deep system access.
-            </p>
-            <div className="space-y-4">
-              {criteria.map((c) => (
-                <div key={c.id} className="rounded-[3px] border border-black/10 bg-white px-5 py-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="font-semibold text-bw-black">{c.name}</h3>
-                    <span className="shrink-0 rounded-[3px] bg-bw-blue/10 px-2.5 py-0.5 text-xs font-bold text-bw-blue">
-                      {c.weight}% weight
-                    </span>
-                  </div>
-                  <p className="mt-1 text-sm text-bw-text">{c.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Individual product write-ups */}
         <section className="mx-auto max-w-3xl px-4 py-12 space-y-14">
           <h2 className="text-2xl font-bold text-bw-black">
@@ -238,7 +233,7 @@ export default function AntivirusPage() {
           </h2>
 
           {/* Windows Defender */}
-          <article>
+          <article id="windows-defender">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
                 1. Windows Defender — {weightedScore(topPick).toFixed(1)}/10
@@ -276,7 +271,7 @@ export default function AntivirusPage() {
           </article>
 
           {/* Bitdefender */}
-          <article>
+          <article id="bitdefender">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
                 2. Bitdefender — {weightedScore(bitdefenderPick).toFixed(1)}/10
@@ -315,7 +310,7 @@ export default function AntivirusPage() {
           </article>
 
           {/* ESET */}
-          <article>
+          <article id="eset">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
                 3. ESET — {weightedScore(esetPick).toFixed(1)}/10
@@ -355,7 +350,7 @@ export default function AntivirusPage() {
           </article>
 
           {/* Malwarebytes */}
-          <article>
+          <article id="malwarebytes">
             <h3 className="text-xl font-bold text-bw-black">
               4. Malwarebytes — {weightedScore(malwarebytesPick).toFixed(1)}/10
             </h3>
@@ -390,7 +385,7 @@ export default function AntivirusPage() {
           </article>
 
           {/* Norton */}
-          <article>
+          <article id="norton">
             <h3 className="text-xl font-bold text-bw-black">
               5. Norton 360 — {weightedScore(nortonPick).toFixed(1)}/10
             </h3>
@@ -415,115 +410,6 @@ export default function AntivirusPage() {
               alternatives.
             </p>
           </article>
-        </section>
-
-        {/* Verdict */}
-        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-6 text-2xl font-bold text-bw-black">Our verdict</h2>
-
-            <div className="space-y-4 mb-8">
-              <div className="rounded-[3px] border border-green-200 bg-white px-5 py-4">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-bw-black">
-                    Tied winners: Windows Defender + ESET
-                  </span>
-                  <span className="text-sm font-semibold text-green-700">
-                    {weightedScore(topPick).toFixed(1)}/10
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-bw-text">
-                  Windows Defender if you want zero cost and no additional trust
-                  relationships. ESET if you want independent third-party verification, a
-                  lighter system footprint, and a non-US company with a clean privacy record.
-                </p>
-              </div>
-
-              <div className="rounded-[3px] border border-blue-200 bg-white px-5 py-4">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-bw-black">Best detection: Bitdefender</span>
-                  <span className="text-sm font-semibold text-bw-blue">
-                    {weightedScore(bitdefenderPick).toFixed(1)}/10
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-bw-text">
-                  Consistently maximum AV-TEST scores with minimal system impact. Romanian
-                  company, reasonable privacy practices. Best paid option for pure detection.
-                </p>
-              </div>
-
-              <div className="rounded-[3px] border border-black/10 bg-white px-5 py-4">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-bw-black">
-                    Best free scanner: Malwarebytes (alongside Defender)
-                  </span>
-                  <span className="text-sm font-semibold text-bw-text">
-                    {weightedScore(malwarebytesPick).toFixed(1)}/10
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-bw-text">
-                  Run it periodically as a second-opinion scanner. Excellent at finding and
-                  removing infections that Defender might miss. Free version is fully
-                  functional with no time limit.
-                </p>
-              </div>
-
-              <div className="rounded-[3px] border border-red-200 bg-white px-5 py-4">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-bw-black">Skip: Norton 360</span>
-                  <span className="text-sm font-semibold text-red-600">
-                    {weightedScore(nortonPick).toFixed(1)}/10
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-bw-text">
-                  The Norton Crypto incident is disqualifying for a product asking for
-                  deep system access. ESET and Bitdefender are better at every price point.
-                </p>
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <ScoreBreakdown product={topPick} criteria={criteria} />
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <AffiliateCTA
-                product="eset"
-                href={productCta(esetPick)}
-                label="Try ESET (paid pick)"
-                variant="primary"
-              />
-              <AffiliateCTA
-                product="bitdefender"
-                href={productCta(bitdefenderPick)}
-                label="Try Bitdefender"
-                variant="secondary"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* The question nobody asks */}
-        <section className="border-t border-black/10 px-4 py-10">
-          <div className="mx-auto max-w-3xl rounded-[3px] border border-black/10 bg-bw-light px-6 py-5">
-            <h2 className="mb-3 text-lg font-bold text-bw-black">
-              The question nobody asks
-            </h2>
-            <p className="text-bw-text text-sm">
-              The best antivirus is the one that never needs to activate because you
-              didn&apos;t click the phishing link, didn&apos;t download the cracked
-              software, and kept your system updated. No antivirus product can fully
-              compensate for unsafe computing habits. The most effective security
-              investment for most people is not an antivirus subscription — it&apos;s a{' '}
-              <Link href="/password-managers" className="text-bw-blue underline hover:text-bw-blue-dark">
-                password manager
-              </Link>{' '}
-              and{' '}
-              <Link href="/2fa-apps" className="text-bw-blue underline hover:text-bw-blue-dark">
-                2FA
-              </Link>{' '}
-              on their important accounts.
-            </p>
-          </div>
         </section>
 
         {/* Ranked comparison */}
@@ -553,7 +439,7 @@ export default function AntivirusPage() {
           })}
           <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
             Scores calculated from{' '}
-            <Link href="/about" className="text-bw-blue underline">published criteria</Link>.
+            <Link href="/how-we-test" className="text-bw-blue underline">published criteria</Link>.
             {' '}Affiliate commissions do not affect rankings. Some links earn us a commission
             at no extra cost to you.{' '}
             <Link href="/disclosure" className="text-bw-blue underline">Full disclosure →</Link>

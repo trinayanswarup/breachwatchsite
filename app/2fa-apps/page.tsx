@@ -4,8 +4,8 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
 import RankedCard from '@/components/RankedCard';
-import ScoreBreakdown from '@/components/ScoreBreakdown';
 import AffiliateCTA from '@/components/AffiliateCTA';
+import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
@@ -27,6 +27,14 @@ function weightedScore(p: Product): number {
 
 const ranked = [...products].sort((a, b) => weightedScore(b) - weightedScore(a));
 const topPick = ranked[0];
+
+const shortlist = [
+  { name: 'Aegis', label: 'best 2FA app for Android', href: '#aegis' },
+  { name: 'Ente Auth', label: 'best cross-platform 2FA app', href: '#ente-auth' },
+  { name: 'Google Authenticator', label: 'familiar but limited recovery', href: '#google-authenticator' },
+  { name: 'Microsoft Authenticator', label: 'best only for Microsoft accounts', href: '#microsoft-authenticator' },
+  { name: 'Authy', label: 'avoid for new users because of export lock-in', href: '#authy' },
+];
 
 function productCta(p: Product): string {
   const raw = affiliateLinks[p.id] ?? p.affiliateUrl;
@@ -141,6 +149,29 @@ export default function TwoFAPage() {
 
 
 
+        <CategoryShortlist
+          title="Recommended 2FA apps - shortlist"
+          description="Start here if you want the fast answer before reading the full breakdown."
+          items={shortlist}
+        />
+
+        <section className="border-t border-black/10 bg-bw-light px-4 py-10">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-2xl font-bold text-bw-black">Why 2FA matters</h2>
+            <div className="mt-4 space-y-3 text-sm leading-6 text-bw-text">
+              <p>
+                Two-factor authentication protects important accounts even when a password
+                leaks. For email, banking, password managers, and work accounts, app-based
+                2FA is one of the highest-impact upgrades you can make.
+              </p>
+              <p>
+                The backup plan matters as much as the app. Before you rely on any 2FA app,
+                know how you will recover if your phone is lost, stolen, or broken.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Comparison table */}
         <section className="mx-auto max-w-6xl px-4 py-12">
           <h2 className="mb-2 text-2xl font-bold text-bw-black">
@@ -154,33 +185,6 @@ export default function TwoFAPage() {
           <ComparisonTable products={ranked} criteria={criteria} category="2fa-apps" />
         </section>
 
-        {/* Criteria explanation */}
-        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-2 text-2xl font-bold text-bw-black">
-              How we score 2FA apps
-            </h2>
-            <p className="mb-8 text-bw-gray">
-              Backup and recovery has the highest weight because the consequences of
-              getting it wrong are severe — you can lose access to accounts permanently
-              if you lose your phone with no recovery path.
-            </p>
-            <div className="space-y-4">
-              {criteria.map((c) => (
-                <div key={c.id} className="rounded-[3px] border border-black/10 bg-white px-5 py-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="font-semibold text-bw-black">{c.name}</h3>
-                    <span className="shrink-0 rounded-[3px] bg-bw-blue/10 px-2.5 py-0.5 text-xs font-bold text-bw-blue">
-                      {c.weight}% weight
-                    </span>
-                  </div>
-                  <p className="mt-1 text-sm text-bw-text">{c.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Individual product write-ups */}
         <section className="mx-auto max-w-3xl px-4 py-12 space-y-14">
           <h2 className="text-2xl font-bold text-bw-black">
@@ -188,7 +192,7 @@ export default function TwoFAPage() {
           </h2>
 
           {/* Aegis */}
-          <article>
+          <article id="aegis">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
                 1. Aegis Authenticator — {weightedScore(topPick).toFixed(1)}/10
@@ -232,7 +236,7 @@ export default function TwoFAPage() {
           </article>
 
           {/* Ente Auth */}
-          <article>
+          <article id="ente-auth">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
                 2. Ente Auth — {weightedScore(enteAuthPick).toFixed(1)}/10
@@ -275,7 +279,7 @@ export default function TwoFAPage() {
           </article>
 
           {/* Google Authenticator */}
-          <article>
+          <article id="google-authenticator">
             <h3 className="text-xl font-bold text-bw-black">
               3. Google Authenticator — {weightedScore(googleAuthPick).toFixed(1)}/10
             </h3>
@@ -305,7 +309,7 @@ export default function TwoFAPage() {
           </article>
 
           {/* Microsoft Authenticator */}
-          <article>
+          <article id="microsoft-authenticator">
             <h3 className="text-xl font-bold text-bw-black">
               4. Microsoft Authenticator — {weightedScore(msAuthPick).toFixed(1)}/10
             </h3>
@@ -334,7 +338,7 @@ export default function TwoFAPage() {
           </article>
 
           {/* Authy */}
-          <article>
+          <article id="authy">
             <h3 className="text-xl font-bold text-bw-black">
               5. Authy — {weightedScore(authyPick).toFixed(1)}/10
             </h3>
@@ -364,108 +368,6 @@ export default function TwoFAPage() {
           </article>
         </section>
 
-        {/* Critical backup warning */}
-        <section className="border-t border-orange-100 bg-orange-50 px-4 py-10">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-4 text-xl font-bold text-orange-900">
-              The backup step most people skip
-            </h2>
-            <p className="mb-4 text-sm text-orange-800">
-              Before you set up 2FA on any account, decide how you will recover access
-              if your phone is lost, stolen, or broken. The Play Store is full of
-              people who lost access to their accounts permanently because they
-              didn&apos;t take this step.
-            </p>
-            <div className="space-y-3 text-sm text-orange-800">
-              <div className="rounded border border-orange-200 bg-white px-4 py-3">
-                <strong>With Aegis:</strong> Export an encrypted backup file to a
-                separate location you control. Test that the backup restores before
-                you rely on it.
-              </div>
-              <div className="rounded border border-orange-200 bg-white px-4 py-3">
-                <strong>With Ente Auth:</strong> Your tokens sync with E2EE. Save
-                your recovery key somewhere physical, separate from your phone.
-              </div>
-              <div className="rounded border border-orange-200 bg-white px-4 py-3">
-                <strong>With any app:</strong> Save the backup codes every website
-                gives you when you set up 2FA. Store them somewhere separate from
-                your phone. This is your last resort if everything else fails.
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Verdict */}
-        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-6 text-2xl font-bold text-bw-black">Our verdict</h2>
-
-            <div className="space-y-4 mb-8">
-              <div className="rounded-[3px] border border-green-200 bg-white px-5 py-4">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-bw-black">Winner: Aegis (Android)</span>
-                  <span className="text-sm font-semibold text-green-700">
-                    {weightedScore(topPick).toFixed(1)}/10
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-bw-text">
-                  Full control of your tokens, encrypted file backups, open source, no
-                  cloud dependency. The right answer for Android users who take security
-                  seriously. Requires backup discipline.
-                </p>
-              </div>
-
-              <div className="rounded-[3px] border border-blue-200 bg-white px-5 py-4">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-bw-black">Runner-up: Ente Auth (all platforms)</span>
-                  <span className="text-sm font-semibold text-bw-blue">
-                    {weightedScore(enteAuthPick).toFixed(1)}/10
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-bw-text">
-                  The only Privacy Guides-recommended app with genuine cross-platform
-                  support including iOS and desktop. End-to-end encrypted cloud sync.
-                  Export your tokens any time. Best choice for iOS users.
-                </p>
-              </div>
-
-              <div className="rounded-[3px] border border-red-200 bg-white px-5 py-4">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-bw-black">
-                    Skip: Google Auth, Microsoft Auth, Authy
-                  </span>
-                  <span className="text-sm font-semibold text-bw-gray">
-                    {weightedScore(googleAuthPick).toFixed(1)} and below
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-bw-text">
-                  All three are closed source. All three have significant token loss
-                  stories in recent reviews. Authy actively prevents you from leaving.
-                  None appear on Privacy Guides.
-                </p>
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <ScoreBreakdown product={topPick} criteria={criteria} />
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <AffiliateCTA
-                product="aegis"
-                href={topPickHref}
-                label="Get Aegis (Android)"
-                variant="primary"
-              />
-              <AffiliateCTA
-                product="ente_auth"
-                href={productCta(enteAuthPick)}
-                label="Get Ente Auth (all platforms)"
-                variant="secondary"
-              />
-            </div>
-          </div>
-        </section>
-
         {/* Ranked comparison */}
         <section className="mx-auto max-w-[760px] px-5 pb-10">
           <div className="flex items-end gap-3 border-b-2 border-bw-blue pb-2 mb-4">
@@ -492,7 +394,7 @@ export default function TwoFAPage() {
           })}
           <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
             Scores calculated from{' '}
-            <Link href="/about" className="text-bw-blue underline">published criteria</Link>.
+            <Link href="/how-we-test" className="text-bw-blue underline">published criteria</Link>.
             {' '}Affiliate commissions do not affect rankings. Some links earn us a commission
             at no extra cost to you.{' '}
             <Link href="/disclosure" className="text-bw-blue underline">Full disclosure →</Link>

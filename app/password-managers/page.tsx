@@ -4,8 +4,8 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
 import RankedCard from '@/components/RankedCard';
-import ScoreBreakdown from '@/components/ScoreBreakdown';
 import AffiliateCTA from '@/components/AffiliateCTA';
+import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
@@ -26,7 +26,14 @@ function weightedScore(p: Product): number {
 }
 
 const ranked = [...products].sort((a, b) => weightedScore(b) - weightedScore(a));
-const topPick = ranked[0];
+
+const shortlist = [
+  { name: 'Bitwarden', label: 'best password manager overall', href: '#bitwarden' },
+  { name: 'Proton Pass', label: 'best privacy-focused password manager', href: '#protonpass' },
+  { name: '1Password', label: 'best premium password manager', href: '#1password' },
+  { name: 'Keeper', label: 'best for enterprise compliance', href: '#keeper' },
+  { name: 'NordPass', label: 'best for Nord ecosystem users', href: '#nordpass' },
+];
 
 function productCta(p: Product): string {
   const raw = affiliateLinks[p.id] ?? p.affiliateUrl;
@@ -112,8 +119,6 @@ const PM_BULLETS: Record<string, { pros: string[]; cons: string[] }> = {
 };
 
 export default function PasswordManagersPage() {
-  const topPickHref = productCta(topPick);
-
   return (
     <div className="flex min-h-screen flex-col">
       <JsonLd data={pageSchema} />
@@ -140,6 +145,29 @@ export default function PasswordManagersPage() {
           </div>
         </section>
 
+        <CategoryShortlist
+          title="Recommended password managers - shortlist"
+          description="Start here if you want the fast answer before reading the full breakdown."
+          items={shortlist}
+        />
+
+        <section className="border-t border-black/10 bg-bw-light px-4 py-10">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-2xl font-bold text-bw-black">Why a password manager matters</h2>
+            <div className="mt-4 space-y-3 text-sm leading-6 text-bw-text">
+              <p>
+                A password manager lets every account use a unique, random password. That
+                stops one breached website from becoming a chain reaction across your email,
+                banking, shopping, and social accounts.
+              </p>
+              <p>
+                The safest password managers combine zero-knowledge encryption, strong key
+                derivation, reliable sync, and a recovery plan you understand before you need it.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Comparison table */}
         <section className="mx-auto max-w-6xl px-4 py-12">
           <h2 className="mb-2 text-2xl font-bold text-bw-black">
@@ -153,33 +181,6 @@ export default function PasswordManagersPage() {
           <ComparisonTable products={ranked} criteria={criteria} category="password-manager" />
         </section>
 
-        {/* Criteria explanation */}
-        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-2 text-2xl font-bold text-bw-black">
-              How we score password managers
-            </h2>
-            <p className="mb-8 text-bw-gray">
-              Security architecture carries the most weight because a vault with a flawed
-              design creates a single point of failure without the security properties
-              that justify that risk.
-            </p>
-            <div className="space-y-4">
-              {criteria.map((c) => (
-                <div key={c.id} className="rounded-[3px] border border-black/10 bg-white px-5 py-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="font-semibold text-bw-black">{c.name}</h3>
-                    <span className="shrink-0 rounded-[3px] bg-bw-blue/10 px-2.5 py-0.5 text-xs font-bold text-bw-blue">
-                      {c.weight}% weight
-                    </span>
-                  </div>
-                  <p className="mt-1 text-sm text-bw-text">{c.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Individual product write-ups */}
         <section className="mx-auto max-w-3xl px-4 py-12 space-y-14">
           <h2 className="text-2xl font-bold text-bw-black">
@@ -187,7 +188,7 @@ export default function PasswordManagersPage() {
           </h2>
 
           {/* Bitwarden */}
-          <article>
+          <article id="bitwarden">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
                 1. Bitwarden — {weightedScore(ranked[0]).toFixed(1)}/10
@@ -228,7 +229,7 @@ export default function PasswordManagersPage() {
           </article>
 
           {/* Proton Pass */}
-          <article>
+          <article id="protonpass">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
                 2. Proton Pass — {weightedScore(ranked[1]).toFixed(1)}/10
@@ -270,7 +271,7 @@ export default function PasswordManagersPage() {
           </article>
 
           {/* 1Password */}
-          <article>
+          <article id="1password">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
                 3. 1Password — {weightedScore(ranked[2]).toFixed(1)}/10
@@ -315,7 +316,7 @@ export default function PasswordManagersPage() {
           </article>
 
           {/* Keeper */}
-          <article>
+          <article id="keeper">
             <h3 className="text-xl font-bold text-bw-black">
               4. Keeper — {weightedScore(ranked[3]).toFixed(1)}/10
             </h3>
@@ -338,7 +339,7 @@ export default function PasswordManagersPage() {
           </article>
 
           {/* NordPass */}
-          <article>
+          <article id="nordpass">
             <h3 className="text-xl font-bold text-bw-black">
               5. NordPass — {weightedScore(ranked[4]).toFixed(1)}/10
             </h3>
@@ -384,81 +385,6 @@ export default function PasswordManagersPage() {
           </article>
         </section>
 
-        {/* Verdict */}
-        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-6 text-2xl font-bold text-bw-black">Our verdict</h2>
-
-            <div className="space-y-4 mb-8">
-              <div className="rounded-[3px] border border-green-200 bg-white px-5 py-4">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-bw-black">Winner: Bitwarden</span>
-                  <span className="text-sm font-semibold text-green-700">
-                    {weightedScore(ranked[0]).toFixed(1)}/10
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-bw-text">
-                  Open source, independently audited by Cure53, genuinely free tier with
-                  unlimited items on unlimited devices. The only choice for users who want
-                  full transparency about what touches their credentials.
-                </p>
-              </div>
-
-              <div className="rounded-[3px] border border-blue-200 bg-white px-5 py-4">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-bw-black">Runner-up: Proton Pass</span>
-                  <span className="text-sm font-semibold text-bw-blue">
-                    {weightedScore(ranked[1]).toFixed(1)}/10
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-bw-text">
-                  Open source, Swiss jurisdiction, built-in email aliases. The privacy
-                  bundle for Proton ecosystem users or anyone who wants email aliasing
-                  as a core feature.
-                </p>
-              </div>
-
-              <div className="rounded-[3px] border border-purple-200 bg-white px-5 py-4">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-bw-black">Premium pick: 1Password</span>
-                  <span className="text-sm font-semibold text-purple-700">
-                    {weightedScore(ranked[2]).toFixed(1)}/10
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-bw-text">
-                  Secret Key architecture, never been breached, best UX for families and
-                  teams. Worth the price if polish and breach record matter more than
-                  open source auditability.
-                </p>
-              </div>
-
-              <div className="rounded-[3px] border border-black/10 bg-white px-5 py-4">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="font-bold text-bw-black">Skip: NordPass, Dashlane, Keeper</span>
-                  <span className="text-sm font-semibold text-bw-gray">
-                    {weightedScore(ranked[3]).toFixed(1)} and below
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-bw-text">
-                  Not open source, not price-competitive with Bitwarden or Proton Pass.
-                  Keeper is the exception only for organisations with enterprise
-                  compliance requirements.
-                </p>
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <ScoreBreakdown product={topPick} criteria={criteria} />
-            </div>
-            <AffiliateCTA
-              product={topPick.id}
-              href={topPickHref}
-              label="Try Bitwarden free"
-              variant="primary"
-            />
-          </div>
-        </section>
-
         {/* Ranked comparison */}
         <section className="mx-auto max-w-[760px] px-5 pb-10">
           <div className="flex items-end gap-3 border-b-2 border-bw-blue pb-2 mb-4">
@@ -485,7 +411,7 @@ export default function PasswordManagersPage() {
           })}
           <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
             Scores calculated from{' '}
-            <Link href="/about" className="text-bw-blue underline">published criteria</Link>.
+            <Link href="/how-we-test" className="text-bw-blue underline">published criteria</Link>.
             {' '}Affiliate commissions do not affect rankings. Some links earn us a commission
             at no extra cost to you.{' '}
             <Link href="/disclosure" className="text-bw-blue underline">Full disclosure →</Link>

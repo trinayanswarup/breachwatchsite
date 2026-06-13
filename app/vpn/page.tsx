@@ -4,8 +4,8 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
 import RankedCard from '@/components/RankedCard';
-import ScoreBreakdown from '@/components/ScoreBreakdown';
 import AffiliateCTA from '@/components/AffiliateCTA';
+import CategoryShortlist from '@/components/CategoryShortlist';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import vpnsRaw from '@/data/vpns.json';
@@ -26,7 +26,13 @@ function weightedScore(p: Product): number {
 }
 
 const ranked = [...products].sort((a, b) => weightedScore(b) - weightedScore(a));
-const topPick = ranked[0];
+const shortlist = [
+  { name: 'NordVPN', label: 'best VPN for streaming overall', href: '/reviews/nordvpn' },
+  { name: 'Proton VPN', label: 'best free VPN with reliable privacy features', href: '#protonvpn' },
+  { name: 'Surfshark', label: 'affordable VPN for unlimited devices', href: '#surfshark' },
+  { name: 'Mullvad', label: 'best VPN for maximum privacy', href: '#mullvad' },
+  { name: 'ExpressVPN', label: 'premium VPN for geo-unblocking', href: '#expressvpn' },
+];
 
 function productCta(p: Product): string {
   const raw = affiliateLinks[p.id] ?? p.affiliateUrl;
@@ -139,6 +145,31 @@ export default function VPNPage() {
           </div>
         </section>
 
+        <CategoryShortlist
+          title="Recommended VPNs - shortlist"
+          description="Start here if you want the fast answer before reading the full breakdown."
+          items={shortlist}
+        />
+
+        <section className="border-t border-black/10 bg-bw-light px-4 py-10">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-2xl font-bold text-bw-black">Why a VPN matters</h2>
+            <div className="mt-4 space-y-3 text-sm leading-6 text-bw-text">
+              <p>
+                A VPN protects traffic between your device and the VPN provider, which is
+                most useful on public WiFi, hotel networks, airports, and any network you
+                do not control. It can also reduce how much your internet provider sees
+                about your browsing.
+              </p>
+              <p>
+                A VPN does not make you anonymous. It moves trust from your ISP or network
+                operator to the VPN company. That is why logging policy, jurisdiction,
+                audits, and ownership matter more than ad claims about speed.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Comparison table */}
         <section className="mx-auto max-w-6xl px-4 py-12">
           <h2 className="mb-2 text-2xl font-bold text-bw-black">
@@ -150,32 +181,6 @@ export default function VPNPage() {
           <ComparisonTable products={ranked} criteria={criteria} category="vpn" />
         </section>
 
-        {/* Criteria explanation */}
-        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-2 text-2xl font-bold text-bw-black">
-              How we score VPNs
-            </h2>
-            <p className="mb-8 text-bw-gray">
-              Every score is derived from the criteria below. Weights reflect what
-              actually protects you — not what makes for a flashy spec sheet.
-            </p>
-            <div className="space-y-4">
-              {criteria.map((c) => (
-                <div key={c.id} className="rounded-[3px] border border-black/10 bg-white px-5 py-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="font-semibold text-bw-black">{c.name}</h3>
-                    <span className="shrink-0 rounded-[3px] bg-bw-blue/10 px-2.5 py-0.5 text-xs font-bold text-bw-blue">
-                      {c.weight}% weight
-                    </span>
-                  </div>
-                  <p className="mt-1 text-sm text-bw-text">{c.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Detailed product write-ups */}
         <article className="mx-auto max-w-3xl px-4 py-12 space-y-16">
           <h2 className="text-2xl font-bold text-bw-black">
@@ -183,7 +188,7 @@ export default function VPNPage() {
           </h2>
 
           {/* 1. Mullvad */}
-          <section>
+          <section id="mullvad">
             <h3 className="text-xl font-bold text-bw-black">
               1. Mullvad — 9.0/10
             </h3>
@@ -238,7 +243,7 @@ export default function VPNPage() {
           </section>
 
           {/* 2. Proton VPN */}
-          <section>
+          <section id="protonvpn">
             <h3 className="text-xl font-bold text-bw-black">
               2. Proton VPN — 8.8/10
             </h3>
@@ -292,7 +297,7 @@ export default function VPNPage() {
           </section>
 
           {/* 3. Surfshark */}
-          <section>
+          <section id="surfshark">
             <h3 className="text-xl font-bold text-bw-black">
               3. Surfshark — 7.6/10
             </h3>
@@ -339,7 +344,7 @@ export default function VPNPage() {
           </section>
 
           {/* 4. NordVPN */}
-          <section>
+          <section id="nordvpn">
             <h3 className="text-xl font-bold text-bw-black">
               4. <Link href="/reviews/nordvpn" className="text-bw-blue hover:underline">NordVPN</Link> — 7.4/10
             </h3>
@@ -392,7 +397,7 @@ export default function VPNPage() {
           </section>
 
           {/* 5. ExpressVPN */}
-          <section>
+          <section id="expressvpn">
             <h3 className="text-xl font-bold text-bw-black">
               5. ExpressVPN — 6.2/10
             </h3>
@@ -441,64 +446,6 @@ export default function VPNPage() {
           </section>
         </article>
 
-        {/* Verdict */}
-        <section className="border-t border-black/10 bg-bw-light px-4 py-12">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-6 text-2xl font-bold text-bw-black">Verdict</h2>
-            <div className="space-y-4 mb-8">
-              <div className="rounded-[3px] bg-white border border-black/10 px-5 py-4">
-                <p className="font-bold text-bw-black">
-                  Winner: Mullvad — 9.0/10
-                </p>
-                <p className="mt-1 text-sm text-bw-text">
-                  If privacy is genuinely your reason for using a VPN, Mullvad is the honest
-                  answer. No account, no email, no logs, independently audited, open source,
-                  cash payment accepted. The lack of a free tier is the only real barrier.
-                </p>
-              </div>
-              <div className="rounded-[3px] bg-white border border-black/10 px-5 py-4">
-                <p className="font-bold text-bw-black">Runner-up: Proton VPN — 8.8/10</p>
-                <p className="mt-1 text-sm text-bw-text">
-                  Swiss jurisdiction, open source, independently audited, and the only VPN on
-                  this list with a genuinely free tier that doesn&apos;t monetise your data.
-                  The occasional reinstall requirement is annoying but not a dealbreaker.
-                </p>
-              </div>
-              <div className="rounded-[3px] bg-white border border-black/10 px-5 py-4">
-                <p className="font-bold text-bw-black">Budget pick: Surfshark — 7.6/10</p>
-                <p className="mt-1 text-sm text-bw-text">
-                  Unlimited devices at the lowest price. Works well for most users most of the
-                  time. Know that it&apos;s owned by the same company as NordVPN, and be
-                  prepared for occasional connection troubleshooting.
-                </p>
-              </div>
-              <div className="rounded-[3px] bg-white border border-black/10 px-5 py-4">
-                <p className="font-bold text-bw-black">Mainstream pick: NordVPN — 7.4/10</p>
-                <p className="mt-1 text-sm text-bw-text">
-                  The safest choice if you want something your non-technical family members can
-                  use without issues. Just know the 2018 breach history and what it means.
-                </p>
-              </div>
-              <div className="rounded-[3px] bg-white border border-black/10 px-5 py-4">
-                <p className="font-bold text-bw-black">Skip: ExpressVPN — 6.2/10</p>
-                <p className="mt-1 text-sm text-bw-text">
-                  The price premium is no longer justified by the product. The ownership history
-                  is concerning. There are better options at every price point.
-                </p>
-              </div>
-            </div>
-            <div className="mb-6">
-              <ScoreBreakdown product={topPick} criteria={criteria} />
-            </div>
-            <AffiliateCTA
-              product={topPick.id}
-              href={productCta(topPick)}
-              label={`Visit ${topPick.name}`}
-              variant="primary"
-            />
-          </div>
-        </section>
-
         {/* Ranked comparison */}
         <section className="mx-auto max-w-[760px] px-5 pb-10">
           <div className="flex items-end gap-3 border-b-2 border-bw-blue pb-2 mb-4">
@@ -526,7 +473,7 @@ export default function VPNPage() {
           })}
           <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
             Scores calculated from{' '}
-            <Link href="/about" className="text-bw-blue underline">published criteria</Link>.
+            <Link href="/how-we-test" className="text-bw-blue underline">published criteria</Link>.
             {' '}Affiliate commissions do not affect rankings. Some links earn us a commission
             at no extra cost to you.{' '}
             <Link href="/disclosure" className="text-bw-blue underline">Full disclosure →</Link>
