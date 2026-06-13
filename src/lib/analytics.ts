@@ -12,12 +12,12 @@ export function trackQuizComplete(
   track('quiz_complete', { score, recommendedCategory, urgency });
 }
 
-export function trackAffiliateClick(
+export function trackProductLinkClick(
   product: string,
   category: string,
   page: string
 ): void {
-  track('affiliate_click', { product, category, page });
+  track('product_link_click', { product, category, page });
 }
 
 export function trackCategoryView(category: string): void {
@@ -27,3 +27,5 @@ export function trackCategoryView(category: string): void {
 export function trackComparisonView(slug: string): void {
   track('comparison_view', { slug });
 }
+
+

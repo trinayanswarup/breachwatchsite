@@ -1,4 +1,4 @@
-import AffiliateCTA from '@/components/AffiliateCTA';
+import ProductCTA from '@/components/ProductCTA';
 import Link from 'next/link';
 
 export interface RankedCardProps {
@@ -12,7 +12,7 @@ export interface RankedCardProps {
   ctaHref: string;
   ctaLabel: string;
   reviewHref?: string;
-  noAffiliateNote?: string;
+  linkNote?: string;
 }
 
 export default function RankedCard({
@@ -26,7 +26,7 @@ export default function RankedCard({
   ctaHref,
   ctaLabel,
   reviewHref,
-  noAffiliateNote,
+  linkNote,
 }: RankedCardProps) {
   const isWinner = rank === 1;
 
@@ -81,7 +81,7 @@ export default function RankedCard({
           <div className="text-[11px] text-bw-gray">/10</div>
         </div>
         <div className="w-full">
-          <AffiliateCTA product={productId} href={ctaHref} label={ctaLabel} variant="primary" />
+          <ProductCTA product={productId} href={ctaHref} label={ctaLabel} variant="primary" />
         </div>
         {reviewHref && (
           <Link
@@ -91,10 +91,12 @@ export default function RankedCard({
             Full review →
           </Link>
         )}
-        {noAffiliateNote && (
-          <p className="text-[10px] text-bw-gray text-center leading-snug">{noAffiliateNote}</p>
+        {linkNote && (
+          <p className="text-[10px] text-bw-gray text-center leading-snug">{linkNote}</p>
         )}
       </div>
     </div>
   );
 }
+
+

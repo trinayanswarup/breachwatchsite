@@ -178,9 +178,7 @@ export default function HomePage() {
               </Link>
             </div>
             <p className="mb-4 text-[11px] text-bw-gray">
-              Affiliate link —{' '}
-              <Link href="/disclosure" className="text-bw-blue underline">full disclosure</Link>.
-              Featured because it scores highest in our methodology.
+              Direct product link. Featured because it scores highest in our methodology.
             </p>
             <div className="max-w-sm">
               <ProductCard product={featuredProduct} category="vpn" featured />
@@ -224,8 +222,7 @@ export default function HomePage() {
             <p className="mt-3 text-[14px] text-bw-gray leading-relaxed">
               Every product is scored using a weighted set of criteria specific to its
               category. The weights are published alongside every comparison. Scores are
-              calculated from the data — never adjusted to favour products that earn
-              higher commissions.
+              calculated from the data and not adjusted for paid placements.
             </p>
             <Link
               href="/how-we-test"
@@ -241,4 +238,9 @@ export default function HomePage() {
     </div>
   );
 }
+
+
+
+
+
 

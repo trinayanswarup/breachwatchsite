@@ -26,12 +26,9 @@ export function buildAffiliateUrl(
     return `/reviews/${product}`;
   }
 
-  const utm = new URLSearchParams({
-    utm_source: 'breachwatchsite',
-    utm_medium: 'affiliate',
-    utm_campaign: `${category}-${pageType}`,
-  });
-
-  const separator = href.includes('?') ? '&' : '?';
-  return `${href}${separator}${utm.toString()}`;
+  void category;
+  void pageType;
+  return href;
 }
+
+

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
-import AffiliateCTA from '@/components/AffiliateCTA';
+import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import vpnsRaw from '@/data/vpns.json';
@@ -80,9 +80,9 @@ export default function BestVpnLithuaniaPage() {
             </p>
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
-              <strong>Disclosure:</strong> This page contains affiliate links. Recommendations
-              are based on our scored methodology, not commercial relationships.{' '}
-              <Link href="/disclosure" className="underline hover:text-amber-900">Full disclosure.</Link>
+              <strong>Independence note:</strong> Product links use direct links
+              or internal review pages. Rankings are based on published criteria.{' '}
+              <Link href="/disclosure" className="underline hover:text-amber-900">Learn more.</Link>
             </div>
           </div>
         </section>
@@ -272,13 +272,13 @@ export default function BestVpnLithuaniaPage() {
               NordVPN is the better practical choice. For maximum anonymity, Mullvad.
             </p>
             <div className="flex flex-wrap gap-3">
-              <AffiliateCTA
+              <ProductCTA
                 product={topPick.id}
                 href={topPickUrl}
                 label={`Try ${topPick.name}`}
                 variant="primary"
               />
-              <AffiliateCTA
+              <ProductCTA
                 product="nordvpn"
                 href="/vpn"
                 label="Compare all VPNs"
@@ -316,4 +316,8 @@ export default function BestVpnLithuaniaPage() {
     </div>
   );
 }
+
+
+
+
 

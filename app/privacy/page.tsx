@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    'BreachWatch privacy policy: no accounts, no ad trackers, no saved passwords, and clear limits on analytics and affiliate links.',
+    'BreachWatch privacy policy: no accounts, no ad trackers, no saved passwords, and clear limits on analytics and product links.',
 };
 
 const LAST_UPDATED = '13 June 2026';
@@ -100,17 +100,15 @@ export default function PrivacyPage() {
             </section>
 
             <section className="rounded-[3px] border border-black/10 bg-white p-6">
-              <h2 className="text-[22px] font-bold text-bw-black">Affiliate links</h2>
+              <h2 className="text-[22px] font-bold text-bw-black">Product links</h2>
               <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
                 <p>
-                  Some product links are affiliate links. If you click one and buy from the
-                  product provider, BreachWatch may earn a commission at no extra cost to
-                  you.
+                  Product links go to official websites or internal review pages.
+                  BreachWatch does not use affiliate tracking links on the live site.
                 </p>
                 <p>
-                  The provider may use its own cookies or tracking after you leave
-                  BreachWatch. That is controlled by the provider, not by us. We do not sell
-                  personal information to affiliate partners.
+                  A destination website may use its own cookies or tracking after you leave
+                  BreachWatch. That is controlled by the destination website, not by us.
                 </p>
               </div>
             </section>
@@ -136,8 +134,8 @@ export default function PrivacyPage() {
               <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
                 <p>
                   You can use BreachWatch without creating an account. You can avoid
-                  affiliate tracking by not clicking product links. You can also use browser
-                  privacy controls to block third-party cookies on destination sites.
+                  third-party tracking by using browser privacy controls on destination
+                  websites.
                 </p>
                 <p>
                   If you have a privacy question, contact{' '}
@@ -158,7 +156,7 @@ export default function PrivacyPage() {
               href="/disclosure"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-[13px] font-semibold text-bw-text transition-colors hover:border-bw-blue hover:text-bw-blue"
             >
-              Affiliate disclosure -&gt;
+              Funding and independence -&gt;
             </Link>
             <Link
               href="/how-we-test"
@@ -173,3 +171,7 @@ export default function PrivacyPage() {
     </div>
   );
 }
+
+
+
+

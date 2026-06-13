@@ -53,7 +53,7 @@ const limitations = [
   'We do not run a VPN speed-test lab.',
   'We do not run a malware testing lab.',
   'We do not claim hands-on testing when a score is based on public research.',
-  'We do not treat affiliate commission rates as scoring criteria.',
+  'We do not use paid placements as scoring criteria.',
   'We do not use AI-generated claims as a source of truth.',
 ];
 
@@ -148,9 +148,8 @@ export default function HowWeTestPage() {
                   What we do not claim
                 </h2>
                 <p className="mt-3 text-[14px] leading-6 text-bw-gray">
-                  This is the part most affiliate sites hide. BreachWatch should be useful
-                  because it is specific and honest, not because it pretends to own a full
-                  testing lab.
+                  BreachWatch should be useful because it is specific and honest, not
+                  because it pretends to own a full testing lab.
                 </p>
               </div>
               <div className="space-y-3">
@@ -204,3 +203,7 @@ export default function HowWeTestPage() {
     </div>
   );
 }
+
+
+
+

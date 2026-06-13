@@ -1,16 +1,18 @@
 # BreachWatch
 
-Cybersecurity tools comparison and affiliate site. Earns revenue through affiliate commissions. Targets organic search traffic via SEO-optimised comparison content. The entry point is an AI-powered security quiz.
+BreachWatch is a non-affiliate cybersecurity utility and comparison site. It combines free security tools, breach awareness, curated security links, and transparent product comparisons. The live project currently uses direct product links or internal review links, not affiliate tracking links.
 
-**Stack:** Next.js 16 App Router · TypeScript strict · Tailwind CSS v4 · Groq (llama-3.3-70b-versatile) · Vercel Analytics · next-sitemap
+The codebase is still affiliate-ready: monetization can be enabled later by replacing the placeholder link map and updating the public disclosure copy before launch.
+
+**Stack:** Next.js 16 App Router, TypeScript strict, Tailwind CSS v4, Groq quiz API, Vercel Analytics, next-sitemap.
 
 ---
 
-## Local development
+## Local Development
 
 ```bash
 npm install
-cp .env.example .env.local   # then fill in your GROQ_API_KEY
+cp .env.example .env.local
 npm run dev
 ```
 
@@ -18,148 +20,122 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## Environment variables
+## Environment Variables
 
-| Variable | Required | Where to get it |
+| Variable | Required | Notes |
 |---|---|---|
-| `GROQ_API_KEY` | Yes (for quiz) | [console.groq.com](https://console.groq.com) — free, no credit card |
-| `VERCEL_ACCESS_TOKEN` | No | Vercel dashboard → Settings → Tokens |
-| `VERCEL_PROJECT_ID` | No | Vercel project settings |
-
-The quiz falls back to a sensible default recommendation if `GROQ_API_KEY` is missing or Groq returns an error — it never throws.
-
-The `/stats` page shows placeholder copy if Vercel credentials are absent. They are optional and only needed for the live traffic dashboard.
+| `GROQ_API_KEY` | Yes for live quiz AI | The quiz falls back safely if missing or if Groq errors. |
+| `VERCEL_ACCESS_TOKEN` | No | Optional for future analytics/admin work. |
+| `VERCEL_PROJECT_ID` | No | Optional for future analytics/admin work. |
 
 ---
 
 ## Commands
 
 ```bash
-npm run dev      # Dev server at localhost:3000
-npm run build    # Production build (runs next-sitemap as postbuild)
-npm run lint     # ESLint
-npm run test     # Vitest unit tests
-npm start        # Serve production build
+npm run dev
+npm run lint
+npm run typecheck
+npm run test
+npm run build
+npm start
 ```
 
 ---
 
-## Project structure
+## Project Structure
 
-```
-app/                        # All served pages (App Router)
-├── page.tsx                # Homepage
-├── quiz/
-│   ├── page.tsx            # Quiz UI
-│   └── api/route.ts        # Quiz API — calls Groq, never throws
-├── vpn/page.tsx
-├── password-managers/page.tsx
-├── antivirus/page.tsx
-├── 2fa-apps/page.tsx
-├── reviews/
-│   ├── nordvpn/
-│   ├── bitwarden/
-│   ├── nordvpn-vs-expressvpn/
-│   ├── bitwarden-vs-1password/
-│   └── best-vpn-lithuania/
-├── about/page.tsx
-├── privacy/page.tsx
-├── disclosure/page.tsx
-└── stats/page.tsx
+```text
+app/                         App Router pages
+app/news/                    Curated security links
+app/breaches/                Public breach records and response advice
+app/tools/                   Free browser-safe tools
+app/comparisons/[slug]/      Short comparison pages
+app/reviews/                 Review and comparison articles
+app/disclosure/              Funding and independence page
 
-src/
-├── components/             # Shared React components
-├── data/                   # All product data as JSON (no database)
-│   ├── vpns.json
-│   ├── password-managers.json
-│   ├── antivirus.json
-│   ├── 2fa-apps.json
-│   └── scoring-criteria.json
-└── lib/
-    ├── affiliate.ts        # All affiliate URLs — single source of truth
-    ├── analytics.ts        # Vercel Analytics helpers
-    ├── quiz.ts             # Groq quiz logic + parseQuizResult
-    └── types.ts            # Shared TypeScript types
+src/components/              Shared React components
+src/data/                    Product data and scoring criteria
+src/lib/                     Link helpers, analytics, quiz logic, types
 ```
 
 ---
 
-## How scoring works
+## Current Monetization Status
 
-Every product is scored from JSON data in `src/data/` — never hardcoded in components. Criteria are per-category with weights summing to 100. The methodology is published at `/about`.
+The live site is intentionally non-affiliate right now.
 
-To update a score: edit the product's `scores` object in the relevant JSON file.
-To change criteria weights: edit `src/data/scoring-criteria.json`.
+- Product buttons use official product links where available.
+- Placeholder products fall back to internal review pages.
+- The public disclosure page says the site is currently non-affiliate.
+- CTAs do not use `rel="sponsored"`.
+- Product links do not append affiliate UTM parameters.
+- Rankings are not paid placements.
 
-The UI recalculates automatically on the next build.
-
----
-
-## Affiliate setup — what needs to be done before launch
-
-All affiliate URLs live in `src/lib/affiliate.ts`. Replace each `PLACEHOLDER` with your real tracking link before going live.
-
-| Product | Affiliate programme | Where to sign up | Status |
-|---|---|---|---|
-| NordVPN | NordVPN Partners | affiliates.nordvpn.com | **PLACEHOLDER** |
-| ExpressVPN | ExpressVPN Affiliates | expressvpn.com/affiliates | **PLACEHOLDER** |
-| Surfshark | Surfshark Affiliates | surfshark.com/affiliates | **PLACEHOLDER** |
-| Mullvad | None — link directly | — | direct (no programme) |
-| ProtonVPN | Proton Affiliate Program | proton.me/about/affiliates | **PLACEHOLDER** |
-| 1Password | 1Password Affiliate | 1password.com/affiliate | **PLACEHOLDER** |
-| Dashlane | Dashlane Affiliates | dashlane.com/affiliates | **PLACEHOLDER** |
-| NordPass | NordPass Partners | nordpass.com/affiliates | **PLACEHOLDER** |
-| Keeper | Keeper Affiliates | keepersecurity.com/affiliates | **PLACEHOLDER** |
-| Malwarebytes | Impact.com | impact.com (search Malwarebytes) | **PLACEHOLDER** |
-| Bitdefender | Bitdefender Affiliates | bitdefender.com/affiliates | **PLACEHOLDER** |
-| Norton | CJ Affiliate | cj.com (search Norton) | **PLACEHOLDER** |
-| ESET | ESET Affiliates | eset.com/affiliates | **PLACEHOLDER** |
-| Bitwarden | Referral only | bitwarden.com dashboard | direct (no standard programme) |
-
-**Mullvad and Bitwarden** have no standard affiliate programmes. They are linked directly — this is intentional and builds editorial credibility.
-
-Once you have a real URL, replace `PLACEHOLDER` in `src/lib/affiliate.ts`:
-
-```typescript
-// Before
-nordvpn: 'PLACEHOLDER',
-
-// After
-nordvpn: 'https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOUR_ID',
-```
-
-UTM params (`utm_source=breachwatchsite`, `utm_medium=affiliate`, `utm_campaign={category}-{pagetype}`) are appended automatically by `buildAffiliateUrl`.
+This avoids claiming affiliate relationships before they exist and keeps the project compatible with a free deployment path.
 
 ---
 
-## Deployment
+## Affiliate-Ready Architecture
 
-1. Push to GitHub
-2. Import project at vercel.com
-3. Set `GROQ_API_KEY` in Vercel → Settings → Environment Variables
-4. Deploy
+The old affiliate architecture is intentionally left easy to re-enable later, because the project may need to demonstrate affiliate marketing readiness.
 
-The `postbuild` script runs `next-sitemap` automatically after each Vercel build, generating `public/sitemap.xml` and `public/robots.txt`.
+The switch point is `src/lib/affiliate.ts`.
+
+To enable affiliate links later:
+
+1. Replace each `PLACEHOLDER` with an approved tracking URL.
+2. Change `buildAffiliateUrl` to append the required tracking parameters.
+3. Restore `rel="sponsored"` on paid links.
+4. Update `/disclosure`, `/privacy`, footer copy, and product pages before deploying.
+5. Confirm the deployment plan allows affiliate/commercial usage.
+
+Potential programs to apply for later:
+
+| Product | Program |
+|---|---|
+| NordVPN | NordVPN Partners |
+| ExpressVPN | ExpressVPN Affiliates / CJ |
+| Surfshark | Surfshark Affiliates |
+| Proton VPN | Proton affiliate program |
+| 1Password | 1Password affiliate / partner program |
+| Dashlane | Dashlane affiliates |
+| NordPass | NordPass partners |
+| Keeper | Keeper affiliates |
+| Malwarebytes | Impact.com |
+| Bitdefender | Bitdefender affiliates |
+| Norton | CJ Affiliate |
+| ESET | ESET affiliates |
+
+Brutal note: do not enable those links on a free deployment if the host terms require a paid/commercial plan.
 
 ---
 
-## Pre-launch checklist
+## Scoring
 
-- [ ] All `PLACEHOLDER` values in `src/lib/affiliate.ts` replaced with real links
-- [ ] `GROQ_API_KEY` set in Vercel environment variables
-- [ ] Google Search Console: domain verified
-- [ ] Sitemap submitted to Search Console: `https://breachwatchsite.com/sitemap.xml`
-- [ ] Quiz tested end-to-end on mobile viewport (real device or DevTools)
-- [ ] Affiliate disclosure note confirmed visible on every category page and review page
-- [ ] No `console.error` in browser DevTools on any page
-- [ ] `npm run build` passes clean
-- [ ] `npm run lint` passes clean
-- [ ] `npm run test` passes clean
+Every product is scored from JSON data in `src/data/`. Criteria are category-specific and weights sum to 100. The methodology is published at `/how-we-test`.
+
+To update a product score, edit the product `scores` object in the relevant JSON file.
+
+To change criteria weights, edit `src/data/scoring-criteria.json`.
+
+---
+
+## Pre-Launch Checklist
+
+- [ ] `npm run lint` passes
+- [ ] `npm run typecheck` passes
+- [ ] `npm run test` passes
+- [ ] `npm run build` passes
+- [ ] `GROQ_API_KEY` is configured for production
+- [ ] `/sitemap.xml` renders after build
+- [ ] `/robots.txt` renders after build
+- [ ] Footer legal links work
+- [ ] Public pages match the current non-affiliate status
+- [ ] If affiliate links are enabled later, disclosure/privacy copy is updated first
 
 ---
 
 ## CI
 
-GitHub Actions runs lint → test → build on every push and PR to `main`.
-
-Add `GROQ_API_KEY` as a GitHub Actions secret if needed. It is only used at runtime by the quiz API route — the build succeeds without it.
+GitHub Actions runs lint, tests, and build on every push and pull request to `main`.

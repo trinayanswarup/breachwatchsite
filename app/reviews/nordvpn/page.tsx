@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ScoreBreakdown from '@/components/ScoreBreakdown';
-import AffiliateCTA from '@/components/AffiliateCTA';
+import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import vpnsRaw from '@/data/vpns.json';
@@ -94,10 +94,9 @@ export default function NordVpnReviewPage() {
             </p>
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
-              <strong>Disclosure:</strong> This page contains an affiliate link to NordVPN.
-              We earn a commission if you purchase. Our score is calculated from the same
-              weighted criteria used across every VPN we compare.{' '}
-              <Link href="/disclosure" className="underline hover:text-amber-900">Full disclosure.</Link>
+              <strong>Independence note:</strong> Product links use direct links
+              or internal review pages. Rankings are based on published criteria.{' '}
+              <Link href="/disclosure" className="underline hover:text-amber-900">Learn more.</Link>
             </div>
           </div>
         </section>
@@ -248,13 +247,13 @@ export default function NordVpnReviewPage() {
               10 simultaneous connections make it practical for households.
             </p>
             <div className="flex flex-wrap gap-3">
-              <AffiliateCTA
+              <ProductCTA
                 product={product.id}
                 href={ctaUrl}
                 label="Visit NordVPN"
                 variant="primary"
               />
-              <AffiliateCTA
+              <ProductCTA
                 product="protonvpn"
                 href="/vpn"
                 label="Compare all VPNs"
@@ -292,4 +291,8 @@ export default function NordVpnReviewPage() {
     </div>
   );
 }
+
+
+
+
 

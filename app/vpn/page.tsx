@@ -4,7 +4,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
 import RankedCard from '@/components/RankedCard';
-import AffiliateCTA from '@/components/AffiliateCTA';
+import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
@@ -106,7 +106,7 @@ const VPN_BULLETS: Record<string, { pros: string[]; cons: string[] }> = {
     ],
     cons: [
       '2018 server breach disclosed late · Dutch parent despite Panama registration',
-      'Highest affiliate commissions in the industry — skews third-party reviews',
+      'Heavy marketing presence can skew third-party reviews',
     ],
   },
   expressvpn: {
@@ -132,8 +132,8 @@ export default function VPNPage() {
               Best VPNs of 2026 — Ranked on Privacy, Not Popularity
             </h1>
             <p className="mt-3.5 text-[15px] text-bw-gray leading-relaxed max-w-[500px] mx-auto">
-              Most comparison sites rank NordVPN and ExpressVPN first. Those happen to pay the
-              highest affiliate commissions. Our scores use documented criteria — logging policy,
+              Most comparison sites rank NordVPN and ExpressVPN first because they are the
+              biggest consumer VPN brands. Our scores use documented criteria: logging policy,
               jurisdiction, audits, price, and reliability.
             </p>
             <Link
@@ -230,10 +230,10 @@ export default function VPNPage() {
               and wants a VPN that genuinely has no incentive to keep data about them. Not ideal
               if you need streaming or a free tier to test first.</p>
               <p className="mt-2 text-bw-gray">Play Store: 3.8 stars / 7,340 reviews ·
-              Privacy Guides: Recommended ✓ · Affiliate programme: None — we link directly</p>
+              Privacy Guides: Recommended - Link type: Direct official website</p>
             </div>
             <div className="mt-4">
-              <AffiliateCTA
+              <ProductCTA
                 product="mullvad"
                 href={productCta(ranked.find((p) => p.id === 'mullvad')!)}
                 label="Visit Mullvad"
@@ -287,7 +287,7 @@ export default function VPNPage() {
               Privacy Guides: Recommended ✓</p>
             </div>
             <div className="mt-4">
-              <AffiliateCTA
+              <ProductCTA
                 product="protonvpn"
                 href={productCta(ranked.find((p) => p.id === 'protonvpn')!)}
                 label="Try Proton VPN"
@@ -334,7 +334,7 @@ export default function VPNPage() {
               Privacy Guides: Not recommended</p>
             </div>
             <div className="mt-4">
-              <AffiliateCTA
+              <ProductCTA
                 product="surfshark"
                 href={productCta(ranked.find((p) => p.id === 'surfshark')!)}
                 label="Try Surfshark"
@@ -350,7 +350,7 @@ export default function VPNPage() {
             </h3>
             <p className="mt-1 text-bw-gray italic">The most recognised name in VPN — with a complicated history</p>
             <p className="mt-4 text-bw-text">
-              NordVPN is the most searched VPN on Google and the most recommended on affiliate
+              NordVPN is the most searched VPN on Google and the most recommended on commercial
               sites. With 1.28 million Play Store reviews and a 4.5 star average, it has the
               largest real-world user base of any VPN. For mainstream use — streaming, general
               privacy, travel — it works reliably for most people most of the time.
@@ -381,13 +381,13 @@ export default function VPNPage() {
               Privacy Guides: Not recommended</p>
             </div>
             <div className="mt-4 flex flex-wrap gap-3">
-              <AffiliateCTA
+              <ProductCTA
                 product="nordvpn"
                 href={productCta(ranked.find((p) => p.id === 'nordvpn')!)}
                 label="Visit NordVPN"
                 variant="primary"
               />
-              <AffiliateCTA
+              <ProductCTA
                 product="nordvpn"
                 href="/reviews/nordvpn-vs-expressvpn"
                 label="NordVPN vs ExpressVPN →"
@@ -436,7 +436,7 @@ export default function VPNPage() {
               Privacy Guides: Not recommended</p>
             </div>
             <div className="mt-4">
-              <AffiliateCTA
+              <ProductCTA
                 product="expressvpn"
                 href={productCta(ranked.find((p) => p.id === 'expressvpn')!)}
                 label="Visit ExpressVPN"
@@ -467,16 +467,16 @@ export default function VPNPage() {
                 score={weightedScore(p)}
                 ctaHref={productCta(p)}
                 ctaLabel={`Visit ${p.name}`}
-                noAffiliateNote={p.id === 'mullvad' ? 'No affiliate programme — we link directly' : undefined}
+                linkNote={p.id === 'mullvad' ? 'Direct official link' : undefined}
               />
             );
           })}
           <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
             Scores calculated from{' '}
             <Link href="/how-we-test" className="text-bw-blue underline">published criteria</Link>.
-            {' '}Affiliate commissions do not affect rankings. Some links earn us a commission
-            at no extra cost to you.{' '}
-            <Link href="/disclosure" className="text-bw-blue underline">Full disclosure →</Link>
+            {' '}BreachWatch uses direct product links, not affiliate links.
+            Rankings are based on published criteria.{' '}
+            <Link href="/disclosure" className="text-bw-blue underline">Learn more -&gt;</Link>
           </p>
         </section>
 
@@ -606,4 +606,8 @@ export default function VPNPage() {
     </div>
   );
 }
+
+
+
+
 

@@ -4,7 +4,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
 import RankedCard from '@/components/RankedCard';
-import AffiliateCTA from '@/components/AffiliateCTA';
+import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
@@ -226,7 +226,7 @@ export default function TwoFAPage() {
               <a href="https://getaegis.app" className="text-bw-blue underline hover:text-bw-blue-dark" target="_blank" rel="noopener noreferrer">Android only</a>
             </p>
             <div className="mt-4">
-              <AffiliateCTA
+              <ProductCTA
                 product="aegis"
                 href={topPickHref}
                 label="Get Aegis (Android)"
@@ -269,7 +269,7 @@ export default function TwoFAPage() {
               <a href="https://ente.io/auth" className="text-bw-blue underline hover:text-bw-blue-dark" target="_blank" rel="noopener noreferrer">Android, iOS, desktop, web</a>
             </p>
             <div className="mt-4">
-              <AffiliateCTA
+              <ProductCTA
                 product="ente_auth"
                 href={productCta(enteAuthPick)}
                 label="Get Ente Auth"
@@ -395,9 +395,9 @@ export default function TwoFAPage() {
           <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
             Scores calculated from{' '}
             <Link href="/how-we-test" className="text-bw-blue underline">published criteria</Link>.
-            {' '}Affiliate commissions do not affect rankings. Some links earn us a commission
-            at no extra cost to you.{' '}
-            <Link href="/disclosure" className="text-bw-blue underline">Full disclosure →</Link>
+            {' '}BreachWatch uses direct product links, not affiliate links.
+            Rankings are based on published criteria.{' '}
+            <Link href="/disclosure" className="text-bw-blue underline">Learn more -&gt;</Link>
           </p>
         </section>
 
@@ -499,4 +499,8 @@ export default function TwoFAPage() {
     </div>
   );
 }
+
+
+
+
 

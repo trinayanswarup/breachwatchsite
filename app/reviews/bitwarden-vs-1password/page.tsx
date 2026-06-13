@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
-import AffiliateCTA from '@/components/AffiliateCTA';
+import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import pmRaw from '@/data/password-managers.json';
@@ -82,9 +82,9 @@ export default function BitwardenVs1PasswordPage() {
             </p>
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
-              <strong>Disclosure:</strong> This page contains affiliate links. Our
-              scoring methodology is published and applied consistently across all products.{' '}
-              <Link href="/disclosure" className="underline hover:text-amber-900">Full disclosure.</Link>
+              <strong>Independence note:</strong> Product links use direct links
+              or internal review pages. Rankings are based on published criteria.{' '}
+              <Link href="/disclosure" className="underline hover:text-amber-900">Learn more.</Link>
             </div>
           </div>
         </section>
@@ -285,13 +285,13 @@ export default function BitwardenVs1PasswordPage() {
               team management, or Secret Key architecture are important to you.
             </p>
             <div className="flex flex-wrap gap-3">
-              <AffiliateCTA
+              <ProductCTA
                 product={bitwarden.id}
                 href={cta(bitwarden)}
                 label="Try Bitwarden free"
                 variant="primary"
               />
-              <AffiliateCTA
+              <ProductCTA
                 product={onepassword.id}
                 href={cta(onepassword)}
                 label="Try 1Password"
@@ -329,4 +329,8 @@ export default function BitwardenVs1PasswordPage() {
     </div>
   );
 }
+
+
+
+
 

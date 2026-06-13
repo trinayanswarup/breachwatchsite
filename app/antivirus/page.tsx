@@ -4,7 +4,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
 import RankedCard from '@/components/RankedCard';
-import AffiliateCTA from '@/components/AffiliateCTA';
+import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
@@ -300,7 +300,7 @@ export default function AntivirusPage() {
               this inherent trust requirement — not any specific incident.
             </p>
             <div className="mt-4">
-              <AffiliateCTA
+              <ProductCTA
                 product="bitdefender"
                 href={productCta(bitdefenderPick)}
                 label="Try Bitdefender"
@@ -340,7 +340,7 @@ export default function AntivirusPage() {
               Fewer bundled features if you specifically want a security suite.
             </p>
             <div className="mt-4">
-              <AffiliateCTA
+              <ProductCTA
                 product="eset"
                 href={productCta(esetPick)}
                 label="Try ESET"
@@ -375,7 +375,7 @@ export default function AntivirusPage() {
               if something gets through. Better coverage than either product alone.
             </p>
             <div className="mt-4">
-              <AffiliateCTA
+              <ProductCTA
                 product="malwarebytes"
                 href={productCta(malwarebytesPick)}
                 label="Get Malwarebytes free"
@@ -433,16 +433,16 @@ export default function AntivirusPage() {
                 score={weightedScore(p)}
                 ctaHref={productCta(p)}
                 ctaLabel={`Visit ${p.name}`}
-                noAffiliateNote={p.id === 'windows_defender' ? 'Free and built-in — no affiliate link' : undefined}
+                linkNote={p.id === 'windows_defender' ? 'Free and built-in direct link' : undefined}
               />
             );
           })}
           <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
             Scores calculated from{' '}
             <Link href="/how-we-test" className="text-bw-blue underline">published criteria</Link>.
-            {' '}Affiliate commissions do not affect rankings. Some links earn us a commission
-            at no extra cost to you.{' '}
-            <Link href="/disclosure" className="text-bw-blue underline">Full disclosure →</Link>
+            {' '}BreachWatch uses direct product links, not affiliate links.
+            Rankings are based on published criteria.{' '}
+            <Link href="/disclosure" className="text-bw-blue underline">Learn more -&gt;</Link>
           </p>
         </section>
 
@@ -537,4 +537,8 @@ export default function AntivirusPage() {
     </div>
   );
 }
+
+
+
+
 

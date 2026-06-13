@@ -4,20 +4,19 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-black/10 bg-bw-light mt-auto">
+    <footer className="mt-auto border-t border-black/10 bg-bw-light">
       <div className="mx-auto max-w-6xl px-4 py-10">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <div>
             <Link
               href="/"
-              className="flex items-center gap-2 text-base font-bold text-bw-black hover:text-bw-blue transition-colors"
+              className="flex items-center gap-2 text-base font-bold text-bw-black transition-colors hover:text-bw-blue"
             >
-              <span className="text-bw-blue" aria-hidden="true">🛡</span>
+              <span className="text-bw-blue" aria-hidden="true">BW</span>
               BreachWatch
             </Link>
             <p className="mt-2 text-sm text-bw-gray">
-              Honest cybersecurity tool comparisons. Transparent scoring, no
-              hidden bias.
+              Honest cybersecurity tool comparisons. Transparent scoring, no hidden bias.
             </p>
           </div>
 
@@ -39,7 +38,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-bw-text hover:text-bw-black transition-colors"
+                    className="text-sm text-bw-text transition-colors hover:text-bw-black"
                   >
                     {link.label}
                   </Link>
@@ -57,12 +56,12 @@ export default function Footer() {
                 { href: '/about', label: 'About' },
                 { href: '/how-we-test', label: 'How We Test' },
                 { href: '/privacy', label: 'Privacy Policy' },
-                { href: '/disclosure', label: 'Affiliate Disclosure' },
+                { href: '/disclosure', label: 'Funding & Independence' },
               ].map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-bw-text hover:text-bw-black transition-colors"
+                    className="text-sm text-bw-text transition-colors hover:text-bw-black"
                   >
                     {link.label}
                   </Link>
@@ -74,19 +73,20 @@ export default function Footer() {
 
         <div className="mt-8 border-t border-black/10 pt-6">
           <p className="text-xs text-bw-gray">
-            <strong>Affiliate disclosure:</strong> BreachWatch earns commissions
-            on some links at no extra cost to you. Our scores are calculated
-            algorithmically from documented criteria — commissions never affect
-            rankings.{' '}
+            <strong>Independence note:</strong> BreachWatch uses direct
+            product links, not affiliate links. Scores are calculated from documented
+            criteria, not paid placements.{' '}
             <Link href="/disclosure" className="underline hover:text-bw-text">
-              Full disclosure →
+              Learn more -&gt;
             </Link>
           </p>
           <p className="mt-3 text-xs text-bw-gray">
-            © {year} BreachWatch. All rights reserved.
+            &copy; {year} BreachWatch. All rights reserved.
           </p>
         </div>
       </div>
     </footer>
   );
 }
+
+

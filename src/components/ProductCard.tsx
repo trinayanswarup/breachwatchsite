@@ -1,5 +1,5 @@
 import type { Product, Criterion, ScoringCriteria } from '@/lib/types';
-import AffiliateCTA from '@/components/AffiliateCTA';
+import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import rawCriteria from '@/data/scoring-criteria.json';
 
@@ -97,7 +97,7 @@ export default function ProductCard({
       </p>
 
       <div className="mt-4">
-        <AffiliateCTA
+        <ProductCTA
           product={product.id}
           href={ctaHref}
           label={`Visit ${product.name}`}
@@ -107,3 +107,5 @@ export default function ProductCard({
     </article>
   );
 }
+
+
