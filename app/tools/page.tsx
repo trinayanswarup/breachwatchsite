@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import ToolsWorkbench from '@/components/ToolsWorkbench';
 
 export const metadata: Metadata = {
   title: 'Free Cybersecurity Tools | BreachWatch',
@@ -28,13 +29,6 @@ const availableTools = [
     proof: 'No account required, and quiz answers are not stored.',
     action: 'Take the quiz',
   },
-];
-
-const plannedTools = [
-  'Password generator',
-  'Breach response checklist',
-  '2FA recovery checklist',
-  'VPN need checker',
 ];
 
 export default function ToolsPage() {
@@ -103,35 +97,7 @@ export default function ToolsPage() {
           </div>
         </section>
 
-        <section className="border-t border-black/10 bg-bw-light px-5 py-12">
-          <div className="mx-auto max-w-6xl">
-            <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
-              <div>
-                <h2 className="text-[22px] font-bold text-bw-black">
-                  What gets added next
-                </h2>
-                <p className="mt-3 text-[14px] leading-6 text-bw-gray">
-                  The next tools should stay free, browser-safe, and useful without
-                  collecting personal data. That is the line: utility first, no fake
-                  risk scoring theater.
-                </p>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {plannedTools.map((tool) => (
-                  <div
-                    key={tool}
-                    className="rounded-[3px] border border-black/10 bg-white p-4"
-                  >
-                    <p className="text-[14px] font-semibold text-bw-black">{tool}</p>
-                    <p className="mt-1 text-[12px] text-bw-gray">
-                      Planned as a free BreachWatch utility.
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <ToolsWorkbench />
       </main>
       <Footer />
     </div>
