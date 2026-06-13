@@ -480,35 +480,58 @@ export default function AntivirusPage() {
 
         {/* Related links */}
         <section className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-6 text-xl font-bold text-bw-black">Related comparisons</h2>
+          <h2 className="mb-6 text-xl font-bold text-bw-black">Related antivirus comparisons</h2>
           <div className="grid gap-3 sm:grid-cols-2">
+            <Link
+              href="#windows-defender"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Windows Defender vs paid antivirus -&gt;
+            </Link>
+            <Link
+              href="#eset"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              ESET vs Bitdefender - speed vs detection -&gt;
+            </Link>
+            <Link
+              href="#malwarebytes"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Malwarebytes vs full antivirus suites -&gt;
+            </Link>
+            <Link
+              href="#norton"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Norton 360 vs safer alternatives -&gt;
+            </Link>
             <Link
               href="/password-managers"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Best password managers — higher ROI than antivirus →
+              Best password managers - higher ROI than antivirus -&gt;
             </Link>
             <Link
               href="/2fa-apps"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Best 2FA apps →
+              Best 2FA apps -&gt;
             </Link>
             <Link
               href="/vpn"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Best VPNs →
+              Best VPNs -&gt;
             </Link>
             <Link
               href="/quiz"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Take the security quiz →
+              Take the security quiz -&gt;
             </Link>
           </div>
         </section>
-
       </main>
       <Footer />
     </div>

@@ -435,50 +435,65 @@ export default function TwoFAPage() {
 
         {/* Related links */}
         <section className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-6 text-xl font-bold text-bw-black">
-            Build a complete security setup
-          </h2>
-          <p className="mb-4 text-sm text-bw-text">
-            2FA is one layer. Pair it with a{' '}
-            <Link href="/password-managers" className="text-bw-blue underline hover:text-bw-blue-dark">
-              password manager
-            </Link>{' '}
-            for the biggest security improvement most people can make.
-          </p>
+          <h2 className="mb-6 text-xl font-bold text-bw-black">Build a complete security setup</h2>
+          <p className="mb-4 text-sm text-bw-text">2FA is one layer. Pair it with a <a href="/password-managers" className="text-bw-blue underline hover:text-bw-blue-dark">password manager</a> for the biggest security improvement most people can make.</p>
           <div className="grid gap-3 sm:grid-cols-2">
+            <Link
+              href="#aegis"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Aegis vs Ente Auth - local backup vs sync -&gt;
+            </Link>
+            <Link
+              href="#google-authenticator"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Google Authenticator vs safer backups -&gt;
+            </Link>
+            <Link
+              href="#microsoft-authenticator"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Microsoft Authenticator vs general 2FA apps -&gt;
+            </Link>
+            <Link
+              href="#authy"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Authy vs export-friendly 2FA apps -&gt;
+            </Link>
             <Link
               href="/password-managers"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Best password managers →
+              Best password managers -&gt;
             </Link>
             <Link
               href="/reviews/bitwarden"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Bitwarden review — includes TOTP integration →
+              Bitwarden review - includes TOTP integration -&gt;
             </Link>
             <Link
               href="/vpn"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Best VPNs →
+              Best VPNs -&gt;
             </Link>
             <Link
               href="/antivirus"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Best antivirus software →
+              Best antivirus software -&gt;
             </Link>
           </div>
           <p className="mt-8 text-sm text-bw-gray">
             Not sure where to start?{' '}
             <Link href="/quiz" className="text-bw-blue underline hover:text-bw-blue-dark">
-              Take the 30-second security quiz →
+              Take the 30-second security quiz -&gt;
             </Link>
           </p>
         </section>
-
       </main>
       <Footer />
     </div>

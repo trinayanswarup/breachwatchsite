@@ -542,37 +542,61 @@ export default function VPNPage() {
 
         {/* Related links */}
         <section className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-6 text-xl font-bold text-bw-black">Related comparisons</h2>
+          <h2 className="mb-6 text-xl font-bold text-bw-black">Related VPN comparisons</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             <Link
               href="/reviews/nordvpn"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              NordVPN full review →
+              NordVPN full review -&gt;
             </Link>
             <Link
               href="/reviews/nordvpn-vs-expressvpn"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              NordVPN vs ExpressVPN →
+              NordVPN vs ExpressVPN -&gt;
+            </Link>
+            <Link
+              href="#mullvad"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Mullvad vs Proton VPN - privacy picks -&gt;
+            </Link>
+            <Link
+              href="#surfshark"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Surfshark vs NordVPN - budget vs mainstream -&gt;
+            </Link>
+            <Link
+              href="#expressvpn"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              ExpressVPN vs the field - when to skip it -&gt;
             </Link>
             <Link
               href="/reviews/best-vpn-lithuania"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Best VPN for Lithuania →
+              Best VPN for Lithuania -&gt;
             </Link>
             <Link
               href="/password-managers"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Best password managers →
+              Best password managers -&gt;
+            </Link>
+            <Link
+              href="/breach-checker"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Check if a password was leaked -&gt;
             </Link>
           </div>
           <p className="mt-8 text-sm text-bw-gray">
             Not sure which tool you need first?{' '}
             <Link href="/quiz" className="text-bw-blue underline hover:text-bw-blue-dark">
-              Take our 30-second security quiz →
+              Take the 30-second security quiz -&gt;
             </Link>
           </p>
         </section>

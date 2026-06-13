@@ -363,7 +363,7 @@ export default function PasswordManagersPage() {
           </article>
 
           {/* Dashlane */}
-          <article>
+          <article id="dashlane">
             <h3 className="text-xl font-bold text-bw-black">
               6. Dashlane — {weightedScore(ranked[5]).toFixed(1)}/10
             </h3>
@@ -458,41 +458,64 @@ export default function PasswordManagersPage() {
 
         {/* Related links */}
         <section className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-6 text-xl font-bold text-bw-black">Related comparisons</h2>
+          <h2 className="mb-6 text-xl font-bold text-bw-black">Related password manager comparisons</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             <Link
               href="/reviews/bitwarden"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Bitwarden full review →
+              Bitwarden full review -&gt;
             </Link>
             <Link
               href="/reviews/bitwarden-vs-1password"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Bitwarden vs 1Password — full comparison →
+              Bitwarden vs 1Password full comparison -&gt;
+            </Link>
+            <Link
+              href="#protonpass"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Proton Pass vs Bitwarden - privacy vs free tier -&gt;
+            </Link>
+            <Link
+              href="#1password"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              1Password vs Keeper - premium vs compliance -&gt;
+            </Link>
+            <Link
+              href="#dashlane"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              NordPass vs Dashlane - ecosystem vs bundle -&gt;
             </Link>
             <Link
               href="/2fa-apps"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Best 2FA apps — add a second layer →
+              Best 2FA apps - add a second layer -&gt;
             </Link>
             <Link
               href="/vpn"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
             >
-              Best VPNs →
+              Best VPNs -&gt;
+            </Link>
+            <Link
+              href="/breach-checker"
+              className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-sm font-medium text-bw-text hover:border-bw-blue hover:text-bw-blue transition-colors"
+            >
+              Check a reused password -&gt;
             </Link>
           </div>
           <p className="mt-8 text-sm text-bw-gray">
             Not sure what security tool you need first?{' '}
             <Link href="/quiz" className="text-bw-blue underline hover:text-bw-blue-dark">
-              Take the 30-second security quiz →
+              Take the 30-second security quiz -&gt;
             </Link>
           </p>
         </section>
-
       </main>
       <Footer />
     </div>
