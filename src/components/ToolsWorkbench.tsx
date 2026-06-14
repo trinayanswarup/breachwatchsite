@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
 
 const LOWER = 'abcdefghijkmnopqrstuvwxyz';
 const UPPER = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
@@ -182,6 +183,14 @@ export default function ToolsWorkbench() {
             </div>
             <p className="mt-4 rounded-[3px] border border-bw-blue/30 bg-blue-50 px-4 py-3 text-[13px] font-medium leading-5 text-bw-black">
               {vpnResult}
+            </p>
+            <p className="mt-3 text-[12px] leading-5 text-bw-gray">
+              Most users should prioritize a password manager and 2FA first. If you have
+              already done that, or you travel frequently, compare the{' '}
+              <Link href="/vpn" className="font-semibold text-bw-blue underline hover:text-bw-blue-dark">
+                VPNs worth considering
+              </Link>
+              .
             </p>
           </div>
 

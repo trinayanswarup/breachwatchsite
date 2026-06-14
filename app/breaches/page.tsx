@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import {
   formatBreachCount,
   formatBreachDate,
+  getBreachActionLinks,
   getBreachAdvice,
   getBreachSeverity,
   type HIBPBreach,
@@ -40,6 +41,7 @@ async function fetchBreaches(): Promise<HIBPBreach[]> {
 function BreachCard({ breach }: { breach: HIBPBreach }) {
   const severity = getBreachSeverity(breach.PwnCount);
   const advice = getBreachAdvice(breach.DataClasses);
+  const actionLinks = getBreachActionLinks(breach.DataClasses);
   const visibleClasses = breach.DataClasses.slice(0, 5);
   const remaining = breach.DataClasses.length - visibleClasses.length;
 
@@ -110,6 +112,19 @@ function BreachCard({ breach }: { breach: HIBPBreach }) {
             <li key={item}>- {item}</li>
           ))}
         </ul>
+        {actionLinks.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {actionLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-[3px] border border-bw-blue px-3 py-1.5 text-[12px] font-bold text-bw-blue hover:bg-white"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </article>
   );

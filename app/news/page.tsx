@@ -66,28 +66,55 @@ function getRelatedLink(topic: string): { href: string; label: string } {
   return { href: '/quiz', label: 'Find your biggest risk' };
 }
 
-function getWhyItMatters(topic: string): string {
+function getWhyItMatters(item: NewsItem, topic: string): string {
+  const lower = item.title.toLowerCase();
+  const subject = item.title.replace(/\s+/g, ' ').trim();
+
+  if (lower.includes('privacy') && (lower.includes('luxury') || lower.includes('paywall'))) {
+    return 'Privacy is becoming something paid users get by default while free users absorb more tracking. That changes which free tools deserve trust.';
+  }
+
+  if (lower.includes('coupang') || (lower.includes('fine') && lower.includes('breach'))) {
+    return 'Large breach penalties can push companies to invest in data protection, but affected users still need to watch for fraud and phishing.';
+  }
+
+  if (lower.includes('ai') && (lower.includes('malware') || lower.includes('scanner'))) {
+    return 'Attackers are now testing how AI security layers can be manipulated. Traditional detection still matters while those filters mature.';
+  }
+
+  if (lower.includes('ransomware')) {
+    return 'Ransomware stories matter when they expose which backups, patching habits, and recovery plans actually hold up under pressure.';
+  }
+
+  if (lower.includes('password') || lower.includes('credential') || lower.includes('passkey')) {
+    return 'Credential stories are practical: they usually point to password reuse, weak recovery flows, or where passkeys reduce account takeover risk.';
+  }
+
+  if (lower.includes('cve') || lower.includes('zero-day') || lower.includes('exploit')) {
+    return 'This is patch-priority news. The useful question is whether the affected software is on your devices or in a service you depend on.';
+  }
+
   if (topic === 'Breach') {
-    return 'Breaches often turn into password reuse, phishing, and account takeover risk.';
+    return `${subject} is a reminder to match your response to the leaked data: passwords, IDs, payment details, and emails require different next steps.`;
   }
 
   if (topic === 'Privacy') {
-    return 'Privacy stories can change which tools and habits are worth trusting.';
+    return `${subject} affects trust decisions: who collects data, who pays for privacy, and which tools reduce tracking instead of adding more.`;
   }
 
   if (topic === 'Passwords') {
-    return 'Password and passkey changes directly affect everyday account security.';
+    return `${subject} connects directly to daily account security, especially password reuse, recovery settings, and passkey adoption.`;
   }
 
   if (topic === 'Malware') {
-    return 'Malware news matters when it changes what normal users should avoid or update.';
+    return `${subject} matters if it changes what users should avoid, update, scan, or stop trusting.`;
   }
 
   if (topic === 'Vulnerability') {
-    return 'Vulnerabilities matter most when they are exploitable or affect software you use.';
+    return `${subject} matters most if the affected software is installed, exposed to the internet, or used by a service you rely on.`;
   }
 
-  return 'Security news is most useful when it points to a concrete action, not panic.';
+  return `${subject} is worth reading only if it leads to a concrete action: update, change a setting, verify an account, or ignore the panic.`;
 }
 
 function sourceBadgeClass(source: NewsSource): string {
@@ -136,7 +163,7 @@ function NewsCard({ item }: { item: NewsItem }) {
         <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-bw-gray">
           Why it matters
         </p>
-        <p className="mt-2 text-[13px] leading-5 text-bw-text">{getWhyItMatters(topic)}</p>
+        <p className="mt-2 text-[13px] leading-5 text-bw-text">{getWhyItMatters(item, topic)}</p>
       </div>
 
       <div className="mt-auto flex flex-wrap items-center gap-4 pt-5">

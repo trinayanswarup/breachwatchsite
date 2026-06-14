@@ -6,12 +6,13 @@ import ComparisonTable from '@/components/ComparisonTable';
 import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
+import FreshnessNote from '@/components/FreshnessNote';
 import pmRaw from '@/data/password-managers.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
-  title: 'Bitwarden vs 1Password 2025 — Free vs Premium, Which Wins?',
+  title: 'Bitwarden vs 1Password 2026 — Free vs Premium, Which Wins?',
   description:
     'Bitwarden (9.4/10) vs 1Password (7.0/10): open source vs Secret Key architecture, free vs $2.99/month, and which is right for you. Honest verdict with full scoring.',
 };
@@ -37,10 +38,10 @@ const SITE = 'https://breachwatchsite.com';
 const pageSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Bitwarden vs 1Password 2025 — Free vs Premium, Which Wins?',
+  headline: 'Bitwarden vs 1Password 2026 — Free vs Premium, Which Wins?',
   url: `${SITE}/reviews/bitwarden-vs-1password`,
   datePublished: '2025-01-01',
-  dateModified: '2025-06-10',
+  dateModified: '2026-06-14',
   author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
   publisher: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/reviews/bitwarden-vs-1password` },
@@ -69,7 +70,7 @@ export default function BitwardenVs1PasswordPage() {
             </nav>
 
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-bw-black sm:text-4xl">
-              Bitwarden vs 1Password 2025 — Free vs Premium, Which Wins?
+              Bitwarden vs 1Password 2026 — Free vs Premium, Which Wins?
             </h1>
             <p className="mt-4 text-lg text-bw-text">
               Bitwarden scores <strong className="text-bw-black">9.4/10</strong>;
@@ -80,6 +81,9 @@ export default function BitwardenVs1PasswordPage() {
               architecture and the best UX in the category. For most people, Bitwarden
               is the clear answer.
             </p>
+            <FreshnessNote>
+              Comparison uses the password-manager methodology, pricing, audit status, and platform support checked in June 2026.
+            </FreshnessNote>
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
               <strong>Independence note:</strong> Product links use direct links

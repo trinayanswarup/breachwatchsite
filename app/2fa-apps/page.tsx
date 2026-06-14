@@ -7,6 +7,7 @@ import RankedCard from '@/components/RankedCard';
 import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
+import FreshnessNote from '@/components/FreshnessNote';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import productsRaw from '@/data/2fa-apps.json';
@@ -31,9 +32,9 @@ const topPick = ranked[0];
 const shortlist = [
   { name: 'Aegis', label: 'best 2FA app for Android', href: '#aegis' },
   { name: 'Ente Auth', label: 'best cross-platform 2FA app', href: '#ente-auth' },
-  { name: 'Google Authenticator', label: 'familiar but limited recovery', href: '#google-authenticator' },
-  { name: 'Microsoft Authenticator', label: 'best only for Microsoft accounts', href: '#microsoft-authenticator' },
-  { name: 'Authy', label: 'avoid for new users because of export lock-in', href: '#authy' },
+  { name: 'Google Authenticator', label: 'familiar TOTP app with basic recovery', href: '#google-authenticator' },
+  { name: 'Microsoft Authenticator', label: 'best fit for Microsoft-account sign-in', href: '#microsoft-authenticator' },
+  { name: 'Authy', label: 'legacy multi-device app with export limits', href: '#authy' },
 ];
 
 function productCta(p: Product): string {
@@ -138,6 +139,9 @@ export default function TwoFAPage() {
               We compared 5 two-factor authentication apps on what actually matters: what
               happens when you lose your phone. The results will surprise you.
             </p>
+            <FreshnessNote>
+              Scores reflect backup, recovery, export, cloud sync, and open-source signals checked in June 2026.
+            </FreshnessNote>
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"

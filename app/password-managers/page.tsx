@@ -7,6 +7,7 @@ import RankedCard from '@/components/RankedCard';
 import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
+import FreshnessNote from '@/components/FreshnessNote';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import productsRaw from '@/data/password-managers.json';
@@ -136,6 +137,9 @@ export default function PasswordManagersPage() {
               We scored six products on zero-knowledge architecture, open source code, and real
               reliability. Bitwarden leads at 9.3/10 and is free. See the full methodology.
             </p>
+            <FreshnessNote>
+              Scores reflect public audits, pricing, platform support, open-source status, and breach history checked in June 2026.
+            </FreshnessNote>
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"

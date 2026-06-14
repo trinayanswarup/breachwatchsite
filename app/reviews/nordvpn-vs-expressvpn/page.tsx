@@ -6,12 +6,13 @@ import ComparisonTable from '@/components/ComparisonTable';
 import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
+import FreshnessNote from '@/components/FreshnessNote';
 import vpnsRaw from '@/data/vpns.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
-  title: 'NordVPN vs ExpressVPN 2025 — Which Is Actually Better?',
+  title: 'NordVPN vs ExpressVPN 2026 — Which Is Actually Better?',
   description:
     'Side-by-side comparison: NordVPN (8.05/10) vs ExpressVPN (7.00/10). ExpressVPN is faster but costs 67% more and is owned by Kape Technologies. The verdict is clear.',
 };
@@ -37,10 +38,10 @@ const SITE = 'https://breachwatchsite.com';
 const pageSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'NordVPN vs ExpressVPN 2025 — Which Is Actually Better?',
+  headline: 'NordVPN vs ExpressVPN 2026 — Which Is Actually Better?',
   url: `${SITE}/reviews/nordvpn-vs-expressvpn`,
   datePublished: '2025-01-01',
-  dateModified: '2025-06-10',
+  dateModified: '2026-06-14',
   author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
   publisher: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/reviews/nordvpn-vs-expressvpn` },
@@ -69,7 +70,7 @@ export default function NordVpnVsExpressVpnPage() {
             </nav>
 
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-bw-black sm:text-4xl">
-              NordVPN vs ExpressVPN 2025 — Which Is Actually Better?
+              NordVPN vs ExpressVPN 2026 — Which Is Actually Better?
             </h1>
             <p className="mt-4 text-lg text-bw-text">
               This comparison has a clear answer: <strong className="text-bw-black">NordVPN
@@ -79,6 +80,9 @@ export default function NordVpnVsExpressVpnPage() {
               Kape Technologies ownership question that ExpressVPN has carried since
               2021. On every criterion except raw speed, NordVPN is the better choice.
             </p>
+            <FreshnessNote>
+              Comparison uses the VPN methodology, ownership records, pricing, and audit context checked in June 2026.
+            </FreshnessNote>
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
               <strong>Independence note:</strong> Product links use direct links

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   formatBreachCount,
   formatBreachDate,
+  getBreachActionLinks,
   getBreachAdvice,
   getBreachSeverity,
 } from '../breaches';
@@ -20,10 +21,10 @@ describe('getBreachAdvice', () => {
     const advice = getBreachAdvice(['Email addresses', 'Passwords']);
 
     expect(advice).toContain(
-      'Change reused passwords immediately and check old passwords for known leaks.'
+      'Change this password and any other account that reused it.'
     );
     expect(advice).toContain(
-      'Watch for phishing emails and enable 2FA on important accounts.'
+      'Expect targeted phishing and turn on 2FA for important accounts.'
     );
   });
 
@@ -42,6 +43,13 @@ describe('getBreachAdvice', () => {
     ]);
   });
 
+  it('adds identity and health-specific advice when sensitive records are exposed', () => {
+    expect(getBreachAdvice(['Government issued IDs', 'Health insurance information'])).toEqual([
+      'Freeze or monitor credit files and watch for identity theft attempts.',
+      'Contact your insurer and watch for unfamiliar medical claims or benefit notices.',
+    ]);
+  });
+
   it('limits advice to three actions to keep breach cards readable', () => {
     const advice = getBreachAdvice([
       'Passwords',
@@ -52,6 +60,21 @@ describe('getBreachAdvice', () => {
     ]);
 
     expect(advice).toHaveLength(3);
+  });
+});
+
+describe('getBreachActionLinks', () => {
+  it('links password breaches to password-specific tools', () => {
+    expect(getBreachActionLinks(['Passwords'])).toEqual([
+      { href: '/breach-checker', label: 'Check a password' },
+      { href: '/password-managers', label: 'Compare password managers' },
+    ]);
+  });
+
+  it('links email-only breaches to the security quiz', () => {
+    expect(getBreachActionLinks(['Email addresses'])).toEqual([
+      { href: '/quiz', label: 'Find your biggest account risk' },
+    ]);
   });
 });
 

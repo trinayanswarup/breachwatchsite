@@ -6,6 +6,7 @@ import ComparisonTable from '@/components/ComparisonTable';
 import RankedCard from '@/components/RankedCard';
 import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
+import FreshnessNote from '@/components/FreshnessNote';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import vpnsRaw from '@/data/vpns.json';
@@ -136,6 +137,9 @@ export default function VPNPage() {
               biggest consumer VPN brands. Our scores use documented criteria: logging policy,
               jurisdiction, audits, price, and reliability.
             </p>
+            <FreshnessNote>
+              Scores reflect published no-logs claims, audits, jurisdiction, pricing, and reliability signals checked in June 2026.
+            </FreshnessNote>
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"

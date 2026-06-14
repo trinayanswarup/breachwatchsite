@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import FreshnessNote from '@/components/FreshnessNote';
 import {
   getSimpleComparison,
   simpleComparisons,
@@ -67,6 +68,9 @@ export default async function ComparisonPage({ params }: PageProps) {
             <p className="mt-4 max-w-2xl text-base text-bw-text">
               {comparison.description}
             </p>
+            <FreshnessNote>
+              Quick comparisons use the latest BreachWatch category scores and public product data checked in June 2026.
+            </FreshnessNote>
           </div>
         </section>
 

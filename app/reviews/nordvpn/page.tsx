@@ -6,12 +6,13 @@ import ScoreBreakdown from '@/components/ScoreBreakdown';
 import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
+import FreshnessNote from '@/components/FreshnessNote';
 import vpnsRaw from '@/data/vpns.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
-  title: 'NordVPN Review 2025 — Is It Still Worth It?',
+  title: 'NordVPN Review 2026 — Is It Still Worth It?',
   description:
     'Honest NordVPN review: the 2018 server breach, PricewaterhouseCoopers audit, Panama jurisdiction, and whether it beats ProtonVPN on value. Scored 8.05/10.',
 };
@@ -37,10 +38,10 @@ const pageSchema: Record<string, unknown> = {
   '@graph': [
     {
       '@type': 'Article',
-      headline: 'NordVPN Review 2025 — Is It Still Worth It?',
+      headline: 'NordVPN Review 2026 — Is It Still Worth It?',
       url: `${SITE}/reviews/nordvpn`,
       datePublished: '2025-01-01',
-      dateModified: '2025-06-10',
+      dateModified: '2026-06-14',
       author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
       publisher: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
       mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/reviews/nordvpn` },
@@ -83,7 +84,7 @@ export default function NordVpnReviewPage() {
             </nav>
 
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-bw-black sm:text-4xl">
-              NordVPN Review 2025 — Is It Still Worth It?
+              NordVPN Review 2026 — Is It Still Worth It?
             </h1>
             <p className="mt-4 text-lg text-bw-text">
               NordVPN is the most heavily marketed VPN in the world. That alone is reason
@@ -92,6 +93,9 @@ export default function NordVpnReviewPage() {
               is <strong className="text-bw-black">8.05/10</strong> — strong, but not our
               top pick. ProtonVPN scores 8.25 and has a better transparency record.
             </p>
+            <FreshnessNote>
+              Review score uses the VPN methodology, audit history, pricing, and ownership context checked in June 2026.
+            </FreshnessNote>
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
               <strong>Independence note:</strong> Product links use direct links

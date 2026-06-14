@@ -7,6 +7,7 @@ import RankedCard from '@/components/RankedCard';
 import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
+import FreshnessNote from '@/components/FreshnessNote';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import productsRaw from '@/data/antivirus.json';
@@ -33,7 +34,7 @@ const shortlist = [
   { name: 'ESET', label: 'best lightweight paid antivirus', href: '#eset' },
   { name: 'Bitdefender', label: 'best detection-focused antivirus', href: '#bitdefender' },
   { name: 'Malwarebytes', label: 'best second-opinion scanner', href: '#malwarebytes' },
-  { name: 'Norton 360', label: 'skip unless you specifically need the bundle', href: '#norton' },
+  { name: 'Norton 360', label: 'best for users who want one security bundle', href: '#norton' },
 ];
 
 function productCta(p: Product): string {
@@ -137,6 +138,9 @@ export default function AntivirusPage() {
               We ranked antivirus software using AV-TEST independent lab scores. Includes the
               honest answer about whether you actually need third-party antivirus.
             </p>
+            <FreshnessNote>
+              Scores reflect AV-TEST lab results, system impact, privacy posture, and pricing checked in June 2026.
+            </FreshnessNote>
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"

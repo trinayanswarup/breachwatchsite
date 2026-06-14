@@ -6,12 +6,13 @@ import ScoreBreakdown from '@/components/ScoreBreakdown';
 import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import type { Product, ScoringCriteria } from '@/lib/types';
+import FreshnessNote from '@/components/FreshnessNote';
 import pmRaw from '@/data/password-managers.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
-  title: 'Bitwarden Review 2025 — The Best Free Password Manager?',
+  title: 'Bitwarden Review 2026 — The Best Free Password Manager?',
   description:
     'In-depth Bitwarden review: open source code, Cure53 audit of both client and server, free vs premium ($10/year), and the 2023 autofill advisory. Scores 9.4/10.',
 };
@@ -37,10 +38,10 @@ const pageSchema: Record<string, unknown> = {
   '@graph': [
     {
       '@type': 'Article',
-      headline: 'Bitwarden Review 2025 — The Best Free Password Manager?',
+      headline: 'Bitwarden Review 2026 — The Best Free Password Manager?',
       url: `${SITE}/reviews/bitwarden`,
       datePublished: '2025-01-01',
-      dateModified: '2025-06-10',
+      dateModified: '2026-06-14',
       author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
       publisher: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
       mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/reviews/bitwarden` },
@@ -83,7 +84,7 @@ export default function BitwardenReviewPage() {
             </nav>
 
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-bw-black sm:text-4xl">
-              Bitwarden Review 2025 — The Best Free Password Manager?
+              Bitwarden Review 2026 — The Best Free Password Manager?
             </h1>
             <p className="mt-4 text-lg text-bw-text">
               Bitwarden scores <strong className="text-bw-black">9.4/10</strong> in our
@@ -93,6 +94,9 @@ export default function BitwardenReviewPage() {
               vault items. The short answer to the headline question: yes, it is the best
               free password manager. It is also competitive with paid alternatives.
             </p>
+            <FreshnessNote>
+              Review score uses the password-manager methodology, Cure53 audit history, pricing, and platform support checked in June 2026.
+            </FreshnessNote>
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
               <strong>Independence note:</strong> Product links use direct links

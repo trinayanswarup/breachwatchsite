@@ -52,6 +52,12 @@ interface ComparisonLinkProps {
   label: string;
 }
 
+interface FreeToolLinkProps {
+  href: string;
+  title: string;
+  description: string;
+}
+
 function ComparisonLink({ href, title, label }: ComparisonLinkProps) {
   return (
     <Link
@@ -68,6 +74,27 @@ function ComparisonLink({ href, title, label }: ComparisonLinkProps) {
       </div>
       <span className="shrink-0 text-bw-gray group-hover:text-bw-blue transition-colors" aria-hidden="true">
         →
+      </span>
+    </Link>
+  );
+}
+
+function FreeToolLink({ href, title, description }: FreeToolLinkProps) {
+  return (
+    <Link
+      href={href}
+      className="group flex items-start justify-between gap-4 border border-black/10 bg-white px-4 py-3.5 transition-all hover:border-bw-blue"
+    >
+      <span>
+        <span className="block text-[14px] font-bold text-bw-black group-hover:text-bw-blue">
+          {title}
+        </span>
+        <span className="mt-1 block text-[12px] leading-5 text-bw-gray">
+          {description}
+        </span>
+      </span>
+      <span className="mt-0.5 shrink-0 text-bw-gray group-hover:text-bw-blue" aria-hidden="true">
+        -&gt;
       </span>
     </Link>
   );
@@ -110,6 +137,41 @@ export default function HomePage() {
               >
                 Check if your password was leaked →
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Free tools */}
+        <section className="border-b border-black/10 bg-bw-light px-5 py-10">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-5">
+              <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
+                Free tools
+              </p>
+              <h2 className="mt-1 text-[20px] font-bold text-bw-black">
+                No account required.
+              </h2>
+              <p className="mt-2 max-w-2xl text-[13px] leading-6 text-bw-gray">
+                These are the practical checks people can use before reading a full
+                product comparison.
+              </p>
+            </div>
+            <div className="grid gap-3 md:grid-cols-3">
+              <FreeToolLink
+                href="/breach-checker"
+                title="Check if your password was leaked"
+                description="Private k-anonymity check against known breached passwords."
+              />
+              <FreeToolLink
+                href="/quiz"
+                title="Take the 30-second security quiz"
+                description="Find the first security gap worth fixing."
+              />
+              <FreeToolLink
+                href="/tools"
+                title="Generate strong passwords"
+                description="Create local browser-generated passwords and use quick checklists."
+              />
             </div>
           </div>
         </section>
@@ -197,7 +259,7 @@ export default function HomePage() {
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <ComparisonLink
               href="/reviews/nordvpn"
-              title="NordVPN Review 2025 — Is It Still Worth It?"
+              title="NordVPN Review 2026 — Is It Still Worth It?"
               label="VPN review"
             />
             <ComparisonLink
