@@ -38,6 +38,7 @@ npm run lint
 npm run typecheck
 npm run test
 npm run build
+npm run smoke
 npm start
 ```
 
@@ -141,6 +142,8 @@ Every product is scored from JSON data in `src/data/`. Criteria are category-spe
 To update a product score, edit the product `scores` object in the relevant JSON file.
 
 To change criteria weights, edit `src/data/scoring-criteria.json`.
+
+For interview context, see `CASE_STUDY.md`. It explains the scoring model, evidence trail, non-affiliate architecture, analytics funnel, fallback behavior, and verification strategy.
 
 ---
 

@@ -8,7 +8,9 @@ import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
 import FreshnessNote from '@/components/FreshnessNote';
+import EvidencePanel from '@/components/EvidencePanel';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
+import { calculateWeightedScore, formatScore, sortProductsByScore } from '@/lib/scoring';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import productsRaw from '@/data/password-managers.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
@@ -23,10 +25,10 @@ const products = productsRaw as unknown as Product[];
 const criteria = (criteriaRaw as unknown as ScoringCriteria)['password-manager'];
 
 function weightedScore(p: Product): number {
-  return criteria.reduce((sum, c) => sum + ((p.scores[c.id] ?? 0) * c.weight) / 100, 0);
+  return calculateWeightedScore(p, criteria);
 }
 
-const ranked = [...products].sort((a, b) => weightedScore(b) - weightedScore(a));
+const ranked = sortProductsByScore(products, criteria);
 
 const shortlist = [
   { name: 'Bitwarden', label: 'best password manager overall', href: '#bitwarden' },
@@ -140,6 +142,7 @@ export default function PasswordManagersPage() {
             <FreshnessNote>
               Scores reflect public audits, pricing, platform support, open-source status, and breach history checked in June 2026.
             </FreshnessNote>
+            <EvidencePanel category="password-manager" />
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
@@ -195,7 +198,7 @@ export default function PasswordManagersPage() {
           <article id="bitwarden">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                1. Bitwarden — {weightedScore(ranked[0]).toFixed(1)}/10
+                1. Bitwarden — {formatScore(weightedScore(ranked[0]))}/10
               </h3>
               <span className="rounded-[3px] bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 Winner
@@ -236,7 +239,7 @@ export default function PasswordManagersPage() {
           <article id="protonpass">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                2. Proton Pass — {weightedScore(ranked[1]).toFixed(1)}/10
+                2. Proton Pass — {formatScore(weightedScore(ranked[1]))}/10
               </h3>
               <span className="rounded-[3px] bg-bw-blue/10 px-3 py-1 text-sm font-semibold text-bw-blue-dark">
                 Runner-up
@@ -278,7 +281,7 @@ export default function PasswordManagersPage() {
           <article id="1password">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                3. 1Password — {weightedScore(ranked[2]).toFixed(1)}/10
+                3. 1Password — {formatScore(weightedScore(ranked[2]))}/10
               </h3>
               <span className="rounded-[3px] bg-purple-100 px-3 py-1 text-sm font-semibold text-purple-800">
                 Premium pick
@@ -322,7 +325,7 @@ export default function PasswordManagersPage() {
           {/* Keeper */}
           <article id="keeper">
             <h3 className="text-xl font-bold text-bw-black">
-              4. Keeper — {weightedScore(ranked[3]).toFixed(1)}/10
+              4. Keeper — {formatScore(weightedScore(ranked[3]))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Keeper holds the strongest enterprise compliance credentials in this
@@ -345,7 +348,7 @@ export default function PasswordManagersPage() {
           {/* NordPass */}
           <article id="nordpass">
             <h3 className="text-xl font-bold text-bw-black">
-              5. NordPass — {weightedScore(ranked[4]).toFixed(1)}/10
+              5. NordPass — {formatScore(weightedScore(ranked[4]))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               NordPass uses XChaCha20 encryption — a more modern algorithm than the
@@ -369,7 +372,7 @@ export default function PasswordManagersPage() {
           {/* Dashlane */}
           <article id="dashlane">
             <h3 className="text-xl font-bold text-bw-black">
-              6. Dashlane — {weightedScore(ranked[5]).toFixed(1)}/10
+              6. Dashlane — {formatScore(weightedScore(ranked[5]))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Dashlane is the most expensive option at $4.99/month, which bundles a VPN

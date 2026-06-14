@@ -2,6 +2,7 @@ import type { Product, Criterion, ScoringCriteria } from '@/lib/types';
 import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import rawCriteria from '@/data/scoring-criteria.json';
+import { calculateWeightedScore, formatScore } from '@/lib/scoring';
 
 export interface ProductCardProps {
   product: Product;
@@ -17,14 +18,6 @@ function getCriteriaForCategory(category: string): Criterion[] {
   return criteriaData[key as keyof ScoringCriteria] ?? [];
 }
 
-function weightedScore(product: Product, criteria: Criterion[]): number {
-  if (!criteria.length) return 0;
-  return criteria.reduce(
-    (sum, c) => sum + ((product.scores[c.id] ?? 0) * c.weight) / 100,
-    0
-  );
-}
-
 function scoreBadgeClass(score: number): string {
   if (score >= 7) return 'bg-green-100 text-green-800 ring-green-200';
   if (score >= 5) return 'bg-amber-100 text-amber-800 ring-amber-200';
@@ -37,7 +30,7 @@ export default function ProductCard({
   featured = false,
 }: ProductCardProps) {
   const criteria = getCriteriaForCategory(category);
-  const score = weightedScore(product, criteria);
+  const score = criteria.length ? calculateWeightedScore(product, criteria) : 0;
   const ctaHref = buildAffiliateUrl(
     affiliateLinks[product.id] ?? product.affiliateUrl,
     product.id,
@@ -68,7 +61,7 @@ export default function ProductCard({
           className={`shrink-0 rounded-[3px] px-3 py-2 text-center ring-1 ${scoreBadgeClass(score)}`}
         >
           <span className="block text-2xl font-bold leading-none">
-            {score.toFixed(1)}
+            {formatScore(score)}
           </span>
           <span className="block text-[10px] font-semibold uppercase tracking-wider opacity-70">
             / 10

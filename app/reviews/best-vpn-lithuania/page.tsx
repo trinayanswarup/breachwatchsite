@@ -5,8 +5,10 @@ import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
 import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
+import { calculateWeightedScore, formatScore, sortProductsByScore } from '@/lib/scoring';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import FreshnessNote from '@/components/FreshnessNote';
+import EvidencePanel from '@/components/EvidencePanel';
 import vpnsRaw from '@/data/vpns.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 import JsonLd from '@/components/JsonLd';
@@ -21,11 +23,14 @@ const vpns = vpnsRaw as unknown as Product[];
 const criteria = (criteriaRaw as unknown as ScoringCriteria).vpn;
 
 function weightedScore(p: Product): number {
-  return criteria.reduce((sum, c) => sum + ((p.scores[c.id] ?? 0) * c.weight) / 100, 0);
+  return calculateWeightedScore(p, criteria);
 }
 
-const ranked = [...vpns].sort((a, b) => weightedScore(b) - weightedScore(a));
-const topPick = ranked[0];
+const ranked = sortProductsByScore(vpns, criteria);
+const protonVpn = vpns.find((p) => p.id === 'protonvpn')!;
+const nordVpn = vpns.find((p) => p.id === 'nordvpn')!;
+const mullvad = vpns.find((p) => p.id === 'mullvad')!;
+const topPick = protonVpn;
 
 const raw = affiliateLinks[topPick.id] ?? topPick.affiliateUrl;
 const topPickUrl = buildAffiliateUrl(
@@ -82,6 +87,7 @@ export default function BestVpnLithuaniaPage() {
             <FreshnessNote>
               Lithuania guidance reflects VPN legality, ISP metadata-retention context, and provider jurisdiction checked in June 2026.
             </FreshnessNote>
+            <EvidencePanel category="vpn" productId="protonvpn" />
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
               <strong>Independence note:</strong> Product links use direct links
@@ -194,7 +200,7 @@ export default function BestVpnLithuaniaPage() {
             </h2>
 
             <h3 className="mb-2 text-base font-bold text-bw-black">
-              1. ProtonVPN — best overall (8.25/10)
+              1. Proton VPN ? best contextual Lithuania pick ({formatScore(weightedScore(protonVpn))}/10)
             </h3>
             <p className="mb-4 text-bw-text">
               ProtonVPN is headquartered in Geneva, Switzerland — outside the EU and
@@ -207,7 +213,7 @@ export default function BestVpnLithuaniaPage() {
             </p>
 
             <h3 className="mb-2 text-base font-bold text-bw-black">
-              2. NordVPN — best for streaming and speed (8.05/10)
+              2. NordVPN ? best for streaming and speed ({formatScore(weightedScore(nordVpn))}/10)
             </h3>
             <p className="mb-4 text-bw-text">
               NordVPN is incorporated in Panama — outside the EU and not subject to
@@ -221,7 +227,7 @@ export default function BestVpnLithuaniaPage() {
             </p>
 
             <h3 className="mb-2 text-base font-bold text-bw-black">
-              3. Mullvad — best for anonymity (7.30/10)
+              3. Mullvad ? best for anonymity ({formatScore(weightedScore(mullvad))}/10)
             </h3>
             <p className="mb-4 text-bw-text">
               Mullvad is headquartered in Sweden, which is an EU member state. This

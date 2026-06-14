@@ -1,16 +1,10 @@
 import type { Product, Criterion } from '@/lib/types';
+import { calculateWeightedScore, formatScore } from '@/lib/scoring';
 
 export interface ComparisonTableProps {
   products: Product[];
   criteria: Criterion[];
   category: string;
-}
-
-function weightedScore(scores: Record<string, number>, criteria: Criterion[]): number {
-  return criteria.reduce(
-    (sum, c) => sum + ((scores[c.id] ?? 0) * c.weight) / 100,
-    0
-  );
 }
 
 function rawScoreClass(score: number): string {
@@ -22,7 +16,7 @@ function rawScoreClass(score: number): string {
 export default function ComparisonTable({ products, criteria }: ComparisonTableProps) {
   const scores = products.map((p) => ({
     id: p.id,
-    score: weightedScore(p.scores, criteria),
+    score: calculateWeightedScore(p, criteria),
   }));
   const maxScore = Math.max(...scores.map((s) => s.score));
 
@@ -106,7 +100,7 @@ export default function ComparisonTable({ products, criteria }: ComparisonTableP
                       : 'font-semibold text-bw-black'
                   }`}
                 >
-                  <span className="text-lg">{s.score.toFixed(1)}</span>
+                  <span className="text-lg">{formatScore(s.score)}</span>
                   <span className="text-sm text-bw-gray">/10</span>
                 </td>
               );

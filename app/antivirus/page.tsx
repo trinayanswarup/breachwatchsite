@@ -8,7 +8,9 @@ import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
 import FreshnessNote from '@/components/FreshnessNote';
+import EvidencePanel from '@/components/EvidencePanel';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
+import { calculateWeightedScore, formatScore, sortProductsByScore } from '@/lib/scoring';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import productsRaw from '@/data/antivirus.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
@@ -23,10 +25,10 @@ const products = productsRaw as unknown as Product[];
 const criteria = (criteriaRaw as unknown as ScoringCriteria).antivirus;
 
 function weightedScore(p: Product): number {
-  return criteria.reduce((sum, c) => sum + ((p.scores[c.id] ?? 0) * c.weight) / 100, 0);
+  return calculateWeightedScore(p, criteria);
 }
 
-const ranked = [...products].sort((a, b) => weightedScore(b) - weightedScore(a));
+const ranked = sortProductsByScore(products, criteria);
 const topPick = ranked[0];
 
 const shortlist = [
@@ -141,6 +143,7 @@ export default function AntivirusPage() {
             <FreshnessNote>
               Scores reflect AV-TEST lab results, system impact, privacy posture, and pricing checked in June 2026.
             </FreshnessNote>
+            <EvidencePanel category="antivirus" />
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
@@ -240,7 +243,7 @@ export default function AntivirusPage() {
           <article id="windows-defender">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                1. Windows Defender — {weightedScore(topPick).toFixed(1)}/10
+                1. Windows Defender — {formatScore(weightedScore(topPick))}/10
               </h3>
               <span className="rounded-[3px] bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 Winner (free)
@@ -278,7 +281,7 @@ export default function AntivirusPage() {
           <article id="bitdefender">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                2. Bitdefender — {weightedScore(bitdefenderPick).toFixed(1)}/10
+                2. Bitdefender — {formatScore(weightedScore(bitdefenderPick))}/10
               </h3>
               <span className="rounded-[3px] bg-bw-blue/10 px-3 py-1 text-sm font-semibold text-bw-blue-dark">
                 Best detection
@@ -317,7 +320,7 @@ export default function AntivirusPage() {
           <article id="eset">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                3. ESET — {weightedScore(esetPick).toFixed(1)}/10
+                3. ESET — {formatScore(weightedScore(esetPick))}/10
               </h3>
               <span className="rounded-[3px] bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 Winner (paid)
@@ -356,7 +359,7 @@ export default function AntivirusPage() {
           {/* Malwarebytes */}
           <article id="malwarebytes">
             <h3 className="text-xl font-bold text-bw-black">
-              4. Malwarebytes — {weightedScore(malwarebytesPick).toFixed(1)}/10
+              4. Malwarebytes — {formatScore(weightedScore(malwarebytesPick))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Malwarebytes built its reputation as the tool you run when you already have
@@ -391,7 +394,7 @@ export default function AntivirusPage() {
           {/* Norton */}
           <article id="norton">
             <h3 className="text-xl font-bold text-bw-black">
-              5. Norton 360 — {weightedScore(nortonPick).toFixed(1)}/10
+              5. Norton 360 — {formatScore(weightedScore(nortonPick))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Norton 360 achieves good AV-TEST scores and bundles a lot of features:

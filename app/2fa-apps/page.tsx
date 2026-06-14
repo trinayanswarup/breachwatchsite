@@ -8,7 +8,9 @@ import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
 import FreshnessNote from '@/components/FreshnessNote';
+import EvidencePanel from '@/components/EvidencePanel';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
+import { calculateWeightedScore, formatScore, sortProductsByScore } from '@/lib/scoring';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import productsRaw from '@/data/2fa-apps.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
@@ -23,10 +25,10 @@ const products = productsRaw as unknown as Product[];
 const criteria = (criteriaRaw as unknown as ScoringCriteria)['2fa-apps'];
 
 function weightedScore(p: Product): number {
-  return criteria.reduce((sum, c) => sum + ((p.scores[c.id] ?? 0) * c.weight) / 100, 0);
+  return calculateWeightedScore(p, criteria);
 }
 
-const ranked = [...products].sort((a, b) => weightedScore(b) - weightedScore(a));
+const ranked = sortProductsByScore(products, criteria);
 const topPick = ranked[0];
 
 const shortlist = [
@@ -142,6 +144,7 @@ export default function TwoFAPage() {
             <FreshnessNote>
               Scores reflect backup, recovery, export, cloud sync, and open-source signals checked in June 2026.
             </FreshnessNote>
+            <EvidencePanel category="2fa-apps" />
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
@@ -199,7 +202,7 @@ export default function TwoFAPage() {
           <article id="aegis">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                1. Aegis Authenticator — {weightedScore(topPick).toFixed(1)}/10
+                1. Aegis Authenticator — {formatScore(weightedScore(topPick))}/10
               </h3>
               <span className="rounded-[3px] bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 Winner (Android)
@@ -243,7 +246,7 @@ export default function TwoFAPage() {
           <article id="ente-auth">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                2. Ente Auth — {weightedScore(enteAuthPick).toFixed(1)}/10
+                2. Ente Auth — {formatScore(weightedScore(enteAuthPick))}/10
               </h3>
               <span className="rounded-[3px] bg-bw-blue/10 px-3 py-1 text-sm font-semibold text-bw-blue-dark">
                 Runner-up (all platforms)
@@ -285,7 +288,7 @@ export default function TwoFAPage() {
           {/* Google Authenticator */}
           <article id="google-authenticator">
             <h3 className="text-xl font-bold text-bw-black">
-              3. Google Authenticator — {weightedScore(googleAuthPick).toFixed(1)}/10
+              3. Google Authenticator — {formatScore(weightedScore(googleAuthPick))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Google Authenticator is the most widely supported 2FA app — virtually
@@ -315,7 +318,7 @@ export default function TwoFAPage() {
           {/* Microsoft Authenticator */}
           <article id="microsoft-authenticator">
             <h3 className="text-xl font-bold text-bw-black">
-              4. Microsoft Authenticator — {weightedScore(msAuthPick).toFixed(1)}/10
+              4. Microsoft Authenticator — {formatScore(weightedScore(msAuthPick))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Microsoft Authenticator is required if you want passwordless sign-in to
@@ -344,7 +347,7 @@ export default function TwoFAPage() {
           {/* Authy */}
           <article id="authy">
             <h3 className="text-xl font-bold text-bw-black">
-              5. Authy — {weightedScore(authyPick).toFixed(1)}/10
+              5. Authy — {formatScore(weightedScore(authyPick))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Authy pioneered multi-device sync for 2FA and was the best option for

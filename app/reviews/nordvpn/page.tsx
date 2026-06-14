@@ -1,12 +1,14 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ScoreBreakdown from '@/components/ScoreBreakdown';
 import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
+import { calculateWeightedScore, formatScore, getTopProduct } from '@/lib/scoring';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import FreshnessNote from '@/components/FreshnessNote';
+import EvidencePanel from '@/components/EvidencePanel';
 import vpnsRaw from '@/data/vpns.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 import JsonLd from '@/components/JsonLd';
@@ -14,12 +16,15 @@ import JsonLd from '@/components/JsonLd';
 export const metadata: Metadata = {
   title: 'NordVPN Review 2026 — Is It Still Worth It?',
   description:
-    'Honest NordVPN review: the 2018 server breach, PricewaterhouseCoopers audit, Panama jurisdiction, and whether it beats ProtonVPN on value. Scored 8.05/10.',
+    'Honest NordVPN review: the 2018 server breach, PricewaterhouseCoopers audit, Panama jurisdiction, pricing, and whether it is still worth using.',
 };
 
 const vpns = vpnsRaw as unknown as Product[];
 const criteria = (criteriaRaw as unknown as ScoringCriteria).vpn;
 const product = vpns.find((p) => p.id === 'nordvpn')!;
+const topVpn = getTopProduct(vpns, criteria);
+const protonVpn = vpns.find((p) => p.id === 'protonvpn')!;
+const mullvad = vpns.find((p) => p.id === 'mullvad')!;
 
 const raw = affiliateLinks[product.id] ?? product.affiliateUrl;
 const ctaUrl = buildAffiliateUrl(
@@ -30,9 +35,7 @@ const ctaUrl = buildAffiliateUrl(
 );
 
 const SITE = 'https://breachwatchsite.com';
-const productScore = criteria.reduce(
-  (sum, c) => sum + ((product.scores[c.id] ?? 0) * c.weight) / 100, 0
-);
+const productScore = calculateWeightedScore(product, criteria);
 const pageSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -90,12 +93,14 @@ export default function NordVpnReviewPage() {
               NordVPN is the most heavily marketed VPN in the world. That alone is reason
               to be sceptical. After reviewing the independent audit results, the 2018
               server breach, Panama&apos;s jurisdiction, and the current pricing, our score
-              is <strong className="text-bw-black">8.05/10</strong> — strong, but not our
-              top pick. ProtonVPN scores 8.25 and has a better transparency record.
+              is <strong className="text-bw-black">{formatScore(productScore)}/10</strong> ? strong, but not our
+              top pick. {topVpn.name} scores {formatScore(calculateWeightedScore(topVpn, criteria))}/10
+              and has cleaner privacy-first signals.
             </p>
             <FreshnessNote>
               Review score uses the VPN methodology, audit history, pricing, and ownership context checked in June 2026.
             </FreshnessNote>
+            <EvidencePanel category="vpn" productId="nordvpn" />
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
               <strong>Independence note:</strong> Product links use direct links
@@ -243,10 +248,10 @@ export default function NordVpnReviewPage() {
           <div className="mx-auto max-w-3xl">
             <h2 className="mb-3 text-2xl font-bold text-bw-black">Verdict</h2>
             <p className="mb-6 text-bw-text">
-              NordVPN scores <strong>8.05/10</strong> — good but not our top-ranked VPN.
+              NordVPN scores <strong>{formatScore(productScore)}/10</strong> — good but not our top-ranked VPN.
               If you want the most popular option with a solid audit record and excellent
               streaming support, it delivers. If you want maximum privacy credibility,
-              ProtonVPN (8.25/10) or Mullvad (7.30/10 overall, but 10/10 on logging
+              {protonVpn.name} ({formatScore(calculateWeightedScore(protonVpn, criteria))}/10) or {mullvad.name} ({formatScore(calculateWeightedScore(mullvad, criteria))}/10 overall, and 10/10 on logging
               policy) are better choices. NordVPN&apos;s pricing is competitive and its
               10 simultaneous connections make it practical for households.
             </p>

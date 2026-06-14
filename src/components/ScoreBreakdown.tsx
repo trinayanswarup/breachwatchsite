@@ -1,4 +1,5 @@
 import type { Product, Criterion } from '@/lib/types';
+import { calculateWeightedScore, formatScore } from '@/lib/scoring';
 
 export interface ScoreBreakdownProps {
   product: Product;
@@ -12,7 +13,7 @@ export default function ScoreBreakdown({ product, criteria }: ScoreBreakdownProp
     return { criterion: c, score, contribution };
   });
 
-  const total = rows.reduce((sum, r) => sum + r.contribution, 0);
+  const total = calculateWeightedScore(product, criteria);
 
   function scoreColor(score: number): string {
     if (score >= 8) return 'bg-green-500';
@@ -28,7 +29,7 @@ export default function ScoreBreakdown({ product, criteria }: ScoreBreakdownProp
         </h3>
         <p className="text-xs text-bw-gray mt-0.5">
           How the overall score of{' '}
-          <strong className="text-bw-text">{total.toFixed(1)}/10</strong> is calculated
+          <strong className="text-bw-text">{formatScore(total)}/10</strong> is calculated
         </p>
       </div>
 
@@ -69,7 +70,7 @@ export default function ScoreBreakdown({ product, criteria }: ScoreBreakdownProp
       <div className="border-t-2 border-black/10 bg-bw-light px-4 py-3 flex justify-between items-center">
         <span className="font-bold text-bw-black">Overall Score</span>
         <span className="text-xl font-bold text-bw-black">
-          {total.toFixed(1)}
+          {formatScore(total)}
           <span className="text-sm font-normal text-bw-gray">/10</span>
         </span>
       </div>

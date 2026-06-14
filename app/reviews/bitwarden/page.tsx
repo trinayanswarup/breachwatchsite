@@ -5,8 +5,10 @@ import Footer from '@/components/Footer';
 import ScoreBreakdown from '@/components/ScoreBreakdown';
 import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
+import { calculateWeightedScore, formatScore } from '@/lib/scoring';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import FreshnessNote from '@/components/FreshnessNote';
+import EvidencePanel from '@/components/EvidencePanel';
 import pmRaw from '@/data/password-managers.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 import JsonLd from '@/components/JsonLd';
@@ -14,7 +16,7 @@ import JsonLd from '@/components/JsonLd';
 export const metadata: Metadata = {
   title: 'Bitwarden Review 2026 — The Best Free Password Manager?',
   description:
-    'In-depth Bitwarden review: open source code, Cure53 audit of both client and server, free vs premium ($10/year), and the 2023 autofill advisory. Scores 9.4/10.',
+    'In-depth Bitwarden review: open source code, Cure53 audit history, free vs premium pricing, and the 2023 autofill advisory.',
 };
 
 const pms = pmRaw as unknown as Product[];
@@ -30,9 +32,7 @@ const ctaUrl = buildAffiliateUrl(
 );
 
 const SITE = 'https://breachwatchsite.com';
-const productScore = criteria.reduce(
-  (sum, c) => sum + ((product.scores[c.id] ?? 0) * c.weight) / 100, 0
-);
+const productScore = calculateWeightedScore(product, criteria);
 const pageSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -87,7 +87,7 @@ export default function BitwardenReviewPage() {
               Bitwarden Review 2026 — The Best Free Password Manager?
             </h1>
             <p className="mt-4 text-lg text-bw-text">
-              Bitwarden scores <strong className="text-bw-black">9.4/10</strong> in our
+              Bitwarden scores <strong className="text-bw-black">{formatScore(productScore)}/10</strong> in our
               ranking — the highest of any password manager we have tested. It is fully
               open source, independently audited by Cure53 (covering both the client
               applications and the server code), and the free tier includes unlimited
@@ -97,6 +97,7 @@ export default function BitwardenReviewPage() {
             <FreshnessNote>
               Review score uses the password-manager methodology, Cure53 audit history, pricing, and platform support checked in June 2026.
             </FreshnessNote>
+            <EvidencePanel category="password-manager" productId="bitwarden" />
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
               <strong>Independence note:</strong> Product links use direct links
@@ -260,7 +261,7 @@ export default function BitwardenReviewPage() {
           <div className="mx-auto max-w-3xl">
             <h2 className="mb-3 text-2xl font-bold text-bw-black">Verdict</h2>
             <p className="mb-6 text-bw-text">
-              Bitwarden scores <strong>9.4/10</strong> — the highest in our password
+              Bitwarden scores <strong>{formatScore(productScore)}/10</strong> — the highest in our password
               manager comparison. Open source, audited at server level, free tier covers
               everything most people need, and $10/year for premium extras is fair.
               The autofill advisory is worth knowing about but does not materially affect

@@ -5,8 +5,10 @@ import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
 import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
+import { calculateWeightedScore, formatScore } from '@/lib/scoring';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import FreshnessNote from '@/components/FreshnessNote';
+import EvidencePanel from '@/components/EvidencePanel';
 import pmRaw from '@/data/password-managers.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 import JsonLd from '@/components/JsonLd';
@@ -14,7 +16,7 @@ import JsonLd from '@/components/JsonLd';
 export const metadata: Metadata = {
   title: 'Bitwarden vs 1Password 2026 — Free vs Premium, Which Wins?',
   description:
-    'Bitwarden (9.4/10) vs 1Password (7.0/10): open source vs Secret Key architecture, free vs $2.99/month, and which is right for you. Honest verdict with full scoring.',
+    'Bitwarden vs 1Password: open source vs Secret Key architecture, free vs $2.99/month, and which is right for you. Honest verdict with full scoring.',
 };
 
 const pms = pmRaw as unknown as Product[];
@@ -23,6 +25,8 @@ const criteria = (criteriaRaw as unknown as ScoringCriteria)['password-manager']
 const bitwarden = pms.find((p) => p.id === 'bitwarden')!;
 const onepassword = pms.find((p) => p.id === '1password')!;
 const pair = [bitwarden, onepassword];
+const bitwardenScore = calculateWeightedScore(bitwarden, criteria);
+const onePasswordScore = calculateWeightedScore(onepassword, criteria);
 
 function cta(product: Product): string {
   const raw = affiliateLinks[product.id] ?? product.affiliateUrl;
@@ -73,8 +77,8 @@ export default function BitwardenVs1PasswordPage() {
               Bitwarden vs 1Password 2026 — Free vs Premium, Which Wins?
             </h1>
             <p className="mt-4 text-lg text-bw-text">
-              Bitwarden scores <strong className="text-bw-black">9.4/10</strong>;
-              1Password scores <strong className="text-bw-black">7.0/10</strong>. The
+              Bitwarden scores <strong className="text-bw-black">{formatScore(bitwardenScore)}/10</strong>;
+              1Password scores <strong className="text-bw-black">{formatScore(onePasswordScore)}/10</strong>. The
               gap is largely explained by one criterion: open source carries 20% of
               the total score, and 1Password scores 0 because its code is proprietary.
               If you can accept that trade-off, 1Password offers a stronger security
@@ -84,6 +88,7 @@ export default function BitwardenVs1PasswordPage() {
             <FreshnessNote>
               Comparison uses the password-manager methodology, pricing, audit status, and platform support checked in June 2026.
             </FreshnessNote>
+            <EvidencePanel category="password-manager" />
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
               <strong>Independence note:</strong> Product links use direct links
@@ -282,8 +287,8 @@ export default function BitwardenVs1PasswordPage() {
           <div className="mx-auto max-w-3xl">
             <h2 className="mb-3 text-2xl font-bold text-bw-black">Verdict</h2>
             <p className="mb-6 text-bw-text">
-              Bitwarden scores <strong>9.4/10</strong> versus 1Password&apos;s{' '}
-              <strong>7.0/10</strong>. The score gap is real and driven by open source
+              Bitwarden scores <strong>{formatScore(bitwardenScore)}/10</strong> versus 1Password&apos;s{' '}
+              <strong>{formatScore(onePasswordScore)}/10</strong>. The score gap is real and driven by open source
               and price criteria that we weight heavily for good reason. For most users,
               Bitwarden is the right choice. 1Password is worth the premium if UX,
               team management, or Secret Key architecture are important to you.

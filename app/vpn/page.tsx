@@ -7,7 +7,9 @@ import RankedCard from '@/components/RankedCard';
 import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import FreshnessNote from '@/components/FreshnessNote';
+import EvidencePanel from '@/components/EvidencePanel';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
+import { calculateWeightedScore, formatScore, sortProductsByScore } from '@/lib/scoring';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import vpnsRaw from '@/data/vpns.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
@@ -23,10 +25,15 @@ const products = vpnsRaw as unknown as Product[];
 const criteria = (criteriaRaw as unknown as ScoringCriteria).vpn;
 
 function weightedScore(p: Product): number {
-  return criteria.reduce((sum, c) => sum + ((p.scores[c.id] ?? 0) * c.weight) / 100, 0);
+  return calculateWeightedScore(p, criteria);
 }
 
-const ranked = [...products].sort((a, b) => weightedScore(b) - weightedScore(a));
+const ranked = sortProductsByScore(products, criteria);
+const mullvadPick = ranked.find((p) => p.id === 'mullvad') ?? ranked[0];
+const protonVpnPick = ranked.find((p) => p.id === 'protonvpn') ?? ranked[1];
+const surfsharkPick = ranked.find((p) => p.id === 'surfshark') ?? ranked[2];
+const nordVpnPick = ranked.find((p) => p.id === 'nordvpn') ?? ranked[3];
+const expressVpnPick = ranked.find((p) => p.id === 'expressvpn') ?? ranked[4];
 const shortlist = [
   { name: 'NordVPN', label: 'best VPN for streaming overall', href: '/reviews/nordvpn' },
   { name: 'Proton VPN', label: 'best free VPN with reliable privacy features', href: '#protonvpn' },
@@ -140,6 +147,7 @@ export default function VPNPage() {
             <FreshnessNote>
               Scores reflect published no-logs claims, audits, jurisdiction, pricing, and reliability signals checked in June 2026.
             </FreshnessNote>
+            <EvidencePanel category="vpn" />
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
@@ -194,7 +202,7 @@ export default function VPNPage() {
           {/* 1. Mullvad */}
           <section id="mullvad">
             <h3 className="text-xl font-bold text-bw-black">
-              1. Mullvad — 9.0/10
+              1. Mullvad — {formatScore(weightedScore(mullvadPick))}/10
             </h3>
             <p className="mt-1 text-bw-gray italic">The only VPN that doesn&apos;t want to know who you are</p>
             <p className="mt-4 text-bw-text">
@@ -249,7 +257,7 @@ export default function VPNPage() {
           {/* 2. Proton VPN */}
           <section id="protonvpn">
             <h3 className="text-xl font-bold text-bw-black">
-              2. Proton VPN — 8.8/10
+              2. Proton VPN — {formatScore(weightedScore(protonVpnPick))}/10
             </h3>
             <p className="mt-1 text-bw-gray italic">Swiss-based, open source, free tier with no data limit</p>
             <p className="mt-4 text-bw-text">
@@ -303,7 +311,7 @@ export default function VPNPage() {
           {/* 3. Surfshark */}
           <section id="surfshark">
             <h3 className="text-xl font-bold text-bw-black">
-              3. Surfshark — 7.6/10
+              3. Surfshark — {formatScore(weightedScore(surfsharkPick))}/10
             </h3>
             <p className="mt-1 text-bw-gray italic">Unlimited devices, budget price — owned by Nord Security</p>
             <p className="mt-4 text-bw-text">
@@ -350,7 +358,7 @@ export default function VPNPage() {
           {/* 4. NordVPN */}
           <section id="nordvpn">
             <h3 className="text-xl font-bold text-bw-black">
-              4. <Link href="/reviews/nordvpn" className="text-bw-blue hover:underline">NordVPN</Link> — 7.4/10
+              4. <Link href="/reviews/nordvpn" className="text-bw-blue hover:underline">NordVPN</Link> — {formatScore(weightedScore(nordVpnPick))}/10
             </h3>
             <p className="mt-1 text-bw-gray italic">The most recognised name in VPN — with a complicated history</p>
             <p className="mt-4 text-bw-text">
@@ -403,7 +411,7 @@ export default function VPNPage() {
           {/* 5. ExpressVPN */}
           <section id="expressvpn">
             <h3 className="text-xl font-bold text-bw-black">
-              5. ExpressVPN — 6.2/10
+              5. ExpressVPN — {formatScore(weightedScore(expressVpnPick))}/10
             </h3>
             <p className="mt-1 text-bw-gray italic">Premium pricing, declining reliability, controversial ownership</p>
             <p className="mt-4 text-bw-text">

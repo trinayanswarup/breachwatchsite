@@ -1,5 +1,6 @@
 import ProductCTA from '@/components/ProductCTA';
 import Link from 'next/link';
+import { formatScore } from '@/lib/scoring';
 
 export interface RankedCardProps {
   rank: number;
@@ -77,7 +78,7 @@ export default function RankedCard({
       {/* Right panel */}
       <div className="bg-bw-light border-l border-black/10 px-4 py-3.5 min-w-[160px] flex flex-col items-center justify-between gap-2.5">
         <div className="text-center">
-          <div className="text-[30px] font-bold text-bw-black leading-none">{score.toFixed(1)}</div>
+          <div className="text-[30px] font-bold text-bw-black leading-none">{formatScore(score)}</div>
           <div className="text-[11px] text-bw-gray">/10</div>
         </div>
         <div className="w-full">

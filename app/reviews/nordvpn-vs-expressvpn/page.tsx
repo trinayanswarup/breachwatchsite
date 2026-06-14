@@ -5,8 +5,10 @@ import Footer from '@/components/Footer';
 import ComparisonTable from '@/components/ComparisonTable';
 import ProductCTA from '@/components/ProductCTA';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
+import { calculateWeightedScore, formatScore, getTopProduct } from '@/lib/scoring';
 import type { Product, ScoringCriteria } from '@/lib/types';
 import FreshnessNote from '@/components/FreshnessNote';
+import EvidencePanel from '@/components/EvidencePanel';
 import vpnsRaw from '@/data/vpns.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 import JsonLd from '@/components/JsonLd';
@@ -14,7 +16,7 @@ import JsonLd from '@/components/JsonLd';
 export const metadata: Metadata = {
   title: 'NordVPN vs ExpressVPN 2026 — Which Is Actually Better?',
   description:
-    'Side-by-side comparison: NordVPN (8.05/10) vs ExpressVPN (7.00/10). ExpressVPN is faster but costs 67% more and is owned by Kape Technologies. The verdict is clear.',
+    'Side-by-side comparison: NordVPN vs ExpressVPN. ExpressVPN is faster, but costs more and is owned by Kape Technologies.',
 };
 
 const vpns = vpnsRaw as unknown as Product[];
@@ -23,6 +25,9 @@ const criteria = (criteriaRaw as unknown as ScoringCriteria).vpn;
 const nord = vpns.find((p) => p.id === 'nordvpn')!;
 const express = vpns.find((p) => p.id === 'expressvpn')!;
 const pair = [nord, express];
+const nordScore = calculateWeightedScore(nord, criteria);
+const expressScore = calculateWeightedScore(express, criteria);
+const topVpn = getTopProduct(vpns, criteria);
 
 function cta(product: Product): string {
   const raw = affiliateLinks[product.id] ?? product.affiliateUrl;
@@ -74,8 +79,8 @@ export default function NordVpnVsExpressVpnPage() {
             </h1>
             <p className="mt-4 text-lg text-bw-text">
               This comparison has a clear answer: <strong className="text-bw-black">NordVPN
-              wins</strong> at <strong>8.05/10</strong> versus ExpressVPN&apos;s
-              <strong> 7.00/10</strong>. ExpressVPN is marginally faster, but NordVPN
+              wins</strong> at <strong>{formatScore(nordScore)}/10</strong> versus ExpressVPN&apos;s
+              <strong> {formatScore(expressScore)}/10</strong>. ExpressVPN is marginally faster, but NordVPN
               is cheaper, has a more credible audit record, and does not carry the
               Kape Technologies ownership question that ExpressVPN has carried since
               2021. On every criterion except raw speed, NordVPN is the better choice.
@@ -83,6 +88,7 @@ export default function NordVpnVsExpressVpnPage() {
             <FreshnessNote>
               Comparison uses the VPN methodology, ownership records, pricing, and audit context checked in June 2026.
             </FreshnessNote>
+            <EvidencePanel category="vpn" />
 
             <div className="mt-4 rounded-[3px] bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
               <strong>Independence note:</strong> Product links use direct links
@@ -231,7 +237,7 @@ export default function NordVpnVsExpressVpnPage() {
             <p className="mb-3 text-bw-text">
               <strong className="text-bw-black">Choose NordVPN if:</strong> you want a
               well-audited, fast VPN at a competitive price. The PwC audit, Panama
-              jurisdiction, 10 device connections, and 8.05/10 score make it the better
+              jurisdiction, 10 device connections, and {formatScore(nordScore)}/10 score make it the better
               all-round choice for most users. The 2018 breach is a historical mark
               against it but the company&apos;s response has been substantive.
             </p>
@@ -250,11 +256,11 @@ export default function NordVpnVsExpressVpnPage() {
           <div className="mx-auto max-w-3xl">
             <h2 className="mb-3 text-2xl font-bold text-bw-black">Verdict</h2>
             <p className="mb-6 text-bw-text">
-              NordVPN scores <strong>8.05/10</strong> versus ExpressVPN&apos;s{' '}
-              <strong>7.00/10</strong>. ExpressVPN is genuinely faster, but the Kape
+              NordVPN scores <strong>{formatScore(nordScore)}/10</strong> versus ExpressVPN&apos;s{' '}
+              <strong>{formatScore(expressScore)}/10</strong>. ExpressVPN is genuinely faster, but the Kape
               Technologies ownership, higher price, and marginally weaker audit
               credentials mean NordVPN is the better choice for almost everyone. Neither
-              is our overall top VPN pick — that goes to ProtonVPN at 8.25/10.
+              is our overall top VPN pick ? that goes to {topVpn.name} at {formatScore(calculateWeightedScore(topVpn, criteria))}/10.
             </p>
             <div className="flex flex-wrap gap-3">
               <ProductCTA

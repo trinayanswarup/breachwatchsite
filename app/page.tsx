@@ -4,38 +4,15 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import RecentBreaches from '@/components/RecentBreaches';
 import SecurityNews from '@/components/SecurityNews';
-import type { Criterion, Product, ScoringCriteria } from '@/lib/types';
-import vpnsJson from '@/data/vpns.json';
-import passwordManagersJson from '@/data/password-managers.json';
-import antivirusJson from '@/data/antivirus.json';
-import twoFaAppsJson from '@/data/2fa-apps.json';
-import criteriaJson from '@/data/scoring-criteria.json';
+import { calculateWeightedScore, formatScore } from '@/lib/scoring';
+import { homepageTopPicks } from '@/lib/top-picks';
+import type { Product } from '@/lib/types';
 
 export const metadata: Metadata = {
   title: { absolute: 'BreachWatch — Honest Cybersecurity Tool Comparisons' },
   description:
     'Find the right VPN, password manager, or antivirus without the jargon. Transparent scoring, real comparisons, no hidden bias. Start with our free 30-second security quiz.',
 };
-
-const vpns = vpnsJson as unknown as Product[];
-const passwordManagers = passwordManagersJson as unknown as Product[];
-const antivirus = antivirusJson as unknown as Product[];
-const twoFaApps = twoFaAppsJson as unknown as Product[];
-const criteria = criteriaJson as unknown as ScoringCriteria;
-
-function weightedScore(product: Product, categoryCriteria: Criterion[]): number {
-  return categoryCriteria.reduce(
-    (sum, criterion) =>
-      sum + ((product.scores[criterion.id] ?? 0) * criterion.weight) / 100,
-    0
-  );
-}
-
-function topProduct(products: Product[], categoryCriteria: Criterion[]): Product {
-  return [...products].sort(
-    (a, b) => weightedScore(b, categoryCriteria) - weightedScore(a, categoryCriteria)
-  )[0];
-}
 
 interface CategoryCardProps {
   href: string;
@@ -82,7 +59,7 @@ interface TopPickCardProps {
   href: string;
   product: Product;
   reason: string;
-  score: number;
+  score: string;
 }
 
 function ComparisonLink({ href, title, label }: ComparisonLinkProps) {
@@ -150,7 +127,7 @@ function TopPickCard({
         </div>
         <div className="shrink-0 rounded-[3px] bg-green-100 px-3 py-2 text-center text-green-800 ring-1 ring-green-200">
           <span className="block text-[22px] font-bold leading-none">
-            {score.toFixed(1)}
+            {score}
           </span>
           <span className="block text-[10px] font-semibold uppercase tracking-wider">
             /10
@@ -164,37 +141,6 @@ function TopPickCard({
     </Link>
   );
 }
-
-const topPicks = [
-  {
-    categoryLabel: 'VPN',
-    href: '/vpn',
-    product: topProduct(vpns, criteria.vpn),
-    criteria: criteria.vpn,
-    reason: 'Highest score across logging policy, jurisdiction, audits, price, and reliability.',
-  },
-  {
-    categoryLabel: 'Password manager',
-    href: '/password-managers',
-    product: topProduct(passwordManagers, criteria['password-manager']),
-    criteria: criteria['password-manager'],
-    reason: 'Best blend of security architecture, open source code, price, and platform coverage.',
-  },
-  {
-    categoryLabel: 'Antivirus',
-    href: '/antivirus',
-    product: topProduct(antivirus, criteria.antivirus),
-    criteria: criteria.antivirus,
-    reason: 'Top score when detection, performance impact, privacy, price, and false positives are weighted.',
-  },
-  {
-    categoryLabel: '2FA app',
-    href: '/2fa-apps',
-    product: topProduct(twoFaApps, criteria['2fa-apps']),
-    criteria: criteria['2fa-apps'],
-    reason: 'Strongest score for backup, recovery, export, reliability, and open-source signals.',
-  },
-];
 
 export default function HomePage() {
   return (
@@ -331,14 +277,14 @@ export default function HomePage() {
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {topPicks.map((pick) => (
+              {homepageTopPicks.map((pick) => (
                 <TopPickCard
                   key={pick.categoryLabel}
                   categoryLabel={pick.categoryLabel}
                   href={pick.href}
                   product={pick.product}
                   reason={pick.reason}
-                  score={weightedScore(pick.product, pick.criteria)}
+                  score={formatScore(calculateWeightedScore(pick.product, pick.criteria))}
                 />
               ))}
             </div>
