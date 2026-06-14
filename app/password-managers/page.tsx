@@ -142,7 +142,6 @@ export default function PasswordManagersPage() {
             <FreshnessNote>
               Scores reflect public audits, pricing, platform support, open-source status, and breach history checked in June 2026.
             </FreshnessNote>
-            <EvidencePanel category="password-manager" />
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
@@ -423,6 +422,10 @@ export default function PasswordManagersPage() {
             Rankings are based on published criteria.{' '}
             <Link href="/disclosure" className="text-bw-blue underline">Learn more -&gt;</Link>
           </p>
+        </section>
+
+        <section className="mx-auto max-w-3xl px-4 pb-10">
+          <EvidencePanel category="password-manager" />
         </section>
 
         {/* FAQ */}

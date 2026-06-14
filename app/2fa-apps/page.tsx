@@ -144,7 +144,6 @@ export default function TwoFAPage() {
             <FreshnessNote>
               Scores reflect backup, recovery, export, cloud sync, and open-source signals checked in June 2026.
             </FreshnessNote>
-            <EvidencePanel category="2fa-apps" />
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
@@ -406,6 +405,10 @@ export default function TwoFAPage() {
             Rankings are based on published criteria.{' '}
             <Link href="/disclosure" className="text-bw-blue underline">Learn more -&gt;</Link>
           </p>
+        </section>
+
+        <section className="mx-auto max-w-3xl px-4 pb-10">
+          <EvidencePanel category="2fa-apps" />
         </section>
 
         {/* FAQ */}
