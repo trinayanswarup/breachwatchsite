@@ -2,11 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import ProductCard from '@/components/ProductCard';
 import RecentBreaches from '@/components/RecentBreaches';
 import SecurityNews from '@/components/SecurityNews';
-import type { Product } from '@/lib/types';
+import type { Criterion, Product, ScoringCriteria } from '@/lib/types';
 import vpnsJson from '@/data/vpns.json';
+import passwordManagersJson from '@/data/password-managers.json';
+import antivirusJson from '@/data/antivirus.json';
+import twoFaAppsJson from '@/data/2fa-apps.json';
+import criteriaJson from '@/data/scoring-criteria.json';
 
 export const metadata: Metadata = {
   title: { absolute: 'BreachWatch — Honest Cybersecurity Tool Comparisons' },
@@ -15,8 +18,24 @@ export const metadata: Metadata = {
 };
 
 const vpns = vpnsJson as unknown as Product[];
+const passwordManagers = passwordManagersJson as unknown as Product[];
+const antivirus = antivirusJson as unknown as Product[];
+const twoFaApps = twoFaAppsJson as unknown as Product[];
+const criteria = criteriaJson as unknown as ScoringCriteria;
 
-const featuredProduct = vpns.find((p) => p.id === 'protonvpn')!;
+function weightedScore(product: Product, categoryCriteria: Criterion[]): number {
+  return categoryCriteria.reduce(
+    (sum, criterion) =>
+      sum + ((product.scores[criterion.id] ?? 0) * criterion.weight) / 100,
+    0
+  );
+}
+
+function topProduct(products: Product[], categoryCriteria: Criterion[]): Product {
+  return [...products].sort(
+    (a, b) => weightedScore(b, categoryCriteria) - weightedScore(a, categoryCriteria)
+  )[0];
+}
 
 interface CategoryCardProps {
   href: string;
@@ -56,6 +75,14 @@ interface FreeToolLinkProps {
   href: string;
   title: string;
   description: string;
+}
+
+interface TopPickCardProps {
+  categoryLabel: string;
+  href: string;
+  product: Product;
+  reason: string;
+  score: number;
 }
 
 function ComparisonLink({ href, title, label }: ComparisonLinkProps) {
@@ -99,6 +126,75 @@ function FreeToolLink({ href, title, description }: FreeToolLinkProps) {
     </Link>
   );
 }
+
+function TopPickCard({
+  categoryLabel,
+  href,
+  product,
+  reason,
+  score,
+}: TopPickCardProps) {
+  return (
+    <Link
+      href={href}
+      className="group flex min-h-[180px] flex-col border border-black/10 bg-white p-5 transition-all hover:border-bw-blue hover:shadow-sm"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
+            {categoryLabel}
+          </p>
+          <h3 className="mt-2 text-[18px] font-bold text-bw-black group-hover:text-bw-blue">
+            {product.name}
+          </h3>
+        </div>
+        <div className="shrink-0 rounded-[3px] bg-green-100 px-3 py-2 text-center text-green-800 ring-1 ring-green-200">
+          <span className="block text-[22px] font-bold leading-none">
+            {score.toFixed(1)}
+          </span>
+          <span className="block text-[10px] font-semibold uppercase tracking-wider">
+            /10
+          </span>
+        </div>
+      </div>
+      <p className="mt-3 text-[13px] leading-5 text-bw-text">{reason}</p>
+      <p className="mt-auto pt-5 text-[12px] font-bold text-bw-blue">
+        View category -&gt;
+      </p>
+    </Link>
+  );
+}
+
+const topPicks = [
+  {
+    categoryLabel: 'VPN',
+    href: '/vpn',
+    product: topProduct(vpns, criteria.vpn),
+    criteria: criteria.vpn,
+    reason: 'Highest score across logging policy, jurisdiction, audits, price, and reliability.',
+  },
+  {
+    categoryLabel: 'Password manager',
+    href: '/password-managers',
+    product: topProduct(passwordManagers, criteria['password-manager']),
+    criteria: criteria['password-manager'],
+    reason: 'Best blend of security architecture, open source code, price, and platform coverage.',
+  },
+  {
+    categoryLabel: 'Antivirus',
+    href: '/antivirus',
+    product: topProduct(antivirus, criteria.antivirus),
+    criteria: criteria.antivirus,
+    reason: 'Top score when detection, performance impact, privacy, price, and false positives are weighted.',
+  },
+  {
+    categoryLabel: '2FA app',
+    href: '/2fa-apps',
+    product: topProduct(twoFaApps, criteria['2fa-apps']),
+    criteria: criteria['2fa-apps'],
+    reason: 'Strongest score for backup, recovery, export, reliability, and open-source signals.',
+  },
+];
 
 export default function HomePage() {
   return (
@@ -220,30 +316,31 @@ export default function HomePage() {
         <RecentBreaches />
         <SecurityNews />
 
-        {/* Featured pick */}
+        {/* Top picks */}
         <section className="border-t border-black/10 px-5 py-12">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-5 flex items-baseline justify-between gap-4">
-              <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
-                  Featured pick this month
-                </p>
-                <h2 className="mt-1 text-[20px] font-bold text-bw-black">
-                  Our top-rated VPN
-                </h2>
-              </div>
-              <Link
-                href="/vpn"
-                className="shrink-0 text-[13px] font-medium text-bw-blue hover:text-bw-blue-dark"
-              >
-                See all VPNs →
-              </Link>
+            <div className="mb-5">
+              <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
+                Top picks by category
+              </p>
+              <h2 className="mt-1 text-[20px] font-bold text-bw-black">
+                The current leaders from our scoring model.
+              </h2>
+              <p className="mt-2 max-w-2xl text-[13px] leading-6 text-bw-gray">
+                Top picks are calculated from published criteria, not paid placement.
+              </p>
             </div>
-            <p className="mb-4 text-[11px] text-bw-gray">
-              Direct product link. Featured because it scores highest in our methodology.
-            </p>
-            <div className="max-w-sm">
-              <ProductCard product={featuredProduct} category="vpn" featured />
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {topPicks.map((pick) => (
+                <TopPickCard
+                  key={pick.categoryLabel}
+                  categoryLabel={pick.categoryLabel}
+                  href={pick.href}
+                  product={pick.product}
+                  reason={pick.reason}
+                  score={weightedScore(pick.product, pick.criteria)}
+                />
+              ))}
             </div>
           </div>
         </section>
