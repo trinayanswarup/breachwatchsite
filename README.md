@@ -74,13 +74,19 @@ The live site is intentionally non-affiliate right now.
 
 This avoids claiming affiliate relationships before they exist and keeps the project compatible with a free deployment path.
 
+Interview framing:
+
+> BreachWatch is live as a trust-first, non-affiliate portfolio project. Product rankings come from editorial scoring criteria, not commercial placement. All product CTA URLs still flow through one helper, `src/lib/affiliate.ts`, so approved affiliate links could be enabled later without rewriting category pages, review pages, or product card components. Monetization is intentionally isolated from the scoring system.
+
 ---
 
 ## Affiliate-Ready Architecture
 
-The old affiliate architecture is intentionally left easy to re-enable later, because the project may need to demonstrate affiliate marketing readiness.
+The affiliate-ready architecture is intentionally left easy to enable later, because the project may need to demonstrate commercial readiness without changing the live site's current non-affiliate stance.
 
 The switch point is `src/lib/affiliate.ts`.
+
+Every category page, review page, and shared product CTA component should resolve commercial product links through `buildAffiliateUrl(href, product, category, pageType)`. Direct informational links, such as source articles or security-news links, can stay as normal external links.
 
 To enable affiliate links later:
 
@@ -111,6 +117,23 @@ Brutal note: do not enable those links on a free deployment if the host terms re
 
 ---
 
+## Private Analytics
+
+BreachWatch does not expose a public `/stats` page. Builder metrics live in the private Vercel Analytics dashboard.
+
+The app uses Vercel Analytics for anonymous page-view data and custom events for key product behavior:
+
+- `quiz_start`
+- `quiz_complete`
+- `recommended_product_click`
+- `product_link_click`
+- `category_view`
+- `comparison_view`
+
+The intended funnel is: category or review visit -> quiz start -> quiz complete -> recommended category click -> product CTA click. Quiz answers are not stored; only aggregate event metadata is sent to analytics.
+
+---
+
 ## Scoring
 
 Every product is scored from JSON data in `src/data/`. Criteria are category-specific and weights sum to 100. The methodology is published at `/how-we-test`.
@@ -131,6 +154,7 @@ To change criteria weights, edit `src/data/scoring-criteria.json`.
 - [ ] `/sitemap.xml` renders after build
 - [ ] `/robots.txt` renders after build
 - [ ] Footer legal links work
+- [ ] No public `/stats` route is exposed
 - [ ] Public pages match the current non-affiliate status
 - [ ] If affiliate links are enabled later, disclosure/privacy copy is updated first
 

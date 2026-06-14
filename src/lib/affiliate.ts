@@ -1,3 +1,11 @@
+/**
+ * Single switch point for product CTA destinations.
+ *
+ * BreachWatch is intentionally non-affiliate today: live product CTAs either
+ * use direct official links or fall back to internal review pages. If affiliate
+ * programmes are approved later, replace entries here without changing page
+ * components or editorial scoring logic.
+ */
 export const affiliateLinks: Record<string, string> = {
   nordvpn: 'PLACEHOLDER',
   expressvpn: 'PLACEHOLDER',

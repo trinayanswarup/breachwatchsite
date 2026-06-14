@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import type { QuizResult } from '@/lib/quiz';
 import ShareScore from '@/components/ShareScore';
+import { trackRecommendedProductClick } from '@/lib/analytics';
 
 export interface QuizResultProps {
   result: QuizResult;
@@ -72,6 +75,9 @@ function ScoreBadge({ score }: { score: number }) {
 
 export default function QuizResultComponent({ result }: QuizResultProps) {
   const meta = CATEGORY_META[result.recommendedCategory];
+  const handleRecommendedClick = () => {
+    trackRecommendedProductClick(result.recommendedCategory, result.score);
+  };
 
   return (
     <div className="mx-auto max-w-xl px-4 py-10">
@@ -113,6 +119,7 @@ export default function QuizResultComponent({ result }: QuizResultProps) {
       <div className="space-y-3">
         <Link
           href={meta.href}
+          onClick={handleRecommendedClick}
           className="flex w-full items-center justify-center gap-2 rounded-[3px] bg-blue-600 px-6 py-4 text-base font-bold text-white transition-colors hover:bg-blue-700"
         >
           {meta.ctaLabel} <span aria-hidden="true">→</span>

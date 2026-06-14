@@ -20,6 +20,13 @@ export function trackProductLinkClick(
   track('product_link_click', { product, category, page });
 }
 
+export function trackRecommendedProductClick(
+  recommendedCategory: string,
+  score: number
+): void {
+  track('recommended_product_click', { recommendedCategory, score });
+}
+
 export function trackCategoryView(category: string): void {
   track('category_view', { category });
 }
