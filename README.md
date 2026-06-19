@@ -1,168 +1,116 @@
-# BreachWatch
+# CipherCheck
 
-BreachWatch is a non-affiliate cybersecurity utility and comparison site. It combines free security tools, breach awareness, curated security links, and transparent product comparisons. The live project currently uses direct product links or internal review links, not affiliate tracking links.
+A cybersecurity tool comparison site that ranks products by documented privacy criteria — not commission size.
 
-The codebase is still affiliate-ready: monetization can be enabled later by replacing the placeholder link map and updating the public disclosure copy before launch.
+## Live Demo
 
-**Stack:** Next.js 16 App Router, TypeScript strict, Tailwind CSS v4, Groq quiz API, Vercel Analytics, next-sitemap.
+[https://ciphercheck.vercel.app](https://ciphercheck.vercel.app)
 
----
+## Screenshots
 
-## Local Development
+[Homepage screenshot] [Quiz screenshot] [Category page screenshot]
+
+## What This Is
+
+CipherCheck is a commercial cybersecurity affiliate site, not a portfolio demo. It earns revenue through affiliate commissions on VPN, password manager, antivirus, and 2FA app referrals. The trust hypothesis: most comparison sites rank NordVPN first because NordVPN pays the highest commissions — CipherCheck ranks by published scoring criteria with documented weights, which is verifiable. The cybersecurity affiliate market is substantial and almost entirely captured by sites that bury their methodology. Transparent scoring is the differentiator.
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js 16, TypeScript (strict), Tailwind CSS v4 |
+| API routes | Next.js App Router API handlers |
+| AI | Groq API (llama-3.3-70b-versatile) — security quiz |
+| Analytics | PostHog (session recording + funnels) + Vercel Analytics |
+| Data | Static JSON + ISR — no database at MVP stage |
+| Deployment | Vercel |
+| CI | GitHub Actions — lint, typecheck, build on every push |
+| Testing | Vitest — 32 tests across 5 files |
+
+## Features
+
+- **AI security quiz** (Groq) — entry point for the acquisition funnel; asks 5 questions and routes users to the most relevant product category
+- **Live breach checker** — uses HIBP k-anonymity API; only the first 5 characters of the SHA-1 hash leave the browser, never the password
+- **Inline security tools** — DNS leak test (api.ipleak.net), password strength checker (local, no API call), breach lookup — all without an account
+- **Real-time security news** — aggregates Hacker News + r/netsec + r/privacy + r/cybersecurity, deduplicated, filtered for security relevance
+- **Recent breach tracker** — HIBP public API, ISR revalidation every 24 hours
+- **Transparent scoring** — every product scored from JSON data with published criteria and weights; methodology at `/how-we-test`
+- **Affiliate disclosure** — visible on every page with affiliate links, `rel="sponsored"` on tracked links
+- **Sitemap** — `/sitemap.xml` generated post-build via next-sitemap
+
+## Architecture Decisions
+
+**Static JSON over a database:** ISR delivers sub-100ms page loads for category and comparison pages. Product data (VPNs, password managers, antivirus, 2FA apps) changes infrequently — pricing and features quarterly at most. At current traffic, a database adds operational cost and latency with no benefit. Supabase is the obvious next step if traffic validates the model.
+
+**Groq over OpenAI:** Free tier, no credit card required, and llama-3.3-70b is fast enough for a 5-question quiz. At MVP stage, zero AI inference cost matters. The quiz makes exactly one API call per submission with a safe fallback if Groq errors — no unhandled exceptions, no broken user flow.
+
+**PostHog over Vercel Analytics alone:** Vercel Analytics gives page views. PostHog gives funnels, session recordings, and feature flags. The key funnel — Homepage → Quiz → Category → Affiliate click — needs drop-off analysis to be actionable. Session recording identifies UX friction that aggregate data misses.
+
+**k-anonymity for the breach checker:** CipherCheck's brand is that it doesn't compromise user privacy for commercial convenience. Sending plaintext passwords to an API would be a direct contradiction of that. The HIBP k-anonymity model (SHA-1 hash prefix only) is the only acceptable implementation.
+
+## Growth & Analytics Setup
+
+PostHog funnel tracking the full acquisition path:
+
+```
+Homepage → Quiz start → Quiz complete → Category page → Affiliate CTA click
+```
+
+Session recording is enabled with input masking on sensitive fields. ISR revalidation is tuned per content type:
+
+| Content | Revalidation |
+|---|---|
+| Security news | 2 hours |
+| Recent breaches | 24 hours |
+| Category / comparison pages | 1 year (data changes trigger a rebuild) |
+| Static pages (about, disclosure) | 1 year |
+
+## AI-Native Development Workflow
+
+Built using Claude (Anthropic) for architecture scaffolding, UI iteration, scoring algorithm generation, and TypeScript type design. All AI-generated code was reviewed, tested against the Vitest suite, and adapted to project constraints — not copy-pasted. The workflow compressed an estimated 3–4 week build into significantly less time while maintaining TypeScript strict mode throughout and zero `any` types in the codebase.
+
+## Running Locally
 
 ```bash
+git clone https://github.com/trinayanswarup/ciphercheck
+cd ciphercheck
 npm install
 cp .env.example .env.local
+```
+
+Edit `.env.local` and set:
+
+```
+GROQ_API_KEY=          # console.groq.com — free, no credit card
+NEXT_PUBLIC_POSTHOG_KEY=  # app.posthog.com → Project Settings → API Key
+```
+
+```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
 
----
-
-## Environment Variables
-
-| Variable | Required | Notes |
-|---|---|---|
-| `GROQ_API_KEY` | Yes for live quiz AI | The quiz falls back safely if missing or if Groq errors. |
-| `VERCEL_ACCESS_TOKEN` | No | Optional for future analytics/admin work. |
-| `VERCEL_PROJECT_ID` | No | Optional for future analytics/admin work. |
-
----
-
-## Commands
+## Testing
 
 ```bash
-npm run dev
-npm run lint
-npm run typecheck
 npm run test
-npm run build
-npm run smoke
-npm start
 ```
 
----
+32 tests across 5 files covering scoring logic, k-anonymity hash utilities, API route behaviour, and affiliate URL construction.
 
-## Project Structure
-
-```text
-app/                         App Router pages
-app/news/                    Curated security links
-app/breaches/                Public breach records and response advice
-app/tools/                   Free browser-safe tools
-app/comparisons/[slug]/      Short comparison pages
-app/reviews/                 Review and comparison articles
-app/disclosure/              Funding and independence page
-
-src/components/              Shared React components
-src/data/                    Product data and scoring criteria
-src/lib/                     Link helpers, analytics, quiz logic, types
+```bash
+npm run lint       # ESLint
+npm run typecheck  # tsc --noEmit (strict mode, zero any)
+npm run build      # production build + sitemap generation
 ```
 
----
+## Roadmap
 
-## Current Monetization Status
+If affiliate revenue validates the model:
 
-The live site is intentionally non-affiliate right now.
-
-- Product buttons use official product links where available.
-- Placeholder products fall back to internal review pages.
-- The public disclosure page says the site is currently non-affiliate.
-- CTAs do not use `rel="sponsored"`.
-- Product links do not append affiliate UTM parameters.
-- Rankings are not paid placements.
-
-This avoids claiming affiliate relationships before they exist and keeps the project compatible with a free deployment path.
-
-Interview framing:
-
-> BreachWatch is live as a trust-first, non-affiliate portfolio project. Product rankings come from editorial scoring criteria, not commercial placement. All product CTA URLs still flow through one helper, `src/lib/affiliate.ts`, so approved affiliate links could be enabled later without rewriting category pages, review pages, or product card components. Monetization is intentionally isolated from the scoring system.
-
----
-
-## Affiliate-Ready Architecture
-
-The affiliate-ready architecture is intentionally left easy to enable later, because the project may need to demonstrate commercial readiness without changing the live site's current non-affiliate stance.
-
-The switch point is `src/lib/affiliate.ts`.
-
-Every category page, review page, and shared product CTA component should resolve commercial product links through `buildAffiliateUrl(href, product, category, pageType)`. Direct informational links, such as source articles or security-news links, can stay as normal external links.
-
-To enable affiliate links later:
-
-1. Replace each `PLACEHOLDER` with an approved tracking URL.
-2. Change `buildAffiliateUrl` to append the required tracking parameters.
-3. Restore `rel="sponsored"` on paid links.
-4. Update `/disclosure`, `/privacy`, footer copy, and product pages before deploying.
-5. Confirm the deployment plan allows affiliate/commercial usage.
-
-Potential programs to apply for later:
-
-| Product | Program |
-|---|---|
-| NordVPN | NordVPN Partners |
-| ExpressVPN | ExpressVPN Affiliates / CJ |
-| Surfshark | Surfshark Affiliates |
-| Proton VPN | Proton affiliate program |
-| 1Password | 1Password affiliate / partner program |
-| Dashlane | Dashlane affiliates |
-| NordPass | NordPass partners |
-| Keeper | Keeper affiliates |
-| Malwarebytes | Impact.com |
-| Bitdefender | Bitdefender affiliates |
-| Norton | CJ Affiliate |
-| ESET | ESET affiliates |
-
-Brutal note: do not enable those links on a free deployment if the host terms require a paid/commercial plan.
-
----
-
-## Private Analytics
-
-BreachWatch does not expose a public `/stats` page. Builder metrics live in the private Vercel Analytics dashboard.
-
-The app uses Vercel Analytics for anonymous page-view data and custom events for key product behavior:
-
-- `quiz_start`
-- `quiz_complete`
-- `recommended_product_click`
-- `product_link_click`
-- `category_view`
-- `comparison_view`
-
-The intended funnel is: category or review visit -> quiz start -> quiz complete -> recommended category click -> product CTA click. Quiz answers are not stored; only aggregate event metadata is sent to analytics.
-
----
-
-## Scoring
-
-Every product is scored from JSON data in `src/data/`. Criteria are category-specific and weights sum to 100. The methodology is published at `/how-we-test`.
-
-To update a product score, edit the product `scores` object in the relevant JSON file.
-
-To change criteria weights, edit `src/data/scoring-criteria.json`.
-
-For interview context, see `CASE_STUDY.md`. It explains the scoring model, evidence trail, non-affiliate architecture, analytics funnel, fallback behavior, and verification strategy.
-
----
-
-## Pre-Launch Checklist
-
-- [ ] `npm run lint` passes
-- [ ] `npm run typecheck` passes
-- [ ] `npm run test` passes
-- [ ] `npm run build` passes
-- [ ] `GROQ_API_KEY` is configured for production
-- [ ] `/sitemap.xml` renders after build
-- [ ] `/robots.txt` renders after build
-- [ ] Footer legal links work
-- [ ] No public `/stats` route is exposed
-- [ ] Public pages match the current non-affiliate status
-- [ ] If affiliate links are enabled later, disclosure/privacy copy is updated first
-
----
-
-## CI
-
-GitHub Actions runs lint, tests, and build on every push and pull request to `main`.
+- Migrate data layer to Supabase — product data as rows, scores computed server-side, admin UI for editorial updates
+- User accounts — saved comparisons, personalised quiz results, email breach alerts
+- Expand to 50+ products per category with automated data freshness checks
+- A/B test quiz question ordering using PostHog feature flags to optimise category routing
+- Expand to adjacent categories: identity theft protection, browser extensions, secure email
