@@ -7,7 +7,6 @@ import RankedCard from '@/components/RankedCard';
 import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
-import FreshnessNote from '@/components/FreshnessNote';
 import EvidencePanel from '@/components/EvidencePanel';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import { calculateWeightedScore, formatScore, sortProductsByScore } from '@/lib/scoring';
@@ -16,7 +15,7 @@ import productsRaw from '@/data/password-managers.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 
 export const metadata: Metadata = {
-  title: 'Best Password Managers 2026 — Ranked on Security, Not Marketing',
+  title: 'Best Password Managers 2026: Ranked on Security, Not Marketing',
   description:
     'We scored 6 password managers on zero-knowledge design, open source code, and real reliability. Bitwarden leads at 9.3/10 and is free. See the full methodology.',
 };
@@ -133,15 +132,11 @@ export default function PasswordManagersPage() {
         <section className="px-5 pt-14 pb-10 text-center">
           <div className="mx-auto max-w-[680px]">
             <h1 className="text-[32px] font-bold leading-tight text-bw-black">
-              Best Password Managers of 2026 — Ranked on Security, Not Marketing
+              Best Password Managers of 2026: Ranked on Security, Not Marketing
             </h1>
             <p className="mt-3.5 text-[15px] text-bw-gray leading-relaxed max-w-[500px] mx-auto">
-              We scored six products on zero-knowledge architecture, open source code, and real
-              reliability. Bitwarden leads at 9.3/10 and is free. See the full methodology.
+              Six products scored on zero-knowledge architecture, open source code, and real reliability. Bitwarden leads at 9.3/10 and is free.
             </p>
-            <FreshnessNote>
-              Scores reflect public audits, pricing, platform support, open-source status, and breach history checked in June 2026.
-            </FreshnessNote>
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
@@ -190,14 +185,14 @@ export default function PasswordManagersPage() {
         {/* Individual product write-ups */}
         <section className="mx-auto max-w-3xl px-4 py-12 space-y-14">
           <h2 className="text-2xl font-bold text-bw-black">
-            Detailed breakdown — every password manager reviewed
+            Detailed breakdown: every password manager reviewed
           </h2>
 
           {/* Bitwarden */}
           <article id="bitwarden">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                1. Bitwarden — {formatScore(weightedScore(ranked[0]))}/10
+                1. Bitwarden: {formatScore(weightedScore(ranked[0]))}/10
               </h3>
               <span className="rounded-[3px] bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 Winner
@@ -238,7 +233,7 @@ export default function PasswordManagersPage() {
           <article id="protonpass">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                2. Proton Pass — {formatScore(weightedScore(ranked[1]))}/10
+                2. Proton Pass: {formatScore(weightedScore(ranked[1]))}/10
               </h3>
               <span className="rounded-[3px] bg-bw-blue/10 px-3 py-1 text-sm font-semibold text-bw-blue-dark">
                 Runner-up
@@ -280,7 +275,7 @@ export default function PasswordManagersPage() {
           <article id="1password">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                3. 1Password — {formatScore(weightedScore(ranked[2]))}/10
+                3. 1Password: {formatScore(weightedScore(ranked[2]))}/10
               </h3>
               <span className="rounded-[3px] bg-purple-100 px-3 py-1 text-sm font-semibold text-purple-800">
                 Premium pick
@@ -324,7 +319,7 @@ export default function PasswordManagersPage() {
           {/* Keeper */}
           <article id="keeper">
             <h3 className="text-xl font-bold text-bw-black">
-              4. Keeper — {formatScore(weightedScore(ranked[3]))}/10
+              4. Keeper: {formatScore(weightedScore(ranked[3]))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Keeper holds the strongest enterprise compliance credentials in this
@@ -347,7 +342,7 @@ export default function PasswordManagersPage() {
           {/* NordPass */}
           <article id="nordpass">
             <h3 className="text-xl font-bold text-bw-black">
-              5. NordPass — {formatScore(weightedScore(ranked[4]))}/10
+              5. NordPass: {formatScore(weightedScore(ranked[4]))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               NordPass uses XChaCha20 encryption — a more modern algorithm than the
@@ -371,7 +366,7 @@ export default function PasswordManagersPage() {
           {/* Dashlane */}
           <article id="dashlane">
             <h3 className="text-xl font-bold text-bw-black">
-              6. Dashlane — {formatScore(weightedScore(ranked[5]))}/10
+              6. Dashlane: {formatScore(weightedScore(ranked[5]))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Dashlane is the most expensive option at $4.99/month, which bundles a VPN
@@ -418,7 +413,7 @@ export default function PasswordManagersPage() {
           <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
             Scores calculated from{' '}
             <Link href="/how-we-test" className="text-bw-blue underline">published criteria</Link>.
-            {' '}BreachWatch uses direct product links, not affiliate links.
+            {' '}CipherCheck uses direct product links, not affiliate links.
             Rankings are based on published criteria.{' '}
             <Link href="/disclosure" className="text-bw-blue underline">Learn more -&gt;</Link>
           </p>

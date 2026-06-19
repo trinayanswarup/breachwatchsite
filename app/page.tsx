@@ -6,53 +6,15 @@ import RecentBreaches from '@/components/RecentBreaches';
 import SecurityNews from '@/components/SecurityNews';
 import { calculateWeightedScore, formatScore } from '@/lib/scoring';
 import { homepageTopPicks } from '@/lib/top-picks';
-import type { Product } from '@/lib/types';
+import type { Product, ScoringCriteria } from '@/lib/types';
+import vpnsJson from '@/data/vpns.json';
+import criteriaJson from '@/data/scoring-criteria.json';
 
 export const metadata: Metadata = {
-  title: { absolute: 'BreachWatch — Honest Cybersecurity Tool Comparisons' },
+  title: { absolute: 'CipherCheck: Honest Cybersecurity Tool Comparisons' },
   description:
-    'Find the right VPN, password manager, or antivirus without the jargon. Transparent scoring, real comparisons, no hidden bias. Start with our free 30-second security quiz.',
+    'Find the right VPN, password manager, or antivirus without the jargon. Real comparisons with documented scoring. Start with our free security quiz.',
 };
-
-interface CategoryCardProps {
-  href: string;
-  icon: string;
-  title: string;
-  description: string;
-  count: number;
-}
-
-function CategoryCard({ href, icon, title, description, count }: CategoryCardProps) {
-  return (
-    <Link
-      href={href}
-      className="group flex flex-col gap-3 border border-black/10 bg-white p-5 transition-all hover:border-bw-blue hover:shadow-sm"
-    >
-      <span className="text-2xl" aria-hidden="true">{icon}</span>
-      <div>
-        <h3 className="font-bold text-bw-black group-hover:text-bw-blue transition-colors text-[15px]">
-          {title}
-        </h3>
-        <p className="mt-1 text-[13px] text-bw-gray">{description}</p>
-      </div>
-      <p className="mt-auto text-[12px] font-medium text-bw-blue">
-        {count} products scored →
-      </p>
-    </Link>
-  );
-}
-
-interface ComparisonLinkProps {
-  href: string;
-  title: string;
-  label: string;
-}
-
-interface FreeToolLinkProps {
-  href: string;
-  title: string;
-  description: string;
-}
 
 interface TopPickCardProps {
   categoryLabel: string;
@@ -62,221 +24,196 @@ interface TopPickCardProps {
   score: string;
 }
 
-function ComparisonLink({ href, title, label }: ComparisonLinkProps) {
+function TopPickCard({ categoryLabel, href, product, reason, score }: TopPickCardProps) {
   return (
     <Link
       href={href}
-      className="group flex items-center justify-between border border-black/10 bg-white px-4 py-3.5 transition-all hover:border-bw-blue"
-    >
-      <div>
-        <span className="block text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
-          {label}
-        </span>
-        <span className="mt-0.5 block text-[13px] font-medium text-bw-black group-hover:text-bw-blue">
-          {title}
-        </span>
-      </div>
-      <span className="shrink-0 text-bw-gray group-hover:text-bw-blue transition-colors" aria-hidden="true">
-        →
-      </span>
-    </Link>
-  );
-}
-
-function FreeToolLink({ href, title, description }: FreeToolLinkProps) {
-  return (
-    <Link
-      href={href}
-      className="group flex items-start justify-between gap-4 border border-black/10 bg-white px-4 py-3.5 transition-all hover:border-bw-blue"
-    >
-      <span>
-        <span className="block text-[14px] font-bold text-bw-black group-hover:text-bw-blue">
-          {title}
-        </span>
-        <span className="mt-1 block text-[12px] leading-5 text-bw-gray">
-          {description}
-        </span>
-      </span>
-      <span className="mt-0.5 shrink-0 text-bw-gray group-hover:text-bw-blue" aria-hidden="true">
-        -&gt;
-      </span>
-    </Link>
-  );
-}
-
-function TopPickCard({
-  categoryLabel,
-  href,
-  product,
-  reason,
-  score,
-}: TopPickCardProps) {
-  return (
-    <Link
-      href={href}
-      className="group flex min-h-[180px] flex-col border border-black/10 bg-white p-5 transition-all hover:border-bw-blue hover:shadow-sm"
+      className="group flex min-h-[180px] flex-col border border-black/15 bg-white p-5 transition-all hover:border-black hover:shadow-[4px_4px_0_0_rgba(0,0,0,0.1)] rounded-none"
     >
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
-            {categoryLabel}
+          <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue mb-1">
+            {categoryLabel} Winner
           </p>
-          <h3 className="mt-2 text-[18px] font-bold text-bw-black group-hover:text-bw-blue">
+          <h3 className="text-[18px] font-bold text-bw-black group-hover:text-bw-blue tracking-tight">
             {product.name}
           </h3>
         </div>
-        <div className="shrink-0 rounded-[3px] bg-green-100 px-3 py-2 text-center text-green-800 ring-1 ring-green-200">
-          <span className="block text-[22px] font-bold leading-none">
-            {score}
-          </span>
-          <span className="block text-[10px] font-semibold uppercase tracking-wider">
-            /10
-          </span>
+        <div className="shrink-0 bg-bw-light border border-black/10 px-3 py-2 text-center text-bw-black">
+          <span className="block text-[22px] font-bold leading-none">{score}</span>
+          <span className="block text-[10px] font-semibold uppercase tracking-wider text-bw-gray">/10</span>
         </div>
       </div>
-      <p className="mt-3 text-[13px] leading-5 text-bw-text">{reason}</p>
-      <p className="mt-auto pt-5 text-[12px] font-bold text-bw-blue">
-        View category -&gt;
+      <p className="mt-4 text-[13px] leading-relaxed text-bw-text border-l-2 border-bw-blue pl-3">
+        {reason}
+      </p>
+      <p className="mt-auto pt-5 text-[12px] font-bold text-bw-black uppercase tracking-wide group-hover:text-bw-blue">
+        View category →
       </p>
     </Link>
   );
 }
 
+const CATEGORY_LINKS = [
+  { href: '/vpn', label: 'Top VPNs' },
+  { href: '/password-managers', label: 'Top Password Managers' },
+  { href: '/antivirus', label: 'Top Antivirus' },
+  { href: '/2fa-apps', label: 'Top 2FA Apps' },
+] as const;
+
+const COMPARISON_LINKS = [
+  { href: '/reviews/nordvpn', label: 'VPN review', title: 'NordVPN Review 2026 — Is It Still Worth It?' },
+  { href: '/reviews/nordvpn-vs-expressvpn', label: 'VPN comparison', title: 'NordVPN vs ExpressVPN — Which Is Actually Better?' },
+  { href: '/reviews/bitwarden-vs-1password', label: 'Password manager', title: 'Bitwarden vs 1Password — Free vs Premium, Which Wins?' },
+] as const;
+
 export default function HomePage() {
+  const vpns = vpnsJson as unknown as Product[];
+  const criteria = criteriaJson as unknown as ScoringCriteria;
+  const protonVpn = vpns.find(v => v.id === 'protonvpn') || vpns[1];
+  const protonScore = formatScore(calculateWeightedScore(protonVpn, criteria.vpn));
+
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-white">
       <Nav />
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="px-5 pt-16 pb-12 text-center border-b border-black/10">
-          <div className="mx-auto max-w-[680px]">
-            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.1em] text-bw-gray">
-              Transparent scoring · No hidden bias
-            </p>
-            <h1 className="text-[32px] font-bold leading-tight text-bw-black">
-              Find the right cybersecurity tool — without the jargon or the bias.
-            </h1>
-            <p className="mt-3 text-[15px] text-bw-gray">
-              We score every tool on the criteria that actually matter.{' '}
-              <Link href="/how-we-test" className="text-bw-blue underline hover:text-bw-blue-dark">
-                See our methodology.
-              </Link>
-            </p>
-            <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <Link
-                href="/quiz"
-                className="rounded-[3px] bg-bw-blue px-6 py-3 text-[14px] font-bold text-white hover:bg-bw-blue-dark transition-colors"
-              >
-                Find your biggest security risk →
-              </Link>
-              <p className="text-[12px] text-bw-gray">Takes 30 seconds. No email required.</p>
-            </div>
-            <div className="mt-3">
-              <Link
-                href="/breach-checker"
-                className="text-[13px] font-medium text-bw-blue underline hover:text-bw-blue-dark transition-colors"
-              >
-                Check if your password was leaked →
-              </Link>
+        <section className="border-b border-black/15 bg-bw-light">
+          <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+            <div className="flex flex-col lg:flex-row items-center gap-12">
+              <div className="lg:w-2/3">
+                <h1 className="text-[36px] md:text-[48px] font-bold leading-tight text-bw-black tracking-tight">
+                  Find the right cybersecurity tool without the jargon.
+                </h1>
+                <p className="mt-5 text-[16px] text-bw-text leading-relaxed max-w-xl">
+                  We score every tool on the criteria that actually matter. No sponsored rankings, no AI slop. Just rigorous, published methodology.
+                </p>
+                <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  <Link
+                    href="/quiz"
+                    className="rounded-none bg-bw-blue px-8 py-4 text-[15px] font-bold text-white hover:bg-bw-blue-dark transition-colors shadow-[4px_4px_0_0_rgba(0,0,0,0.15)] hover:shadow-[2px_2px_0_0_rgba(0,0,0,0.15)] hover:translate-y-[2px] hover:translate-x-[2px]"
+                  >
+                    Find your biggest security risk →
+                  </Link>
+                  <Link href="/how-we-test" className="text-[14px] font-bold text-bw-black underline decoration-2 underline-offset-4 hover:text-bw-blue transition-colors">
+                    See our methodology
+                  </Link>
+                </div>
+              </div>
+
+              {/* Featured Pick Card */}
+              <div className="w-full lg:w-1/3">
+                <div className="border-t-4 border-t-bw-blue border-x border-b border-black/15 bg-white p-6 shadow-[8px_8px_0_0_rgba(0,0,0,0.05)] rounded-none">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
+                      Featured VPN
+                    </span>
+                    <span className="bg-green-100 text-green-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-green-200">
+                      Top Free Tier
+                    </span>
+                  </div>
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-[24px] font-bold text-bw-black tracking-tight">{protonVpn.name}</h3>
+                    <div className="shrink-0 bg-bw-light border border-black/15 px-3 py-2 text-center text-bw-black">
+                      <span className="block text-[22px] font-bold leading-none">{protonScore}</span>
+                      <span className="block text-[10px] font-semibold uppercase tracking-wider text-bw-gray">/10</span>
+                    </div>
+                  </div>
+                  <p className="mt-5 text-[14px] leading-relaxed text-bw-text border-l-2 border-bw-blue pl-4 italic">
+                    &quot;{protonVpn.verdict}&quot;
+                  </p>
+                  <Link href="/vpn" className="mt-6 block w-full border border-black/15 bg-bw-light py-3 text-center text-[13px] font-bold text-bw-black hover:bg-bw-black hover:text-white transition-colors uppercase tracking-wide">
+                    View VPN Rankings →
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Free tools */}
-        <section className="border-b border-black/10 bg-bw-light px-5 py-10">
+        {/* Two-column editorial section */}
+        <section className="border-b border-black/15 bg-bw-light px-5 py-16">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-5">
-              <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
-                Free tools
-              </p>
-              <h2 className="mt-1 text-[20px] font-bold text-bw-black">
-                No account required.
-              </h2>
-              <p className="mt-2 max-w-2xl text-[13px] leading-6 text-bw-gray">
-                These are the practical checks people can use before reading a full
-                product comparison.
-              </p>
-            </div>
-            <div className="grid gap-3 md:grid-cols-3">
-              <FreeToolLink
-                href="/breach-checker"
-                title="Check if your password was leaked"
-                description="Private k-anonymity check against known breached passwords."
-              />
-              <FreeToolLink
-                href="/quiz"
-                title="Take the 30-second security quiz"
-                description="Find the first security gap worth fixing."
-              />
-              <FreeToolLink
-                href="/tools"
-                title="Generate strong passwords"
-                description="Create local browser-generated passwords and use quick checklists."
-              />
+            <div className="lg:grid lg:grid-cols-3 lg:gap-12">
+              
+              {/* Left column (2/3): Recent Data Breaches */}
+              <div className="lg:col-span-2">
+                <RecentBreaches />
+              </div>
+
+              {/* Right column (1/3): Categories + Comparisons */}
+              <div className="flex flex-col gap-6 mt-12 lg:mt-0">
+
+                {/* Box 1: Categories */}
+                <div className="border-t-4 border-bw-blue bg-white p-6 shadow-[4px_4px_0_0_rgba(0,0,0,0.05)] border-x border-b border-black/15">
+                  <h2 className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-gray mb-3">
+                    Categories
+                  </h2>
+                  <nav>
+                    {CATEGORY_LINKS.map(({ href, label }) => (
+                      <Link
+                        key={href}
+                        href={href}
+                        className="group flex items-center justify-between border-b border-black/10 py-3 text-[14px] font-semibold text-bw-black hover:text-bw-blue transition-colors last:border-b-0"
+                      >
+                        {label}
+                        <span className="text-bw-gray group-hover:text-bw-blue transition-colors" aria-hidden="true">→</span>
+                      </Link>
+                    ))}
+                  </nav>
+                </div>
+
+                {/* Box 2: Latest Comparisons */}
+                <div className="border-t-4 border-bw-blue bg-white p-6 shadow-[4px_4px_0_0_rgba(0,0,0,0.05)] border-x border-b border-black/15">
+                  <h2 className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-gray mb-4">
+                    Latest Comparisons
+                  </h2>
+                  <ul className="flex flex-col divide-y divide-black/10">
+                    {COMPARISON_LINKS.map(({ href, label, title }) => (
+                      <li key={href}>
+                        <Link
+                          href={href}
+                          className="group flex flex-col gap-1 py-4 hover:opacity-80 transition-opacity"
+                        >
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-bw-gray">{label}</span>
+                          <span className="text-[14px] font-semibold text-bw-black group-hover:text-bw-blue leading-snug transition-colors">{title}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href="/reviews/nordvpn"
+                    className="mt-6 block border border-black/15 bg-bw-light py-3 text-center text-[13px] font-bold text-bw-black hover:bg-bw-black hover:text-white transition-colors uppercase tracking-wide"
+                  >
+                    See all reviews →
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Category cards */}
-        <section className="mx-auto max-w-6xl px-5 py-12">
-          <h2 className="mb-1 text-[20px] font-bold text-bw-black">
-            Browse by category
-          </h2>
-          <p className="mb-6 text-[13px] text-bw-gray">
-            Every product is scored using documented criteria. No black boxes.
-          </p>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <CategoryCard
-              href="/vpn"
-              icon="🛡"
-              title="VPNs"
-              description="Protect your traffic on any network. We rank on logging policy and jurisdiction — not just speed."
-              count={5}
-            />
-            <CategoryCard
-              href="/password-managers"
-              icon="🔐"
-              title="Password Managers"
-              description="Generate and store unique passwords. We prioritise zero-knowledge architecture and open source."
-              count={5}
-            />
-            <CategoryCard
-              href="/antivirus"
-              icon="🦠"
-              title="Antivirus"
-              description="Detect and remove malware. Scores are based on AV-TEST data, not marketing claims."
-              count={5}
-            />
-            <CategoryCard
-              href="/2fa-apps"
-              icon="📱"
-              title="2FA Apps"
-              description="A second factor on every account. We score on backup and recovery — not just convenience."
-              count={5}
-            />
-          </div>
-        </section>
-
-        {/* Recent breaches + security news */}
-        <RecentBreaches />
+        {/* Security News */}
         <SecurityNews />
 
-        {/* Top picks */}
-        <section className="border-t border-black/10 px-5 py-12">
+        {/* Editor's Choice */}
+        <section className="border-t border-black/15 px-5 py-16 bg-white">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-5">
-              <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
-                Top picks by category
-              </p>
-              <h2 className="mt-1 text-[20px] font-bold text-bw-black">
-                The current leaders from our scoring model.
-              </h2>
-              <p className="mt-2 max-w-2xl text-[13px] leading-6 text-bw-gray">
-                Top picks are calculated from published criteria, not paid placement.
-              </p>
+            <div className="mb-8 border-b border-black/15 pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <div>
+                <h2 className="text-[24px] font-bold text-bw-black tracking-tight">
+                  Editor&apos;s Choice
+                </h2>
+                <p className="mt-2 text-[14px] text-bw-gray">
+                  The current leaders from our scoring model. Not paid placement.
+                </p>
+              </div>
+              <Link href="/how-we-test" className="text-[12px] font-bold text-bw-black uppercase tracking-wide hover:text-bw-blue">
+                Read methodology →
+              </Link>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {homepageTopPicks.map((pick) => (
                 <TopPickCard
                   key={pick.categoryLabel}
@@ -291,49 +228,18 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Recent comparisons */}
-        <section className="border-t border-black/10 mx-auto max-w-6xl px-5 py-12">
-          <h2 className="mb-1 text-[20px] font-bold text-bw-black">
-            Latest comparisons
-          </h2>
-          <p className="mb-6 text-[13px] text-bw-gray">
-            In-depth reviews based on real product testing and publicly verifiable data.
-          </p>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <ComparisonLink
-              href="/reviews/nordvpn"
-              title="NordVPN Review 2026 — Is It Still Worth It?"
-              label="VPN review"
-            />
-            <ComparisonLink
-              href="/reviews/nordvpn-vs-expressvpn"
-              title="NordVPN vs ExpressVPN — Which Is Actually Better?"
-              label="VPN comparison"
-            />
-            <ComparisonLink
-              href="/reviews/bitwarden-vs-1password"
-              title="Bitwarden vs 1Password — Free vs Premium, Which Wins?"
-              label="Password manager"
-            />
-          </div>
-        </section>
-
-        {/* Methodology teaser */}
-        <section className="border-t border-black/10 px-5 py-10">
-          <div className="mx-auto max-w-[680px] text-center">
-            <h2 className="text-[18px] font-bold text-bw-black">
-              How we score products
-            </h2>
-            <p className="mt-3 text-[14px] text-bw-gray leading-relaxed">
-              Every product is scored using a weighted set of criteria specific to its
-              category. The weights are published alongside every comparison. Scores are
-              calculated from the data and not adjusted for paid placements.
+        {/* Free Security Tools teaser */}
+        <section className="border-t border-black/15 bg-bw-light px-5 py-8">
+          <div className="mx-auto max-w-6xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <p className="text-[15px] text-bw-text">
+              Run a DNS leak test, password strength check, or breach lookup.{' '}
+              <span className="text-bw-gray">No account required.</span>
             </p>
             <Link
-              href="/how-we-test"
-              className="mt-4 inline-block text-[13px] font-semibold text-bw-blue underline hover:text-bw-blue-dark"
+              href="/tools"
+              className="shrink-0 rounded-none border border-bw-blue px-6 py-3 text-[13px] font-bold text-bw-blue hover:bg-bw-blue hover:text-white transition-colors uppercase tracking-wide"
             >
-              Read the full methodology →
+              Open free tools →
             </Link>
           </div>
         </section>
@@ -343,9 +249,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-
-
-
-
-

@@ -12,11 +12,11 @@ export default function Footer() {
               href="/"
               className="flex items-center gap-2 text-base font-bold text-bw-black transition-colors hover:text-bw-blue"
             >
-              <span className="text-bw-blue" aria-hidden="true">BW</span>
-              BreachWatch
+              <span className="text-bw-blue" aria-hidden="true">CC</span>
+              CipherCheck
             </Link>
             <p className="mt-2 text-sm text-bw-gray">
-              Honest cybersecurity tool comparisons. Transparent scoring, no hidden bias.
+              Honest cybersecurity tool comparisons.
             </p>
           </div>
 
@@ -73,7 +73,7 @@ export default function Footer() {
 
         <div className="mt-8 border-t border-black/10 pt-6">
           <p className="text-xs text-bw-gray">
-            <strong>Independence note:</strong> BreachWatch uses direct
+            <strong>Independence note:</strong> CipherCheck uses direct
             product links, not affiliate links. Scores are calculated from documented
             criteria, not paid placements.{' '}
             <Link href="/disclosure" className="underline hover:text-bw-text">
@@ -81,12 +81,10 @@ export default function Footer() {
             </Link>
           </p>
           <p className="mt-3 text-xs text-bw-gray">
-            &copy; {year} BreachWatch. All rights reserved.
+            &copy; {year} CipherCheck. All rights reserved.
           </p>
         </div>
       </div>
     </footer>
   );
 }
-
-

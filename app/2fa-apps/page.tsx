@@ -7,7 +7,6 @@ import RankedCard from '@/components/RankedCard';
 import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
-import FreshnessNote from '@/components/FreshnessNote';
 import EvidencePanel from '@/components/EvidencePanel';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import { calculateWeightedScore, formatScore, sortProductsByScore } from '@/lib/scoring';
@@ -16,7 +15,7 @@ import productsRaw from '@/data/2fa-apps.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 
 export const metadata: Metadata = {
-  title: 'Best 2FA Apps of 2026 — Ranked on Backup, Recovery & Open Source',
+  title: 'Best 2FA Apps of 2026: Ranked on Backup, Recovery and Open Source',
   description:
     'We compared 5 two-factor authentication apps on what actually matters: what happens when you lose your phone. The results will surprise you.',
 };
@@ -135,15 +134,11 @@ export default function TwoFAPage() {
         <section className="px-5 pt-14 pb-10 text-center">
           <div className="mx-auto max-w-[680px]">
             <h1 className="text-[32px] font-bold leading-tight text-bw-black">
-              Best 2FA Apps of 2026 — The One Question That Changes Everything
+              Best 2FA Apps of 2026: Ranked on Backup and Recovery
             </h1>
             <p className="mt-3.5 text-[15px] text-bw-gray leading-relaxed max-w-[500px] mx-auto">
-              We compared 5 two-factor authentication apps on what actually matters: what
-              happens when you lose your phone. The results will surprise you.
+              Five authenticator apps compared on what matters most: what happens when you lose your phone. Scores weight backup, export, and recovery options.
             </p>
-            <FreshnessNote>
-              Scores reflect backup, recovery, export, cloud sync, and open-source signals checked in June 2026.
-            </FreshnessNote>
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
@@ -194,14 +189,14 @@ export default function TwoFAPage() {
         {/* Individual product write-ups */}
         <section className="mx-auto max-w-3xl px-4 py-12 space-y-14">
           <h2 className="text-2xl font-bold text-bw-black">
-            Detailed breakdown — every 2FA app reviewed
+            Detailed breakdown: every 2FA app reviewed
           </h2>
 
           {/* Aegis */}
           <article id="aegis">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                1. Aegis Authenticator — {formatScore(weightedScore(topPick))}/10
+                1. Aegis Authenticator: {formatScore(weightedScore(topPick))}/10
               </h3>
               <span className="rounded-[3px] bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 Winner (Android)
@@ -245,7 +240,7 @@ export default function TwoFAPage() {
           <article id="ente-auth">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                2. Ente Auth — {formatScore(weightedScore(enteAuthPick))}/10
+                2. Ente Auth: {formatScore(weightedScore(enteAuthPick))}/10
               </h3>
               <span className="rounded-[3px] bg-bw-blue/10 px-3 py-1 text-sm font-semibold text-bw-blue-dark">
                 Runner-up (all platforms)
@@ -287,7 +282,7 @@ export default function TwoFAPage() {
           {/* Google Authenticator */}
           <article id="google-authenticator">
             <h3 className="text-xl font-bold text-bw-black">
-              3. Google Authenticator — {formatScore(weightedScore(googleAuthPick))}/10
+              3. Google Authenticator: {formatScore(weightedScore(googleAuthPick))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Google Authenticator is the most widely supported 2FA app — virtually
@@ -317,7 +312,7 @@ export default function TwoFAPage() {
           {/* Microsoft Authenticator */}
           <article id="microsoft-authenticator">
             <h3 className="text-xl font-bold text-bw-black">
-              4. Microsoft Authenticator — {formatScore(weightedScore(msAuthPick))}/10
+              4. Microsoft Authenticator: {formatScore(weightedScore(msAuthPick))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Microsoft Authenticator is required if you want passwordless sign-in to
@@ -346,7 +341,7 @@ export default function TwoFAPage() {
           {/* Authy */}
           <article id="authy">
             <h3 className="text-xl font-bold text-bw-black">
-              5. Authy — {formatScore(weightedScore(authyPick))}/10
+              5. Authy: {formatScore(weightedScore(authyPick))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Authy pioneered multi-device sync for 2FA and was the best option for
@@ -401,7 +396,7 @@ export default function TwoFAPage() {
           <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
             Scores calculated from{' '}
             <Link href="/how-we-test" className="text-bw-blue underline">published criteria</Link>.
-            {' '}BreachWatch uses direct product links, not affiliate links.
+            {' '}CipherCheck uses direct product links, not affiliate links.
             Rankings are based on published criteria.{' '}
             <Link href="/disclosure" className="text-bw-blue underline">Learn more -&gt;</Link>
           </p>

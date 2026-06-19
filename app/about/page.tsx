@@ -6,9 +6,9 @@ import criteriaRaw from '@/data/scoring-criteria.json';
 import type { ScoringCriteria } from '@/lib/types';
 
 export const metadata: Metadata = {
-  title: 'About BreachWatch - Independent Cybersecurity Tools and Comparisons',
+  title: 'About CipherCheck - Independent Cybersecurity Tools and Comparisons',
   description:
-    'BreachWatch is a non-affiliate cybersecurity utility site with transparent scoring, public data sources, and free security tools.',
+    'CipherCheck is a non-affiliate cybersecurity utility site with transparent scoring, public data sources, and free security tools.',
 };
 
 const allCriteria = criteriaRaw as unknown as ScoringCriteria;
@@ -32,7 +32,7 @@ export default function AboutPage() {
             </p>
             <div className="mt-3 max-w-3xl">
               <h1 className="text-[34px] font-bold leading-tight text-bw-black">
-                BreachWatch helps people choose security tools without paid rankings.
+                CipherCheck helps people choose security tools without paid rankings.
               </h1>
               <p className="mt-4 text-[15px] leading-7 text-bw-gray">
                 The site combines free tools, breach data, curated security links, and
@@ -49,7 +49,7 @@ export default function AboutPage() {
               <h2 className="text-[22px] font-bold text-bw-black">Why it exists</h2>
               <p className="mt-4 text-[14px] leading-7 text-bw-text">
                 Security advice is usually split between technical jargon and sales-heavy
-                comparison pages. BreachWatch is meant to be more practical: show the
+                comparison pages. CipherCheck is meant to be more practical: show the
                 tradeoffs, show the criteria, and give readers tools they can use
                 immediately.
               </p>
@@ -97,7 +97,7 @@ export default function AboutPage() {
               <h2 className="text-[22px] font-bold text-bw-black">Independence</h2>
               <ul className="mt-4 space-y-2 text-[14px] leading-6 text-bw-text">
                 {[
-                  'BreachWatch uses direct product links, not affiliate links.',
+                  'CipherCheck uses direct product links, not affiliate links.',
                   'No company can buy a ranking or a product placement.',
                   'Scores are based on published criteria and product data.',
                   'If monetization is enabled later, the public disclosure must be updated first.',
@@ -141,7 +141,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-
-
-

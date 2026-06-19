@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    'BreachWatch privacy policy: no accounts, no ad trackers, no saved passwords, and clear limits on analytics and product links.',
+    'CipherCheck privacy policy: no accounts, no ad trackers, no saved passwords, and clear limits on analytics and product links.',
 };
 
 const LAST_UPDATED = '13 June 2026';
@@ -14,11 +14,11 @@ const LAST_UPDATED = '13 June 2026';
 const privacyPoints = [
   {
     title: 'No accounts',
-    text: 'You can use BreachWatch without signing up, logging in, or giving us an email address.',
+    text: 'You can use CipherCheck without signing up, logging in, or giving us an email address.',
   },
   {
     title: 'No saved passwords',
-    text: 'Password checks are designed so BreachWatch never receives the full password you type.',
+    text: 'Password checks are designed so CipherCheck never receives the full password you type.',
   },
   {
     title: 'No ad tracking',
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
             </p>
             <div className="mt-3 max-w-3xl">
               <h1 className="text-[34px] font-bold leading-tight text-bw-black">
-                BreachWatch is built to collect as little data as possible.
+                CipherCheck is built to collect as little data as possible.
               </h1>
               <p className="mt-4 text-[15px] leading-7 text-bw-gray">
                 Use the site without an account. Check passwords without sending the full
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
               <h2 className="text-[22px] font-bold text-bw-black">What we collect</h2>
               <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
                 <p>
-                  BreachWatch does not have user accounts, comments, saved profiles, or a
+                  CipherCheck does not have user accounts, comments, saved profiles, or a
                   newsletter signup. That means we do not ask for your name, email address,
                   phone number, or login details to use the site.
                 </p>
@@ -84,17 +84,17 @@ export default function PrivacyPage() {
               <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
                 <p>
                   The password checker hashes your password in the browser first and only
-                  sends a short hash prefix for comparison. BreachWatch does not receive or
+                  sends a short hash prefix for comparison. CipherCheck does not receive or
                   store the full password.
                 </p>
                 <p>
                   The security quiz is used only to show a recommendation on screen. We do
-                  not save your answers to a BreachWatch account or build a personal profile
+                  not save your answers to a CipherCheck account or build a personal profile
                   from them.
                 </p>
                 <p>
-                  The password generator, checklists, and VPN need checker run in your
-                  browser and do not require an account.
+                  The password strength checker and DNS leak test run in your browser and
+                  do not require an account.
                 </p>
               </div>
             </section>
@@ -104,11 +104,11 @@ export default function PrivacyPage() {
               <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
                 <p>
                   Product links go to official websites or internal review pages.
-                  BreachWatch does not use affiliate tracking links on the live site.
+                  CipherCheck does not use affiliate tracking links on the live site.
                 </p>
                 <p>
                   A destination website may use its own cookies or tracking after you leave
-                  BreachWatch. That is controlled by the destination website, not by us.
+                  CipherCheck. That is controlled by the destination website, not by us.
                 </p>
               </div>
             </section>
@@ -117,7 +117,7 @@ export default function PrivacyPage() {
               <h2 className="text-[22px] font-bold text-bw-black">Cookies and third parties</h2>
               <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
                 <p>
-                  BreachWatch does not use advertising cookies. Hosting, analytics, security
+                  CipherCheck does not use advertising cookies. Hosting, analytics, security
                   tooling, and product links may involve third-party services that process
                   limited technical data needed to provide the site.
                 </p>
@@ -133,17 +133,17 @@ export default function PrivacyPage() {
               <h2 className="text-[22px] font-bold text-bw-black">Your choices</h2>
               <div className="mt-4 space-y-3 text-[14px] leading-7 text-bw-text">
                 <p>
-                  You can use BreachWatch without creating an account. You can avoid
+                  You can use CipherCheck without creating an account. You can avoid
                   third-party tracking by using browser privacy controls on destination
                   websites.
                 </p>
                 <p>
                   If you have a privacy question, contact{' '}
                   <a
-                    href="mailto:privacy@breachwatchsite.com"
+                    href="mailto:privacy@ciphercheck.com"
                     className="text-bw-blue underline hover:text-bw-blue-dark"
                   >
-                    privacy@breachwatchsite.com
+                    privacy@ciphercheck.com
                   </a>
                   .
                 </p>
@@ -162,7 +162,7 @@ export default function PrivacyPage() {
               href="/how-we-test"
               className="rounded-[3px] border border-black/10 bg-white px-4 py-3 text-[13px] font-semibold text-bw-text transition-colors hover:border-bw-blue hover:text-bw-blue"
             >
-              How BreachWatch tests products -&gt;
+              How CipherCheck tests products -&gt;
             </Link>
           </div>
         </article>
@@ -171,7 +171,3 @@ export default function PrivacyPage() {
     </div>
   );
 }
-
-
-
-

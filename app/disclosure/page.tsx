@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Funding and Independence',
   description:
-    'BreachWatch uses direct product links, not affiliate links. Rankings are based on published scoring criteria, not paid placements.',
+    'CipherCheck uses direct product links, not affiliate links. Rankings are based on published scoring criteria, not paid placements.',
 };
 
 const LAST_UPDATED = '13 June 2026';
@@ -30,11 +30,11 @@ export default function DisclosurePage() {
             </p>
             <div className="mt-3 max-w-3xl">
               <h1 className="text-[34px] font-bold leading-tight text-bw-black">
-                BreachWatch is a non-affiliate project.
+                CipherCheck is a non-affiliate project.
               </h1>
               <p className="mt-4 text-[15px] leading-7 text-bw-gray">
                 Product links go to official websites or internal review pages.
-                BreachWatch does not earn commission from those links, and rankings are
+                CipherCheck does not earn commission from those links, and rankings are
                 not paid placements.
               </p>
               <p className="mt-3 text-[13px] text-bw-gray">Last updated: {LAST_UPDATED}</p>
@@ -56,7 +56,7 @@ export default function DisclosurePage() {
               <h2 className="text-[22px] font-bold text-bw-black">How product links work</h2>
               <p className="mt-4 text-[14px] leading-7 text-bw-text">
                 Product buttons use direct destination links where available.
-                When a product link is not configured, BreachWatch sends readers to an
+                When a product link is not configured, CipherCheck sends readers to an
                 internal review page instead of a tracking link.
               </p>
             </section>
@@ -93,7 +93,3 @@ export default function DisclosurePage() {
     </div>
   );
 }
-
-
-
-

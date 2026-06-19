@@ -68,18 +68,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `My security score: ${n}/5`,
     description:
-      'I just checked my security score on BreachWatch. Find out yours in 30 seconds.',
+      'I just checked my security score on CipherCheck. Find out yours in 30 seconds.',
     robots: { index: false, follow: false },
     openGraph: {
       title: `My security score: ${n}/5 — How secure are you?`,
       description:
-        'I just checked my security score on BreachWatch. Find out yours in 30 seconds.',
+        'I just checked my security score on CipherCheck. Find out yours in 30 seconds.',
     },
     twitter: {
       card: 'summary',
       title: `My security score: ${n}/5 — How secure are you?`,
       description:
-        'I just checked my security score on BreachWatch. Find out yours in 30 seconds.',
+        'I just checked my security score on CipherCheck. Find out yours in 30 seconds.',
     },
   };
 }
@@ -115,7 +115,7 @@ export default async function ScorePage({ params }: PageProps) {
           </h1>
 
           <p className="mt-3 text-bw-gray">
-            Scored on BreachWatch — the free, unbiased cybersecurity quiz.
+            Scored on CipherCheck — the free, unbiased cybersecurity quiz.
           </p>
 
           <div className="mt-8 space-y-3">

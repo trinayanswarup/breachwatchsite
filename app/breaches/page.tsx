@@ -12,7 +12,7 @@ import {
 } from '@/lib/breaches';
 
 export const metadata: Metadata = {
-  title: 'Recent Data Breaches and What To Do Next | BreachWatch',
+  title: 'Recent Data Breaches and What To Do Next | CipherCheck',
   description:
     'Track recent public data breach records, exposed data types, affected account counts, and practical next steps.',
 };
@@ -21,7 +21,7 @@ async function fetchBreaches(): Promise<HIBPBreach[]> {
   try {
     const res = await fetch('https://haveibeenpwned.com/api/v3/breaches', {
       next: { revalidate: 86400 },
-      headers: { 'User-Agent': 'BreachWatch/1.0' },
+      headers: { 'User-Agent': 'CipherCheck/1.0' },
     });
 
     if (!res.ok) return [];

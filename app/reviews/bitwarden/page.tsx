@@ -42,8 +42,8 @@ const pageSchema: Record<string, unknown> = {
       url: `${SITE}/reviews/bitwarden`,
       datePublished: '2025-01-01',
       dateModified: '2026-06-14',
-      author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
-      publisher: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+      author: { '@type': 'Organization', name: 'CipherCheck', url: SITE },
+      publisher: { '@type': 'Organization', name: 'CipherCheck', url: SITE },
       mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/reviews/bitwarden` },
     },
     {
@@ -60,7 +60,7 @@ const pageSchema: Record<string, unknown> = {
         bestRating: '10',
         worstRating: '0',
       },
-      author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+      author: { '@type': 'Organization', name: 'CipherCheck', url: SITE },
     },
   ],
 };
@@ -76,7 +76,7 @@ export default function BitwardenReviewPage() {
         <section className="bg-gradient-to-b from-blue-50 to-white px-4 pt-10 pb-8">
           <div className="mx-auto max-w-3xl">
             <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm text-bw-gray">
-              <Link href="/" className="hover:text-bw-blue">BreachWatch</Link>
+              <Link href="/" className="hover:text-bw-blue">CipherCheck</Link>
               <span aria-hidden="true">›</span>
               <Link href="/password-managers" className="hover:text-bw-blue">Password Managers</Link>
               <span aria-hidden="true">›</span>

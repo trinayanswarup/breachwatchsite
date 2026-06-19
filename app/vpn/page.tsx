@@ -6,7 +6,6 @@ import ComparisonTable from '@/components/ComparisonTable';
 import RankedCard from '@/components/RankedCard';
 import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
-import FreshnessNote from '@/components/FreshnessNote';
 import EvidencePanel from '@/components/EvidencePanel';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import { calculateWeightedScore, formatScore, sortProductsByScore } from '@/lib/scoring';
@@ -16,7 +15,7 @@ import criteriaRaw from '@/data/scoring-criteria.json';
 import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
-  title: 'Best VPNs of 2026 — Ranked on Privacy, Not Popularity | BreachWatch',
+  title: 'Best VPNs of 2026: Ranked on Privacy, Not Popularity | CipherCheck',
   description:
     'We compared 5 VPNs using real user reviews and independent privacy audits — not marketing claims. Spoiler: the most advertised ones aren\'t always the best.',
 };
@@ -137,16 +136,11 @@ export default function VPNPage() {
         <section className="px-5 pt-14 pb-10 text-center">
           <div className="mx-auto max-w-[680px]">
             <h1 className="text-[32px] font-bold leading-tight text-bw-black">
-              Best VPNs of 2026 — Ranked on Privacy, Not Popularity
+              Best VPNs of 2026: Ranked on Privacy, Not Popularity
             </h1>
             <p className="mt-3.5 text-[15px] text-bw-gray leading-relaxed max-w-[500px] mx-auto">
-              Most comparison sites rank NordVPN and ExpressVPN first because they are the
-              biggest consumer VPN brands. Our scores use documented criteria: logging policy,
-              jurisdiction, audits, price, and reliability.
+              Five VPNs compared on logging policy, jurisdiction, independent audits, price, and reliability. Scores are calculated from documented criteria.
             </p>
-            <FreshnessNote>
-              Scores reflect published no-logs claims, audits, jurisdiction, pricing, and reliability signals checked in June 2026.
-            </FreshnessNote>
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
@@ -201,7 +195,7 @@ export default function VPNPage() {
           {/* 1. Mullvad */}
           <section id="mullvad">
             <h3 className="text-xl font-bold text-bw-black">
-              1. Mullvad — {formatScore(weightedScore(mullvadPick))}/10
+              1. Mullvad: {formatScore(weightedScore(mullvadPick))}/10
             </h3>
             <p className="mt-1 text-bw-gray italic">The only VPN that doesn&apos;t want to know who you are</p>
             <p className="mt-4 text-bw-text">
@@ -256,7 +250,7 @@ export default function VPNPage() {
           {/* 2. Proton VPN */}
           <section id="protonvpn">
             <h3 className="text-xl font-bold text-bw-black">
-              2. Proton VPN — {formatScore(weightedScore(protonVpnPick))}/10
+              2. Proton VPN: {formatScore(weightedScore(protonVpnPick))}/10
             </h3>
             <p className="mt-1 text-bw-gray italic">Swiss-based, open source, free tier with no data limit</p>
             <p className="mt-4 text-bw-text">
@@ -310,7 +304,7 @@ export default function VPNPage() {
           {/* 3. Surfshark */}
           <section id="surfshark">
             <h3 className="text-xl font-bold text-bw-black">
-              3. Surfshark — {formatScore(weightedScore(surfsharkPick))}/10
+              3. Surfshark: {formatScore(weightedScore(surfsharkPick))}/10
             </h3>
             <p className="mt-1 text-bw-gray italic">Unlimited devices, budget price — owned by Nord Security</p>
             <p className="mt-4 text-bw-text">
@@ -357,7 +351,7 @@ export default function VPNPage() {
           {/* 4. NordVPN */}
           <section id="nordvpn">
             <h3 className="text-xl font-bold text-bw-black">
-              4. <Link href="/reviews/nordvpn" className="text-bw-blue hover:underline">NordVPN</Link> — {formatScore(weightedScore(nordVpnPick))}/10
+              4. <Link href="/reviews/nordvpn" className="text-bw-blue hover:underline">NordVPN</Link>: {formatScore(weightedScore(nordVpnPick))}/10
             </h3>
             <p className="mt-1 text-bw-gray italic">The most recognised name in VPN — with a complicated history</p>
             <p className="mt-4 text-bw-text">
@@ -410,7 +404,7 @@ export default function VPNPage() {
           {/* 5. ExpressVPN */}
           <section id="expressvpn">
             <h3 className="text-xl font-bold text-bw-black">
-              5. ExpressVPN — {formatScore(weightedScore(expressVpnPick))}/10
+              5. ExpressVPN: {formatScore(weightedScore(expressVpnPick))}/10
             </h3>
             <p className="mt-1 text-bw-gray italic">Premium pricing, declining reliability, controversial ownership</p>
             <p className="mt-4 text-bw-text">
@@ -485,7 +479,7 @@ export default function VPNPage() {
           <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
             Scores calculated from{' '}
             <Link href="/how-we-test" className="text-bw-blue underline">published criteria</Link>.
-            {' '}BreachWatch uses direct product links, not affiliate links.
+            {' '}CipherCheck uses direct product links, not affiliate links.
             Rankings are based on published criteria.{' '}
             <Link href="/disclosure" className="text-bw-blue underline">Learn more -&gt;</Link>
           </p>

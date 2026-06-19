@@ -69,7 +69,7 @@ export default async function ComparisonPage({ params }: PageProps) {
               {comparison.description}
             </p>
             <FreshnessNote>
-              Quick comparisons use the latest BreachWatch category scores and public product data checked in June 2026.
+              Quick comparisons use the latest CipherCheck category scores and public product data checked in June 2026.
             </FreshnessNote>
           </div>
         </section>

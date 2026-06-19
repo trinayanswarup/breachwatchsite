@@ -25,9 +25,9 @@ export default function Nav() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-1.5">
           <span className="bg-bw-blue text-white text-[13px] font-bold px-1.5 py-0.5 rounded-sm" aria-hidden="true">
-            BW
+            CC
           </span>
-          <span className="text-[20px] font-bold text-bw-black">BreachWatch</span>
+          <span className="text-[20px] font-bold text-bw-black">CipherCheck</span>
         </Link>
 
         {/* Desktop links + buttons */}

@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import BreachChecker from '@/components/BreachChecker';
 
 export const metadata: Metadata = {
-  title: 'Has My Password Been Leaked? Free Password Checker | BreachWatch',
+  title: 'Has My Password Been Leaked? Free Password Checker | CipherCheck',
   description:
     'Check if your password appeared in a data breach — instantly and privately. We never see your password. Uses the Have I Been Pwned database of 900 million leaked passwords.',
 };

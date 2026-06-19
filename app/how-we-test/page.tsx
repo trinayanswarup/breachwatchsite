@@ -6,9 +6,9 @@ import criteriaRaw from '@/data/scoring-criteria.json';
 import type { ScoringCriteria } from '@/lib/types';
 
 export const metadata: Metadata = {
-  title: 'How We Test and Score Cybersecurity Tools | BreachWatch',
+  title: 'How We Test and Score Cybersecurity Tools | CipherCheck',
   description:
-    'How BreachWatch scores VPNs, password managers, antivirus software, and 2FA apps using public sources, documented criteria, and transparent limitations.',
+    'How CipherCheck scores VPNs, password managers, antivirus software, and 2FA apps using public sources, documented criteria, and transparent limitations.',
 };
 
 const allCriteria = criteriaRaw as unknown as ScoringCriteria;
@@ -69,10 +69,10 @@ export default function HowWeTestPage() {
             </p>
             <div className="mt-3 max-w-3xl">
               <h1 className="text-[34px] font-bold leading-tight text-bw-black">
-                How BreachWatch tests, researches, and scores security tools.
+                How CipherCheck tests, researches, and scores security tools.
               </h1>
               <p className="mt-4 text-[15px] leading-7 text-bw-gray">
-                BreachWatch is not a lab. Scores are built from documented criteria,
+                CipherCheck is not a lab. Scores are built from documented criteria,
                 public sources, product policies, independent reports, pricing, and
                 recurring user-review signals. If we did not personally test something,
                 this page says so.
@@ -148,7 +148,7 @@ export default function HowWeTestPage() {
                   What we do not claim
                 </h2>
                 <p className="mt-3 text-[14px] leading-6 text-bw-gray">
-                  BreachWatch should be useful because it is specific and honest, not
+                  CipherCheck should be useful because it is specific and honest, not
                   because it pretends to own a full testing lab.
                 </p>
               </div>

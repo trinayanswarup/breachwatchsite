@@ -146,7 +146,7 @@ async function fetchSubreddit(sub: RedditSource): Promise<NewsItem[]> {
     `https://www.reddit.com/r/${sub}/top.json?limit=35&t=week`,
     {
       next: { revalidate: 7200 },
-      headers: { 'User-Agent': 'BreachWatch/1.0' },
+      headers: { 'User-Agent': 'CipherCheck/1.0' },
     }
   );
   if (!res.ok) throw new Error(`r/${sub} unavailable`);

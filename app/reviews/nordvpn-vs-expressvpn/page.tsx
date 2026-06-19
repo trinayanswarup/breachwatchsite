@@ -47,8 +47,8 @@ const pageSchema: Record<string, unknown> = {
   url: `${SITE}/reviews/nordvpn-vs-expressvpn`,
   datePublished: '2025-01-01',
   dateModified: '2026-06-14',
-  author: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
-  publisher: { '@type': 'Organization', name: 'BreachWatch', url: SITE },
+  author: { '@type': 'Organization', name: 'CipherCheck', url: SITE },
+  publisher: { '@type': 'Organization', name: 'CipherCheck', url: SITE },
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/reviews/nordvpn-vs-expressvpn` },
   about: [
     { '@type': 'SoftwareApplication', name: 'NordVPN', url: nord.website },
@@ -67,7 +67,7 @@ export default function NordVpnVsExpressVpnPage() {
         <section className="bg-gradient-to-b from-blue-50 to-white px-4 pt-10 pb-8">
           <div className="mx-auto max-w-3xl">
             <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm text-bw-gray">
-              <Link href="/" className="hover:text-bw-blue">BreachWatch</Link>
+              <Link href="/" className="hover:text-bw-blue">CipherCheck</Link>
               <span aria-hidden="true">›</span>
               <Link href="/vpn" className="hover:text-bw-blue">VPNs</Link>
               <span aria-hidden="true">›</span>

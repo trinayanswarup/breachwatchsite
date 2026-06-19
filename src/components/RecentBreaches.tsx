@@ -10,7 +10,7 @@ async function fetchRecentBreaches(): Promise<HIBPBreach[]> {
   try {
     const res = await fetch('https://haveibeenpwned.com/api/v3/breaches', {
       next: { revalidate: 86400 },
-      headers: { 'User-Agent': 'BreachWatch/1.0' },
+      headers: { 'User-Agent': 'CipherCheck/1.0' },
     });
     if (!res.ok) return [];
     const all = (await res.json()) as HIBPBreach[];
@@ -35,16 +35,16 @@ function BreachCard({ breach }: BreachCardProps) {
   const remaining = breach.DataClasses.length - visibleClasses.length;
 
   return (
-    <div className="flex flex-col gap-3 rounded-[3px] border border-black/10 bg-white p-4 shadow-sm">
+    <div className="flex flex-col gap-3 rounded-none border border-black/15 bg-white p-5 shadow-[4px_4px_0_0_rgba(0,0,0,0.05)] transition-all hover:border-black">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="font-bold text-bw-black leading-tight">{breach.Title}</p>
+          <p className="font-bold text-bw-black leading-tight tracking-tight">{breach.Title}</p>
           {breach.Domain && (
             <p className="mt-0.5 text-xs text-bw-gray">{breach.Domain}</p>
           )}
         </div>
         <span
-          className={`shrink-0 rounded-[3px] px-2 py-0.5 text-xs font-semibold ${severity.className}`}
+          className={`shrink-0 rounded-none px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider border ${severity.className.includes('red') ? 'border-red-200' : severity.className.includes('yellow') ? 'border-yellow-200' : 'border-green-200'} ${severity.className}`}
         >
           {severity.label}
         </span>
@@ -63,13 +63,13 @@ function BreachCard({ breach }: BreachCardProps) {
         {visibleClasses.map((dc) => (
           <span
             key={dc}
-            className="rounded-[3px] bg-bw-light px-2 py-0.5 text-xs text-bw-blue"
+            className="rounded-none bg-bw-light px-2 py-0.5 text-xs text-bw-blue border border-black/5"
           >
             {dc}
           </span>
         ))}
         {remaining > 0 && (
-          <span className="rounded-[3px] bg-gray-100 px-2 py-0.5 text-xs text-bw-gray">
+          <span className="rounded-none bg-gray-100 px-2 py-0.5 text-xs text-bw-gray border border-black/5">
             +{remaining} more
           </span>
         )}
@@ -83,28 +83,26 @@ export default async function RecentBreaches() {
   if (breaches.length === 0) return null;
 
   return (
-    <section className="border-t border-black/10 bg-bw-light px-4 py-16">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-bw-black">Recent Data Breaches</h2>
-            <p className="mt-1 text-bw-gray">
-              Updated daily from the Have I Been Pwned database
-            </p>
-          </div>
-          <Link
-            href="/breaches"
-            className="text-sm font-semibold text-bw-blue underline hover:text-bw-blue-dark"
-          >
-            View all breaches -&gt;
-          </Link>
+    <div className="flex flex-col h-full">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-8 border-b border-black/15 pb-4">
+        <div>
+          <h2 className="text-[24px] font-bold text-bw-black tracking-tight">Recent Data Breaches</h2>
+          <p className="mt-2 text-[14px] text-bw-gray">
+            Updated daily from the Have I Been Pwned database
+          </p>
         </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {breaches.map((breach) => (
-            <BreachCard key={breach.Name} breach={breach} />
-          ))}
-        </div>
+        <Link
+          href="/breaches"
+          className="text-[12px] font-bold text-bw-black uppercase tracking-wide hover:text-bw-blue"
+        >
+          View all breaches -&gt;
+        </Link>
       </div>
-    </section>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {breaches.map((breach) => (
+          <BreachCard key={breach.Name} breach={breach} />
+        ))}
+      </div>
+    </div>
   );
 }

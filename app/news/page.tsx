@@ -5,9 +5,9 @@ import Footer from '@/components/Footer';
 import { fetchAllNews, type NewsItem, type NewsSource } from '@/lib/news';
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity News Links and Privacy Updates | BreachWatch',
+  title: 'Cybersecurity News Links and Privacy Updates | CipherCheck',
   description:
-    'Curated cybersecurity, privacy, breach, vulnerability, and security-tool links with clear context and related BreachWatch tools.',
+    'Curated cybersecurity, privacy, breach, vulnerability, and security-tool links with clear context and related CipherCheck tools.',
 };
 
 function timeAgo(date: Date): string {
@@ -205,7 +205,7 @@ export default async function NewsPage() {
               <p className="mt-4 text-[15px] leading-7 text-bw-gray">
                 Follow security, privacy, breach, and vulnerability items from public
                 sources, organized with topic labels, action context, and related
-                BreachWatch tools.
+                CipherCheck tools.
               </p>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default async function NewsPage() {
               href="/how-we-test"
               className="text-[13px] font-semibold text-bw-blue underline hover:text-bw-blue-dark"
             >
-              How BreachWatch handles sources
+              How CipherCheck handles sources
             </Link>
           </div>
 
@@ -239,7 +239,7 @@ export default async function NewsPage() {
                 News feed temporarily unavailable
               </h2>
               <p className="mt-2 text-[14px] leading-6 text-bw-gray">
-                The public sources could not be reached. BreachWatch tools and breach
+                The public sources could not be reached. CipherCheck tools and breach
                 checks still work without the news feed.
               </p>
               <Link

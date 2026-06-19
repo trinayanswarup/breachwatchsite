@@ -31,7 +31,7 @@ function SourceBadge({ source }: SourceBadgeProps) {
   };
   return (
     <span
-      className={`rounded-[3px] px-2 py-0.5 text-xs font-semibold ${styles[source]}`}
+      className={`rounded-none px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-black/5 ${styles[source]}`}
     >
       {source}
     </span>
@@ -48,9 +48,9 @@ function NewsCard({ item }: NewsCardProps) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col gap-2 rounded-[3px] border border-black/10 bg-white p-4 shadow-sm transition-all hover:border-bw-blue hover:shadow-md"
+      className="group flex flex-col gap-2 rounded-none border border-black/15 bg-white p-5 shadow-[4px_4px_0_0_rgba(0,0,0,0.05)] transition-all hover:border-black hover:-translate-y-0.5 hover:-translate-x-0.5 hover:shadow-[6px_6px_0_0_rgba(0,0,0,0.1)]"
     >
-      <p className="text-sm font-medium text-bw-black leading-snug group-hover:text-bw-blue transition-colors line-clamp-3">
+      <p className="text-[15px] font-bold text-bw-black leading-snug group-hover:text-bw-blue transition-colors line-clamp-3 tracking-tight">
         {item.title}
       </p>
       <div className="mt-auto flex items-center gap-2">
@@ -72,21 +72,21 @@ export default async function SecurityNews() {
   if (items.length === 0) return null;
 
   return (
-    <section className="border-t border-black/10 bg-white px-4 py-16">
+    <section className="border-t border-black/15 bg-white px-4 py-16">
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-8 border-b border-black/15 pb-4">
           <div>
-            <h2 className="text-2xl font-bold text-bw-black">Security News</h2>
-            <p className="mt-1 text-bw-gray">Latest from the security community</p>
+            <h2 className="text-[24px] font-bold text-bw-black tracking-tight">Security News</h2>
+            <p className="mt-2 text-[14px] text-bw-gray">Latest from the security community</p>
           </div>
           <Link
             href="/news"
-            className="text-sm font-semibold text-bw-blue underline hover:text-bw-blue-dark"
+            className="text-[12px] font-bold text-bw-black uppercase tracking-wide hover:text-bw-blue"
           >
             View all news -&gt;
           </Link>
         </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
             <NewsCard key={item.id} item={item} />
           ))}

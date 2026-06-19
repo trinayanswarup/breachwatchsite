@@ -7,7 +7,6 @@ import RankedCard from '@/components/RankedCard';
 import ProductCTA from '@/components/ProductCTA';
 import CategoryShortlist from '@/components/CategoryShortlist';
 import JsonLd from '@/components/JsonLd';
-import FreshnessNote from '@/components/FreshnessNote';
 import EvidencePanel from '@/components/EvidencePanel';
 import { buildAffiliateUrl, affiliateLinks } from '@/lib/affiliate';
 import { calculateWeightedScore, formatScore, sortProductsByScore } from '@/lib/scoring';
@@ -16,7 +15,7 @@ import productsRaw from '@/data/antivirus.json';
 import criteriaRaw from '@/data/scoring-criteria.json';
 
 export const metadata: Metadata = {
-  title: 'Best Antivirus Software 2026 — Ranked on AV-TEST Detection Data',
+  title: 'Best Antivirus Software 2026: Ranked on AV-TEST Detection Data',
   description:
     'We ranked antivirus software using AV-TEST independent lab scores — not marketing claims. Includes the honest answer about whether you actually need third-party antivirus.',
 };
@@ -134,15 +133,11 @@ export default function AntivirusPage() {
         <section className="px-5 pt-14 pb-10 text-center">
           <div className="mx-auto max-w-[680px]">
             <h1 className="text-[32px] font-bold leading-tight text-bw-black">
-              Best Antivirus Software 2026 — What the Independent Tests Actually Show
+              Best Antivirus Software 2026: What the Independent Tests Show
             </h1>
             <p className="mt-3.5 text-[15px] text-bw-gray leading-relaxed max-w-[500px] mx-auto">
-              We ranked antivirus software using AV-TEST independent lab scores. Includes the
-              honest answer about whether you actually need third-party antivirus.
+              Five antivirus products ranked using AV-TEST independent lab scores. Includes an honest answer about whether you need third-party antivirus at all.
             </p>
-            <FreshnessNote>
-              Scores reflect AV-TEST lab results, system impact, privacy posture, and pricing checked in June 2026.
-            </FreshnessNote>
             <Link
               href="/quiz"
               className="mt-6 inline-flex items-center gap-2 bg-bw-blue text-white px-7 py-3 rounded-[3px] text-[15px] font-semibold hover:bg-bw-blue-dark transition-colors"
@@ -235,14 +230,14 @@ export default function AntivirusPage() {
         {/* Individual product write-ups */}
         <section className="mx-auto max-w-3xl px-4 py-12 space-y-14">
           <h2 className="text-2xl font-bold text-bw-black">
-            Detailed breakdown — every antivirus reviewed
+            Detailed breakdown: every antivirus reviewed
           </h2>
 
           {/* Windows Defender */}
           <article id="windows-defender">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                1. Windows Defender — {formatScore(weightedScore(topPick))}/10
+                1. Windows Defender: {formatScore(weightedScore(topPick))}/10
               </h3>
               <span className="rounded-[3px] bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 Winner (free)
@@ -280,7 +275,7 @@ export default function AntivirusPage() {
           <article id="bitdefender">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                2. Bitdefender — {formatScore(weightedScore(bitdefenderPick))}/10
+                2. Bitdefender: {formatScore(weightedScore(bitdefenderPick))}/10
               </h3>
               <span className="rounded-[3px] bg-bw-blue/10 px-3 py-1 text-sm font-semibold text-bw-blue-dark">
                 Best detection
@@ -319,7 +314,7 @@ export default function AntivirusPage() {
           <article id="eset">
             <div className="flex items-baseline justify-between gap-3 flex-wrap">
               <h3 className="text-xl font-bold text-bw-black">
-                3. ESET — {formatScore(weightedScore(esetPick))}/10
+                3. ESET: {formatScore(weightedScore(esetPick))}/10
               </h3>
               <span className="rounded-[3px] bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
                 Winner (paid)
@@ -358,7 +353,7 @@ export default function AntivirusPage() {
           {/* Malwarebytes */}
           <article id="malwarebytes">
             <h3 className="text-xl font-bold text-bw-black">
-              4. Malwarebytes — {formatScore(weightedScore(malwarebytesPick))}/10
+              4. Malwarebytes: {formatScore(weightedScore(malwarebytesPick))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Malwarebytes built its reputation as the tool you run when you already have
@@ -393,7 +388,7 @@ export default function AntivirusPage() {
           {/* Norton */}
           <article id="norton">
             <h3 className="text-xl font-bold text-bw-black">
-              5. Norton 360 — {formatScore(weightedScore(nortonPick))}/10
+              5. Norton 360: {formatScore(weightedScore(nortonPick))}/10
             </h3>
             <p className="mt-3 text-bw-text">
               Norton 360 achieves good AV-TEST scores and bundles a lot of features:
@@ -446,7 +441,7 @@ export default function AntivirusPage() {
           <p className="text-[11px] text-bw-gray text-center pt-3 border-t border-black/10 leading-relaxed">
             Scores calculated from{' '}
             <Link href="/how-we-test" className="text-bw-blue underline">published criteria</Link>.
-            {' '}BreachWatch uses direct product links, not affiliate links.
+            {' '}CipherCheck uses direct product links, not affiliate links.
             Rankings are based on published criteria.{' '}
             <Link href="/disclosure" className="text-bw-blue underline">Learn more -&gt;</Link>
           </p>
