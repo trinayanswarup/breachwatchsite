@@ -38,6 +38,14 @@ CipherCheck is a commercial cybersecurity affiliate site, not a portfolio demo. 
 - **Affiliate disclosure** — visible on every page with affiliate links, `rel="sponsored"` on tracked links
 - **Sitemap** — `/sitemap.xml` generated post-build via next-sitemap
 
+## Affiliate Architecture
+
+Affiliate links are managed centrally in `src/lib/affiliate.ts`. Every outbound product link routes through this file — swapping in a real affiliate ID across the entire site requires editing one object, not hunting through 20 pages.
+
+Current status: placeholder URLs in place. Affiliate programme approvals (NordVPN Partners, Bitwarden, Proton, Malwarebytes) require a custom domain — not a .vercel.app subdomain. Custom domain is pending until the site has enough traffic to justify the cost. Once live on a real domain, affiliate links activate by updating `src/lib/affiliate.ts` only.
+
+The scoring methodology is intentionally decoupled from affiliate relationships — products are ranked before affiliate links are assigned, not after.
+
 ## Architecture Decisions
 
 **Static JSON over a database:** ISR delivers sub-100ms page loads for category and comparison pages. Product data (VPNs, password managers, antivirus, 2FA apps) changes infrequently — pricing and features quarterly at most. At current traffic, a database adds operational cost and latency with no benefit. Supabase is the obvious next step if traffic validates the model.
