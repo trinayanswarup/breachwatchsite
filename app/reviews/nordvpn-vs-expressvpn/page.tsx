@@ -39,7 +39,7 @@ function cta(product: Product): string {
   );
 }
 
-const SITE = 'https://breachwatchsite.com';
+const SITE = 'https://ciphercheck.com';
 const pageSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'Article',

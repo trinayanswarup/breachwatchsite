@@ -1,8 +1,8 @@
-# AGENTS.md — BreachWatch
+# AGENTS.md — CipherCheck
 
 ## How Claude Code should approach this project
 
-BreachWatch is built in seven sequential sessions. Each session has a clear input, a clear output, and a definition of done. Never start a session until the previous session's output passes `npm run build` and `npm run lint`.
+CipherCheck is built in seven sequential sessions. Each session has a clear input, a clear output, and a definition of done. Never start a session until the previous session's output passes `npm run build` and `npm run lint`.
 
 ---
 
@@ -176,7 +176,7 @@ Note in affiliate.ts which programmes have been applied for vs approved vs live.
 - [ ] Internal links: every page links to at least two other pages
 
 **README.md must include:**
-- One paragraph describing what BreachWatch is
+- One paragraph describing what CipherCheck is
 - Setup instructions (clone, install, add GROQ_API_KEY, run dev)
 - Affiliate programme status (which are applied for, which are live)
 - How the scoring system works

@@ -53,7 +53,7 @@ const googleAuthPick = ranked.find(p => p.id === 'google_authenticator') ?? rank
 const msAuthPick = ranked.find(p => p.id === 'microsoft_authenticator') ?? ranked[3];
 const authyPick = ranked.find(p => p.id === 'authy') ?? ranked[4];
 
-const SITE = 'https://breachwatchsite.com';
+const SITE = 'https://ciphercheck.com';
 const pageSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',

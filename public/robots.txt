@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://breachwatchsite.com
+Host: https://ciphercheck.com
 
 # Sitemaps
-Sitemap: https://breachwatchsite.com/sitemap.xml
+Sitemap: https://ciphercheck.com/sitemap.xml

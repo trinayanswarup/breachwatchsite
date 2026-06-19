@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://breachwatchsite.com',
+  siteUrl: 'https://ciphercheck.com',
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,

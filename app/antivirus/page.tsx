@@ -53,7 +53,7 @@ const bitdefenderPick = ranked.find(p => p.id === 'bitdefender') ?? topPick;
 const malwarebytesPick = ranked.find(p => p.id === 'malwarebytes') ?? topPick;
 const nortonPick = ranked.find(p => p.id === 'norton') ?? topPick;
 
-const SITE = 'https://breachwatchsite.com';
+const SITE = 'https://ciphercheck.com';
 const pageSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',

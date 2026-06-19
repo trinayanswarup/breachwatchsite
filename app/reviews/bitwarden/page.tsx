@@ -31,7 +31,7 @@ const ctaUrl = buildAffiliateUrl(
   'review'
 );
 
-const SITE = 'https://breachwatchsite.com';
+const SITE = 'https://ciphercheck.com';
 const productScore = calculateWeightedScore(product, criteria);
 const pageSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',

@@ -1,7 +1,7 @@
-# CLAUDE.md — BreachWatch
+# CLAUDE.md — CipherCheck
 
 ## What this project is
-BreachWatch is a real commercial product, not a portfolio demo. It is a cybersecurity tools comparison and affiliate site that earns revenue through affiliate commissions. It targets organic search traffic via SEO-optimised comparison content. The entry point is an AI-powered security quiz. Everything is built on the free tier — zero ongoing costs.
+CipherCheck is a real commercial product, not a portfolio demo. It is a cybersecurity tools comparison and affiliate site that earns revenue through affiliate commissions. It targets organic search traffic via SEO-optimised comparison content. The entry point is an AI-powered security quiz. Everything is built on the free tier — zero ongoing costs.
 
 ## Your job
 You are building a production-quality Next.js 14 app. Every decision you make should optimise for:
@@ -22,7 +22,7 @@ This is not a demo. Ship production-quality code every session.
 
 ## Project structure
 ```
-breachwatchsite/
+ciphercheck/
 ├── CLAUDE.md
 ├── PRD.md
 ├── README.md
@@ -106,7 +106,7 @@ Get `GROQ_API_KEY` free at console.groq.com — no credit card required.
 
 ### SEO rules — these are non-negotiable
 - Every page.tsx must export a `metadata` object with `title` and `description`.
-- Title format: `{Page-specific title} | BreachWatch`
+- Title format: `{Page-specific title} | CipherCheck`
 - Description must be written for click-through rate — it's what users read in Google before clicking. 150-160 characters. Make it compelling.
 - H1: exactly one per page, contains the primary keyword.
 - H2s: contain secondary keywords naturally.

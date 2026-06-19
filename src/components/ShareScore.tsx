@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-const SITE_URL = 'https://breachwatchsite.com';
+const SITE_URL = 'https://ciphercheck.com';
 
 export interface ShareScoreProps {
   score: number;

@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
       {
         next: { revalidate: 3600 },
         headers: {
-          'User-Agent': 'BreachWatch-password-checker/1.0',
+          'User-Agent': 'CipherCheck-password-checker/1.0',
         },
       }
     );

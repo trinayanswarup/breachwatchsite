@@ -1,8 +1,8 @@
-# BreachWatch Case Study
+# CipherCheck Case Study
 
 ## Problem
 
-Most cybersecurity comparison sites blur three things together: editorial advice, affiliate incentives, and vague scoring. BreachWatch was built as a trust-first portfolio project that helps a non-expert choose a practical next security step without pretending every user needs the same product.
+Most cybersecurity comparison sites blur three things together: editorial advice, affiliate incentives, and vague scoring. CipherCheck was built as a trust-first portfolio project that helps a non-expert choose a practical next security step without pretending every user needs the same product.
 
 ## Scoring Model
 

@@ -99,7 +99,7 @@ export const simpleComparisons: SimpleComparison[] = [
     keyDifferences: [
       'ExpressVPN is expensive compared with several strong alternatives.',
       'The Kape ownership history matters for privacy-sensitive buyers.',
-      'Mullvad and Proton VPN are better aligned with BreachWatch scoring priorities.',
+      'Mullvad and Proton VPN are better aligned with CipherCheck scoring priorities.',
     ],
     rows: [
       { label: 'Price', left: 'Premium', right: 'Often cheaper', winner: 'right' },
@@ -296,7 +296,7 @@ export const simpleComparisons: SimpleComparison[] = [
     rightName: 'Cleaner alternatives',
     winnerName: 'Cleaner alternatives',
     verdict:
-      'Norton can work, but BreachWatch favors cleaner alternatives with less bundle pressure.',
+      'Norton can work, but CipherCheck favors cleaner alternatives with less bundle pressure.',
     leftBestFor: 'Users who want one big security bundle and accept upsells.',
     rightBestFor: 'Users who want lighter software and separate best-in-class tools.',
     keyDifferences: [

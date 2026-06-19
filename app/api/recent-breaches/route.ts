@@ -16,7 +16,7 @@ export async function GET() {
     const response = await fetch('https://haveibeenpwned.com/api/v3/breaches', {
       next: { revalidate: 86400 },
       headers: {
-        'User-Agent': 'BreachWatch/1.0',
+        'User-Agent': 'CipherCheck/1.0',
       },
     });
 

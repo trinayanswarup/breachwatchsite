@@ -1,4 +1,4 @@
-# PRD — BreachWatch
+# PRD — CipherCheck
 ## Cybersecurity Tools Comparison & Affiliate Platform
 
 ---
@@ -7,7 +7,7 @@
 Most people have no idea which cybersecurity tools they need. The existing comparison sites are either full of technical jargon or transparently biased toward whichever product pays the highest commission. There is no honest, jargon-free, transparent-scoring comparison site in the cybersecurity tools niche that also personalises its recommendations.
 
 ## Solution
-BreachWatch is a clean, honest comparison site in the cybersecurity tools niche — VPNs, password managers, antivirus, and 2FA apps — that makes money through affiliate commissions. The primary entry point is a five-question AI quiz that identifies the visitor's single biggest security risk and routes them to the most relevant product category. Every comparison uses transparent, documented scoring criteria. The business model is explained openly on the site.
+CipherCheck is a clean, honest comparison site in the cybersecurity tools niche — VPNs, password managers, antivirus, and 2FA apps — that makes money through affiliate commissions. The primary entry point is a five-question AI quiz that identifies the visitor's single biggest security risk and routes them to the most relevant product category. Every comparison uses transparent, documented scoring criteria. The business model is explained openly on the site.
 
 ## Target user
 Someone who has just heard about a data breach, or is setting up a new laptop, or has been told by a more tech-savvy friend that they need a VPN. They are not technical. They do not know the difference between AES-256 and ChaCha20. They want a trustworthy answer to "what should I actually use?"
@@ -48,7 +48,7 @@ Secondary acquisition: Reddit communities (r/privacy, r/cybersecurity, r/digital
 - Affiliate disclosure notice in footer
 
 **SEO:**
-- Title: `BreachWatch — Honest Cybersecurity Tool Comparisons`
+- Title: `CipherCheck — Honest Cybersecurity Tool Comparisons`
 - Description: `Find the right VPN, password manager, or antivirus without the jargon. Transparent scoring, real comparisons, no hidden bias. Start with our free 30-second security quiz.`
 
 ---
@@ -85,7 +85,7 @@ Secondary acquisition: Reddit communities (r/privacy, r/cybersecurity, r/digital
 - Secondary link: "See all categories" links to homepage
 
 **SEO:**
-- Title: `Free Security Risk Quiz — Find Your Biggest Cybersecurity Gap | BreachWatch`
+- Title: `Free Security Risk Quiz — Find Your Biggest Cybersecurity Gap | CipherCheck`
 - Description: `Answer 5 questions in 30 seconds. Our AI identifies your single biggest security risk and tells you exactly which tool would protect you most. No email required.`
 
 ---
@@ -119,7 +119,7 @@ Secondary acquisition: Reddit communities (r/privacy, r/cybersecurity, r/digital
 **Products to include:** NordVPN, ExpressVPN, Surfshark, Mullvad, ProtonVPN
 
 **SEO:**
-- Title: `Best VPNs of 2025 — Honest Comparison & Rankings | BreachWatch`
+- Title: `Best VPNs of 2025 — Honest Comparison & Rankings | CipherCheck`
 - Description: `We compared 5 top VPNs on logging policy, jurisdiction, price, and speed. Our transparent scoring shows exactly why we ranked them this way. Updated for 2025.`
 - Internal links to: `/reviews/nordvpn`, `/reviews/nordvpn-vs-expressvpn`, `/reviews/best-vpn-lithuania`
 
@@ -139,7 +139,7 @@ Secondary acquisition: Reddit communities (r/privacy, r/cybersecurity, r/digital
 **Products:** Bitwarden, 1Password, Dashlane, NordPass, Keeper
 
 **SEO:**
-- Title: `Best Password Managers of 2025 — Ranked by Security | BreachWatch`
+- Title: `Best Password Managers of 2025 — Ranked by Security | CipherCheck`
 - Description: `Bitwarden, 1Password, Dashlane compared honestly. We score on zero-knowledge architecture, price, and real security track record — not just features lists.`
 
 ---
@@ -155,7 +155,7 @@ Secondary acquisition: Reddit communities (r/privacy, r/cybersecurity, r/digital
 **Products:** Malwarebytes, Bitdefender, Norton, ESET, Windows Defender (included as baseline)
 
 **SEO:**
-- Title: `Best Antivirus Software 2025 — What Actually Works | BreachWatch`
+- Title: `Best Antivirus Software 2025 — What Actually Works | CipherCheck`
 - Description: `We compared antivirus software using AV-TEST detection scores, not marketing claims. Includes system performance impact and privacy analysis for each product.`
 
 ---
@@ -171,7 +171,7 @@ Secondary acquisition: Reddit communities (r/privacy, r/cybersecurity, r/digital
 **Products:** Aegis (Android), Raivo (iOS), Authy, Google Authenticator, Microsoft Authenticator
 
 **SEO:**
-- Title: `Best 2FA Apps 2025 — Securing Your Accounts | BreachWatch`
+- Title: `Best 2FA Apps 2025 — Securing Your Accounts | CipherCheck`
 - Description: `Two-factor authentication app comparison — Aegis, Authy, Raivo, Google Authenticator. We prioritise backup options and open source code over brand recognition.`
 
 ---
@@ -368,7 +368,7 @@ interface QuizResult {
 
 ## Affiliate link management (`lib/affiliate.ts`)
 All affiliate URLs live here and nowhere else. Each URL gets UTM params appended:
-- `utm_source=breachwatchsite`
+- `utm_source=ciphercheck`
 - `utm_medium=affiliate`
 - `utm_campaign={category}-{pagetype}` e.g. `vpn-comparison`, `vpn-review`
 
@@ -397,7 +397,7 @@ Note: Mullvad has no affiliate programme. Link to them anyway. This builds edito
 ```javascript
 // next-sitemap.config.js
 module.exports = {
-  siteUrl: 'https://breachwatchsite.com',
+  siteUrl: 'https://ciphercheck.com',
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,
@@ -417,7 +417,7 @@ const schema = {
     "@type": "ListItem",
     "position": i + 1,
     "name": p.name,
-    "url": `https://breachwatchsite.com/reviews/${p.slug}`
+    "url": `https://ciphercheck.com/reviews/${p.slug}`
   }))
 }
 ```
@@ -473,7 +473,7 @@ These features extend the core comparison site with live data and interactive to
 - Results cached per hash prefix, not per password
 
 **SEO:**
-- Title: `Has My Password Been Hacked? Check for Data Breaches | BreachWatch`
+- Title: `Has My Password Been Hacked? Check for Data Breaches | CipherCheck`
 - Description: `Check if your password has appeared in a data breach. Uses Have I Been Pwned. Your password never leaves your browser — only an anonymous hash fragment is sent.`
 - Internal links: password managers page, 2FA apps page
 
