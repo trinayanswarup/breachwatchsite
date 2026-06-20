@@ -2,6 +2,8 @@
 
 Cybersecurity tool comparison site that ranks products by published scoring criteria, not commission size.
 
+CipherCheck is a cybersecurity product comparison site built for affiliate growth. It ranks VPNs, password managers, antivirus tools, and 2FA apps using published scoring criteria instead of commission size. It includes an AI recommendation quiz, HIBP k-anonymity breach checker, DNS leak test, local password strength checker, live security news, and PostHog funnel analytics from quiz start to affiliate click.
+
 ## Live Demo
 
 [https://ciphercheck.vercel.app](https://ciphercheck.vercel.app)
@@ -27,7 +29,7 @@ Most cybersecurity affiliate sites rank NordVPN first because NordVPN pays the h
 
 ## Features
 
-- **AI security quiz** — five questions, routes users to the most relevant category based on threat profile
+- **AI security quiz** — five questions, routes users to the most relevant category based on threat profile. AI is used only where personalisation helps: mapping a user's threat profile to the most relevant category and recommendation path. Core scoring remains deterministic and auditable.
 - **Breach checker** — HIBP k-anonymity; only the first 5 chars of the SHA-1 hash leave the browser, password never sent in plaintext
 - **DNS leak test** — verifies VPN is actually routing traffic
 - **Password strength checker** — scored locally, nothing sent anywhere
@@ -59,7 +61,7 @@ Each category has a weighted rubric defined in `src/data/scoring-criteria.json`.
 | Antivirus | AV-TEST detection rate 40%, Performance impact 20%, False positives 15%, Price 15%, Privacy policy 10% |
 | 2FA Apps | Backup/export support 35%, Open source 30%, Platform support 20%, Ease of use 15% |
 
-Scores are computed by `calculateWeightedScore()` in `src/lib/scoring.ts`. The function is pure — same inputs always produce the same output — and is covered by unit tests. Rankings cannot be manually overridden; they fall out of the data. This is the structural guarantee that affiliate relationships cannot influence what gets recommended.
+Scores are computed by `calculateWeightedScore()` in `src/lib/scoring.ts`. The function is pure — same inputs always produce the same output — and is covered by unit tests. Rankings are not manually reordered. They are generated from published scoring weights and product data stored in JSON. Objective criteria such as price, audit status, open-source availability, and platform support are scored from public product information. More subjective criteria such as ease of use and reliability are informed by patterns from app-store reviews and privacy and security guides. This makes the ranking process auditable, even though it is not a substitute for a full independent security lab test.
 
 ## Analytics & Growth Setup
 
