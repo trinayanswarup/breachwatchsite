@@ -48,6 +48,43 @@ All affiliate links are centralised in `src/lib/affiliate.ts`. One file edit act
 - **k-anonymity for the breach checker** — sending passwords to an API on a privacy-focused site would directly contradict the product's premise.
 - **ISR revalidation tuned per content type** — news: 2h, breaches: 24h, static category pages: 1 year.
 
+## Scoring Methodology
+
+Each category has a weighted rubric defined in `src/data/scoring-criteria.json`. Weights were set before any affiliate relationships existed and have not changed since.
+
+| Category | Criteria & weights |
+|---|---|
+| VPNs | Logging policy 30%, Jurisdiction 20%, Independent audit 20%, Price 15%, Reliability 15% |
+| Password Managers | Zero-knowledge architecture 35%, Open source 25%, Audit 20%, Price 10%, Platform support 10% |
+| Antivirus | AV-TEST detection rate 40%, Performance impact 20%, False positives 15%, Price 15%, Privacy policy 10% |
+| 2FA Apps | Backup/export support 35%, Open source 30%, Platform support 20%, Ease of use 15% |
+
+Scores are computed by `calculateWeightedScore()` in `src/lib/scoring.ts`. The function is pure — same inputs always produce the same output — and is covered by unit tests. Rankings cannot be manually overridden; they fall out of the data. This is the structural guarantee that affiliate relationships cannot influence what gets recommended.
+
+## Analytics & Growth Setup
+
+PostHog is instrumented to track the full acquisition funnel for an affiliate business:
+
+```
+Homepage visit → Quiz start → Quiz complete → Category page view → Affiliate link click
+```
+
+Each step is a discrete event. Drop-off between steps is visible in the PostHog funnel view. The goal is to identify where users abandon before reaching an affiliate click — that's where engineering effort has the most direct revenue impact.
+
+Session recordings are enabled on top of the funnel events. Aggregate data tells you *where* users drop off; recordings tell you *why*.
+
+ISR revalidation is tuned per content type rather than set globally — news (2h), breaches (24h), static category pages (1 year) — so pages stay fresh without unnecessary rebuilds.
+
+> **For a growth engineering role:** this setup is the answer to "how do you know what to build next." The funnel is instrumented before there's significant traffic so the baseline exists from day one.
+
+## Development Notes
+
+`CLAUDE.md` and `AGENTS.md` are excluded from this repository. They contain session-specific AI coding instructions used during active development — not useful signal for someone reading the codebase cold.
+
+The project was built using Claude as a development partner for architecture scaffolding, UI iteration, and code generation. Every generated change went through TypeScript strict mode, the Vitest test suite, and `npm run build` before being committed. The AI workflow handled the scaffolding; the engineering judgment was applied to what got kept.
+
+> **For a growth engineering role:** shipping something real and instrumented in a compressed timeframe using AI tooling is exactly the skill. The codebase reflects the choices made, not the prompts used to make them.
+
 ## Running Locally
 
 ```bash

@@ -1,36 +1,36 @@
-# CipherCheck
+# CLAUDE.md — CipherCheck
 
-A cybersecurity tool comparison and affiliate site. Ranks VPNs, password managers, antivirus, and 2FA apps by documented scoring criteria.
+## What this is
 
-## Tech Stack
+A cybersecurity tool comparison and affiliate site. Users browse ranked VPNs, password managers, antivirus, and 2FA apps scored by documented criteria. Entry point is an AI security quiz. Includes live breach checking, DNS leak test, and security news feed.
 
-- Next.js 16 (App Router), TypeScript (strict), Tailwind CSS v4
-- Groq API (llama-3.3-70b-versatile) for the AI security quiz
-- PostHog (session recording, funnel analysis) + Vercel Analytics
-- Vitest for testing
-- next-sitemap for sitemap generation
-- No database — product data in JSON files in `/src/data/`
+## Stack
 
-## Running Locally
+- **Frontend**: Next.js 16 App Router, TypeScript (strict), Tailwind CSS v4
+- **AI**: Groq llama-3.3-70b-versatile — security quiz and recommendations
+- **Analytics**: PostHog (session recording, funnels) + Vercel Analytics
+- **APIs**: HIBP (k-anonymity breach checker), Hacker News, Reddit
+- **Data**: Static JSON with ISR — no database at MVP stage
+- **Testing**: Vitest — 32 tests, all offline
+- **CI**: GitHub Actions — lint, typecheck, build on every push
+- **Deploy**: Vercel
 
-```bash
-npm install
-npm run dev
-```
+## Critical rules
 
-Open [http://localhost:3000](http://localhost:3000).
+- npm run build must pass clean after every change
+- No any types
+- Server secrets (GROQ_API_KEY) never in use client files
+- Only NEXT_PUBLIC_POSTHOG_KEY is safe client-side
+- HIBP breach checker must use k-anonymity — never send full password or full hash to any API
+- Affiliate links all go through src/lib/affiliate.ts — never hardcode URLs in page files
 
-## Environment Variables
+## ISR revalidation
 
-```
-GROQ_API_KEY=              # console.groq.com — free, no credit card
-NEXT_PUBLIC_POSTHOG_KEY=   # app.posthog.com → Project Settings → API Key
-```
+- Security news: 2 hours
+- Recent breaches: 24 hours
+- Static category pages: 1 year
 
-Copy `.env.example` to `.env.local` and fill in both values.
+## Environment variables
 
-## Tests
-
-```bash
-npm run test
-```
+GROQ_API_KEY=
+NEXT_PUBLIC_POSTHOG_KEY=
