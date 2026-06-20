@@ -69,6 +69,10 @@ npm run test
 
 32 tests across 5 files — scoring logic, k-anonymity hash utilities, API route behaviour, affiliate URL construction, and data integrity checks.
 
+## Development Notes
+
+CLAUDE.md and AGENTS.md are excluded from the public repository. They contain session-specific AI coding instructions, internal build quirks, and workflow notes that are only useful during active development. Shipping them publicly would be the equivalent of committing your scratch pad — they add noise without adding signal to anyone reading the codebase.
+
 ## Roadmap
 
 - Activate affiliate links once custom domain is live
