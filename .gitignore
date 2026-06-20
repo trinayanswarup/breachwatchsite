@@ -12,7 +12,13 @@
 
 # testing
 /coverage
+
+# internal development docs — not for public repo
+CLAUDE.md
+AGENTS.md
+CASE_STUDY.md
 TESTS.md
+MASTER_PROMPT.md
 
 # next.js
 /.next/
