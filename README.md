@@ -13,6 +13,12 @@ CipherCheck is a cybersecurity product comparison site built for affiliate growt
 ![Category page](docs/screenshots/category.png)
 ![Category1 page](docs/screenshots/category1.png)
 
+## Status
+
+Deployed at https://cipher-check-tau.vercel.app. Verified in Google Search Console — sitemap submitted, indexing in progress.
+
+PostHog funnel is live and tracking from homepage through quiz to category pages. Affiliate architecture is ready to activate once a custom domain is in place — programme approvals require a real domain, not a .vercel.app subdomain.
+
 ## The Problem
 
 Most cybersecurity affiliate sites rank NordVPN first because NordVPN pays the highest commissions. Users have no way to tell. CipherCheck publishes its full scoring methodology — criteria, weights, and sources — so rankings can be verified independently of which products have affiliate programmes.
