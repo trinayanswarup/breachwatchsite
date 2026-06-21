@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://ciphercheck.com
+Host: https://cipher-check-tau.vercel.app
 
 # Sitemaps
-Sitemap: https://ciphercheck.com/sitemap.xml
+Sitemap: https://cipher-check-tau.vercel.app/sitemap.xml

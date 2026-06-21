@@ -6,11 +6,12 @@ CipherCheck is a cybersecurity product comparison site built for affiliate growt
 
 ## Live Demo
 
-[https://ciphercheck.vercel.app](https://ciphercheck.vercel.app)
+[https://cipher-check-tau.vercel.app](https://cipher-check-tau.vercel.app)
 
 ![Homepage](docs/screenshots/homepage.png)
 ![Quiz](docs/screenshots/quiz.png)
 ![Category page](docs/screenshots/category.png)
+![Category1 page](docs/screenshots/category1.png)
 
 ## The Problem
 
@@ -18,14 +19,14 @@ Most cybersecurity affiliate sites rank NordVPN first because NordVPN pays the h
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Frontend | Next.js 16, TypeScript (strict), Tailwind CSS v4 |
-| AI | Groq (llama-3.3-70b) — security quiz and recommendations |
-| Analytics | PostHog (funnels, session recording) + Vercel Analytics |
-| APIs | HIBP (breach checker, k-anonymity), Hacker News, Reddit |
-| CI/CD | GitHub Actions — lint, typecheck, build on every push |
-| Deployment | Vercel |
+| Layer      | Technology                                               |
+| ---------- | -------------------------------------------------------- |
+| Frontend   | Next.js 16, TypeScript (strict), Tailwind CSS v4         |
+| AI         | Groq (llama-3.3-70b) — security quiz and recommendations |
+| Analytics  | PostHog (funnels, session recording) + Vercel Analytics  |
+| APIs       | HIBP (breach checker, k-anonymity), Hacker News, Reddit  |
+| CI/CD      | GitHub Actions — lint, typecheck, build on every push    |
+| Deployment | Vercel                                                   |
 
 ## Features
 
@@ -54,12 +55,12 @@ All affiliate links are centralised in `src/lib/affiliate.ts`. One file edit act
 
 Each category has a weighted rubric defined in `src/data/scoring-criteria.json`. Weights were set before any affiliate relationships existed and have not changed since.
 
-| Category | Criteria & weights |
-|---|---|
-| VPNs | Logging policy 30%, Jurisdiction 20%, Independent audit 20%, Price 15%, Reliability 15% |
-| Password Managers | Zero-knowledge architecture 35%, Open source 25%, Audit 20%, Price 10%, Platform support 10% |
-| Antivirus | AV-TEST detection rate 40%, Performance impact 20%, False positives 15%, Price 15%, Privacy policy 10% |
-| 2FA Apps | Backup/export support 35%, Open source 30%, Platform support 20%, Ease of use 15% |
+| Category          | Criteria & weights                                                                                     |
+| ----------------- | ------------------------------------------------------------------------------------------------------ |
+| VPNs              | Logging policy 30%, Jurisdiction 20%, Independent audit 20%, Price 15%, Reliability 15%                |
+| Password Managers | Zero-knowledge architecture 35%, Open source 25%, Audit 20%, Price 10%, Platform support 10%           |
+| Antivirus         | AV-TEST detection rate 40%, Performance impact 20%, False positives 15%, Price 15%, Privacy policy 10% |
+| 2FA Apps          | Backup/export support 35%, Open source 30%, Platform support 20%, Ease of use 15%                      |
 
 Scores are computed by `calculateWeightedScore()` in `src/lib/scoring.ts`. The function is pure — same inputs always produce the same output — and is covered by unit tests. Rankings are not manually reordered. They are generated from published scoring weights and product data stored in JSON. Objective criteria such as price, audit status, open-source availability, and platform support are scored from public product information. More subjective criteria such as ease of use and reliability are informed by patterns from app-store reviews and privacy and security guides. This makes the ranking process auditable, even though it is not a substitute for a full independent security lab test.
 
@@ -73,7 +74,7 @@ Homepage visit → Quiz start → Quiz complete → Category page view → Affil
 
 Each step is a discrete event. Drop-off between steps is visible in the PostHog funnel view. The goal is to identify where users abandon before reaching an affiliate click — that's where engineering effort has the most direct revenue impact.
 
-Session recordings are enabled on top of the funnel events. Aggregate data tells you *where* users drop off; recordings tell you *why*.
+Session recordings are enabled on top of the funnel events. Aggregate data tells you _where_ users drop off; recordings tell you _why_.
 
 ISR revalidation is tuned per content type rather than set globally — news (2h), breaches (24h), static category pages (1 year) — so pages stay fresh without unnecessary rebuilds.
 

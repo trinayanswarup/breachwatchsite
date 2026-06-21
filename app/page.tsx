@@ -70,8 +70,8 @@ const COMPARISON_LINKS = [
 export default function HomePage() {
   const vpns = vpnsJson as unknown as Product[];
   const criteria = criteriaJson as unknown as ScoringCriteria;
-  const protonVpn = vpns.find(v => v.id === 'protonvpn') || vpns[1];
-  const protonScore = formatScore(calculateWeightedScore(protonVpn, criteria.vpn));
+  const mullvad = vpns.find(v => v.id === 'mullvad') || vpns[0];
+  const mullvadScore = formatScore(calculateWeightedScore(mullvad, criteria.vpn));
 
   return (
     <div className="flex min-h-screen flex-col bg-white">
@@ -109,19 +109,19 @@ export default function HomePage() {
                     <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-bw-blue">
                       Featured VPN
                     </span>
-                    <span className="bg-green-100 text-green-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-green-200">
-                      Top Free Tier
+                    <span className="bg-blue-50 text-bw-blue px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-blue-200">
+                      Privacy First
                     </span>
                   </div>
                   <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-[24px] font-bold text-bw-black tracking-tight">{protonVpn.name}</h3>
+                    <h3 className="text-[24px] font-bold text-bw-black tracking-tight">{mullvad.name}</h3>
                     <div className="shrink-0 bg-bw-light border border-black/15 px-3 py-2 text-center text-bw-black">
-                      <span className="block text-[22px] font-bold leading-none">{protonScore}</span>
+                      <span className="block text-[22px] font-bold leading-none">{mullvadScore}</span>
                       <span className="block text-[10px] font-semibold uppercase tracking-wider text-bw-gray">/10</span>
                     </div>
                   </div>
                   <p className="mt-5 text-[14px] leading-relaxed text-bw-text border-l-2 border-bw-blue pl-4 italic">
-                    &quot;{protonVpn.verdict}&quot;
+                    &quot;{mullvad.verdict}&quot;
                   </p>
                   <Link href="/vpn" className="mt-6 block w-full border border-black/15 bg-bw-light py-3 text-center text-[13px] font-bold text-bw-black hover:bg-bw-black hover:text-white transition-colors uppercase tracking-wide">
                     View VPN Rankings →

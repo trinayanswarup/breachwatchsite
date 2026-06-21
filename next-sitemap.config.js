@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://ciphercheck.com',
+  siteUrl: 'https://cipher-check-tau.vercel.app',
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,
