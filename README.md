@@ -86,14 +86,6 @@ ISR revalidation is tuned per content type rather than set globally — news (2h
 
 > **For a growth engineering role:** this setup is the answer to "how do you know what to build next." The funnel is instrumented before there's significant traffic so the baseline exists from day one.
 
-## Development Notes
-
-`CLAUDE.md` and `AGENTS.md` are excluded from this repository. They contain session-specific AI coding instructions used during active development — not useful signal for someone reading the codebase cold.
-
-The project was built using Claude as a development partner for architecture scaffolding, UI iteration, and code generation. Every generated change went through TypeScript strict mode, the Vitest test suite, and `npm run build` before being committed. The AI workflow handled the scaffolding; the engineering judgment was applied to what got kept.
-
-> **For a growth engineering role:** shipping something real and instrumented in a compressed timeframe using AI tooling is exactly the skill. The codebase reflects the choices made, not the prompts used to make them.
-
 ## Running Locally
 
 ```bash
@@ -115,9 +107,10 @@ npm run test
 
 32 tests across 5 files — scoring logic, k-anonymity hash utilities, API route behaviour, affiliate URL construction, and data integrity checks.
 
-## Development Notes
+## Development notes
 
-CLAUDE.md and AGENTS.md are excluded from the public repository. They contain session-specific AI coding instructions, internal build quirks, and workflow notes that are only useful during active development. Shipping them publicly would be the equivalent of committing your scratch pad — they add noise without adding signal to anyone reading the codebase.
+Detailed planning docs (CLAUDE.md, PRD.md, AGENTS.md) are kept private. They contain AI coding instructions, internal build quirks, and session-specific workflow notes used during active development with Claude Code.
+Public versions are committed for reference.
 
 ## Roadmap
 
